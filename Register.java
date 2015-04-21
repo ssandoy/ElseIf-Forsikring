@@ -18,9 +18,9 @@ public interface Register extends Serializable
     /*Metoder for å legge til objekt, og fjerne/sjekke om finnes etter nøkkelverdi*/
     
     public boolean leggTil(Object objekt);
-    public boolean finnes(String pnr);
-    public boolean fjern(String pnr);
-    public boolean finnes(int fnr);
+    public boolean finnes(String nr);
+    public boolean fjern(String nr);
+    public boolean finnes(int nr);
     
     public Object getObject(String nr);
     

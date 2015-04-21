@@ -34,7 +34,7 @@ public abstract class Insurance implements Serializable, Forsikring {
         nestenummer++;
         erstatning = 0.00;
         egenandel = 0.00;
-    }
+    } 
     
     
     @Override

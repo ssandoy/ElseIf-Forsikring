@@ -24,7 +24,7 @@ public class Forsikringskunde extends Person implements Serializable
     private int erstatninger;
     private boolean totalkunde;
     private LinkedList<Forsikring> forsikringer;
-    // LinkedList<Skademelding> skademeldinger;
+    private LinkedList<Skademelding> skademeldinger;
 
     
     public Forsikringskunde(String personnummer, String fornavn, String etternavn,  
@@ -34,10 +34,10 @@ public class Forsikringskunde extends Person implements Serializable
         this.fakturaadresse = fakturaadresse;
 
         kundenummer = nestenummer++;
-        //nestenummer++;
+        
         
         forsikringer = new LinkedList();
-       // skademeldinger = new LinkedList();
+        skademeldinger = new LinkedList();
         totalkunde = false; //ikke nødvendig
         aarligpremie = 0;
         erstatninger = 0;
@@ -50,17 +50,19 @@ public class Forsikringskunde extends Person implements Serializable
         < sjekker om kunden er totalkunde >
     }*/
     
-   
+   /*Metode som legger en forsikring til hos kunden*/
     public void addForsikring(Forsikring f)
     {
         forsikringer.add(f);
     }
     
+    /*Metode som legger til en skademelding hos kunden*/
     public void addSkademelding(Skademelding m)
     {
         skademeldinger.add(m);
     }
     
+    @Override
     public String toString()
     {
         return super.toString() + "\nFakturaadresse: " + fakturaadresse + "\nKundenummer:  " + kundenummer;
