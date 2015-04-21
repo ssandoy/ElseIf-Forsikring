@@ -11,13 +11,13 @@ package prosjektoppgave;
  */
 public abstract class Person implements Menneske
 {
-    private final String personnummer;
+    private final int personnummer;
     private String fornavn;
     private String etternavn;
     private String adresse;
     
    
-    protected Person(String personnummer, String fornavn, String etternavn, String adresse)
+    protected Person(int personnummer, String fornavn, String etternavn, String adresse)
     {
         this.personnummer = personnummer;
         this.fornavn = fornavn;
@@ -28,7 +28,7 @@ public abstract class Person implements Menneske
     
     
     @Override
-    public String getPersonNr() {
+    public int getPersonNr() {
         return personnummer;
     }
 

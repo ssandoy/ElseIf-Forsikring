@@ -69,6 +69,11 @@ public class Skademeldingsregister extends TreeMap<Integer, Skademelding> implem
        }
         return null;
     }
+
+    @Override
+    public Map getMap() {
+        return this;
+    }
    
     
    

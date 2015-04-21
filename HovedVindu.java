@@ -66,7 +66,7 @@ public class HovedVindu extends JFrame implements ActionListener
     
         public void registrerKunde()
         {
-              String personnummer = this.personnummer.getText();
+              int personnummer = Integer.parseInt(this.personnummer.getText());
               String fornavn = this.fornavn.getText();
               String etternavn = this.etternavn.getText();
               String adresse = this.adresse.getText();

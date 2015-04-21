@@ -70,22 +70,35 @@ public class Skademelding implements Serializable {
         this.erstatningsBelop = erstatningsBelop;
     }
     
-    public boolean sjekkDekning()
-    {
-       LinkedList<Forsikring> forsikringer = kunde.getForsikringer();
-       ListIterator it = forsikringer.listIterator();
-        while(it.hasNext())
+        /*Metode som sjekker om kunden har gyldig forsikring til skademeldingen*/
+        public boolean sjekkDekning()
         {
-            Forsikring f = (Forsikring) it.next();
-            
-            if(skadeType == "INNBO")
+           LinkedList<Forsikring> forsikringer = kunde.getForsikringer();
+           ListIterator it = forsikringer.listIterator();
+            while(it.hasNext())
             {
-                if(f.)
+                Forsikring f = (Forsikring) it.next();
+
+                if(skadeType == "INNBO")
+                {
+                    if(f instanceof Innboforsikring)
+                    {
+                        return true;
+                    }
+                }
+                else if(skadeType == "BIL")
+                {
+                    if(f instanceof Bilforsikring)
+                    {
+                        return true;
+                    }
+                }
+
             }
+            return false;
+
+
         }
-       
-        
-    }
     
     @Override
     public String toString(){

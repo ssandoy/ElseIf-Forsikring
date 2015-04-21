@@ -18,11 +18,11 @@ public interface Register extends Serializable
     /*Metoder for å legge til objekt, og fjerne/sjekke om finnes etter nøkkelverdi*/
     
     public boolean leggTil(Object objekt);
-    public boolean finnes(String nr);
-    public boolean fjern(String nr);
-    public boolean finnes(int nr);
+    public boolean finnes(int nr); //skriv kommentar i sluttrapport. Dette fordi enklere å bygge videre
+    public boolean fjern(int nr);
+
     
-    public Object getObject(String nr);
+    public Object getObject(int nr);
     
     //returnerer lista
     public Map getMap();

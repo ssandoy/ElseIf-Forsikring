@@ -24,10 +24,9 @@ public abstract class Boligforsikring extends Insurance implements Serializable
     
     
     
-    protected Boligforsikring( double forsikringspremie, String adresse, 
-                        String byggeaar, String boligtype, int boareal)
+    protected Boligforsikring( String adresse, String byggeaar, 
+                            String boligtype, int boareal)
     {
-        super(forsikringspremie);
         this.adresse = adresse;
         this.byggeaar = byggeaar;
         this.boligtype = boligtype;

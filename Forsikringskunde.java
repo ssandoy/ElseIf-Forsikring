@@ -27,7 +27,7 @@ public class Forsikringskunde extends Person implements Serializable
     private LinkedList<Skademelding> skademeldinger;
 
     
-    public Forsikringskunde(String personnummer, String fornavn, String etternavn,  
+    public Forsikringskunde(int personnummer, String fornavn, String etternavn,  
            String adresse, String fakturaadresse) 
     {
         super(personnummer, fornavn, etternavn, adresse);
@@ -60,6 +60,11 @@ public class Forsikringskunde extends Person implements Serializable
     public void addSkademelding(Skademelding m)
     {
         skademeldinger.add(m);
+    }
+     
+    public LinkedList getForsikringer()
+    {
+        return forsikringer;
     }
     
     @Override

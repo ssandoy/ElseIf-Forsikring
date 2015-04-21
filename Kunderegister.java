@@ -12,7 +12,7 @@ import java.util.TreeMap;
  *
  * @author ssandoy
  */
-public class Kunderegister extends TreeMap<String, Forsikringskunde> implements Register{
+public class Kunderegister extends TreeMap<Integer, Forsikringskunde> implements Register{
 
     /*Metode for å legge en kunde i registeret.*/
     @Override
@@ -31,14 +31,14 @@ public class Kunderegister extends TreeMap<String, Forsikringskunde> implements 
 
     /*Metode som sjekker om objektet eksisterer i registeret med Key-verdien pnr*/
     @Override
-    public boolean finnes(String pnr) 
+    public boolean finnes(int pnr) 
     {
        return containsKey(pnr);
     }
 
      //Metode som sletter en søker fra kunderegisteret. Tar personnummer(Key-verdien) som parameter
     @Override
-    public boolean fjern(String pnr) 
+    public boolean fjern(int pnr) 
     {
        if(finnes(pnr))
        {
@@ -48,16 +48,10 @@ public class Kunderegister extends TreeMap<String, Forsikringskunde> implements 
        return false;
     }
     
-    @Override
-    public boolean finnes(int fnr) 
-    {
-       return containsKey(fnr);
-    }
-    
 
     //metode som returnerer en kunde med  parameter pnr   
     @Override
-    public Object getObject(String pnr) 
+    public Object getObject(int pnr) 
     {
         if(finnes(pnr))
         {
@@ -67,7 +61,7 @@ public class Kunderegister extends TreeMap<String, Forsikringskunde> implements 
     }
 
     
-    public Forsikringskunde getKunde(String pnr)
+    public Forsikringskunde getKunde(int pnr)
     {
        if(finnes(pnr))
        {

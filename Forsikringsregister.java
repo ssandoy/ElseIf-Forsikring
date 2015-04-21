@@ -23,7 +23,7 @@ public class Forsikringsregister extends TreeMap<Integer,Forsikring> implements 
         {
         if(!finnes(((Forsikring)objekt).getFNummer()))
             {
-                put(((Forsikringskunde) objekt).getPersonNr(),(Forsikringskunde)objekt);
+                put(((Forsikring) objekt).getFNummer(),(Forsikring)objekt);
                 return true;
             }
         }
@@ -31,27 +31,42 @@ public class Forsikringsregister extends TreeMap<Integer,Forsikring> implements 
     }
     
     @Override
-    public boolean finnes(String pnr) 
+    public boolean finnes(int fnr) 
     {
-        
+        return containsKey(fnr);
     }
+    
+    
 
     @Override
-    public boolean fjern(String pnr) 
+    public boolean fjern(int fnr) 
     {
-        
+         if(finnes(fnr))
+       {
+           remove(fnr);
+           return true;
+       }
+       return false;
     }
+    
+   
 
     @Override
-    public Object getObject(String nr) 
+    public Object getObject(int fnr) 
     {
-       
+     if(finnes(fnr))
+        {
+            return get(fnr);
+        }
+        return null;  
     }
 
     @Override
     public Map getMap() 
     {
-        
+        return this;
     }
+
+    
     
 }
