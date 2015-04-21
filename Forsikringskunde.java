@@ -63,7 +63,7 @@ public class Forsikringskunde extends Person implements Serializable
     
     public String toString()
     {
-        return super.toString() + "\nFakturaadresse: " + fakturaadresse + "\nKundenummer" + kundenummer;
+        return super.toString() + "\nFakturaadresse: " + fakturaadresse + "\nKundenummer:  " + kundenummer;
     }
     
 }

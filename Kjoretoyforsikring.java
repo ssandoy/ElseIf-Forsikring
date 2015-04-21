@@ -15,7 +15,6 @@ import java.util.Date;
 public abstract class Kjoretoyforsikring extends Insurance implements Serializable
 {
 
-  
     
     private String eier;
     private String registreringsnummer;
