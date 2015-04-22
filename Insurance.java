@@ -17,23 +17,21 @@ import java.util.Date;
 public abstract class Insurance implements Serializable, Forsikring {
 
     private final int forsikringsnummer;
-    private int nestenummer = 1;
-    private double forsikringspremie;
+    private static int nestenummer = 1;
     private double erstatning;
     private double egenandel;
     private Date startDato;
     private DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+    private double forsikringspremie;
     
     
-    protected Insurance(double forsikringspremie)
+    protected Insurance()
     {
-        
-        this.forsikringspremie = forsikringspremie;
         this.startDato = new Date();
-        forsikringsnummer = 1;
-        nestenummer++;
+        forsikringsnummer = nestenummer++;
         erstatning = 0.00;
         egenandel = 0.00;
+        forsikringspremie = 0.00;
     } 
     
     
@@ -60,5 +58,13 @@ public abstract class Insurance implements Serializable, Forsikring {
     {
         return erstatning;
     }
+    
+    @Override
+     public void setPremie(double premie)
+     {
+         forsikringspremie = premie;
+     }
+    
+    
     
 }

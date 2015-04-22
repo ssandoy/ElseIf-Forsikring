@@ -46,10 +46,29 @@ public abstract class Boligforsikring extends Insurance implements Serializable
       return startDato;
     }
 
-    @Override
-    public double getBeloep()
+    public double beregnPremie()
     {
-        return forsikringsbelop;
-    }
-    
+        double premie = 0.00;
+         if(boareal >= 30 && boareal <= 50)
+         {
+             super.setPremie(12000.00);
+             return premie;
+         }
+         else if(boareal >= 51 && boareal <= 80)
+         {
+             super.setPremie(20000.00);
+             return premie;
+         }
+         else if(boareal >= 81 && boareal <= 110)
+         {
+             super.setPremie(20000.00);
+             return premie;
+         }
+         else if(boareal >= 11 && boareal <= 140)
+         {
+             super.setPremie(20000.00);
+             return premie;
+         }
+         
+   
 }

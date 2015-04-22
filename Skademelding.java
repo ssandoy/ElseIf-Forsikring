@@ -93,6 +93,20 @@ public class Skademelding implements Serializable {
                         return true;
                     }
                 }
+                 else if(skadeType == "FRITID")
+                {
+                    if(f instanceof Fritidsboligforsikring)
+                    {
+                        return true;
+                    }
+                }
+                 else if(skadeType == "BIL")
+                {
+                    if(f instanceof Bilforsikring)
+                    {
+                        return true;
+                    }
+                }
 
             }
             return false;

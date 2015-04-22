@@ -18,10 +18,10 @@ public class Bilforsikring extends Kjoretoyforsikring implements Serializable
     private int kjorelengde;
     
     
-    public Bilforsikring(double forsikringspremie, String eier, String registreringsnummer, 
+    public Bilforsikring( String eier, String registreringsnummer, 
                          String type, String modell, int registreringsaar, int kjorelengde)
     {
-        super(forsikringspremie,  eier, registreringsnummer, type, modell);
+        super( eier, registreringsnummer, type, modell);
         this.registreringsaar = registreringsaar;
         this.kjorelengde = kjorelengde;
         

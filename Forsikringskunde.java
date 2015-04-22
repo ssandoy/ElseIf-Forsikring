@@ -44,11 +44,11 @@ public class Forsikringskunde extends Person implements Serializable
     }
     
     
-   /*Metode som sjekker om kunden er totalkunde*/
-   /* public boolean TotalKunde()
+   /*Metode som sjekker om kunden er totalkunde
+    public boolean TotalKunde()
     {
         < sjekker om kunden er totalkunde >
-    }*/
+    } /*
     
    /*Metode som legger en forsikring til hos kunden*/
     public void addForsikring(Forsikring f)

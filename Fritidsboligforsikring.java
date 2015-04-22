@@ -12,8 +12,9 @@ package prosjektoppgave;
 public class Fritidsboligforsikring extends Boligforsikring 
 {
 
-    public Fritidsboligforsikring(double forsikringspremie, double foriskringsbelop, String adresse, String byggeaar, String boligtype, int boareal) {
-        super(forsikringspremie, foriskringsbelop, adresse, byggeaar, boligtype, boareal);
+    public Fritidsboligforsikring(String adresse, String byggeaar, String boligtype, int boareal) {
+        super(adresse, byggeaar, boligtype, boareal);
+        
         
         
     }

@@ -5,10 +5,23 @@
  */
 package prosjektoppgave;
 
+import java.io.Serializable;
+
 /**
  *
  * @author ssandoy
  */
-public class Baatforsikring {
+public class Baatforsikring extends Kjoretoyforsikring implements Serializable
+{
+    public String hestekrefter;
+    
+    public Baatforsikring(String eier,  String registreringsnummer, 
+            String type, String modell, String hestekrefter) 
+    {
+        super(eier, registreringsnummer, type, modell);
+        this.hestekrefter = hestekrefter;
+        
+    }
+ 
     
 }

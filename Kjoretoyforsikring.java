@@ -19,20 +19,17 @@ public abstract class Kjoretoyforsikring extends Insurance implements Serializab
     private String eier;
     private String registreringsnummer;
     private String type;
-    private String modell;
-    private String test;
+    private int modell;
+
     
     
-    protected Kjoretoyforsikring(double forsikringspremie
-                               , String eier, String registreringsnummer, 
-                                String type, String modell)
+    protected Kjoretoyforsikring(String eier, String registreringsnummer, 
+                                 String type, int modell)
     {
-        super(forsikringspremie);
         this.eier = eier;
         this.registreringsnummer = registreringsnummer;
         this.type = type;
         this.modell = modell;
-        
     }
     
     
@@ -51,9 +48,35 @@ public abstract class Kjoretoyforsikring extends Insurance implements Serializab
         return type;
     }
     
-    public String getModell()
+    public int getModell()
     {
         return modell;
+    }
+    
+    public double beregnPremie()
+    {
+        double premie = 0.00;
+         if(modell >= 1950 && modell <= 1970)
+         {
+             super.setPremie(12000.00);
+             return premie;
+         }
+         else if(modell >= 1971 && modell <= 1990)
+         {
+             super.setPremie(20000.00);
+             return premie;
+         }
+         else if(modell >= 1991 && modell <= 2005)
+         {
+             super.setPremie(30000.00);
+             return premie;
+         }
+         else if(modell >= 2006 && modell <= 2015)
+         {
+             super.setPremie(40000.00);
+             return premie;
+         }
+
     }
     
 }
