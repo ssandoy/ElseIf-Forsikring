@@ -8,6 +8,7 @@ package prosjektoppgave;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.ListIterator;
 
 /**
  *
@@ -20,8 +21,8 @@ public class Forsikringskunde extends Person implements Serializable
     private String fakturaadresse;
     private int kundenummer;
     private static int nestenummer = 1;
-    private int aarligpremie;
-    private int erstatninger;
+    private double aarligpremie;
+    private double erstatninger;
     private boolean totalkunde;
     private LinkedList<Forsikring> forsikringer;
     private LinkedList<Skademelding> skademeldinger;
@@ -39,16 +40,28 @@ public class Forsikringskunde extends Person implements Serializable
         forsikringer = new LinkedList();
         skademeldinger = new LinkedList();
         totalkunde = false; //ikke nødvendig
-        aarligpremie = 0;
-        erstatninger = 0;
+        aarligpremie = 0.00;
+        erstatninger = 0.00;
     }
     
     
-   /*Metode som sjekker om kunden er totalkunde
+   /*Metode som sjekker om kunden er totalkunde*/
     public boolean TotalKunde()
     {
-        < sjekker om kunden er totalkunde >
-    } /*
+        int teller = 0;
+        ListIterator it = forsikringer.listIterator();
+        while(it.hasNext())
+        {
+            Forsikring f = (Forsikring) it.next();
+            teller++;
+        }
+        
+        if(teller >= 3)
+        {
+            totalkunde = true;
+        }  
+        return totalkunde;
+    } 
     
    /*Metode som legger en forsikring til hos kunden*/
     public void addForsikring(Forsikring f)
@@ -66,6 +79,31 @@ public class Forsikringskunde extends Person implements Serializable
     {
         return forsikringer;
     }
+    
+    //Metode som beregner hvor mye kunden må betale i premie
+    public void beregnPremie()
+    {
+        aarligpremie = 0.00;
+        ListIterator it = forsikringer.listIterator();
+        while(it.hasNext())
+        {
+            Forsikring f = (Forsikring) it.next();
+            aarligpremie += f.getPremie();
+        }
+    }
+    
+    //Metode som beregner hvor mye kunde får i erstatninger
+   /* public void beregnErstatning()
+    {
+        
+    }*/
+    
+    
+    public double getPremie()
+    {
+        return aarligpremie;
+    }
+    
     
     @Override
     public String toString()

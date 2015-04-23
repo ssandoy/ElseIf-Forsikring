@@ -65,6 +65,11 @@ public abstract class Insurance implements Serializable, Forsikring {
          forsikringspremie = premie;
      }
     
+     @Override
+     public void setErstatning(double erstatning)
+     {
+         this.erstatning = erstatning;
+     }
     
     
 }

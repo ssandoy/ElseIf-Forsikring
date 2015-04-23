@@ -81,7 +81,7 @@ public abstract class Person implements Menneske
     @Override
     public String toString()
     {
-      return "PERSONNUMMER: " + personnummer + "Fornavn: " + fornavn + "\nEtternavn: " + etternavn + "\nAdresse: " + adresse;
+      return "PERSONNUMMER: " + personnummer + "\nNavn: " + fornavn + " " + etternavn + "\nAdresse: " + adresse;
     }
     
     

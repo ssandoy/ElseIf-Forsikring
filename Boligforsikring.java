@@ -69,6 +69,8 @@ public abstract class Boligforsikring extends Insurance implements Serializable
              super.setPremie(20000.00);
              return premie;
          }
-         
-   
+         else
+             return premie;
+        }
 }
+

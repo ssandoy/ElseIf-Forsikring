@@ -24,5 +24,7 @@ public interface Forsikring extends Serializable
     
     /*set-metoder*/
     public void setPremie(double premie);
+    public void setErstatning(double erstatning);
+    
     
 }
