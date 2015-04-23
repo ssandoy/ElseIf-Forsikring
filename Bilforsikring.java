@@ -17,7 +17,7 @@ public class Bilforsikring extends Kjoretoyforsikring implements Serializable
     private int registreringsaar;
     private int aarligkjorelengde;
     private int skadefri;
-    private final static int BEREGNINGSKONSTANT = 0.1;
+    private final static double BEREGNINGSKONSTANT = 0.1;
     
     public Bilforsikring( String eier, String registreringsnummer, 
                          String type, int modell, int registreringsaar, int aarligkjorelengde
@@ -37,9 +37,10 @@ public class Bilforsikring extends Kjoretoyforsikring implements Serializable
         
     }
     
-//Metode som beregner premien ut i fra hvor gammel bilen er
+///Metode som beregner premien ut i fra hvor gammel bilen er
     public void beregnPremie()
     {
+         int modell = super.getModell();
         
          if(modell >= 1950 && modell <= 1970)
          {
@@ -85,5 +86,6 @@ public class Bilforsikring extends Kjoretoyforsikring implements Serializable
        }
         
            premie = premie*(1 - bonusprosent);
+           super.setPremie(premie);
     }
 }

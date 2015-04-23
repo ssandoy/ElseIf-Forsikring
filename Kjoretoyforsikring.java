@@ -6,7 +6,7 @@
 package prosjektoppgave;
 
 import java.io.Serializable;
-import java.util.Date;
+
 
 /**
  *
@@ -15,7 +15,6 @@ import java.util.Date;
 public abstract class Kjoretoyforsikring extends Insurance implements Serializable
 {
 
-    
     private String eier;
     private String registreringsnummer;
     private String type;
@@ -32,7 +31,7 @@ public abstract class Kjoretoyforsikring extends Insurance implements Serializab
         this.modell = modell;
     }
     
-    
+    /*get-metoder*/
     public String getEier()
     {
         return eier;
@@ -53,26 +52,6 @@ public abstract class Kjoretoyforsikring extends Insurance implements Serializab
         return modell;
     }
     
-    public void beregnPremie()
-    {
-        double premie = 0.00;
-         if(modell >= 1950 && modell <= 1970)
-         {
-             super.setPremie(12000.00);
-         }
-         else if(modell >= 1971 && modell <= 1990)
-         {
-             super.setPremie(20000.00); 
-         }
-         else if(modell >= 1991 && modell <= 2005)
-         {
-             super.setPremie(30000.00);
-         }
-         else if(modell >= 2006 && modell <= 2015)
-         {
-             super.setPremie(40000.00);
-         }
-
-    }
+    
     
 }
