@@ -18,85 +18,90 @@ import javax.swing.*;
 public class HovedVindu extends JFrame implements ActionListener  
 {
     
-    private JTextField personnummer, fornavn, etternavn, adresse, fakturaadresse;
-    private JButton regKunde;
-    private JTextArea utskrift;
+    private JPanel hovedpanel;
     
-    private Kunderegister kunderegister;
+    private JPanel underpaneler;
     
+    private JButton regKunde, visKunde, regForsikring, regSkade, finanser, historikk, statistikk
+            ,søk;
+    private Icon LOGO, regKundeIcon, visKundeIcon, regForsikringIcon, regSkadeIcon, finanserIcon,
+            historikkIcon, statistikkIcon, søkIcon;
+    
+    private static final int HovedVindu = -1;
+    
+   
     public HovedVindu()
     {
         super("Insurance-Browse!");
+        setLayout(new BorderLayout());
         
-        kunderegister = new Kunderegister();
-        personnummer = new JTextField(20);
-        fornavn = new JTextField(20);
-        etternavn = new JTextField(20);
-        adresse = new JTextField(30);
-        fakturaadresse = new JTextField(30);
+        setGrensesnitt();
         
-        regKunde = new JButton("Registrer kunde!");
-        utskrift = new JTextArea( 15, 45 );
-        utskrift.setEditable( false );
+        underpaneler = new JPanel(new CardLayout());
+        underpaneler.add(hovedpanel, HovedVindu);
+        hovedpanel.setBackground(Color.decode("#E57E7E"));
         
-        Container c = getContentPane();
-        c.setLayout( new FlowLayout() );
-        c.add(new JLabel("PERSONNUMMER"));
-        c.add(personnummer);
-        c.add( new JLabel( "Fornavn:" ) );
-        c.add( fornavn );
-        c.add( new JLabel( "Etternavn:" ) );
-        c.add( etternavn );
-        c.add( new JLabel( "Adresse:" ) );
-        c.add( adresse );
-        c.add( new JLabel( "Fakturaadresse:" ) );
-        c.add( fakturaadresse );
-        c.add(regKunde);
-        c.add(utskrift);
+        add(underpaneler, BorderLayout.CENTER);
         
-        c.add( new JScrollPane( utskrift ) );
-        
-        Knappelytter lytter = new Knappelytter();
-        regKunde.addActionListener(lytter);
-        setSize( 600, 550 );
-    setVisible( true );
-        
-        
+        setVisible(true);
+        pack();
     }
     
-        public void registrerKunde()
-        {
-              int personnummer = Integer.parseInt(this.personnummer.getText());
-              String fornavn = this.fornavn.getText();
-              String etternavn = this.etternavn.getText();
-              String adresse = this.adresse.getText();
-              String fakturaadresse = this.fakturaadresse.getText();
-              
-              Forsikringskunde k = new Forsikringskunde(personnummer, fornavn, etternavn, adresse, fakturaadresse);
-              
-              
-              kunderegister.leggTil(k);
-              Forsikringskunde kunde = kunderegister.getKunde(personnummer);
-              System.out.println(kunde.toString());
-           
-        }
+    
+    //setter grensesnittet. Panelene, knappene osv.
+    public void setGrensesnitt()
+    {
+        hovedpanel = new JPanel(new GridLayout(2,4,5,5));
+        
+        regKundeIcon = new ImageIcon(getClass().getResource("Bilder/regKunde.jpg"));
+        visKundeIcon = new ImageIcon(getClass().getResource("Bilder/visKunde.jpg"));
+        regForsikringIcon = new ImageIcon(getClass().getResource("Bilder/regForsikring.jpg"));
+        regSkadeIcon = new ImageIcon(getClass().getResource("Bilder/regSkademelding.jpg"));
+        finanserIcon = new ImageIcon(getClass().getResource("Bilder/Finanser.jpg"));
+        historikkIcon = new ImageIcon(getClass().getResource("Bilder/Historikk.jpg"));
+        statistikkIcon = new ImageIcon(getClass().getResource("Bilder/Statistikk.jpg"));
+        søkIcon = new ImageIcon(getClass().getResource("Bilder/Søk.jpg"));
+        
+        regKunde      = new JButton(regKundeIcon);
+        visKunde      = new JButton(visKundeIcon);
+        regForsikring = new JButton(regForsikringIcon);
+        regSkade      = new JButton(regSkadeIcon);
+        finanser      = new JButton(finanserIcon);
+        historikk     = new JButton(historikkIcon);
+        statistikk    = new JButton(statistikkIcon);
+        søk           = new JButton(søkIcon);
+        
+        hovedpanel.add(regKunde);
+        hovedpanel.add(visKunde);
+        hovedpanel.add(regForsikring);
+        hovedpanel.add(regSkade);
+        hovedpanel.add(finanser);
+        hovedpanel.add(historikk);
+        hovedpanel.add(statistikk);
+        hovedpanel.add(søk);
+        
+    }
+       
+
+       public void Size() 
+       {
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        Dimension skjerm = kit.getScreenSize();
+        int bredde = skjerm.width;
+        int høyde = skjerm.height;
+
+        setSize(bredde / 2, høyde - 100);
+        setLocation(skjerm.width / 2 - getSize().width / 2, skjerm.height / 2 - getSize().height / 2);
+       
+       }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-
    
     
-    private class Knappelytter implements ActionListener
-  {
-        @Override
-    public void actionPerformed( ActionEvent e )
-    {
-      if(e.getSource() == regKunde)
-          registrerKunde();
-      
-    }
-  }
+    
+    
+    
 }

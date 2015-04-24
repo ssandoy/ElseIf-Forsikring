@@ -20,7 +20,8 @@ import java.util.ListIterator;
 public class Skademelding implements Serializable {
     private Forsikringskunde kunde;  
     private Date skadedato;
-    private int skadeNr;
+    private String skadeNr;
+    private int snr;
     private String skadeType;
     
     private String skadeBeskrivelse;
@@ -36,13 +37,14 @@ public class Skademelding implements Serializable {
     {
         this.kunde = kunde;
         this.skadedato = new Date();
-        skadeNr = nesteNr++;
+        snr = nesteNr++;
+        skadeNr = snr+"";
         this.skadeType = skadeType;
         this.skadeBeskrivelse = skadeBeskrivelse;    
         
     }
     
-    public int getNr(){
+    public String getNr(){
         return skadeNr;
     }
     

@@ -37,17 +37,6 @@ public abstract class Boligforsikring extends Insurance implements Serializable
     }
     
     
-    @Override
-    public double getPremie() 
-    {
-       return forsikringspremie;
-    }
-
-    @Override
-    public Date getStartDato() 
-    {
-      return startDato;
-    }
 
     //Beregner premien på arealet av boligen
     public void beregnArealPremie()

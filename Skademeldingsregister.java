@@ -17,7 +17,7 @@ import java.util.*;
  *
  * @author YAAKOUBD
  */
-public class Skademeldingsregister extends TreeMap<Integer, Skademelding> implements Register{
+public class Skademeldingsregister extends TreeMap<String, Skademelding> implements Register{
     
      @Override
     public boolean leggTil(Object objekt) 
@@ -34,13 +34,13 @@ public class Skademeldingsregister extends TreeMap<Integer, Skademelding> implem
     }
     
     @Override
-    public boolean finnes(int nr) 
+    public boolean finnes(String nr) 
     {
        return containsKey(nr);
     }
     
     @Override
-    public boolean fjern(int nr) 
+    public boolean fjern(String nr) 
     {
        if(finnes(nr))
        {
@@ -51,7 +51,7 @@ public class Skademeldingsregister extends TreeMap<Integer, Skademelding> implem
     }
     
      @Override
-    public Object getObject(int nr) 
+    public Object getObject(String nr) 
     {
         if(finnes(nr))
         {
@@ -61,7 +61,7 @@ public class Skademeldingsregister extends TreeMap<Integer, Skademelding> implem
     }
 
     
-    public Skademelding getSkademelding(int nr)
+    public Skademelding getSkademelding(String nr)
     {
        if(finnes(nr))
        {
