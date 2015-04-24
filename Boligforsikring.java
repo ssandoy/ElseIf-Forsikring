@@ -37,37 +37,25 @@ public abstract class Boligforsikring extends Insurance implements Serializable
     }
     
     
-    @Override
-    public double getPremie() 
-    {
-       return forsikringspremie;
-    }
-
-    @Override
-    public Date getStartDato() 
-    {
-      return startDato;
-    }
-
     //Beregner premien på arealet av boligen
     public void beregnArealPremie()
     {
       
          if(boareal >= 30 && boareal <= 50)
          {
-             super.setPremie(12000.00);
+             super.setPremie(1000.00);
          }
          else if(boareal >= 51 && boareal <= 80)
          {
-             super.setPremie(20000.00);
+             super.setPremie(1500.00);
          }
          else if(boareal >= 81 && boareal <= 110)
          {
-             super.setPremie(20000.00);
+             super.setPremie(2000.00);
          }
          else if(boareal >= 111 && boareal <= 140)
          {
-             super.setPremie(20000.00);
+             super.setPremie(2200.00);
          }
         }
 
@@ -77,11 +65,11 @@ public abstract class Boligforsikring extends Insurance implements Serializable
            double premie = super.getPremie();
            if(byggematerial == "MUR")
            {
-               premie += 1000.00;
+               premie += 200.00;
            }
            else if(byggematerial == "TRE")
            {
-               premie += 3000.00;
+               premie += 300.00;
            }
            super.setPremie(premie);
        }
@@ -91,11 +79,27 @@ public abstract class Boligforsikring extends Insurance implements Serializable
     public void beregnBoligPremie()
      {
          double premie = super.getPremie();
-         if(byggeaar <= x && byggeaar >= x)
+         if(byggeaar <= 1940)
          {
-             
+             premie += 100.00;
          }
-         else if
+         else if(byggeaar > 1940 && byggeaar <= 1960)
+         {
+             premie += 200.00;
+         }
+         else if(byggeaar > 1960 && byggeaar <= 1980)
+         {
+             premie += 300.00;
+         }
+         else if(byggeaar > 1980 && byggeaar <= 2000)
+         {
+             premie += 400.00;
+         }
+         else
+         {
+             premie += 500.00;
+         }
+         super.setPremie(premie);
      }
 
 }
