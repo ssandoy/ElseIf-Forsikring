@@ -14,17 +14,15 @@ import java.io.Serializable;
 public class Bilforsikring extends Kjoretoyforsikring implements Serializable
 {
 
-    private int registreringsaar;
     private int aarligkjorelengde;
     private int skadefri;
     private final static double BEREGNINGSKONSTANT = 0.1;
     
-    public Bilforsikring( String eier, String registreringsnummer, 
-                         String type, int modell, int registreringsaar, int aarligkjorelengde
+    public Bilforsikring(Forsikringskunde k, String eier, String registreringsnummer, 
+                         String type, int modell, int aarligkjorelengde
                         , int skadefri)
     {
-        super(eier, registreringsnummer, type, modell);
-        this.registreringsaar = registreringsaar;
+        super(k, eier, registreringsnummer, type, modell);
         this.aarligkjorelengde = aarligkjorelengde;
         this.skadefri = skadefri;
        
@@ -44,26 +42,26 @@ public class Bilforsikring extends Kjoretoyforsikring implements Serializable
         
          if(modell >= 1950 && modell <= 1970)
          {
-             super.setPremie(12000.00);
+             super.setPremie(5000.00);
          }
          else if(modell >= 1971 && modell <= 1990)
          {
-             super.setPremie(20000.00); 
+             super.setPremie(7000.00); 
          }
          else if(modell >= 1991 && modell <= 2005)
          {
-             super.setPremie(30000.00);
+             super.setPremie(9000.00);
          }
          else if(modell >= 2006 && modell <= 2015)
          {
-             super.setPremie(40000.00);
+             super.setPremie(12000.00);
          }
 
     }
     
     
-    //metode som beregner bil-premien ut i fra bonuser og kjørelengde
-    public void beregnBilPremie()
+    //metode som beregner bil-premien ut i fra skadefrihet, kjørelengde og egenandel
+    public void beregnBiPremie()
     {
         double premie = super.getPremie();
         premie += BEREGNINGSKONSTANT*aarligkjorelengde;
@@ -71,7 +69,7 @@ public class Bilforsikring extends Kjoretoyforsikring implements Serializable
         
        switch (skadefri) 
        {
-            case 0: bonusprosent = 0.00;
+            case 0:  bonusprosent = 0.00;
                      break;
             case 1:  bonusprosent = 0.15;
                      break;
@@ -88,4 +86,5 @@ public class Bilforsikring extends Kjoretoyforsikring implements Serializable
            premie = premie*(1 - bonusprosent);
            super.setPremie(premie);
     }
+    
 }

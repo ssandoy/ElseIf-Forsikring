@@ -24,9 +24,10 @@ public abstract class Boligforsikring extends Insurance implements Serializable
     
     
     
-    protected Boligforsikring( String adresse, int byggeaar, 
+    protected Boligforsikring( Forsikringskunde kunde, String adresse, int byggeaar, 
                             String boligtype, int boareal, String byggematerial)
     {
+        super(kunde);
         this.adresse = adresse;
         this.byggeaar = byggeaar;
         this.boligtype = boligtype;
@@ -37,6 +38,7 @@ public abstract class Boligforsikring extends Insurance implements Serializable
     }
     
     
+
     //Beregner premien på arealet av boligen
     public void beregnArealPremie()
     {

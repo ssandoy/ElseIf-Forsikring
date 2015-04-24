@@ -21,7 +21,7 @@ public interface Menneske extends Serializable
     public String getFornavn();
     public String getEtternavn();
     public String getAdresse();
-    public int getPersonNr();
+    public String getPersonNr();
     
     
     /*set-metoder for navn*/

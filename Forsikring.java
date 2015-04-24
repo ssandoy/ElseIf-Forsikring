@@ -17,7 +17,7 @@ public interface Forsikring extends Serializable
 {
     
     /*get-metoder*/
-    public int getFNummer();
+    public String getFNummer();
     public double getPremie();
     public Date getStartDato();
     public double getErstatning();

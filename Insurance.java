@@ -15,9 +15,11 @@ import java.util.Date;
  * @author ssandoy
  */
 public abstract class Insurance implements Serializable, Forsikring {
-
-    private final int forsikringsnummer;
+    
+    Forsikringskunde kunde;
+    private final int fnr;
     private static int nestenummer = 1;
+    private String forsikringsnummer;
     private double erstatning;
     private double egenandel;
     private Date startDato;
@@ -25,10 +27,13 @@ public abstract class Insurance implements Serializable, Forsikring {
     private double forsikringspremie;
     
     
-    protected Insurance()
+    protected Insurance(Forsikringskunde kunde)
     {
+        this.kunde = kunde;
+        kunde.addForsikring(this);
         this.startDato = new Date();
-        forsikringsnummer = nestenummer++;
+        fnr = nestenummer++;
+        forsikringsnummer = fnr+"";
         erstatning = 0.00;
         egenandel = 0.00;
         forsikringspremie = 0.00;
@@ -36,7 +41,7 @@ public abstract class Insurance implements Serializable, Forsikring {
     
     
     @Override
-    public int getFNummer() 
+    public String getFNummer() 
     {
         return forsikringsnummer;
     }

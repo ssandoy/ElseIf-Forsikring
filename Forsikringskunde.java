@@ -20,6 +20,7 @@ public class Forsikringskunde extends Person implements Serializable
     private Date startDato;
     private String fakturaadresse; //RADIOBUTTON SOM KAN KRYSSES AV slik at den fylles ut autmoatisk
     private int kundenummer;
+    //private int nr;
     private static int nestenummer = 1;
     private double aarligpremie;
     private double erstatninger;
@@ -28,7 +29,7 @@ public class Forsikringskunde extends Person implements Serializable
     private LinkedList<Skademelding> skademeldinger;
 
     
-    public Forsikringskunde(int personnummer, String fornavn, String etternavn,  
+    public Forsikringskunde(String personnummer, String fornavn, String etternavn,  
            String adresse, String fakturaadresse) 
     {
         super(personnummer, fornavn, etternavn, adresse);
@@ -43,6 +44,7 @@ public class Forsikringskunde extends Person implements Serializable
         aarligpremie = 0.00;
         erstatninger = 0.00;
     }
+    
     
     
    /*Metode som sjekker om kunden er totalkunde*/
@@ -84,10 +86,10 @@ public class Forsikringskunde extends Person implements Serializable
     public void beregnPremie()
     {
         aarligpremie = 0.00;
-        ListIterator it = forsikringer.listIterator();
+        ListIterator<Forsikring> it = forsikringer.listIterator();
         while(it.hasNext())
         {
-            Forsikring f = (Forsikring) it.next();
+            Forsikring f = it.next();
             aarligpremie += f.getPremie();
         }
         
@@ -103,6 +105,11 @@ public class Forsikringskunde extends Person implements Serializable
         
     }*/
     
+    
+    public int getKundeNummer()
+    {
+        return kundenummer;
+    }
     
     public double getPremie()
     {

@@ -17,8 +17,11 @@ public class Ansatt extends Person implements Serializable
     
     
     
-    public Ansatt(int personnummer, String fornavn, String etternavn, String adresse) {
+    public Ansatt(int personnummer, String fornavn, String etternavn, String adresse) 
+    {
         super(personnummer, fornavn, etternavn, adresse);
+        
+        
     }
     
 }

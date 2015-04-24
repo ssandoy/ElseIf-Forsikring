@@ -22,9 +22,10 @@ public abstract class Kjoretoyforsikring extends Insurance implements Serializab
 
     
     
-    protected Kjoretoyforsikring(String eier, String registreringsnummer, 
+    protected Kjoretoyforsikring(Forsikringskunde k, String eier, String registreringsnummer, 
                                  String type, int modell)
     {
+        super(k);
         this.eier = eier;
         this.registreringsnummer = registreringsnummer;
         this.type = type;

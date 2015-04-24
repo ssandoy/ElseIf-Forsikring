@@ -13,7 +13,7 @@ import java.util.TreeMap;
  *
  * @author ssandoy
  */
-public class Forsikringsregister extends TreeMap<Integer,Forsikring> implements Serializable, Register 
+public class Forsikringsregister extends TreeMap<String,Forsikring> implements Serializable, Register 
 {
 
     @Override
@@ -31,7 +31,7 @@ public class Forsikringsregister extends TreeMap<Integer,Forsikring> implements 
     }
     
     @Override
-    public boolean finnes(int fnr) 
+    public boolean finnes(String fnr) 
     {
         return containsKey(fnr);
     }
@@ -39,7 +39,7 @@ public class Forsikringsregister extends TreeMap<Integer,Forsikring> implements 
     
 
     @Override
-    public boolean fjern(int fnr) 
+    public boolean fjern(String fnr) 
     {
          if(finnes(fnr))
        {
@@ -52,7 +52,7 @@ public class Forsikringsregister extends TreeMap<Integer,Forsikring> implements 
    
 
     @Override
-    public Object getObject(int fnr) 
+    public Object getObject(String fnr) 
     {
      if(finnes(fnr))
         {
