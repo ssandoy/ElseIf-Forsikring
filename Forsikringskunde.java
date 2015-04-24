@@ -18,7 +18,7 @@ public class Forsikringskunde extends Person implements Serializable
 {
     
     private Date startDato;
-    private String fakturaadresse;
+    private String fakturaadresse; //RADIOBUTTON SOM KAN KRYSSES AV slik at den fylles ut autmoatisk
     private int kundenummer;
     private static int nestenummer = 1;
     private double aarligpremie;
@@ -89,6 +89,11 @@ public class Forsikringskunde extends Person implements Serializable
         {
             Forsikring f = (Forsikring) it.next();
             aarligpremie += f.getPremie();
+        }
+        
+        if(totalkunde)
+        {
+            aarligpremie *= 0.10;
         }
     }
     
