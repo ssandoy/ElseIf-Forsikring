@@ -17,10 +17,10 @@ public class Baatforsikring extends Kjoretoyforsikring implements Serializable
     private int fot;
     
     
-    public Baatforsikring(String eier,  String registreringsnummer, 
+    public Baatforsikring(Forsikringskunde k, String eier,  String registreringsnummer, 
             String type, int modell, int hestekrefter, int fot) 
     {
-        super(eier, registreringsnummer, type, modell);
+        super(k, eier, registreringsnummer, type, modell);
         this.hestekrefter = hestekrefter;
         this.fot = fot;
         

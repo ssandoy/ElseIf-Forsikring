@@ -27,16 +27,18 @@ public class HovedVindu extends JFrame implements ActionListener
     private Icon LOGO, regKundeIcon, visKundeIcon, regForsikringIcon, regSkadeIcon, finanserIcon,
             historikkIcon, statistikkIcon, søkIcon;
     
-    private static final int HovedVindu = -1;
+    public static final String HovedVindu = "-1";
     
+    private Kunderegister register;
    
-    public HovedVindu()
+    public HovedVindu(Kunderegister register)
     {
         super("Insurance-Browse!");
         setLayout(new BorderLayout());
         
-        setGrensesnitt();
+        this.register = register;
         
+        setGrensesnitt();
         underpaneler = new JPanel(new CardLayout());
         underpaneler.add(hovedpanel, HovedVindu);
         hovedpanel.setBackground(Color.decode("#E57E7E"));
@@ -45,6 +47,7 @@ public class HovedVindu extends JFrame implements ActionListener
         
         setVisible(true);
         pack();
+        
     }
     
     
@@ -53,14 +56,14 @@ public class HovedVindu extends JFrame implements ActionListener
     {
         hovedpanel = new JPanel(new GridLayout(2,4,5,5));
         
-        regKundeIcon = new ImageIcon(getClass().getResource("Bilder/regKunde.jpg"));
-        visKundeIcon = new ImageIcon(getClass().getResource("Bilder/visKunde.jpg"));
-        regForsikringIcon = new ImageIcon(getClass().getResource("Bilder/regForsikring.jpg"));
-        regSkadeIcon = new ImageIcon(getClass().getResource("Bilder/regSkademelding.jpg"));
-        finanserIcon = new ImageIcon(getClass().getResource("Bilder/Finanser.jpg"));
-        historikkIcon = new ImageIcon(getClass().getResource("Bilder/Historikk.jpg"));
-        statistikkIcon = new ImageIcon(getClass().getResource("Bilder/Statistikk.jpg"));
-        søkIcon = new ImageIcon(getClass().getResource("Bilder/Søk.jpg"));
+        regKundeIcon        = new ImageIcon(getClass().getResource("Bilder/regKunde.png"));
+        visKundeIcon        = new ImageIcon(getClass().getResource("Bilder/visKunde.png"));
+        regForsikringIcon   = new ImageIcon(getClass().getResource("Bilder/regForsikring.png"));
+        regSkadeIcon        = new ImageIcon(getClass().getResource("Bilder/regSkademelding.png"));
+        finanserIcon        = new ImageIcon(getClass().getResource("Bilder/Finanser.png"));
+        historikkIcon       = new ImageIcon(getClass().getResource("Bilder/Historikk.png"));
+        statistikkIcon      = new ImageIcon(getClass().getResource("Bilder/Statistikk.png"));
+        søkIcon             = new ImageIcon(getClass().getResource("Bilder/Søk.png"));
         
         regKunde      = new JButton(regKundeIcon);
         visKunde      = new JButton(visKundeIcon);
@@ -80,8 +83,18 @@ public class HovedVindu extends JFrame implements ActionListener
         hovedpanel.add(statistikk);
         hovedpanel.add(søk);
         
+        regKunde.addActionListener(this);
+        
+        Size();
+        
     }
        
+      //Metode for å vise panel med innkommen parameter
+    public void visPanel(String st) 
+    {
+        CardLayout cl = (CardLayout) underpaneler.getLayout();
+        cl.show(underpaneler, st);
+    }
 
        public void Size() 
        {
@@ -90,16 +103,22 @@ public class HovedVindu extends JFrame implements ActionListener
         int bredde = skjerm.width;
         int høyde = skjerm.height;
 
-        setSize(bredde / 2, høyde - 100);
+        setSize(bredde /2, høyde - 500);
         setLocation(skjerm.width / 2 - getSize().width / 2, skjerm.height / 2 - getSize().height / 2);
        
        }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void actionPerformed(ActionEvent e) 
+    {
+        
+    
+        if (e.getSource() == regKunde)
+        {
+            underpaneler.add(new registrerKundePanel(register, this), "REG KUNDE");
+            visPanel("REG KUNDE");
+        }
     }
-   
     
     
     

@@ -51,7 +51,9 @@ public class Prosjektoppgave {
         //System.out.println(register.toString());
         //System.out.println(bil1.getPremie());*/
         
-       HovedVindu vindu = new HovedVindu();
+        Kunderegister register = new Kunderegister();
+        
+       HovedVindu vindu = new HovedVindu(register);
       
         vindu.addWindowListener(
                 new WindowAdapter()
