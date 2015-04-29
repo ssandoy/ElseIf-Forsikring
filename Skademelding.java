@@ -26,8 +26,8 @@ public class Skademelding implements Serializable {
     
     private String skadeBeskrivelse;
     private String kontaktInfo;
-    private int takseringsBelop;
-    private int erstatningsBelop;
+    private double takseringsBelop;
+    private double erstatningsBelop;
     private Image bilde;
     private int nesteNr = 1;
     private DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
@@ -60,15 +60,25 @@ public class Skademelding implements Serializable {
         return bilde;
     }
     
+    public double getTakseringsBelop()
+    {
+        return takseringsBelop;
+    }
+    
+    public double getErstatningsBelop()
+    {
+        return erstatningsBelop;
+    }
+    
     public void setKontaktInfo( String kontaktInfo ){
         this.kontaktInfo = kontaktInfo;
     }
     
-    public void setTakseringsBelop( int takseringsBelop ){
+    public void setTakseringsBelop( double takseringsBelop ){
         this.takseringsBelop = takseringsBelop;
     }
     
-    public void setErstatningsBelop( int erstatningsBelop ){
+    public void setErstatningsBelop( double erstatningsBelop ){
         this.erstatningsBelop = erstatningsBelop;
     }
     

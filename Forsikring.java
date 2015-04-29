@@ -21,10 +21,12 @@ public interface Forsikring extends Serializable
     public double getPremie();
     public Date getStartDato();
     public double getErstatning();
+    public double getEgenandel();
     
     /*set-metoder*/
     public void setPremie(double premie);
     public void setErstatning(double erstatning);
+    
     
     
 }

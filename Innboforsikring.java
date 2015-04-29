@@ -14,9 +14,9 @@ public class Innboforsikring extends Boligforsikring
 
     
     
-    public Innboforsikring(String adresse, int byggeaar, String boligtype, int boareal, String byggematerial) 
+    public Innboforsikring(Forsikringskunde kunde, String adresse, int byggeaar, String boligtype, int boareal, String byggematerial) 
     {
-        super( adresse, byggeaar, boligtype, boareal, byggematerial);
+        super(kunde, adresse, byggeaar, boligtype, boareal, byggematerial);
         
         
     }
