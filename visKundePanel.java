@@ -6,8 +6,9 @@
 package prosjektoppgave;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 /**
  *
@@ -16,7 +17,21 @@ import javax.swing.JPanel;
 
 public class visKundePanel extends JPanel implements ActionListener
 {
+    private JPanel overskriftpanel;
+    private JPanel tabellpanel;
+    private JPanel sokepanel;
+    private JPanel knapppanel;
 
+    
+
+    private JLabel overskrift;
+    private JTextField sokfelt;
+    private JTable kundetabell;
+    private JScrollPane scroll;
+    
+    private final String[] soyler = {"Personnummer"};
+    
+    
    private Kunderegister kregister;
     
    private HovedVindu forelder;
@@ -27,5 +42,13 @@ public class visKundePanel extends JPanel implements ActionListener
         this.kregister = kregister;
         this.forelder = forelder;
         
+    }
+
+    
+    
+    @Override
+    public void actionPerformed(ActionEvent e) 
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

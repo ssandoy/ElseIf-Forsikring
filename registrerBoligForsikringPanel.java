@@ -74,8 +74,8 @@ public class registrerBoligForsikringPanel extends JPanel implements ActionListe
     {
         personnummerfelt = new JTextField(10);
         adressefelt      = new JTextField(10);
-        boligtypefelt    = new JComboBox(boligtype);
-        materialfelt     = new JComboBox(materialtype);
+        boligtypefelt    = new JComboBox<String>(boligtype);
+        materialfelt     = new JComboBox<String>(materialtype);
         arealfelt        = new JSlider(JSlider.HORIZONTAL, 30, 150, 50);
         byggeaarfelt     = new JSlider(JSlider.HORIZONTAL, 1900, 2015, 1940);
         
@@ -91,6 +91,8 @@ public class registrerBoligForsikringPanel extends JPanel implements ActionListe
         avbryt = new JButton("Avbryt");
         avbryt.addActionListener(this);
         
+        try
+        {
         BilIcon          = new ImageIcon(getClass().getResource("Bilder/BilIcon.png"));
         BoatIcon         = new ImageIcon(getClass().getResource("Bilder/BoatIcon.png"));
         BoligIcon        = new ImageIcon(getClass().getResource("Bilder/HusIcon.png"));
@@ -104,7 +106,23 @@ public class registrerBoligForsikringPanel extends JPanel implements ActionListe
         Bolig       = new JRadioButton(BoligIcon);
         Bolig.addActionListener(this);
         Hytte       = new JRadioButton(HytteIcon);
+        Hytte.addActionListener(this);
         Reise       = new JRadioButton(ReiseIcon);
+        Reise.addActionListener(this);
+        
+        } catch(NullPointerException npe)
+        {
+            Bil = new JRadioButton("Bil-Forsikring");
+            Bil.addActionListener(this);
+            Baat = new JRadioButton("Båt-Forsikring");
+            Baat.addActionListener(this);
+            Bolig = new JRadioButton("Bolig-Forsikring");
+            Bolig.addActionListener(this);
+            Hytte = new JRadioButton("Hytte-Forsikring");
+            Hytte.addActionListener(this);
+            Reise = new JRadioButton("Reise-Forsikring");
+            Reise.addActionListener(this);
+        }
         
         toppanel = new JPanel(new GridLayout(1, 5, 0, 0));
         toppanel.add(Bil);
@@ -152,7 +170,14 @@ public class registrerBoligForsikringPanel extends JPanel implements ActionListe
         {
             forelder.doClick(2);
         }
-        
+         else if(e.getSource() == Hytte)
+        {
+                    forelder.doClick(4);
+        }
+         else if(e.getSource() == Reise)
+        {
+                    forelder.doClick(5);
+        }
     }
     
 }

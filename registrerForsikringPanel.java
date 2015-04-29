@@ -43,11 +43,7 @@ public class registrerForsikringPanel extends JPanel implements ActionListener
     
     private HovedVindu forelder;
     
-    String[] materialtype =  {"VELG MATERIALTYPE", "MUR", "TRE"};
-    String[] reiseområder = {};
-    String[] yrker = {"VELG DIN YRKESSTATUS", "Student", "Deltidsjobb", "Fulltidsjobb"};
-    Integer[] maaneder = {0, 1, 2, 3, 4, 5, 6};
-    Integer[] skade = {0, 1, 2, 3, 4, 5};
+    
     
     
     public registrerForsikringPanel(HovedVindu forelder)
@@ -57,10 +53,7 @@ public class registrerForsikringPanel extends JPanel implements ActionListener
         
         setLayout(new BorderLayout());
         setGrensesnitt();
-        
-        
-        
-        
+       
         
          add(toppanel, BorderLayout.PAGE_START);
          add(midtpanel, BorderLayout.CENTER );
@@ -79,32 +72,8 @@ public class registrerForsikringPanel extends JPanel implements ActionListener
     //inistialiserer knapper, tekstfelter o.l
     public void setGrensesnitt()
     {
-        personnummerfelt = new JTextField(10);
-        //bilpanel
-        bileierfelt = new JTextField(10);
-        regnummerfelt = new JTextField(10);
-        typefelt = new JTextField(10);
-        kjorelengdefelt = new JTextField(10);
-        skadefri = new JComboBox<Integer>(skade);
-        
-        //båtpanel
-         baateierfelt = new JTextField(10);
-         modell = new JSlider(JSlider.HORIZONTAL, 1950, 2015, 1990);
-         hestekrefter = new JSlider(JSlider.HORIZONTAL, 0, 150, 15);
-         fot = new JSlider(JSlider.HORIZONTAL, 8, 50, 20);
-        
-        
-        //huspanel
-         adressefelt = new JTextField(10); 
-         boligtypefelt = new JTextField(10);
-         areal = new JSlider(JSlider.HORIZONTAL,0,150,50);
-         byggeaar = new JSlider(JSlider.HORIZONTAL, 1850,2015,1950);
-         materiale = new JComboBox<String>(materialtype);
-        
-         //hyttepanel
-         antMaaneder = new JComboBox<Integer>(maaneder);
-        
-      
+       
+
         
         registrer = new JButton("Registrer forsikring");
         registrer.addActionListener(this);
@@ -115,12 +84,13 @@ public class registrerForsikringPanel extends JPanel implements ActionListener
         overskriftpanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         overskriftpanel.add(overskrift);
         
+       try
+        {
         BilIcon          = new ImageIcon(getClass().getResource("Bilder/BilIcon.png"));
         BoatIcon         = new ImageIcon(getClass().getResource("Bilder/BoatIcon.png"));
         BoligIcon        = new ImageIcon(getClass().getResource("Bilder/HusIcon.png"));
         HytteIcon        = new ImageIcon(getClass().getResource("Bilder/HytteIcon.png"));
         ReiseIcon        = new ImageIcon(getClass().getResource("Bilder/ReiseIcon.png"));
-       
         
         Bil         = new JRadioButton(BilIcon);
         Bil.addActionListener(this);
@@ -132,6 +102,20 @@ public class registrerForsikringPanel extends JPanel implements ActionListener
         Hytte.addActionListener(this);
         Reise       = new JRadioButton(ReiseIcon);
         Reise.addActionListener(this);
+        
+        } catch(NullPointerException npe)
+        {
+            Bil = new JRadioButton("Bil-Forsikring");
+            Bil.addActionListener(this);
+            Baat = new JRadioButton("Båt-Forsikring");
+            Baat.addActionListener(this);
+            Bolig = new JRadioButton("Bolig-Forsikring");
+            Bolig.addActionListener(this);
+            Hytte = new JRadioButton("Hytte-Forsikring");
+            Hytte.addActionListener(this);
+            Reise = new JRadioButton("Reise-Forsikring");
+            Reise.addActionListener(this);
+        }
         
         toppanel = new JPanel(new GridLayout(1, 5, 0, 0));
         toppanel.add(Bil);
@@ -191,16 +175,24 @@ public class registrerForsikringPanel extends JPanel implements ActionListener
     {
         if(e.getSource() == Bil)
         {
-          forelder.doClick(1);
+                    forelder.doClick(1);
 
         }
         else if(e.getSource() == Baat)
         {
-           forelder.doClick(2);
+                    forelder.doClick(2);
         }
         else if(e.getSource() == Bolig)
         {
                     forelder.doClick(3);
+        }
+         else if(e.getSource() == Hytte)
+        {
+                    forelder.doClick(4);
+        }
+         else if(e.getSource() == Reise)
+        {
+                    forelder.doClick(5);
         }
         else if(e.getSource() == registrer)
         {

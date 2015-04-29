@@ -14,17 +14,14 @@ import javax.swing.*;
  *
  * @author ssandoy
  */
-public class registrerBilForsikringPanel extends JPanel implements ActionListener
+public class registrerReiseForsikringPanel extends JPanel implements ActionListener
 {
-
     
-    private JTextField personnummerfelt, bileierfelt, regnummerfelt, typefelt, kjorelengdefelt;
+    private JTextField personnummerfelt;
     
-    private JLabel plabel, blabel, rlabel, tlabel, klabel, mlabel, slabel;
+    private JComboBox<String> reisefelt, statusfelt;
     
-    private JSlider modell;
-    
-    private JComboBox<Integer> skadefri;
+    private JLabel personlabel, reiselabel, statuslabel;
     
     private JRadioButton Bil, Baat, Bolig, Hytte, Reise;
     
@@ -39,18 +36,17 @@ public class registrerBilForsikringPanel extends JPanel implements ActionListene
     private JButton registrer;
     private JButton avbryt;
     
-    private JLabel overskrift;
+    HovedVindu forelder;
+    Forsikringsregister fregister;
     
-    private HovedVindu forelder;
+    String[] reise = {"Velg område", "INNLANDS", "SKANDINAVIA", "EUROPA", "VERDEN"};
+    String[] status = {"Velg din status", "Student", "Voksen", "Honnør"};
     
-    Integer[] skade = {0, 1, 2, 3, 4, 5};
     
-    Forsikringsregister register;
-    
-    public registrerBilForsikringPanel(HovedVindu forelder, Forsikringsregister register)
+    public registrerReiseForsikringPanel(HovedVindu forelder, Forsikringsregister fregister)
     {
-        this.forelder = forelder;
-        this.register = register;
+        this.forelder  = forelder;
+        this.fregister = fregister;
         
         setLayout(new BorderLayout());
         setGrensesnitt();
@@ -68,32 +64,24 @@ public class registrerBilForsikringPanel extends JPanel implements ActionListene
          forelder.setLocation(skjerm.width/2-forelder.getSize().width/2, skjerm.height/2-forelder.getSize().height/2);
          forelder.pack();
     }
-
     
     public void setGrensesnitt()
     {
-         personnummerfelt = new JTextField(10);
-        //bilpanel
-        bileierfelt = new JTextField(10);
-        regnummerfelt = new JTextField(10);
-        typefelt = new JTextField(10);
-        kjorelengdefelt = new JTextField(10);
-        modell = new JSlider(JSlider.HORIZONTAL, 1950, 2015, 1990);
-        skadefri = new JComboBox<Integer>(skade);
+        personnummerfelt = new JTextField(10);
+        reisefelt        = new JComboBox<String>(reise);
+        statusfelt       = new JComboBox<String>(status);
         
-        plabel = new JLabel("Personnummer:");
-        blabel = new JLabel("Bileier: ");
-        rlabel = new JLabel("Registreringsnummer: ");
-        tlabel = new JLabel("Biltype: ");
-        klabel = new JLabel("Årlig kjørelengde: ");
-        mlabel = new JLabel("Modell");
-        slabel = new JLabel("Antall år skadefri:");
+        personlabel      = new JLabel("Personnummer: ");
+        reiselabel       = new JLabel("Velg område for forsikringen: ");
+        statuslabel      = new JLabel("Velg din rabatt: ");
         
         registrer = new JButton("Registrer forsikring");
         registrer.addActionListener(this);
         avbryt = new JButton("Avbryt");
         avbryt.addActionListener(this);
         
+        try
+        {
         BilIcon          = new ImageIcon(getClass().getResource("Bilder/BilIcon.png"));
         BoatIcon         = new ImageIcon(getClass().getResource("Bilder/BoatIcon.png"));
         BoligIcon        = new ImageIcon(getClass().getResource("Bilder/HusIcon.png"));
@@ -111,6 +99,20 @@ public class registrerBilForsikringPanel extends JPanel implements ActionListene
         Reise       = new JRadioButton(ReiseIcon);
         Reise.addActionListener(this);
         
+        } catch(NullPointerException npe)
+        {
+            Bil = new JRadioButton("Bil-Forsikring");
+            Bil.addActionListener(this);
+            Baat = new JRadioButton("Båt-Forsikring");
+            Baat.addActionListener(this);
+            Bolig = new JRadioButton("Bolig-Forsikring");
+            Bolig.addActionListener(this);
+            Hytte = new JRadioButton("Hytte-Forsikring");
+            Hytte.addActionListener(this);
+            Reise = new JRadioButton("Reise-Forsikring");
+            Reise.addActionListener(this);
+        }
+        
         toppanel = new JPanel(new GridLayout(1, 5, 0, 0));
         toppanel.add(Bil);
         toppanel.add(Baat);
@@ -122,36 +124,33 @@ public class registrerBilForsikringPanel extends JPanel implements ActionListene
         knappepanel.add(registrer);
         knappepanel.add(avbryt);
         
-        midtpanel = new JPanel(new GridLayout(7,0,0,0));
-        midtpanel.add(plabel);
+        midtpanel = new JPanel(new GridLayout(3,0,0,0));
+        midtpanel.add(personlabel);
         midtpanel.add(personnummerfelt);
-        midtpanel.add(blabel);
-        midtpanel.add(bileierfelt);
-        midtpanel.add(rlabel);
-        midtpanel.add(regnummerfelt);
-        midtpanel.add(tlabel);
-        midtpanel.add(typefelt);
-        midtpanel.add(mlabel);
-        midtpanel.add(modell);
-        midtpanel.add(klabel);
-        midtpanel.add(kjorelengdefelt);
-        midtpanel.add(slabel);
-        midtpanel.add(skadefri);
+        midtpanel.add(statuslabel);
+        midtpanel.add(statusfelt);
+        midtpanel.add(reiselabel);
+        midtpanel.add(reisefelt);
         
         toppanel.setBackground(Color.decode("#E0D1FF"));
         knappepanel.setBackground(Color.decode("#E57E7E"));
         midtpanel.setBackground(Color.decode("#E57E7E"));
-        
     }
+
+    
     
     @Override
     public void actionPerformed(ActionEvent e) 
     {
-        if(e.getSource() == avbryt)
+         if(e.getSource() == avbryt)
        {
            forelder.visPanel(HovedVindu.HovedVindu);
            forelder.Size();
        }
+          else if(e.getSource() == Bil)
+        {
+                    forelder.doClick(1);
+        }
         else if(e.getSource() == Baat)
         {
             forelder.doClick(2);
@@ -164,12 +163,5 @@ public class registrerBilForsikringPanel extends JPanel implements ActionListene
         {
                     forelder.doClick(4);
         }
-         else if(e.getSource() == Reise)
-        {
-                    forelder.doClick(5);
-        }
-        
-        
     }
-    
 }

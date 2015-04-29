@@ -25,7 +25,7 @@ public class HovedVindu extends JFrame implements ActionListener
     private JButton regKunde, visKunde, regForsikring, regSkade, finanser, historikk, statistikk
             ,søk;
     
-    private JButton BilForsikring, BaatForsikring, BoligForsikring;
+    private JButton BilForsikring, BaatForsikring, BoligForsikring, HytteForsikring, ReiseForsikring;
     
     private Icon LOGO, regKundeIcon, visKundeIcon, regForsikringIcon, regSkadeIcon, finanserIcon,
             historikkIcon, statistikkIcon, søkIcon;
@@ -98,9 +98,11 @@ public class HovedVindu extends JFrame implements ActionListener
             søk           = new JButton("Søk");
             logo          = new JLabel("LOGO");
         }
-        BilForsikring = new JButton();
-        BaatForsikring = new JButton();
+        BilForsikring   = new JButton();
+        BaatForsikring  = new JButton();
         BoligForsikring = new JButton();
+        HytteForsikring = new JButton();
+        ReiseForsikring = new JButton();
         
         
         
@@ -119,6 +121,8 @@ public class HovedVindu extends JFrame implements ActionListener
         BilForsikring.addActionListener(this);
         BaatForsikring.addActionListener(this);
         BoligForsikring.addActionListener(this);
+        HytteForsikring.addActionListener(this);
+        ReiseForsikring.addActionListener(this);
         
         Size();
         
@@ -145,6 +149,13 @@ public class HovedVindu extends JFrame implements ActionListener
                 break;
             case 3:
                 BoligForsikring.doClick();
+                break;
+            case 4:
+                HytteForsikring.doClick();
+                break;
+            case 5:
+                ReiseForsikring.doClick();
+                break;
         }
 
     }
@@ -191,6 +202,16 @@ public class HovedVindu extends JFrame implements ActionListener
         {
             underpaneler.add(new registrerBoligForsikringPanel(this,fregister), "BoligForsikring");
             visPanel("BoligForsikring");
+        }
+        else if(e.getSource() == HytteForsikring)
+        {
+            underpaneler.add(new registrerHytteForsikringPanel(this,fregister), "HytteForsikring");
+            visPanel("HytteForsikring");
+        }
+        else if(e.getSource() == ReiseForsikring)
+        {
+            underpaneler.add(new registrerReiseForsikringPanel(this, fregister), "ReiseForsikring");
+            visPanel("ReiseForsikring");
         }
     }
 }

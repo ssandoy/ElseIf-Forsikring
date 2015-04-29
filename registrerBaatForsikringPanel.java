@@ -5,15 +5,12 @@
  */
 package prosjektoppgave;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.awt.Toolkit;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 /**
  *
  * @author ssandoy
@@ -62,14 +59,14 @@ public class registrerBaatForsikringPanel extends JPanel implements ActionListen
         add(midtpanel, BorderLayout.CENTER );
         add(knappepanel, BorderLayout.PAGE_END);
         
-        Toolkit kit = Toolkit.getDefaultToolkit();
+         Toolkit kit = Toolkit.getDefaultToolkit();
          Dimension skjerm = kit.getScreenSize();
          int bredde = skjerm.width;
          int høyde = skjerm.height;
          
-         forelder.setSize(bredde/2, høyde-200);
+         forelder.setSize(bredde/2, høyde-370);
          forelder.setLocation(skjerm.width/2-forelder.getSize().width/2, skjerm.height/2-forelder.getSize().height/2);
-         forelder.pack();
+         
     }
 
     
@@ -88,15 +85,21 @@ public class registrerBaatForsikringPanel extends JPanel implements ActionListen
         blabel = new JLabel("Båteier: ");
         rlabel = new JLabel("Registreringsnummer: ");
         tlabel = new JLabel("Båttype: ");
-        mlabel = new JLabel("Modell:");
-        flabel = new JLabel("Antall fot:");
-        hlabel = new JLabel("Antall hestekrefter:");
+        mlabel = new JLabel("Årsmodell: " + modell.getValue());
+        flabel = new JLabel("Antall fot: " + fot.getValue());
+        hlabel = new JLabel("Antall hestekrefter: " + hestekrefter.getValue());
+        
+        SliderEvent e = new SliderEvent();
+        fot.addChangeListener(e);
+        hestekrefter.addChangeListener(e);
+        modell.addChangeListener(e);
         
         registrer = new JButton("Registrer forsikring");
         registrer.addActionListener(this);
         avbryt = new JButton("Avbryt");
         avbryt.addActionListener(this);
         
+        try{
         BilIcon          = new ImageIcon(getClass().getResource("Bilder/BilIcon.png"));
         BoatIcon         = new ImageIcon(getClass().getResource("Bilder/BoatIcon.png"));
         BoligIcon        = new ImageIcon(getClass().getResource("Bilder/HusIcon.png"));
@@ -114,6 +117,23 @@ public class registrerBaatForsikringPanel extends JPanel implements ActionListen
         Reise       = new JRadioButton(ReiseIcon);
         Reise.addActionListener(this);
         
+        
+        
+        } catch(NullPointerException npe)
+        {
+            Bil = new JRadioButton("Bil-Forsikring");
+            Bil.addActionListener(this);
+            Baat = new JRadioButton("Båt-Forsikring");
+            Baat.addActionListener(this);
+            Bolig = new JRadioButton("Bolig-Forsikring");
+            Bolig.addActionListener(this);
+            Hytte = new JRadioButton("Hytte-Forsikring");
+            Hytte.addActionListener(this);
+            Reise = new JRadioButton("Reise-Forsikring");
+            Reise.addActionListener(this);
+            
+            
+        }
         toppanel = new JPanel(new GridLayout(1, 5, 0, 0));
         toppanel.add(Bil);
         toppanel.add(Baat);
@@ -148,6 +168,7 @@ public class registrerBaatForsikringPanel extends JPanel implements ActionListen
         
     }
     
+ 
     
     @Override
     public void actionPerformed(ActionEvent e)
@@ -165,8 +186,34 @@ public class registrerBaatForsikringPanel extends JPanel implements ActionListen
         {
             forelder.doClick(3);
         }
+         else if(e.getSource() == Hytte)
+        {
+                    forelder.doClick(4);
+        }
     }
         
 
+     public class SliderEvent implements ChangeListener{
+
+
+        @Override
+        public void stateChanged(ChangeEvent e) 
+        {
+            if(e.getSource() == hestekrefter) 
+            {
+                hlabel.setText("Antall hestekrefter: " + hestekrefter.getValue());
+            }
+            else if(e.getSource() == fot)
+            {
+                flabel.setText("Antall fot: " + fot.getValue());
+            }
+            else if(e.getSource() == modell)
+            {
+                mlabel.setText("Årsmodell: " + modell.getValue());
+            }
+        } 
+    }
+    
+    
 }
 
