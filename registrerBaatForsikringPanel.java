@@ -1,0 +1,172 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package prosjektoppgave;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.*;
+/**
+ *
+ * @author ssandoy
+ */
+
+public class registrerBaatForsikringPanel extends JPanel implements ActionListener
+{
+    private JTextField personnummerfelt, baateierfelt, regnummerfelt, typefelt;
+    
+    private JLabel plabel, blabel, rlabel, tlabel, hlabel, mlabel, flabel;
+    
+    private JSlider modell, hestekrefter, fot;
+    
+    private JComboBox<Integer> skadefri;
+    
+    private JRadioButton Bil, Baat, Bolig, Hytte, Reise;
+    
+    private Icon BilIcon, BoatIcon, BoligIcon, HytteIcon, ReiseIcon;
+    
+    private JPanel tekstpanel;
+    private JPanel knappepanel;
+    private JPanel overskriftpanel;
+    private JPanel toppanel;
+    private JPanel midtpanel;
+    
+    private JButton registrer;
+    private JButton avbryt;
+    
+    private JLabel overskrift;
+    
+    private HovedVindu forelder;
+    
+    Integer[] skade = {0, 1, 2, 3, 4, 5};
+    
+    Forsikringsregister register;
+
+    public registrerBaatForsikringPanel(HovedVindu forelder, Forsikringsregister register)
+    {
+        this.forelder = forelder;
+        this.register = register;
+        
+        setLayout(new BorderLayout());
+        setGrensesnitt();
+        
+        add(toppanel, BorderLayout.PAGE_START);
+        add(midtpanel, BorderLayout.CENTER );
+        add(knappepanel, BorderLayout.PAGE_END);
+        
+        Toolkit kit = Toolkit.getDefaultToolkit();
+         Dimension skjerm = kit.getScreenSize();
+         int bredde = skjerm.width;
+         int høyde = skjerm.height;
+         
+         forelder.setSize(bredde/2, høyde-200);
+         forelder.setLocation(skjerm.width/2-forelder.getSize().width/2, skjerm.height/2-forelder.getSize().height/2);
+         forelder.pack();
+    }
+
+    
+    public void setGrensesnitt()
+    {
+         personnummerfelt = new JTextField(10);
+         baateierfelt = new JTextField(10);
+         regnummerfelt = new JTextField(10);
+         typefelt = new JTextField(10);
+         modell = new JSlider(JSlider.HORIZONTAL, 1950, 2015, 1990);
+         hestekrefter = new JSlider(JSlider.HORIZONTAL, 0, 150, 15);
+         fot = new JSlider(JSlider.HORIZONTAL, 8, 50, 20);
+         
+         
+        plabel = new JLabel("Personnummer:");
+        blabel = new JLabel("Båteier: ");
+        rlabel = new JLabel("Registreringsnummer: ");
+        tlabel = new JLabel("Båttype: ");
+        mlabel = new JLabel("Modell:");
+        flabel = new JLabel("Antall fot:");
+        hlabel = new JLabel("Antall hestekrefter:");
+        
+        registrer = new JButton("Registrer forsikring");
+        registrer.addActionListener(this);
+        avbryt = new JButton("Avbryt");
+        avbryt.addActionListener(this);
+        
+        BilIcon          = new ImageIcon(getClass().getResource("Bilder/BilIcon.png"));
+        BoatIcon         = new ImageIcon(getClass().getResource("Bilder/BoatIcon.png"));
+        BoligIcon        = new ImageIcon(getClass().getResource("Bilder/HusIcon.png"));
+        HytteIcon        = new ImageIcon(getClass().getResource("Bilder/HytteIcon.png"));
+        ReiseIcon        = new ImageIcon(getClass().getResource("Bilder/ReiseIcon.png"));
+        
+        Bil         = new JRadioButton(BilIcon);
+        Bil.addActionListener(this);
+        Baat        = new JRadioButton(BoatIcon);
+        Baat.addActionListener(this);
+        Bolig       = new JRadioButton(BoligIcon);
+        Bolig.addActionListener(this);
+        Hytte       = new JRadioButton(HytteIcon);
+        Hytte.addActionListener(this);
+        Reise       = new JRadioButton(ReiseIcon);
+        Reise.addActionListener(this);
+        
+        toppanel = new JPanel(new GridLayout(1, 5, 0, 0));
+        toppanel.add(Bil);
+        toppanel.add(Baat);
+        toppanel.add(Bolig);
+        toppanel.add(Hytte);
+        toppanel.add(Reise);
+        
+        
+        knappepanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        knappepanel.add(registrer);
+        knappepanel.add(avbryt);
+        
+        midtpanel = new JPanel(new GridLayout(7,0,0,0));
+        midtpanel.add(plabel);
+        midtpanel.add(personnummerfelt);
+        midtpanel.add(blabel);
+        midtpanel.add(baateierfelt);
+        midtpanel.add(rlabel);
+        midtpanel.add(regnummerfelt);
+        midtpanel.add(tlabel);
+        midtpanel.add(typefelt);
+        midtpanel.add(mlabel);
+        midtpanel.add(modell);
+        midtpanel.add(flabel);
+        midtpanel.add(fot);
+        midtpanel.add(hlabel);
+        midtpanel.add(hestekrefter);
+        
+        toppanel.setBackground(Color.decode("#FFFF66"));
+        knappepanel.setBackground(Color.decode("#E57E7E"));
+        midtpanel.setBackground(Color.decode("#E57E7E"));
+        
+    }
+    
+    
+    @Override
+    public void actionPerformed(ActionEvent e)
+    {
+        if(e.getSource() == avbryt)
+       {
+           forelder.visPanel(HovedVindu.HovedVindu);
+           forelder.Size();
+       }
+        else if(e.getSource() == Bil)
+        {
+            forelder.doClick(1);
+        }
+        else if(e.getSource() == Bolig)
+        {
+            forelder.doClick(3);
+        }
+    }
+        
+
+}
+

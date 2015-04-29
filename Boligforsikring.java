@@ -76,6 +76,21 @@ public abstract class Boligforsikring extends Insurance implements Serializable
            super.setPremie(premie);
        }
     
+    //metode som beregner premien ut i fra hvilket type hus det er
+        public void beregnTypePremie()
+        {
+            double premie = 0.0;
+            if(boligtype == "LEILIGHET")
+            {
+            premie += 100.00;
+            }
+            else if(boligtype ==  "ENEBOLIG")
+            {
+            premie += 200.00;
+            }
+            super.setPremie(premie);
+        }
+    
     //Metode som sluttberegner boligpremien ut i fra hvor gammelt huset er
     
     public void beregnBoligPremie()

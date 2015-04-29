@@ -5,16 +5,18 @@
  */
 package prosjektoppgave;
 
+import java.io.Serializable;
+
 /**
  *
  * @author ssandoy
  */
-public class Fritidsboligforsikring extends Boligforsikring 
+public class Fritidsboligforsikring extends Boligforsikring implements Serializable 
 {   
     private int antallManeder; //Antall måneder man bor i hytta
 
-    public Fritidsboligforsikring(String adresse, int byggeaar, String boligtype, int boareal, String byggematerial, int antallManeder) {
-        super(adresse, byggeaar, boligtype, boareal, byggematerial);
+    public Fritidsboligforsikring(Forsikringskunde k, String adresse, int byggeaar, String boligtype, int boareal, String byggematerial, int antallManeder) {
+    super(k, adresse, byggeaar, boligtype, boareal, byggematerial);
         this.antallManeder = antallManeder;   
     }
     

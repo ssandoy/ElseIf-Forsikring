@@ -5,8 +5,11 @@
  */
 package prosjektoppgave;
 
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.net.URL;
 import javax.swing.JOptionPane;
 
 /**
@@ -51,9 +54,10 @@ public class Prosjektoppgave {
         //System.out.println(register.toString());
         //System.out.println(bil1.getPremie());*/
         
-        Kunderegister register = new Kunderegister();
+        Kunderegister kregister = new Kunderegister();
+        Forsikringsregister fregister = new Forsikringsregister();
         
-       HovedVindu vindu = new HovedVindu(register);
+       HovedVindu vindu = new HovedVindu(kregister, fregister);
       
         vindu.addWindowListener(
                 new WindowAdapter()
@@ -63,6 +67,8 @@ public class Prosjektoppgave {
                         System.exit(0);
                     }
                 });
+        
+        
     }
     
 }

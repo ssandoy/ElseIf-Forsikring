@@ -16,7 +16,9 @@ public class Bilforsikring extends Kjoretoyforsikring implements Serializable
 
     private int aarligkjorelengde;
     private int skadefri;
-    private final static double BEREGNINGSKONSTANT = 0.1;
+    private static final double BEREGNINGSKONSTANT = 0.1;
+    private static final double PRIS_PR_KM = 1.50;
+
     
     public Bilforsikring(Forsikringskunde k, String eier, String registreringsnummer, 
                          String type, int modell, int aarligkjorelengde
