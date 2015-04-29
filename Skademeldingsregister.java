@@ -24,7 +24,7 @@ public class Skademeldingsregister extends TreeMap<String, Skademelding> impleme
     {
         if(objekt instanceof Skademelding)
         {
-            if(!finnes(((Skademelding)objekt).getNr()))
+        if(!finnes(((Skademelding)objekt).getNr()))
             {
                 put(((Skademelding) objekt).getNr(),(Skademelding)objekt);
                 return true;
