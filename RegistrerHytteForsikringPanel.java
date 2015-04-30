@@ -9,22 +9,22 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 /**
  *
  * @author ssandoy
  */
-public class registrerForsikringPanel extends JPanel implements ActionListener
+public class RegistrerHytteForsikringPanel extends JPanel implements ActionListener
 {
-
+     private JTextField personnummerfelt, adressefelt;
     
-    private JTextField personnummerfelt, bileierfelt, baateierfelt, regnummerfelt, typefelt, kjorelengdefelt;
-    private JTextField adressefelt, boligtypefelt;
+    private JComboBox<Integer>  antMaanederfelt;
     
-    private JSlider areal, byggeaar, modell, hestekrefter, fot;
+    private JSlider arealfelt, byggeaarfelt;
     
-    private JComboBox<String> materiale, reiseomraade, yrke;
-    private JComboBox<Integer> skadefri, antMaaneder;
+    private JLabel personlabel, adresslabel, maanedlabel, areallabel, bygglabel;
     
     private JRadioButton Bil, Baat, Bolig, Hytte, Reise;
     
@@ -39,25 +39,24 @@ public class registrerForsikringPanel extends JPanel implements ActionListener
     private JButton registrer;
     private JButton avbryt;
     
-    private JLabel overskrift;
+    HovedVindu forelder;
     
-    private HovedVindu forelder;
-    
-    
+    Forsikringsregister fregister;
     
     
-    public registrerForsikringPanel(HovedVindu forelder)
+    Integer[] antMaaneder = {0,1,2,3,4,5};
+    
+    public RegistrerHytteForsikringPanel(HovedVindu forelder, Forsikringsregister fregister)
     {
-        super(new BorderLayout());
-        this.forelder = forelder;
+        this.forelder  = forelder;
+        this.fregister = fregister;
         
         setLayout(new BorderLayout());
         setGrensesnitt();
-       
         
-         add(toppanel, BorderLayout.PAGE_START);
-         add(midtpanel, BorderLayout.CENTER );
-         add(knappepanel, BorderLayout.PAGE_END);
+        add(toppanel, BorderLayout.PAGE_START);
+        add(midtpanel, BorderLayout.CENTER );
+        add(knappepanel, BorderLayout.PAGE_END);
          
          Toolkit kit = Toolkit.getDefaultToolkit();
          Dimension skjerm = kit.getScreenSize();
@@ -66,25 +65,36 @@ public class registrerForsikringPanel extends JPanel implements ActionListener
          
          forelder.setSize(bredde/2, høyde-200);
          forelder.setLocation(skjerm.width/2-forelder.getSize().width/2, skjerm.height/2-forelder.getSize().height/2);
-         
+         forelder.pack();
     }
     
-    //inistialiserer knapper, tekstfelter o.l
+    
+    
     public void setGrensesnitt()
     {
-       
-
+        personnummerfelt = new JTextField(10);
+        adressefelt      = new JTextField(10);
+        antMaanederfelt    = new JComboBox<Integer>(antMaaneder);
+        arealfelt        = new JSlider(JSlider.HORIZONTAL, 30, 150, 50);
+        byggeaarfelt     = new JSlider(JSlider.HORIZONTAL, 1900, 2015, 1940);
+        
+        personlabel      = new JLabel("Personnummer: ");
+        adresslabel      = new JLabel("Adresse: ");
+        maanedlabel    = new JLabel("Antall bo-måneder i året: ");
+        areallabel       = new JLabel("Boareal: " + arealfelt.getValue() + " km2");
+        bygglabel        = new JLabel("Byggeår: " + byggeaarfelt.getValue());
         
         registrer = new JButton("Registrer forsikring");
         registrer.addActionListener(this);
         avbryt = new JButton("Avbryt");
         avbryt.addActionListener(this);
         
-        overskrift = new JLabel("Velg en forsikring ved å klikke på ikonene over!");
-        overskriftpanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        overskriftpanel.add(overskrift);
+        SliderEvent e = new SliderEvent();
+        arealfelt.addChangeListener(e);
+        byggeaarfelt.addChangeListener(e);
         
-       try
+        
+        try
         {
         BilIcon          = new ImageIcon(getClass().getResource("Bilder/BilIcon.png"));
         BoatIcon         = new ImageIcon(getClass().getResource("Bilder/BoatIcon.png"));
@@ -128,95 +138,67 @@ public class registrerForsikringPanel extends JPanel implements ActionListener
         knappepanel.add(registrer);
         knappepanel.add(avbryt);
         
-        midtpanel = new JPanel(new FlowLayout());
-        midtpanel.add(overskriftpanel, BorderLayout.PAGE_START);
+        midtpanel = new JPanel(new GridLayout(5,0,0,0));
+        midtpanel.add(personlabel);
+        midtpanel.add(personnummerfelt);
+        midtpanel.add(adresslabel);
+        midtpanel.add(adressefelt);
+        midtpanel.add(maanedlabel);
+        midtpanel.add(antMaanederfelt);
+        midtpanel.add(areallabel);
+        midtpanel.add(arealfelt);
+        midtpanel.add(bygglabel);
+        midtpanel.add(byggeaarfelt);
         
-        
-        overskriftpanel.setBackground(Color.decode("#E57E7E"));
         toppanel.setBackground(Color.decode("#E0D1FF"));
         knappepanel.setBackground(Color.decode("#E57E7E"));
         midtpanel.setBackground(Color.decode("#E57E7E"));
-        
-        
-        
     }
     
     
-        //Metode som bytter ut midtpanelet slik at man kan tegne bil-forsikring
-        public void byttTilBilPanel()
-        {
-            midtpanel = new JPanel(new GridLayout(7,0,0,0));
-            midtpanel.add(personnummerfelt);
-            midtpanel.add(bileierfelt);
-            midtpanel.add(regnummerfelt);
-            midtpanel.add(typefelt);
-            midtpanel.add(modell);
-            midtpanel.add(kjorelengdefelt);
-            midtpanel.add(skadefri);
-            add(midtpanel, BorderLayout.CENTER );
-            forelder.pack();
-        }
-    
-        public void byttTilBaatPanel()
-        {
-            midtpanel = new JPanel(new GridLayout(7,0,0,0));
-            midtpanel.add(personnummerfelt);
-            midtpanel.add(baateierfelt);
-            midtpanel.add(modell);
-            add(midtpanel,BorderLayout.CENTER);
-            forelder.pack();
-            
-        }
-    
-  
-    
     @Override
-    public void actionPerformed(ActionEvent e)
+    public void actionPerformed(ActionEvent e)  
     {
-        if(e.getSource() == Bil)
+        if(e.getSource() == avbryt)
         {
-                    forelder.doClick(1);
-
+           forelder.visPanel(HovedVindu.HovedVindu);
+           forelder.Size();
+        }
+         else if(e.getSource() == Bil)
+        {
+            forelder.doClick(1);
         }
         else if(e.getSource() == Baat)
         {
-                    forelder.doClick(2);
+            forelder.doClick(2);
         }
-        else if(e.getSource() == Bolig)
+         else if(e.getSource() == Bolig)
         {
                     forelder.doClick(3);
-        }
-         else if(e.getSource() == Hytte)
-        {
-                    forelder.doClick(4);
         }
          else if(e.getSource() == Reise)
         {
                     forelder.doClick(5);
         }
-        else if(e.getSource() == registrer)
+        
+    }
+    
+    public class SliderEvent implements ChangeListener{
+
+
+        @Override
+        public void stateChanged(ChangeEvent e) 
         {
+            if(e.getSource() == arealfelt) 
+            {
+                areallabel.setText("Areal: " + arealfelt.getValue() + " km2") ;
+            }
+            else if(e.getSource() == byggeaarfelt)
+            {
+                bygglabel.setText("Byggeår: " + byggeaarfelt.getValue());
+            }
             
-        }
-       
-        else if(e.getSource() == avbryt)
-       {
-           forelder.visPanel(HovedVindu.HovedVindu);
-           forelder.Size();
-       }
+        } 
     }
-    
-    
-    public void visMelding(String melding)
-     {
-        JOptionPane.showMessageDialog(null,melding);
-    }
-     
-      public void visFeilMelding(String melding)
-     {
-       JOptionPane.showMessageDialog(this, melding, "Problem", 
-               JOptionPane.ERROR_MESSAGE);
-     }
-    
     
 }

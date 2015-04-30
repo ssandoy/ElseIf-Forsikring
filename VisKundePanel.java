@@ -15,7 +15,7 @@ import javax.swing.*;
  * @author ssandoy
  */
 
-public class visKundePanel extends JPanel implements ActionListener
+public class VisKundePanel extends JPanel implements ActionListener
 {
     private JPanel overskriftpanel;
     private JPanel tabellpanel;
@@ -36,7 +36,7 @@ public class visKundePanel extends JPanel implements ActionListener
     
    private HovedVindu forelder;
    
-    public visKundePanel(Kunderegister kregister, HovedVindu forelder)
+    public VisKundePanel(Kunderegister kregister, HovedVindu forelder)
     {
         super(new BorderLayout());
         this.kregister = kregister;
@@ -49,6 +49,6 @@ public class visKundePanel extends JPanel implements ActionListener
     @Override
     public void actionPerformed(ActionEvent e) 
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
     }
 }

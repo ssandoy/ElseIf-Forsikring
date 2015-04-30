@@ -8,13 +8,16 @@ package prosjektoppgave;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Iterator;
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 /**
  *
  * @author ssandoy
  */
-public class registrerBoligForsikringPanel extends JPanel implements ActionListener 
+public class RegistrerBoligForsikringPanel extends JPanel implements ActionListener 
 {
 
     private JTextField personnummerfelt, adressefelt;
@@ -41,15 +44,18 @@ public class registrerBoligForsikringPanel extends JPanel implements ActionListe
     HovedVindu forelder;
     
     Forsikringsregister fregister;
+    Kunderegister kregister;
     
     String[] materialtype = {"Velg materialtype", "TRE", "MUR" };
-    String[] boligtype = {"Velg boligtype", "LEILIGHET", "ENEBOLIG"};
+    String[] boligtyper = {"Velg boligtype", "LEILIGHET", "ENEBOLIG"};
     
     
-    public registrerBoligForsikringPanel(HovedVindu forelder, Forsikringsregister fregister)
+    public RegistrerBoligForsikringPanel(HovedVindu forelder, Forsikringsregister fregister, 
+                                        Kunderegister kregister)
     {
         this.forelder  = forelder;
         this.fregister = fregister;
+        this.kregister = kregister;
         
         setLayout(new BorderLayout());
         setGrensesnitt();
@@ -74,7 +80,7 @@ public class registrerBoligForsikringPanel extends JPanel implements ActionListe
     {
         personnummerfelt = new JTextField(10);
         adressefelt      = new JTextField(10);
-        boligtypefelt    = new JComboBox<String>(boligtype);
+        boligtypefelt    = new JComboBox<String>(boligtyper);
         materialfelt     = new JComboBox<String>(materialtype);
         arealfelt        = new JSlider(JSlider.HORIZONTAL, 30, 150, 50);
         byggeaarfelt     = new JSlider(JSlider.HORIZONTAL, 1900, 2015, 1940);
@@ -83,13 +89,17 @@ public class registrerBoligForsikringPanel extends JPanel implements ActionListe
         adresslabel      = new JLabel("Adresse: ");
         typelabel        = new JLabel("Boligtype: ");
         materiallabel    = new JLabel("Byggemateriale: ");
-        areallabel       = new JLabel("Boareal: ");
-        bygglabel        = new JLabel("Byggeår: ");
+        areallabel       = new JLabel("Boareal: " + arealfelt.getValue() + " km2");
+        bygglabel        = new JLabel("Byggeår: " + byggeaarfelt.getValue());
         
         registrer = new JButton("Registrer forsikring");
         registrer.addActionListener(this);
         avbryt = new JButton("Avbryt");
         avbryt.addActionListener(this);
+        
+        SliderEvent e = new SliderEvent();
+        arealfelt.addChangeListener(e);
+        byggeaarfelt.addChangeListener(e);
         
         try
         {
@@ -154,6 +164,59 @@ public class registrerBoligForsikringPanel extends JPanel implements ActionListe
         midtpanel.setBackground(Color.decode("#E57E7E"));
     }
     
+        public void registrer()
+        {
+            String personnummer = personnummerfelt.getText();
+            String adresse      = adressefelt.getText();
+            String boligtype    = boligtypefelt.getItemAt(boligtypefelt.getSelectedIndex());
+            String material     = materialfelt.getItemAt(materialfelt.getSelectedIndex());
+            int areal           = arealfelt.getValue();
+            int byggeaar        = byggeaarfelt.getValue();
+                    
+              if( personnummer.length() == 0 || adresse.length() == 0 || boligtype.length() == 0
+                    || material.length() == 0)
+              {
+                  visFeilMelding("Skriv inn verdier i feltene!");
+              } else if(boligtype.equals("Velg boligtype") || material.equals("Velg materialtype"))
+              {
+                  visFeilMelding("Du må velge boligtype/byggematerial");
+              }
+              else{
+                  
+                  Forsikringskunde k = kregister.getKunde(personnummer);
+                  
+                  if(k == null)
+                  {
+                      visFeilMelding("Du må skriv inn riktig personnummer");
+                  }
+                  else{
+                
+                     Innboforsikring f = new Innboforsikring(k, adresse, byggeaar, areal, boligtype, material);
+                     fregister.leggTil(f);
+                     k.addForsikring(f);
+                     visMelding("Forsikring registrert på kunde: " + k.toString());
+                     System.out.println(fregister.toString());
+                  } 
+              }
+              
+              
+            
+        }
+    
+        
+         public void visMelding(String melding)
+     {
+        JOptionPane.showMessageDialog(null,melding);
+    }
+     
+      public void visFeilMelding(String melding)
+     {
+       JOptionPane.showMessageDialog(this, melding, "Problem", 
+               JOptionPane.ERROR_MESSAGE);
+     }
+    
+    
+    
     @Override
     public void actionPerformed(ActionEvent e) 
     {
@@ -162,6 +225,10 @@ public class registrerBoligForsikringPanel extends JPanel implements ActionListe
            forelder.visPanel(HovedVindu.HovedVindu);
            forelder.Size();
         }
+         else if(e.getSource() == registrer)
+         {
+             registrer();
+         }
          else if(e.getSource() == Bil)
         {
             forelder.doClick(1);
@@ -172,12 +239,31 @@ public class registrerBoligForsikringPanel extends JPanel implements ActionListe
         }
          else if(e.getSource() == Hytte)
         {
-                    forelder.doClick(4);
+            forelder.doClick(4);
         }
          else if(e.getSource() == Reise)
         {
-                    forelder.doClick(5);
+            forelder.doClick(5);
         }
     }
+    
+    public class SliderEvent implements ChangeListener{
+
+
+        @Override
+        public void stateChanged(ChangeEvent e) 
+        {
+            if(e.getSource() == arealfelt) 
+            {
+                areallabel.setText("Boareal: " + arealfelt.getValue() + " km2") ;
+            }
+            else if(e.getSource() == byggeaarfelt)
+            {
+                bygglabel.setText("Byggeår: " + byggeaarfelt.getValue());
+            }
+            
+        } 
+    }
+    
     
 }

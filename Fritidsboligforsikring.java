@@ -16,7 +16,7 @@ public class Fritidsboligforsikring extends Boligforsikring implements Serializa
     private int antallManeder; //Antall måneder man bor i hytta
 
     public Fritidsboligforsikring(Forsikringskunde k, String adresse, int byggeaar, String boligtype, int boareal, String byggematerial, int antallManeder) {
-    super(k, adresse, byggeaar, boligtype, boareal, byggematerial);
+    super(k, adresse, byggeaar, boareal);
         this.antallManeder = antallManeder;   
     }
     

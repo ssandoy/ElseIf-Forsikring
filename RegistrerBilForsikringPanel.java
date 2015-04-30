@@ -9,12 +9,14 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 /**
  *
  * @author ssandoy
  */
-public class registrerBilForsikringPanel extends JPanel implements ActionListener
+public class RegistrerBilForsikringPanel extends JPanel implements ActionListener
 {
 
     
@@ -46,11 +48,13 @@ public class registrerBilForsikringPanel extends JPanel implements ActionListene
     Integer[] skade = {0, 1, 2, 3, 4, 5};
     
     Forsikringsregister register;
+    Kunderegister kregister;
     
-    public registrerBilForsikringPanel(HovedVindu forelder, Forsikringsregister register)
+    public RegistrerBilForsikringPanel(HovedVindu forelder, Forsikringsregister register, Kunderegister kregister)
     {
-        this.forelder = forelder;
-        this.register = register;
+        this.forelder   = forelder;
+        this.register   = register;
+        this.kregister  = kregister;
         
         setLayout(new BorderLayout());
         setGrensesnitt();
@@ -86,13 +90,17 @@ public class registrerBilForsikringPanel extends JPanel implements ActionListene
         rlabel = new JLabel("Registreringsnummer: ");
         tlabel = new JLabel("Biltype: ");
         klabel = new JLabel("Årlig kjørelengde: ");
-        mlabel = new JLabel("Modell");
+        mlabel = new JLabel("Modell: " + modell.getValue());
         slabel = new JLabel("Antall år skadefri:");
         
         registrer = new JButton("Registrer forsikring");
         registrer.addActionListener(this);
         avbryt = new JButton("Avbryt");
         avbryt.addActionListener(this);
+        
+        SliderEvent e = new SliderEvent();
+        modell.addChangeListener(e);
+       
         
         BilIcon          = new ImageIcon(getClass().getResource("Bilder/BilIcon.png"));
         BoatIcon         = new ImageIcon(getClass().getResource("Bilder/BoatIcon.png"));
@@ -144,6 +152,53 @@ public class registrerBilForsikringPanel extends JPanel implements ActionListene
         
     }
     
+     public void registrer()
+        {
+            String personnummer = personnummerfelt.getText();
+            String bileier      = bileierfelt.getText();
+            String regnummer    = regnummerfelt.getText();
+            String biltype      = typefelt.getText();
+            int bilmodell       = modell.getValue();
+            int kjorelengde      = Integer.parseInt(kjorelengdefelt.getText());
+            int skade           = skadefri.getItemAt(skadefri.getSelectedIndex());
+                    
+              if( personnummer.length() == 0 || bileier.length() == 0 || regnummer.length() == 0 
+                      || biltype.length() == 0 || bilmodell == 0)
+              {
+                  visFeilMelding("Skriv inn verdier i feltene!");
+              }
+              else
+              {
+                  Forsikringskunde k = kregister.getKunde(personnummer);
+                  
+                  if(k == null)
+                  {
+                      visFeilMelding("Ingen kunde med det personnummeret!");
+                  }
+                  else
+                  {
+                      Bilforsikring b = new Bilforsikring(k, bileier, regnummer, biltype, bilmodell, kjorelengde, skade);
+                      
+                      
+                  }
+                  
+                  
+              }
+         }
+    
+    
+      public void visMelding(String melding)
+     {
+        JOptionPane.showMessageDialog(null,melding);
+    }
+     
+      public void visFeilMelding(String melding)
+     {
+       JOptionPane.showMessageDialog(this, melding, "Problem", 
+               JOptionPane.ERROR_MESSAGE);
+     }
+    
+    
     @Override
     public void actionPerformed(ActionEvent e) 
     {
@@ -170,6 +225,20 @@ public class registrerBilForsikringPanel extends JPanel implements ActionListene
         }
         
         
+    }
+ 
+    public class SliderEvent implements ChangeListener{
+
+
+        @Override
+        public void stateChanged(ChangeEvent e) 
+        {
+            if(e.getSource() == modell) 
+            {
+                mlabel.setText("Modell: " + modell.getValue());
+            }
+            
+        } 
     }
     
 }

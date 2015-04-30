@@ -28,19 +28,19 @@ public class Innboforsikring extends Boligforsikring
     public void beregnArealPremie()
     {
       
-         if(boareal >= 30 && boareal <= 50)
+         if(super.getAreal() >= 30 && super.getAreal() <= 50)
          {
              super.setPremie(1000.00);
          }
-         else if(boareal >= 51 && boareal <= 80)
+         else if(super.getAreal() >= 51 && super.getAreal() <= 80)
          {
              super.setPremie(1500.00);
          }
-         else if(boareal >= 81 && boareal <= 110)
+         else if(super.getAreal() >= 81 && super.getAreal() <= 110)
          {
              super.setPremie(2000.00);
          }
-         else if(boareal >= 111 && boareal <= 140)
+         else if(super.getAreal() >= 111 && super.getAreal() <= 140)
          {
              super.setPremie(2200.00);
          }
@@ -81,19 +81,19 @@ public class Innboforsikring extends Boligforsikring
     public void beregnBoligPremie()
      {
          double premie = super.getPremie();
-         if(byggeaar <= 1940)
+         if(super.getByggeaar() <= 1940)
          {
              premie += 100.00;
          }
-         else if(byggeaar > 1940 && byggeaar <= 1960)
+         else if(super.getByggeaar() > 1940 && super.getByggeaar() <= 1960)
          {
              premie += 200.00;
          }
-         else if(byggeaar > 1960 && byggeaar <= 1980)
+         else if(super.getByggeaar() > 1960 && super.getByggeaar() <= 1980)
          {
              premie += 300.00;
          }
-         else if(byggeaar > 1980 && byggeaar <= 2000)
+         else if(super.getByggeaar() > 1980 && super.getByggeaar() <= 2000)
          {
              premie += 400.00;
          }

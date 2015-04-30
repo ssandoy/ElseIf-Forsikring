@@ -14,7 +14,7 @@ import javax.swing.*;
  *
  * @author ssandoy
  */
-public class registrerReiseForsikringPanel extends JPanel implements ActionListener
+public class RegistrerReiseForsikringPanel extends JPanel implements ActionListener
 {
     
     private JTextField personnummerfelt;
@@ -43,7 +43,7 @@ public class registrerReiseForsikringPanel extends JPanel implements ActionListe
     String[] status = {"Velg din status", "Student", "Voksen", "Honnør"};
     
     
-    public registrerReiseForsikringPanel(HovedVindu forelder, Forsikringsregister fregister)
+    public RegistrerReiseForsikringPanel(HovedVindu forelder, Forsikringsregister fregister)
     {
         this.forelder  = forelder;
         this.fregister = fregister;

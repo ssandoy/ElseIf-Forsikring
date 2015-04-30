@@ -38,6 +38,15 @@ public abstract class Boligforsikring extends Insurance implements Serializable
     }
     
     
+    public int getAreal()
+    {
+        return boareal;
+    }
+    
+    public int getByggeaar()
+    {
+        return byggeaar;
+    }
 
    
 }

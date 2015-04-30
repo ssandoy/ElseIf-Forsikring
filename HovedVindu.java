@@ -179,38 +179,38 @@ public class HovedVindu extends JFrame implements ActionListener
     
         if (e.getSource() == regKunde)
         {
-            underpaneler.add(new registrerKundePanel(kregister, this), "REG KUNDE");
+            underpaneler.add(new RegistrerKundePanel(kregister, this), "REG KUNDE");
             visPanel("REG KUNDE");
         }
         else if(e.getSource() == regForsikring)
         {
-            underpaneler.add(new registrerForsikringPanel(this), "REG FORSIKRING");
+            underpaneler.add(new RegistrerForsikringPanel(this), "REG FORSIKRING");
             visPanel("REG FORSIKRING");
         
         }
           else if(e.getSource() == BilForsikring)
         {
-            underpaneler.add(new registrerBilForsikringPanel(this, fregister), "BilForsikring");
+            underpaneler.add(new RegistrerBilForsikringPanel(this, fregister, kregister), "BilForsikring");
             visPanel("BilForsikring");
         }
         else if(e.getSource() == BaatForsikring)
         {
-            underpaneler.add(new registrerBaatForsikringPanel(this, fregister), "BåtForsikring");
+            underpaneler.add(new RegistrerBaatForsikringPanel(this, fregister), "BåtForsikring");
             visPanel("BåtForsikring");
         }
         else if(e.getSource() == BoligForsikring)
         {
-            underpaneler.add(new registrerBoligForsikringPanel(this,fregister), "BoligForsikring");
+            underpaneler.add(new RegistrerBoligForsikringPanel(this,fregister, kregister), "BoligForsikring");
             visPanel("BoligForsikring");
         }
         else if(e.getSource() == HytteForsikring)
         {
-            underpaneler.add(new registrerHytteForsikringPanel(this,fregister), "HytteForsikring");
+            underpaneler.add(new RegistrerHytteForsikringPanel(this,fregister), "HytteForsikring");
             visPanel("HytteForsikring");
         }
         else if(e.getSource() == ReiseForsikring)
         {
-            underpaneler.add(new registrerReiseForsikringPanel(this, fregister), "ReiseForsikring");
+            underpaneler.add(new RegistrerReiseForsikringPanel(this, fregister), "ReiseForsikring");
             visPanel("ReiseForsikring");
         }
     }

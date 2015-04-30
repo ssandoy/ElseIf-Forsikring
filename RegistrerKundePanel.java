@@ -14,7 +14,7 @@ import javax.swing.*;
  *
  * @author ssandoy
  */
-public class registrerKundePanel extends JPanel implements ActionListener
+public class RegistrerKundePanel extends JPanel implements ActionListener
 {
     
     private JTextField personnummerfelt, fornavnsfelt, etternavnsfelt, adressefelt, fakturafelt;
@@ -35,7 +35,7 @@ public class registrerKundePanel extends JPanel implements ActionListener
     
     private HovedVindu forelder;
     
-     public registrerKundePanel(Kunderegister register, HovedVindu forelder)
+     public RegistrerKundePanel(Kunderegister register, HovedVindu forelder)
      {
          super(new BorderLayout());
          this.register = register;
