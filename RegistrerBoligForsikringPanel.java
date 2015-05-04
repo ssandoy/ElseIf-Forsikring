@@ -174,9 +174,9 @@ public class RegistrerBoligForsikringPanel extends JPanel implements ActionListe
             int byggeaar        = byggeaarfelt.getValue();
                     
               if( personnummer.length() == 0 || adresse.length() == 0 || boligtype.length() == 0
-                    || material.length() == 0)
+                     || material.length() == 0)
               {
-                  visFeilMelding("Skriv inn verdier i feltene!");
+                  visFeilMelding("Du må skrive inn verdier i feltene!");
               } else if(boligtype.equals("Velg boligtype") || material.equals("Velg materialtype"))
               {
                   visFeilMelding("Du må velge boligtype/byggematerial");
@@ -187,15 +187,24 @@ public class RegistrerBoligForsikringPanel extends JPanel implements ActionListe
                   
                   if(k == null)
                   {
-                      visFeilMelding("Du må skriv inn riktig personnummer");
+                      visFeilMelding("Ingen kunde med det personnummeret!");
                   }
-                  else{
-                
+                  else
+                  {
                      Innboforsikring f = new Innboforsikring(k, adresse, byggeaar, areal, boligtype, material);
-                     fregister.leggTil(f);
                      k.addForsikring(f);
-                     visMelding("Forsikring registrert på kunde: " + k.toString());
+                     if(fregister.leggTil(f))
+                     {
+                     visMelding("Forsikring registrert på kunde:\n" + k.toString());
                      System.out.println(fregister.toString());
+                     System.out.println(f.getFNummer());
+                     forelder.visPanel(HovedVindu.HovedVindu);
+                     forelder.Size();
+                     }
+                     else 
+                     {
+                         visFeilMelding("Feil informasjon fyllt inn. Prøv igjen");
+                     }
                   } 
               }
               
@@ -203,6 +212,11 @@ public class RegistrerBoligForsikringPanel extends JPanel implements ActionListe
             
         }
     
+        public void eierInnbo()
+        {
+            
+            
+        }
         
          public void visMelding(String melding)
      {
@@ -224,10 +238,11 @@ public class RegistrerBoligForsikringPanel extends JPanel implements ActionListe
         {
            forelder.visPanel(HovedVindu.HovedVindu);
            forelder.Size();
+           forelder.addLogo();
         }
          else if(e.getSource() == registrer)
          {
-             registrer();
+             registrer();    
          }
          else if(e.getSource() == Bil)
         {

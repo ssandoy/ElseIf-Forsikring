@@ -24,8 +24,10 @@ public class Kunderegister extends TreeMap<String, Forsikringskunde> implements 
             {
                 put(((Forsikringskunde) objekt).getPersonNr(),(Forsikringskunde)objekt);
                 return true;
+                
             }
         }
+        
         return false;
     }
 

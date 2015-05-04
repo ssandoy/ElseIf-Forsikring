@@ -88,5 +88,12 @@ public class Bilforsikring extends Kjoretoyforsikring implements Serializable
            premie = premie*(1 - bonusprosent);
            super.setPremie(premie);
     }
+
+    @Override
+    public String toString() {
+        return "Bilforsikring{" + "aarligkjorelengde=" + aarligkjorelengde + ", skadefri=" + skadefri + '}';
+    }
+    
+        
     
 }

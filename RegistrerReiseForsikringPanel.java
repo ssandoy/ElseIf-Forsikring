@@ -146,6 +146,7 @@ public class RegistrerReiseForsikringPanel extends JPanel implements ActionListe
        {
            forelder.visPanel(HovedVindu.HovedVindu);
            forelder.Size();
+           forelder.addLogo();
        }
           else if(e.getSource() == Bil)
         {

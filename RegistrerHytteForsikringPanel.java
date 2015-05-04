@@ -155,6 +155,11 @@ public class RegistrerHytteForsikringPanel extends JPanel implements ActionListe
         midtpanel.setBackground(Color.decode("#E57E7E"));
     }
     
+    public void registrer()
+    {
+        
+    }
+    
     
     @Override
     public void actionPerformed(ActionEvent e)  
@@ -163,6 +168,7 @@ public class RegistrerHytteForsikringPanel extends JPanel implements ActionListe
         {
            forelder.visPanel(HovedVindu.HovedVindu);
            forelder.Size();
+            forelder.addLogo();
         }
          else if(e.getSource() == Bil)
         {

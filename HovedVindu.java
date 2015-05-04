@@ -20,7 +20,9 @@ public class HovedVindu extends JFrame implements ActionListener
     
     private JPanel hovedpanel;
     
-    private JPanel underpaneler, logopanel;
+    private final JPanel underpaneler;
+    
+    public static JPanel logopanel;
     
     private JButton regKunde, visKunde, regForsikring, regSkade, finanser, historikk, statistikk
             ,søk;
@@ -36,6 +38,8 @@ public class HovedVindu extends JFrame implements ActionListener
     
     private Kunderegister kregister;
     private Forsikringsregister fregister;
+    private Skademeldingsregister sregister;
+    private Finanser finans;
    
     public HovedVindu(Kunderegister kregister, Forsikringsregister fregister)
     {
@@ -44,15 +48,20 @@ public class HovedVindu extends JFrame implements ActionListener
         
         this.kregister = kregister;
         this.fregister = fregister;
+        this.finans = new Finanser(sregister, fregister);
         
         setGrensesnitt();
         underpaneler = new JPanel(new CardLayout());
         underpaneler.add(hovedpanel, HovedVindu);
         hovedpanel.setBackground(Color.decode("#E57E7E"));
         
-        add(underpaneler, BorderLayout.CENTER);
+        
+        add(logopanel, BorderLayout.PAGE_START);
+        add(underpaneler,BorderLayout.CENTER);
+        
         
         setVisible(true);
+        Size();
         pack();
         
     }
@@ -105,7 +114,7 @@ public class HovedVindu extends JFrame implements ActionListener
         ReiseForsikring = new JButton();
         
         
-        
+        logopanel.add(logo);
         hovedpanel.add(regKunde);
         hovedpanel.add(visKunde);
         hovedpanel.add(regForsikring);
@@ -116,7 +125,9 @@ public class HovedVindu extends JFrame implements ActionListener
         hovedpanel.add(søk);
         
         regKunde.addActionListener(this);
+        visKunde.addActionListener(this);
         regForsikring.addActionListener(this);
+        finanser.addActionListener(this);
         
         BilForsikring.addActionListener(this);
         BaatForsikring.addActionListener(this);
@@ -124,7 +135,10 @@ public class HovedVindu extends JFrame implements ActionListener
         HytteForsikring.addActionListener(this);
         ReiseForsikring.addActionListener(this);
         
-        Size();
+        
+        logopanel.setBackground(Color.decode("#E57E7E"));
+        
+        
         
     }
        
@@ -171,6 +185,15 @@ public class HovedVindu extends JFrame implements ActionListener
         setLocation(skjerm.width / 2 - getSize().width / 2, skjerm.height / 2 - getSize().height / 2);
        
        }
+       
+       public void fjernLogo(){
+           this.remove(logopanel);
+           revalidate();
+           repaint();
+       }
+       public void addLogo(){
+           add(logopanel, BorderLayout.PAGE_START);
+       }
 
     @Override
     public void actionPerformed(ActionEvent e) 
@@ -181,21 +204,40 @@ public class HovedVindu extends JFrame implements ActionListener
         {
             underpaneler.add(new RegistrerKundePanel(kregister, this), "REG KUNDE");
             visPanel("REG KUNDE");
+            fjernLogo();
+            
+        }
+        else if(e.getSource() == visKunde)
+        {
+            underpaneler.add(new VisKundePanel(this, kregister), "VIS KUNDE");
+            visPanel("VIS KUNDE");
+            fjernLogo();
         }
         else if(e.getSource() == regForsikring)
         {
             underpaneler.add(new RegistrerForsikringPanel(this), "REG FORSIKRING");
             visPanel("REG FORSIKRING");
-        
+            fjernLogo();
+        }
+         else if(e.getSource() == finanser)
+         {
+             underpaneler.add(new FinanserPanel(finans, this),"FINANSER");
+             visPanel("FINANSER");
+             fjernLogo();
+         }
+        else if(e.getSource() == regSkade)
+        {
+            underpaneler.add(new RegistrerSkademeldingPanel(this, ))
         }
           else if(e.getSource() == BilForsikring)
         {
             underpaneler.add(new RegistrerBilForsikringPanel(this, fregister, kregister), "BilForsikring");
             visPanel("BilForsikring");
+            fjernLogo();
         }
         else if(e.getSource() == BaatForsikring)
         {
-            underpaneler.add(new RegistrerBaatForsikringPanel(this, fregister), "BåtForsikring");
+            underpaneler.add(new RegistrerBaatForsikringPanel(this, fregister, kregister), "BåtForsikring");
             visPanel("BåtForsikring");
         }
         else if(e.getSource() == BoligForsikring)
@@ -212,7 +254,7 @@ public class HovedVindu extends JFrame implements ActionListener
         {
             underpaneler.add(new RegistrerReiseForsikringPanel(this, fregister), "ReiseForsikring");
             visPanel("ReiseForsikring");
-        }
     }
+  }
 }
 

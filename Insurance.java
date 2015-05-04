@@ -81,6 +81,11 @@ public abstract class Insurance implements Serializable, Forsikring {
      {
          return egenandel;
      }
+
+    @Override
+    public String toString() {
+        return "Insurance{" + "kunde=" + kunde + ", fnr=" + fnr + ", forsikringsnummer=" + forsikringsnummer + ", erstatning=" + erstatning + ", egenandel=" + egenandel + ", startDato=" + startDato + ", dateFormat=" + dateFormat + ", forsikringspremie=" + forsikringspremie + '}';
+    }
     
     
 }

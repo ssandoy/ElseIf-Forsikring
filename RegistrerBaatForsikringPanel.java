@@ -45,12 +45,14 @@ public class RegistrerBaatForsikringPanel extends JPanel implements ActionListen
     
     Integer[] skade = {0, 1, 2, 3, 4, 5};
     
-    Forsikringsregister register;
+    Forsikringsregister fregister;
+    Kunderegister kregister;
 
-    public RegistrerBaatForsikringPanel(HovedVindu forelder, Forsikringsregister register)
+    public RegistrerBaatForsikringPanel(HovedVindu forelder, Forsikringsregister fregister, Kunderegister kregister)
     {
-        this.forelder = forelder;
-        this.register = register;
+        this.forelder  = forelder;
+        this.fregister = fregister;
+        this.kregister = kregister;
         
         setLayout(new BorderLayout());
         setGrensesnitt();
@@ -157,10 +159,11 @@ public class RegistrerBaatForsikringPanel extends JPanel implements ActionListen
         midtpanel.add(typefelt);
         midtpanel.add(mlabel);
         midtpanel.add(modell);
-        midtpanel.add(flabel);
-        midtpanel.add(fot);
         midtpanel.add(hlabel);
         midtpanel.add(hestekrefter);
+        midtpanel.add(flabel);
+        midtpanel.add(fot);
+       
         
         toppanel.setBackground(Color.decode("#FFFF66"));
         knappepanel.setBackground(Color.decode("#E57E7E"));
@@ -168,7 +171,62 @@ public class RegistrerBaatForsikringPanel extends JPanel implements ActionListen
         
     }
     
+    public void registrer()
+    {
+            String personnummer     = personnummerfelt.getText();
+            String baateier     = baateierfelt.getText();
+            String regnummer    = regnummerfelt.getText();
+            String baattype     = typefelt.getText();
+            int baatmodell      = modell.getValue();
+            int motor           = hestekrefter.getValue();
+            int lengde          = fot.getValue();
+            
+         if(personnummer.length() == 0 || baateier.length() == 0 || baattype.length() == 0)
+         {
+             visFeilMelding("Skriv inn verdier i feltene!");
+         }
+         else
+         {
+             Forsikringskunde k = kregister.getKunde(personnummer);
+                  
+                  if(k == null)
+                  {
+                      visFeilMelding("Ingen kunde med det personnummeret!");
+                  }
+                  else
+                  {
+                      Baatforsikring b = new Baatforsikring(k, baateier, regnummer, baattype, baatmodell, motor, lengde);
+                      k.addForsikring(b);
+                      if(fregister.leggTil(b))
+                      {
+                        visMelding("Forsikring registrert på kunde:\n" + k.toString());
+                     System.out.println(fregister.toString());
+                     System.out.println(b.getFNummer());
+                     forelder.visPanel(HovedVindu.HovedVindu);
+                     forelder.Size();   
+                      forelder.addLogo();
+                      }
+                      else
+                      {
+                          visFeilMelding("Feil informasjon fyllt inn. Prøv igjen");
+                      }
+                  }
+         }
+    }
+    
+    
  
+     public void visMelding(String melding)
+     {
+        JOptionPane.showMessageDialog(null,melding);
+    }
+     
+      public void visFeilMelding(String melding)
+     {
+       JOptionPane.showMessageDialog(this, melding, "Problem", 
+               JOptionPane.ERROR_MESSAGE);
+     }
+    
     
     @Override
     public void actionPerformed(ActionEvent e)
@@ -177,7 +235,14 @@ public class RegistrerBaatForsikringPanel extends JPanel implements ActionListen
        {
            forelder.visPanel(HovedVindu.HovedVindu);
            forelder.Size();
+           forelder.addLogo();
        }
+        else if(e.getSource() == registrer)
+        {
+            registrer();
+
+                
+        }
         else if(e.getSource() == Bil)
         {
             forelder.doClick(1);

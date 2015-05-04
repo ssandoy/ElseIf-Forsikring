@@ -9,54 +9,54 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.URL;
+import java.util.Random;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author ssandoy
  */
-public class Prosjektoppgave {
+public class Prosjektoppgave 
+{
 
-    /**
-     * @param args the command line arguments
-     */
+        private static  Kunderegister kregister = new Kunderegister();
+        private static  Forsikringsregister fregister = new Forsikringsregister();
+        private static  Skademeldingsregister sregister = new Skademeldingsregister();
+    
     public static void main(String[] args) {
         // TODO code application logic here
         
-       /* Kunderegister kregister = new Kunderegister();
-        //String nr = 050591 +"";
-        String nr = JOptionPane.showInputDialog("Skriv inn: ");
-        Forsikringskunde k = new Forsikringskunde(nr,"Mads","Karlstad","Haugen","Haugen");
-        kregister.leggTil(k);
-        System.out.println(kregister.toString());
-     
+
+        String[] navn = {"Mads","Sander","Chris","Per","Pål","Eddard","Daenerys","Arya","Melissandre","Jon"};
+        String[] etternavn = {"Karlstad","Sandøy","Askeladd","Stark","Lannister","Snow","Sand","Stormborn"};
+        String[] addresse = {"Kings landing","Pyke","Winterfell","Casterly Rock","Dorne","Oslo","Dragonstone","Brønnøy","Koppang"};
+        int nr = 1;
         
         
-        Forsikringsregister register = new Forsikringsregister();
-       
-            Bilforsikring bil = new Bilforsikring(k, "Mads","12","Mazda",1993,1000,4);
-            register.leggTil(bil);
-          
-        System.out.println(register.toString());
-        System.out.println(k.getForsikringer());
-        //<fnr+"",Obj>
+        lesKunderegister();
+        lesForsikringsregister();
         
-        //bil.beregnPremie();
-        //bil.beBiPremie();regnBiPremie();
-        
-        //System.out.println(bil.getPremie());
-      
-        //Bilforsikring bil1 = new Bilforsikring("Mads","122","Mazda",1995,8000,0);
-        //register.leggTil(bil1);
-        //bil1.beregnPremie();
-        //bil1.beregnBiPremie();
-        //System.out.println(register.toString());
-        //System.out.println(bil1.getPremie());*/
-        
-        Kunderegister kregister = new Kunderegister();
-        Forsikringsregister fregister = new Forsikringsregister();
-        
+       /* for(int i=0;i<1000;i++){
+            int n = new Random().nextInt(navn.length);
+            int e = new Random().nextInt(etternavn.length);
+            int a = new Random().nextInt(addresse.length);
+            
+            nr++;
+            String fnr = nr + "1";
+            String name = navn[n];
+            String last = etternavn[e];
+            String adr = addresse[a];
+            Forsikringskunde k = new Forsikringskunde(fnr,name,last,adr,adr);
+            
+            kregister.leggTil(k);
+        }
+        */
        HovedVindu vindu = new HovedVindu(kregister, fregister);
       
         vindu.addWindowListener(
@@ -64,11 +64,89 @@ public class Prosjektoppgave {
                 {
                     public void windowClosing(WindowEvent e)
                     {
+                        skrivKunderegister();
+                        skrivForsikringsregister();
                         System.exit(0);
                     }
                 });
         
-        
+    }
+   
+    public static void lesKunderegister() {
+        try (ObjectInputStream innfil = new ObjectInputStream(new FileInputStream("kundeliste.data"))) {
+            kregister = (Kunderegister) innfil.readObject();
+            System.out.println("Kunderegister ble lastet!");
+        } catch (ClassNotFoundException cnfe) 
+        {
+            kregister = new Kunderegister();
+            System.out.println("Nytt kunderegister ble opprettet!");
+        } catch (IOException ioe) {
+            kregister = new Kunderegister();
+            System.out.println("Nytt kunderegister ble opprettet!");
+        }
     }
     
+    public static void skrivKunderegister() {
+        try (ObjectOutputStream utfil = new ObjectOutputStream(new FileOutputStream("kundeliste.data"))) {
+            utfil.writeObject(kregister);
+            System.out.println("Kunderegister ble lagret!");
+        } catch (IOException ioe) {
+            System.out.println("Kunderegister ble ikke lagret!");
+        }
+    }
+    
+    public static void lesForsikringsregister() 
+    {
+        try (ObjectInputStream innfil = new ObjectInputStream(new FileInputStream("forsikringsliste.data"))) 
+        {
+            fregister = (Forsikringsregister) innfil.readObject();
+            System.out.println("Forsikringsregister ble lastet!");
+        } catch (ClassNotFoundException cnfe) {
+
+            fregister = new Forsikringsregister();
+            System.out.println("Nytt forsikringsregister ble opprettet!");
+        } catch (IOException ioe) 
+        {
+            fregister = new Forsikringsregister();
+            System.out.println("Nytt forsikringsregister ble opprettet!");
+        }
+    }
+    
+    public static void skrivForsikringsregister() {
+        try (ObjectOutputStream utfil = new ObjectOutputStream(new FileOutputStream("forsikringsliste.data"))) {
+            utfil.writeObject(fregister);
+            System.out.println("Kunderegister ble lagret!");
+        } catch (IOException ioe) {
+            System.out.println("Kunderegister ble ikke lagret!");
+        }
+    }
+    
+    public static void lesSkademeldingsregister() {
+        try (ObjectInputStream innfil = new ObjectInputStream(new FileInputStream("skademeldingsliste.data"))) {
+            sregister = (Skademeldingsregister) innfil.readObject();
+            System.out.println("Skademeldingsregister ble lastet!");
+        } catch (ClassNotFoundException cnfe) {
+
+            sregister = new Skademeldingsregister();
+            System.out.println("Nytt skademeldingsregister ble opprettet!");
+        } catch (IOException ioe) {
+            sregister = new Skademeldingsregister();
+            System.out.println("Nytt skademeldingsregister ble opprettet!");
+        }
+    }
+    
+    public static void skrivSkademeldingsregister() {
+        try (ObjectOutputStream utfil = new ObjectOutputStream(new FileOutputStream("skademeldingsliste.data"))) {
+            utfil.writeObject(sregister);
+            System.out.println("Skademeldingsregister ble lagret!");
+        } catch (IOException ioe) {
+            System.out.println("Skademeldingsregister ble ikke lagret!");
+        }
+    }
+        
 }
+    
+
+
+
+

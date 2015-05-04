@@ -50,8 +50,7 @@ public class RegistrerForsikringPanel extends JPanel implements ActionListener
     {
         super(new BorderLayout());
         this.forelder = forelder;
-        
-        setLayout(new BorderLayout());
+       
         setGrensesnitt();
        
         
@@ -128,7 +127,7 @@ public class RegistrerForsikringPanel extends JPanel implements ActionListener
         knappepanel.add(registrer);
         knappepanel.add(avbryt);
         
-        midtpanel = new JPanel(new FlowLayout());
+        midtpanel = new JPanel(new BorderLayout());
         midtpanel.add(overskriftpanel, BorderLayout.PAGE_START);
         
         
@@ -141,35 +140,7 @@ public class RegistrerForsikringPanel extends JPanel implements ActionListener
         
     }
     
-    
-        //Metode som bytter ut midtpanelet slik at man kan tegne bil-forsikring
-        public void byttTilBilPanel()
-        {
-            midtpanel = new JPanel(new GridLayout(7,0,0,0));
-            midtpanel.add(personnummerfelt);
-            midtpanel.add(bileierfelt);
-            midtpanel.add(regnummerfelt);
-            midtpanel.add(typefelt);
-            midtpanel.add(modell);
-            midtpanel.add(kjorelengdefelt);
-            midtpanel.add(skadefri);
-            add(midtpanel, BorderLayout.CENTER );
-            forelder.pack();
-        }
-    
-        public void byttTilBaatPanel()
-        {
-            midtpanel = new JPanel(new GridLayout(7,0,0,0));
-            midtpanel.add(personnummerfelt);
-            midtpanel.add(baateierfelt);
-            midtpanel.add(modell);
-            add(midtpanel,BorderLayout.CENTER);
-            forelder.pack();
-            
-        }
-    
   
-    
     @Override
     public void actionPerformed(ActionEvent e)
     {
@@ -203,6 +174,7 @@ public class RegistrerForsikringPanel extends JPanel implements ActionListener
        {
            forelder.visPanel(HovedVindu.HovedVindu);
            forelder.Size();
+           forelder.addLogo();
        }
     }
     

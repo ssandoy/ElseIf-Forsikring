@@ -47,13 +47,13 @@ public class RegistrerBilForsikringPanel extends JPanel implements ActionListene
     
     Integer[] skade = {0, 1, 2, 3, 4, 5};
     
-    Forsikringsregister register;
+    Forsikringsregister fregister;
     Kunderegister kregister;
     
-    public RegistrerBilForsikringPanel(HovedVindu forelder, Forsikringsregister register, Kunderegister kregister)
+    public RegistrerBilForsikringPanel(HovedVindu forelder, Forsikringsregister fregister, Kunderegister kregister)
     {
         this.forelder   = forelder;
-        this.register   = register;
+        this.fregister   = fregister;
         this.kregister  = kregister;
         
         setLayout(new BorderLayout());
@@ -178,7 +178,17 @@ public class RegistrerBilForsikringPanel extends JPanel implements ActionListene
                   else
                   {
                       Bilforsikring b = new Bilforsikring(k, bileier, regnummer, biltype, bilmodell, kjorelengde, skade);
-                      
+                      k.addForsikring(b);
+                      if(fregister.leggTil(b))
+                      {
+                          visMelding("Forsikring registrert på kunde:\n" + k.toString());
+                     forelder.visPanel(HovedVindu.HovedVindu);
+                     forelder.Size();
+                      }
+                      else 
+                     {
+                         visFeilMelding("Feil informasjon fyllt inn. Prøv igjen");
+                     }
                       
                   }
                   
@@ -206,7 +216,12 @@ public class RegistrerBilForsikringPanel extends JPanel implements ActionListene
        {
            forelder.visPanel(HovedVindu.HovedVindu);
            forelder.Size();
+           forelder.addLogo();
        }
+        else if(e.getSource() == registrer)
+         {
+                registrer();
+         }
         else if(e.getSource() == Baat)
         {
             forelder.doClick(2);

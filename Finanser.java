@@ -1,15 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package prosjektoppgave;
 
 
+import java.util.List;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.ListIterator;
+import java.util.Map;
 
 /**
  *
@@ -23,9 +22,10 @@ public class Finanser {
     private Skademeldingsregister skademeldinger;
     private Forsikringsregister forsikringer;
     
-    public Finanser(Skademeldingsregister skademeldinger)
+    public Finanser(Skademeldingsregister skademeldinger, Forsikringsregister forsikringer)
     {
         this.skademeldinger = skademeldinger;
+        this.forsikringer = forsikringer;
         innbetalt = 0.00;
         utbetalt = 0.00;
         differanse = 0.00;
@@ -34,12 +34,27 @@ public class Finanser {
     public void beregnUtbetalt() //regner ut hvor mye forsikringsselskapet har betalt
     {
         
-        Iterator itr = skademeldinger.entrySet().iterator();
-        
-        while(itr.hasNext())
+        try
         {
-            Skademelding temp = (Skademelding) itr.next();
-            utbetalt += temp.getErstatningsBelop();
+            List<Skademelding> skademeldingliste = new LinkedList<>();
+
+
+            for(Map.Entry<String, Skademelding> entry : skademeldinger.entrySet())
+            {
+                skademeldingliste.add((Skademelding) entry.getValue());
+            }
+
+            ListIterator<Skademelding> itr = skademeldingliste.listIterator();
+
+
+            while(itr.hasNext())
+            {
+                Skademelding temp = (Skademelding) itr.next();
+                utbetalt += temp.getErstatningsBelop();
+            }
+        }
+        catch(NullPointerException npe){
+            System.out.println( "Ingen skademeldinger er lagret" );
         }
         
         
@@ -67,7 +82,7 @@ public class Finanser {
     public String toString()
     {
         NumberFormat f = new DecimalFormat("#0.00");
-        String tekst = "FINANSER:\nInnbetalt: " + f.format(innbetalt) + "\nUtbetalt: " 
+        String tekst = "FINANSER:\n\nInnbetalt: " + f.format(innbetalt) + "\nUtbetalt: " 
                 + f.format(utbetalt) + "\nDifferanse: " + f.format(differanse);
         return tekst;                
     }
