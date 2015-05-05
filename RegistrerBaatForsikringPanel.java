@@ -199,9 +199,8 @@ public class RegistrerBaatForsikringPanel extends JPanel implements ActionListen
                       k.addForsikring(b);
                       if(fregister.leggTil(b))
                       {
-                        visMelding("Forsikring registrert på kunde:\n" + k.toString());
-                     System.out.println(fregister.toString());
-                     System.out.println(b.getFNummer());
+                       visMelding("Forsikring registrert på kunde:\n" + k.toString());
+                          System.out.println(fregister.toString());
                      forelder.visPanel(HovedVindu.HovedVindu);
                      forelder.Size();   
                       forelder.addLogo();

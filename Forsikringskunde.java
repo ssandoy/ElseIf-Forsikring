@@ -25,7 +25,7 @@ public class Forsikringskunde extends Person implements Serializable
     private double aarligpremie;
     private double erstatninger;
     private boolean totalkunde;
-    private LinkedList<Forsikring> forsikringer;
+    private LinkedList<Insurance> forsikringer;
     private LinkedList<Skademelding> skademeldinger;
 
     
@@ -54,7 +54,7 @@ public class Forsikringskunde extends Person implements Serializable
         ListIterator it = forsikringer.listIterator();
         while(it.hasNext())
         {
-            Forsikring f = (Forsikring) it.next();
+            Insurance f = (Insurance) it.next();
             teller++;
         }
         
@@ -66,7 +66,7 @@ public class Forsikringskunde extends Person implements Serializable
     } 
     
    /*Metode som legger en forsikring til hos kunden*/
-    public void addForsikring(Forsikring f)
+    public void addForsikring(Insurance f)
     {
         forsikringer.add(f);
     }
@@ -86,10 +86,10 @@ public class Forsikringskunde extends Person implements Serializable
     public void beregnPremie()
     {
         aarligpremie = 0.00;
-        ListIterator<Forsikring> it = forsikringer.listIterator();
+        ListIterator<Insurance> it = forsikringer.listIterator();
         while(it.hasNext())
         {
-            Forsikring f = it.next();
+            Insurance f = it.next();
             aarligpremie += f.getPremie();
         }
         

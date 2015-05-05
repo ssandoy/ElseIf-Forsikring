@@ -18,47 +18,48 @@ import java.util.ListIterator;
  * @author YAAKOUBD
  */
 public class Skademelding implements Serializable {
+    
     private Forsikringskunde kunde;  
-    private Date skadedato;
-    private String skadeNr;
-    private int snr;
+    //private Date skadedato
+    private final int snr;
+    private static int nesteNr = 1;
+    private String skadenummer;
     private String skadeType;
     
     private String skadeBeskrivelse;
     private String kontaktInfo;
     private double takseringsBelop;
     private double erstatningsBelop;
-    private Image bilde;
-    private int nesteNr = 1;
+    
     private DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
     
     
     public Skademelding(Forsikringskunde kunde, String skadeType, String skadeBeskrivelse )
     {
         this.kunde = kunde;
-        this.skadedato = new Date();
+       // this.skadedato = new Date();
         snr = nesteNr++;
-        skadeNr = snr+"";
+        skadenummer = snr+"";
         this.skadeType = skadeType;
-        this.skadeBeskrivelse = skadeBeskrivelse;    
+        this.skadeBeskrivelse = skadeBeskrivelse;   
+        takseringsBelop = 0.00;
+        erstatningsBelop = 0.00;
+        
         
     }
     
     public String getNr(){
-        return skadeNr;
+        return skadenummer;
     }
     
-    public String getDate(){
+    /*public String getDate(){
         return dateFormat.format(skadedato);
-    }
+    }*/
     
     public String getBeskrivelse(){
         return skadeBeskrivelse;
     }
     
-    public Image getImage(){
-        return bilde;
-    }
     
     public double getTakseringsBelop()
     {
@@ -85,11 +86,11 @@ public class Skademelding implements Serializable {
         /*Metode som sjekker om kunden har gyldig forsikring til skademeldingen*/
         public boolean sjekkDekning()
         {
-           LinkedList<Forsikring> forsikringer = kunde.getForsikringer();
+           LinkedList<Insurance> forsikringer = kunde.getForsikringer();
            ListIterator it = forsikringer.listIterator();
             while(it.hasNext())
             {
-                Forsikring f = (Forsikring) it.next();
+                Insurance f = (Insurance) it.next();
 
                 if(skadeType == "INNBO")
                 {
@@ -122,19 +123,17 @@ public class Skademelding implements Serializable {
 
             }
             return false;
-
+ 
 
         }
     
     @Override
     public String toString(){
-        String tekst = "Dato for skade: " + getDate() 
-                       + "\nSkadenummer: " + skadeNr 
+        String tekst = "\nSkadenummer: " + skadenummer 
                        + "\nSkade Beskrivelse: " + skadeBeskrivelse
                        + "\nTakseringsbelop: " + takseringsBelop
                        + "\nUtbetalt Erstatningsbelop: " + erstatningsBelop;
-        if( kontaktInfo != null )
-            tekst += "\nKontakt Info: " + kontaktInfo;
+        
         
         return tekst;
         

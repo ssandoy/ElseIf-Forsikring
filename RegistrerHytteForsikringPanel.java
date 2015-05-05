@@ -40,7 +40,7 @@ public class RegistrerHytteForsikringPanel extends JPanel implements ActionListe
     private JButton avbryt;
     
     HovedVindu forelder;
-    
+
     Forsikringsregister fregister;
     
     

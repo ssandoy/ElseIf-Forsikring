@@ -41,13 +41,14 @@ public class HovedVindu extends JFrame implements ActionListener
     private Skademeldingsregister sregister;
     private Finanser finans;
    
-    public HovedVindu(Kunderegister kregister, Forsikringsregister fregister)
+    public HovedVindu(Kunderegister kregister, Forsikringsregister fregister, Skademeldingsregister sregister)
     {
         super("Else-if Forsikring");
         setLayout(new BorderLayout());
         
         this.kregister = kregister;
         this.fregister = fregister;
+        this.sregister = sregister;
         this.finans = new Finanser(sregister, fregister);
         
         setGrensesnitt();
@@ -127,6 +128,7 @@ public class HovedVindu extends JFrame implements ActionListener
         regKunde.addActionListener(this);
         visKunde.addActionListener(this);
         regForsikring.addActionListener(this);
+        regSkade.addActionListener(this);
         finanser.addActionListener(this);
         
         BilForsikring.addActionListener(this);
@@ -227,7 +229,9 @@ public class HovedVindu extends JFrame implements ActionListener
          }
         else if(e.getSource() == regSkade)
         {
-            underpaneler.add(new RegistrerSkademeldingPanel(this, ))
+            underpaneler.add(new RegistrerSkademeldingPanel(this, kregister, fregister, sregister),"REG SKADEMELDING");
+            visPanel("REG SKADEMELDING");
+            
         }
           else if(e.getSource() == BilForsikring)
         {

@@ -17,7 +17,7 @@ import javax.swing.*;
 public class FinanserPanel extends JPanel implements ActionListener{
     
     private JTextArea infofelt;
-    private JButton beregn;
+    private JButton beregn, avbryt;
     private JPanel finanspanel;
     private JPanel knappepanel;
     
@@ -30,7 +30,11 @@ public class FinanserPanel extends JPanel implements ActionListener{
         super(new BorderLayout());
         this.finanser = finanser;
         beregn = new JButton("Beregn");
+        avbryt = new JButton("Avbryt");
+        beregn.addActionListener(this);
+        avbryt.addActionListener(this);
         infofelt = new JTextArea(60, 60);
+        infofelt.setEditable(false);
         
         beregn.addActionListener(this);
         
@@ -41,7 +45,9 @@ public class FinanserPanel extends JPanel implements ActionListener{
         knappepanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         finanspanel.add(infofelt);
         knappepanel.add(beregn);
+        knappepanel.add(avbryt);
         
+        add(finanspanel, BorderLayout.CENTER);
         add(knappepanel, BorderLayout.PAGE_END);
         
         finanspanel.setBackground(Color.decode("#E57E7E"));
@@ -71,6 +77,12 @@ public class FinanserPanel extends JPanel implements ActionListener{
         if(e.getSource() == beregn)
         {
             Beregn();
+        }
+        else if(e.getSource() == avbryt)
+        {
+            forelder.visPanel(HovedVindu.HovedVindu);
+            forelder.Size();
+            forelder.addLogo();
         }
     }
 }

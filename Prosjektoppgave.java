@@ -41,6 +41,8 @@ public class Prosjektoppgave
         
         lesKunderegister();
         lesForsikringsregister();
+        lesSkademeldingsregister();
+      
         
        /* for(int i=0;i<1000;i++){
             int n = new Random().nextInt(navn.length);
@@ -57,7 +59,7 @@ public class Prosjektoppgave
             kregister.leggTil(k);
         }
         */
-       HovedVindu vindu = new HovedVindu(kregister, fregister);
+       HovedVindu vindu = new HovedVindu(kregister, fregister, sregister);
       
         vindu.addWindowListener(
                 new WindowAdapter()
@@ -66,6 +68,7 @@ public class Prosjektoppgave
                     {
                         skrivKunderegister();
                         skrivForsikringsregister();
+                        skrivSkademeldingsregister();
                         System.exit(0);
                     }
                 });
@@ -115,9 +118,9 @@ public class Prosjektoppgave
     public static void skrivForsikringsregister() {
         try (ObjectOutputStream utfil = new ObjectOutputStream(new FileOutputStream("forsikringsliste.data"))) {
             utfil.writeObject(fregister);
-            System.out.println("Kunderegister ble lagret!");
+            System.out.println("Forsikringsregister ble lagret!");
         } catch (IOException ioe) {
-            System.out.println("Kunderegister ble ikke lagret!");
+            System.out.println("Forsikringsregister ble ikke lagret!");
         }
     }
     

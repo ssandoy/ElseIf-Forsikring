@@ -13,17 +13,17 @@ import java.util.TreeMap;
  *
  * @author ssandoy
  */
-public class Forsikringsregister extends TreeMap<String,Forsikring> implements Serializable, Register 
+public class Forsikringsregister extends TreeMap<String,Insurance> implements Serializable, Register 
 {
 
     @Override
     public boolean leggTil(Object objekt) 
     {
-     if(objekt instanceof Forsikring)
+     if(objekt instanceof Insurance)
         {
-        if(!finnes(((Forsikring)objekt).getFNummer()))
+        if(!finnes(((Insurance)objekt).getFNummer()))
             {
-                put(((Forsikring) objekt).getFNummer(),(Forsikring)objekt);
+                put(((Insurance) objekt).getFNummer(),(Insurance)objekt);
                 return true;
             }
         }

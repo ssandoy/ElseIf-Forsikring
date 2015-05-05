@@ -16,7 +16,7 @@ import java.util.Date;
  */
 public abstract class Insurance implements Serializable, Forsikring {
     
-    Forsikringskunde kunde;
+    private Forsikringskunde kunde;
     private final int fnr;
     private static int nestenummer = 1;
     private String forsikringsnummer;
@@ -82,10 +82,7 @@ public abstract class Insurance implements Serializable, Forsikring {
          return egenandel;
      }
 
-    @Override
-    public String toString() {
-        return "Insurance{" + "kunde=" + kunde + ", fnr=" + fnr + ", forsikringsnummer=" + forsikringsnummer + ", erstatning=" + erstatning + ", egenandel=" + egenandel + ", startDato=" + startDato + ", dateFormat=" + dateFormat + ", forsikringspremie=" + forsikringspremie + '}';
-    }
+    
     
     
 }

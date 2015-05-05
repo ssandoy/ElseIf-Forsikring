@@ -64,12 +64,11 @@ public class Finanser {
     
     public void beregnInnbetalt() //regner ut hvor mye forsikringsselskapet har fått innbetalt 
     {
-        Iterator itrf = forsikringer.entrySet().iterator();
-        while(itrf.hasNext())
+        for(Map.Entry<String, Insurance> entry: forsikringer.entrySet())
         {
-            Forsikring tempo = (Forsikring) itrf.next();
-            innbetalt += tempo.getEgenandel();
-            innbetalt += tempo.getPremie();
+            Insurance f = entry.getValue();
+            innbetalt += f.getEgenandel();
+            utbetalt += f.getPremie();
         }
     }
     
