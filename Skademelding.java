@@ -113,7 +113,7 @@ public class Skademelding implements Serializable {
                         return true;
                     }
                 }
-                 else if(skadeType == "BIL")
+                 else if(skadeType == "HYTTE")
                 {
                     if(f instanceof Bilforsikring)
                     {

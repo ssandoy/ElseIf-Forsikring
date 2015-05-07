@@ -29,11 +29,12 @@ public class Prosjektoppgave
         private static  Kunderegister kregister = new Kunderegister();
         private static  Forsikringsregister fregister = new Forsikringsregister();
         private static  Skademeldingsregister sregister = new Skademeldingsregister();
-    
-    public static void main(String[] args) {
-        // TODO code application logic here
         
-
+        public static void main(String[] args) {
+        // TODO code application logic here
+            
+       
+            
         String[] navn = {"Mads","Sander","Chris","Per","Pål","Eddard","Daenerys","Arya","Melissandre","Jon"};
         String[] etternavn = {"Karlstad","Sandøy","Askeladd","Stark","Lannister","Snow","Sand","Stormborn"};
         String[] addresse = {"Kings landing","Pyke","Winterfell","Casterly Rock","Dorne","Oslo","Dragonstone","Brønnøy","Koppang"};
@@ -43,9 +44,8 @@ public class Prosjektoppgave
         lesKunderegister();
         lesForsikringsregister();
         lesSkademeldingsregister();
-        System.out.println(fregister.toString());
         
-       /* for(int i=0;i<1000;i++){
+        /*for(int i=0;i<1000;i++){
             int n = new Random().nextInt(navn.length);
             int e = new Random().nextInt(etternavn.length);
             int a = new Random().nextInt(addresse.length);
@@ -58,8 +58,8 @@ public class Prosjektoppgave
             Forsikringskunde k = new Forsikringskunde(fnr,name,last,adr,adr);
             
             kregister.leggTil(k);
-        }
-        */
+        }*/
+        
        HovedVindu vindu = new HovedVindu(kregister, fregister, sregister);
        
         Toolkit kit = Toolkit.getDefaultToolkit();

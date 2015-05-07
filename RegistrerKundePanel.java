@@ -52,7 +52,7 @@ public class RegistrerKundePanel extends JPanel implements ActionListener {
         int bredde = skjerm.width;
         int høyde = skjerm.height;
 
-       
+        
         setPreferredSize( new Dimension( 640, 480 ) );
         
     }
@@ -82,7 +82,7 @@ public class RegistrerKundePanel extends JPanel implements ActionListener {
   
 
         setLayout(new BorderLayout());
-        tekstpanel = new JPanel(new GridLayout(5, 0, 5, 5));
+        tekstpanel = new JPanel(new GridLayout(5, 0, 0, 0));
         knappepanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         toppanel = new JPanel(new BorderLayout());
         overskriftpanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -108,6 +108,7 @@ public class RegistrerKundePanel extends JPanel implements ActionListener {
         
         toppanel.add(overskriftpanel, BorderLayout.PAGE_START);
         toppanel.add(tekstpanel, BorderLayout.CENTER);
+        
     }
     
     public void Registrer() {
@@ -154,7 +155,7 @@ public class RegistrerKundePanel extends JPanel implements ActionListener {
             Registrer();
         } else if (e.getSource() == avbryt) 
         {
-            forelder.addLogo();
+           forelder.addLogo();
            forelder.visPanel(HovedVindu.HovedVindu);
            forelder.Size();
         }

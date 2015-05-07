@@ -18,14 +18,17 @@ public interface Forsikring extends Serializable
     
     /*get-metoder*/
     public String getFNummer();
+    public Forsikringskunde getKunde();
     public double getPremie();
     public Date getStartDato();
     public double getErstatning();
     public double getEgenandel();
+    public String getType();
     
     /*set-metoder*/
     public void setPremie(double premie);
     public void setErstatning(double erstatning);
+    public void setType(String type);
     
     
     

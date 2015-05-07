@@ -176,31 +176,32 @@ public class RegistrerBilForsikringPanel extends JPanel implements ActionListene
                   }
                   else
                   {
+                      String fnr = fregister.genererNummer();
                       Bilforsikring b = new Bilforsikring(k, bileier, regnummer, biltype, bilmodell, kjorelengde, skade);
+                      b.setForsikringsnummer(fnr);
+                      b.setType("BIL-FORSIKRING");
                       b.beregnPremie();
                       int result = JOptionPane.showConfirmDialog(null, "Pris på din forsikring: " + b.getPremie() + ",-" + "\nVil du tegne denne forsikringen?", null , JOptionPane.YES_NO_OPTION);
                          if(result == JOptionPane.YES_OPTION) 
                          {
-                            fregister.put(b.getFNummer(), b);
-                             System.out.println(fregister.toString());
+                            fregister.put(fnr, b);
                             k.addForsikring(b);
-                     visMelding("Forsikring registrert på kunde:\n" + k.toString());
-                     forelder.addLogo();
-                     forelder.visPanel(HovedVindu.HovedVindu);
-                     forelder.Size();
-                     }
-                     else 
-                       {
-                         visFeilMelding("Feil informasjon fylt inn. Prøv igjen");
-                       }
-                      
-                      
-                         }  
+                            visMelding("Forsikring registrert på kunde:\n" + k.getNavn() + b.toString());
+                            forelder.addLogo();
+                            forelder.visPanel(HovedVindu.HovedVindu);
+                            forelder.Size();
+                          }else
+                            {
+                             b = null;
+                             visMelding("Tegning av forsikring avbrutt");
+                            }
+                     
+                    }  
               }
-         }catch(NumberFormatException nfe)
-         {
+            } catch(NumberFormatException nfe)
+            {
              visFeilMelding("Skriv inn riktige verdier i feltene");
-         }
+           }
         }
         
     

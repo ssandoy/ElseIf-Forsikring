@@ -17,8 +17,8 @@ public class Fritidsboligforsikring extends Boligforsikring implements Serializa
 
     private Forsikringsregister fregister;
     
-    public Fritidsboligforsikring(Forsikringskunde k,Forsikringsregister fregister ,String adresse, int byggeaar, String boligtype, int boareal, String byggematerial, int antallManeder) {
-    super(k,fregister, adresse, byggeaar, boareal);
+    public Fritidsboligforsikring(Forsikringskunde k ,String adresse, int byggeaar, String boligtype, int boareal, String byggematerial, int antallManeder) {
+    super(k, adresse, byggeaar, boareal);
         this.antallManeder = antallManeder;   
     }
     

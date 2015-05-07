@@ -82,6 +82,20 @@ public class Forsikringskunde extends Person implements Serializable
         return forsikringer;
     }
     
+    
+    //Metode som sletter en forsikrikng hos kunden, om den eksisterer
+    public boolean fjernForsikring(Insurance f)
+    {
+        if(forsikringer.contains(f))
+        {
+            forsikringer.remove(f);
+            return true;
+        }
+        else 
+            return false;
+    }
+    
+    
     //Metode som beregner hvor mye kunden må betale i premie
     public void beregnPremie()
     {

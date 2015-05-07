@@ -63,9 +63,7 @@ public class RegistrerHytteForsikringPanel extends JPanel implements ActionListe
          int bredde = skjerm.width;
          int høyde = skjerm.height;
          
-         forelder.setSize(bredde/2, høyde-200);
-         forelder.setLocation(skjerm.width/2-forelder.getSize().width/2, skjerm.height/2-forelder.getSize().height/2);
-         forelder.pack();
+         
     }
     
     
@@ -180,11 +178,11 @@ public class RegistrerHytteForsikringPanel extends JPanel implements ActionListe
         }
          else if(e.getSource() == Bolig)
         {
-                    forelder.doClick(3);
+            forelder.doClick(3);
         }
          else if(e.getSource() == Reise)
         {
-                    forelder.doClick(5);
+             forelder.doClick(5);
         }
         
     }

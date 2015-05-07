@@ -129,3 +129,44 @@ class KundeRamme extends TabellRamme<Forsikringskunde> {
 
     }
 }
+
+//Ramme for forsikringer
+//Ramme for forsikringskundene. Arver fra Tabellramme
+class ForsikringsRamme extends TabellRamme<Insurance> {
+
+    private final int FORSIKRINGSNUMMER    = 0;
+    private final int FORSIKRINGSTYPE      = 1;
+    private final int FORSIKRINGSPREMIE    = 2;
+    private final int STARTDATO            = 3;
+    
+
+    public ForsikringsRamme(String[] kolonnenavn, LinkedList<Insurance> data) {
+        super(kolonnenavn, data);
+    }
+    
+    //Setter inn informasjon om forsikringen til sin respektive søyle
+    public Object getValueAt(int rad, int kol)
+    {
+        
+        Insurance forsikring = (Insurance) super.getData().get(rad);
+
+        switch (kol) {
+            case FORSIKRINGSNUMMER:
+                return forsikring.getFNummer();
+            case FORSIKRINGSTYPE:
+                return forsikring.getType();
+            case FORSIKRINGSPREMIE:
+                return forsikring.getPremie();
+            case STARTDATO:
+                return forsikring.getStartDato();
+            default:
+                return null;
+        }
+
+    }
+    //Metode som returnerer valgt kunde i tabellen
+    public Insurance getValueAt(int rad) {
+        return (Insurance) super.getData().get(rad);
+
+    }
+}

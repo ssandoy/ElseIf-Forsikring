@@ -191,7 +191,10 @@ public class RegistrerBoligForsikringPanel extends JPanel implements ActionListe
                   }
                   else
                  {
+                     String fnr =  fregister.genererNummer();
                      Innboforsikring f = new Innboforsikring(k, adresse, byggeaar, areal, boligtype, material);
+                     f.setForsikringsnummer(fnr);
+                     f.setType("BOLIG-FORSIKRING");;
                      f.beregnPremie();
                      int result = JOptionPane.showConfirmDialog(null, 
                              "Pris på din forsikring: " + f.getPremie() + ",-" + 

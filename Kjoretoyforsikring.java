@@ -22,10 +22,10 @@ public abstract class Kjoretoyforsikring extends Insurance implements Serializab
 
     private Forsikringsregister fregister;
     
-    protected Kjoretoyforsikring(Forsikringskunde k, Forsikringsregister fregister, String eier, String registreringsnummer, 
+    protected Kjoretoyforsikring(Forsikringskunde k, String eier, String registreringsnummer, 
                                  String type, int modell)
     {
-        super(k, fregister);
+        super(k);
         this.eier = eier;
         this.registreringsnummer = registreringsnummer;
         this.type = type;
@@ -43,7 +43,7 @@ public abstract class Kjoretoyforsikring extends Insurance implements Serializab
         return registreringsnummer;
     }
     
-    public String getType()
+    public String getKjoretoyType()
     {
         return type;
     }

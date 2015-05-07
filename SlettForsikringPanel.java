@@ -5,10 +5,21 @@
  */
 package prosjektoppgave;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.*;
+import java.util.LinkedList;
+import java.util.ListIterator;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -33,25 +44,24 @@ public class SlettForsikringPanel extends JPanel implements ActionListener{
     private JPanel overskriftpanel;
     
     
-    public SlettForsikringPanel(HovedVindu forelder, Kunderegister kregister, Forsikringsregister fregister )
+    public SlettForsikringPanel(HovedVindu forelder,Kunderegister kregister, Forsikringsregister fregister)
     {
         super(new BorderLayout());
-        this.forelder = forelder;
         this.kregister = kregister;
         this.fregister = fregister;
         
         slett = new JButton("Slett Forsikring");
         tilbake = new JButton("Tilbake");
-        fnrFelt = new JTextField(10);
-        pnrFelt = new JTextField(10);
-        forsikringsNr = new JLabel("Forsikringsnummer: ");
-        personNr = new JLabel("Personnummer: ");
+        forsikringsnummerfelt = new JTextField(10);
+        personnummerfelt = new JTextField(10);
+        forsikringsnummer = new JLabel("Forsikringsnummer: ");
+        personnummer = new JLabel("Personnummer: ");
         overskrift = new JLabel("Slett Forsikring");
         
         slett.addActionListener(this);
         tilbake.addActionListener(this);
         
-        
+        this.forelder = forelder;
         
         
         setLayout(new BorderLayout());
@@ -62,10 +72,10 @@ public class SlettForsikringPanel extends JPanel implements ActionListener{
 
         overskriftpanel.add(overskrift);
         
-        tekstpanel.add(personNr);
-        tekstpanel.add(pnrFelt);
-        tekstpanel.add(forsikringsNr);
-        tekstpanel.add(fnrFelt);
+        tekstpanel.add(personnummer);
+        tekstpanel.add(personnummerfelt);
+        tekstpanel.add(forsikringsnummer);
+        tekstpanel.add(forsikringsnummerfelt);
         
         
         knappepanel.add(slett);
@@ -92,18 +102,12 @@ public class SlettForsikringPanel extends JPanel implements ActionListener{
      
     }
     
-        public void setGrensesnitt()
-        {
-            
-        }
-    
-    
-    public void slettForsikring()
+    /*public void slettForsikring()
     {
         
         try{
-            String fnr = fnrFelt.getText();
-            String pnr = pnrFelt.getText();
+            String fnr = forsikringsnummerfelt.getText();
+            String pnr = personnummerfelt.getText();
             Insurance forsikring = (Insurance)fregister.getObject(fnr);
             if(fregister.finnes(fnr))
             {
@@ -111,13 +115,21 @@ public class SlettForsikringPanel extends JPanel implements ActionListener{
                 if(forsikring.getKunde().equals(kregister.getKunde(pnr)))
                 {
                     Forsikringskunde kunde = forsikring.getKunde();
-
+                    
                     if(fregister.fjern(fnr))
                     {
-                        kunde.getForsikringer().remove(forsikring);
-                        visMelding("Forsikringen ble slettet!");
-                        return;
+                        if(kunde.fjernForsikring(forsikring))
+                        {
+                            visMelding("Forsikringen ble slettet!");
+                            return;
+                        }
+                        else
+                            visFeilMelding("Forsikringen kunne ikke bli fjernet fra kundens register");
+                        
                     }
+                    else
+                        visFeilMelding("Forsikringen kunne ikke bli fjernet fra forsikringsregisteret");
+
                 }
                 else
                     visFeilMelding("Følgende forsikringsnummer tilpasser ikke følgende personnummer!");
@@ -131,7 +143,7 @@ public class SlettForsikringPanel extends JPanel implements ActionListener{
         {
             visFeilMelding("Null Pointer!");
         }
-    }
+    }*/
     
     public void visMelding(String melding)
      {

@@ -19,9 +19,9 @@ public class Reiseforsikring extends Insurance implements Serializable
     private Forsikringsregister fregister;
     
     
-    public Reiseforsikring(Forsikringskunde kunde, Forsikringsregister fregister, String omraade, String status) 
+    public Reiseforsikring(Forsikringskunde kunde, String omraade, String status) 
     {
-        super(kunde, fregister);
+        super(kunde);
         this.omraade = omraade;
         this.status = status;
         

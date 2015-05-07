@@ -16,9 +16,9 @@ public class Innboforsikring extends Boligforsikring
     
     private Forsikringsregister fregister;
     
-    public Innboforsikring(Forsikringskunde k,Forsikringsregister fregister ,String adresse, int byggeaar, int boareal, String boligtype, String byggematerial) 
+    public Innboforsikring(Forsikringskunde k,String adresse, int byggeaar, int boareal, String boligtype, String byggematerial) 
     {
-        super(k, fregister, adresse, byggeaar, boareal);
+        super(k, adresse, byggeaar, boareal);
         
         this.boligtype = boligtype;
         this.byggematerial = byggematerial;

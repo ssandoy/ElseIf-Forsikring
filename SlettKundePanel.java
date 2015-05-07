@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package prosjektoppgave;
 
 import java.awt.BorderLayout;
@@ -39,19 +44,44 @@ public class SlettKundePanel extends JPanel implements ActionListener{
     public SlettKundePanel(HovedVindu forelder, Kunderegister kregister)
     {
         super(new BorderLayout());
-        this.forelder = forelder;
         this.kregister = kregister;
-        setLayout(new BorderLayout());
         
-        setGrensesnitt();
+        slett = new JButton("Slett Kunde");
+        tilbake = new JButton("Tilbake");
+        personnummerfelt = new JTextField(10);
+        personnummer = new JLabel("Personnummer: ");
+        overskrift = new JLabel("Slett Kunde");
+        
+        slett.addActionListener(this);
+        tilbake.addActionListener(this);
+        
+        this.forelder = forelder;
+        
+        
+        setLayout(new BorderLayout());
+        tekstpanel = new JPanel(new GridLayout(5, 0, 5, 5));
+        knappepanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        toppanel = new JPanel(new BorderLayout());
+        overskriftpanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+
+        overskriftpanel.add(overskrift);
+        
+        tekstpanel.add(personnummer);
+        tekstpanel.add(personnummerfelt);
+        
+        knappepanel.add(slett);
+        knappepanel.add(tilbake);
+
+        toppanel.add(overskriftpanel, BorderLayout.PAGE_START);
+        toppanel.add(tekstpanel, BorderLayout.CENTER);
 
         add(toppanel, BorderLayout.CENTER);
         add(knappepanel, BorderLayout.PAGE_END);
         
-        
-        
-        
-        
+        tekstpanel.setBackground(Color.decode("#E57E7E"));
+        toppanel.setBackground(Color.decode("#E57E7E"));
+        knappepanel.setBackground(Color.decode("#E57E7E"));
+        overskriftpanel.setBackground(Color.decode("#E57E7E"));
 
         Toolkit kit = Toolkit.getDefaultToolkit();
         Dimension skjerm = kit.getScreenSize();
@@ -63,40 +93,6 @@ public class SlettKundePanel extends JPanel implements ActionListener{
      
     }
     
-        public void setGrensesnitt()
-        {
-            personnummerfelt = new JTextField(10);
-            personnummer = new JLabel("Personnummer: ");
-            overskrift = new JLabel("Slett Kunde");
-            
-            slett = new JButton("Slett Kunde");
-            tilbake = new JButton("Tilbake");
-
-            slett.addActionListener(this);
-            tilbake.addActionListener(this);
-            
-            tekstpanel = new JPanel(new GridLayout(5, 0, 5, 5));
-            knappepanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-            toppanel = new JPanel(new BorderLayout());
-            overskriftpanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-
-            overskriftpanel.add(overskrift);
-            overskriftpanel.setBackground(Color.decode("#E57E7E"));
-        
-            tekstpanel.add(personnummer);
-            tekstpanel.add(personnummerfelt);
-            tekstpanel.setBackground(Color.decode("#E57E7E"));
-        
-            knappepanel.add(slett);
-            knappepanel.add(tilbake);
-            knappepanel.setBackground(Color.decode("#E57E7E"));
-
-            toppanel.add(overskriftpanel, BorderLayout.PAGE_START);
-            toppanel.add(tekstpanel, BorderLayout.CENTER);
-            toppanel.setBackground(Color.decode("#E57E7E"));
-            
-            
-        }
     
     public void slettKunde()
     {
@@ -112,17 +108,20 @@ public class SlettKundePanel extends JPanel implements ActionListener{
             {
                 visFeilMelding("Du må slette alle forsikringene til kunden før du sletter kunden!");
                 return;
-            } 
-         
-            kregister.fjern(nr);
-            kunden = null; 
+            }
             
+            if(kregister.fjern(nr))
+            {
+                kunden = null;
+                visMelding("Kunden ble slettet.");
+            }
+             
         }
         catch(NullPointerException npe)
         {
             visFeilMelding("Null Pointer!");
         }
-         
+        
         
     }
     
@@ -142,9 +141,10 @@ public class SlettKundePanel extends JPanel implements ActionListener{
         if (e.getSource() == slett) {
             slettKunde();
         } else if (e.getSource() == tilbake) {
-           forelder.addLogo();
-           forelder.visPanel(HovedVindu.HovedVindu);
-           forelder.Size();
+            forelder.visPanel(HovedVindu.HovedVindu);
+            forelder.Size();
+            forelder.addLogo();
+
         }
     }
 }

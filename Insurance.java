@@ -17,45 +17,45 @@ import java.util.Date;
 public abstract class Insurance implements  Forsikring {
     
     private Forsikringskunde kunde;
-    private final int fnr;
+    
     private static int nestenummer;
     private String forsikringsnummer;
+    private String forsikringstype;
     private double erstatning;
     private double egenandel;
     private Date startDato;
     private DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
     private double forsikringspremie;
     
-    private Forsikringsregister fregister;
     
     
-    protected Insurance(Forsikringskunde kunde, Forsikringsregister fregister)
+    protected Insurance(Forsikringskunde kunde)
     {
         this.kunde = kunde;
-        this.fregister = fregister;
-        kunde.addForsikring(this);
         this.startDato = new Date();
-        if(fregister.size() == 0)
-        {
-            nestenummer = 1;
-        } else
-        {
-           nestenummer = fregister.getLastNumber();
-        }
-        nestenummer++;
-        fnr = nestenummer;
-        forsikringsnummer = fnr+"";
-        System.out.println(forsikringsnummer);
+       
+       
+        
         erstatning = 0.00;
         egenandel = 0.00;
         forsikringspremie = 0.00;
     } 
-    
+   
     
     @Override
     public String getFNummer() 
     {
         return forsikringsnummer;
+    }
+    
+    public Object getObject()
+    {
+        return this;
+    }
+    
+    public Forsikringskunde getKunde()
+    {
+        return kunde;
     }
 
     @Override
@@ -77,6 +77,12 @@ public abstract class Insurance implements  Forsikring {
     }
     
     @Override
+    public String getType()
+    {
+        return forsikringstype;
+    }
+    
+    @Override
      public void setPremie(double premie)
      {
          forsikringspremie = premie;
@@ -88,11 +94,26 @@ public abstract class Insurance implements  Forsikring {
          this.erstatning = erstatning;
      }
      
+     
+     
      @Override
      public double getEgenandel()
      {
          return egenandel;
      }
+
+    public void setForsikringsnummer(String forsikringsnummer)
+    {
+        this.forsikringsnummer = forsikringsnummer;
+    }
+    
+    @Override
+    public void setType(String forsikringstype) 
+    {
+        this.forsikringstype = forsikringstype;
+    }
+     
+    
 
     
     

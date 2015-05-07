@@ -21,11 +21,11 @@ public class Bilforsikring extends Kjoretoyforsikring implements Serializable
     
     private Forsikringsregister fregister;
     
-    public Bilforsikring(Forsikringskunde k, Forsikringsregister fregister, String eier, String registreringsnummer, 
+    public Bilforsikring(Forsikringskunde k, String eier, String registreringsnummer, 
                          String type, int modell, int aarligkjorelengde
                         , int skadefri)
     {
-        super(k, fregister, eier, registreringsnummer, type, modell);
+        super(k, eier, registreringsnummer, type, modell);
         this.aarligkjorelengde = aarligkjorelengde;
         this.skadefri = skadefri;
        

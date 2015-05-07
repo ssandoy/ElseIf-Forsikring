@@ -164,7 +164,10 @@ public class RegistrerReiseForsikringPanel extends JPanel implements ActionListe
                       visFeilMelding("Ingen kunde med det personnummeret!");
              }else
               {
-                  Reiseforsikring f = new Reiseforsikring(k,fregister, reisedekning, status);
+                  String fnr = fregister.genererNummer();
+                  Reiseforsikring f = new Reiseforsikring(k, reisedekning, status);
+                  f.setForsikringsnummer(fnr);
+                  f.setType("REISE-FORSIKRING");
                   f.beregnPremie();
                   int result = JOptionPane.showConfirmDialog(null, 
                         "Pris på din forsikring: " + f.getPremie() + ",-" + 
@@ -173,10 +176,8 @@ public class RegistrerReiseForsikringPanel extends JPanel implements ActionListe
                        {
                            if(fregister.leggTil(f))
                            {
-                                 System.out.println(f.getFNummer());
                                  k.addForsikring(f);
-                                 visMelding("Forsikring registrert på kunde:\n" + k.toString());
-                                 System.out.println(fregister.getObject(f.getFNummer()));
+                                 visMelding("Forsikring registrert på kunde:\n" + k.toString());    
                                  forelder.addLogo();
                                  forelder.visPanel(HovedVindu.HovedVindu);
                                  forelder.Size();

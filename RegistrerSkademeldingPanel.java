@@ -39,11 +39,11 @@ public class RegistrerSkademeldingPanel extends JPanel implements ActionListener
     private JButton registrer;
     private JButton avbryt;
     
-    private JLabel kundeNr, beskrivelse, kInfo, ebelop, tbelop, overskrift, stype;
+    private JLabel personnummer, beskrivelse, kInfo, ebelop, tbelop, overskrift, stype;
     
     private JComboBox<String> skadeType;
     private JTextField skadebeskrivelse, kontaktInfo;
-    private JTextField fnr, erstatningsbelop, takseringsbelop;
+    private JTextField personnummerfelt, erstatningsbelop, takseringsbelop;
     
     String[] st = {"INNBO", "FRITID", "BIL"};
     
@@ -75,11 +75,11 @@ public class RegistrerSkademeldingPanel extends JPanel implements ActionListener
         
         skadeType = new JComboBox<String>(st);
         
-        fnr = new JTextField(10);
+        personnummerfelt = new JTextField(10);
         erstatningsbelop = new JTextField(10);
         takseringsbelop = new JTextField(10);
         
-        kundeNr = new JLabel("Kundenummer: ");
+        personnummer = new JLabel("Personnummer: ");
         kInfo = new JLabel("Kontaktinfo: ");
         beskrivelse = new JLabel("Skadebeskrivelse: ");
         ebelop = new JLabel("Erstatningsbeløp: ");
@@ -100,8 +100,8 @@ public class RegistrerSkademeldingPanel extends JPanel implements ActionListener
 
         overskriftpanel.add(overskrift);
         
-        tekstpanel.add(kundeNr);
-        tekstpanel.add(fnr);
+        tekstpanel.add(personnummer);
+        tekstpanel.add(personnummerfelt);
         tekstpanel.add(stype);
         tekstpanel.add(skadeType);
         tekstpanel.add(beskrivelse);
@@ -140,7 +140,7 @@ public class RegistrerSkademeldingPanel extends JPanel implements ActionListener
     public void registrerSkademelding()
     {
         try{
-            String nr = fnr.getText();
+            String nr = personnummerfelt.getText();
             Forsikringskunde kunden = kregister.getKunde(nr);
              
             if( erstatningsbelop.getText() != null && takseringsbelop.getText() != null)

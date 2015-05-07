@@ -6,6 +6,7 @@
 package prosjektoppgave;
 
 import java.io.Serializable;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -70,6 +71,19 @@ public class Forsikringsregister extends TreeMap<String,Insurance> implements Se
     public int getLastNumber()
     {
         return Integer.parseInt(lastKey());
+    }
+    
+    public String genererNummer(){
+        int nøkkel = 1;
+        for(Map.Entry<String, Insurance> entry : this.entrySet())
+        {
+         if(entry.getValue().getFNummer().equalsIgnoreCase(String.valueOf(nøkkel)))
+            {
+                nøkkel++;
+            }   
+        }
+
+        return String.valueOf(nøkkel);
     }
     
 }

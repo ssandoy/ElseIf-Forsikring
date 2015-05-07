@@ -192,15 +192,18 @@ public class RegistrerBaatForsikringPanel extends JPanel implements ActionListen
                   }
                   else
                   {
+                      String fnr = fregister.genererNummer();
                       Baatforsikring b = new Baatforsikring(k, baateier, regnummer, baattype, baatmodell, motor, lengde);
-                      k.addForsikring(b);
+                      b.setForsikringsnummer(fnr);
+                      b.setType("BÅT-FORSIKRING");
+                     
                       if(fregister.leggTil(b))
                       {
-                       visMelding("Forsikring registrert på kunde:\n" + k.toString());
-                          System.out.println(fregister.toString());
-                     forelder.addLogo();
-                     forelder.visPanel(HovedVindu.HovedVindu);
-                     forelder.Size();
+                         k.addForsikring(b);
+                         visMelding("Forsikring registrert på kunde:\n" + k.toString());
+                         forelder.addLogo();
+                         forelder.visPanel(HovedVindu.HovedVindu);
+                         forelder.Size();
                       }
                       else
                       {
