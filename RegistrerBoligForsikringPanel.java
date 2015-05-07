@@ -38,7 +38,7 @@ public class RegistrerBoligForsikringPanel extends JPanel implements ActionListe
     private JPanel toppanel;
     private JPanel midtpanel;
     
-    private JButton registrer;
+    private JButton beregn;
     private JButton avbryt;
     
     HovedVindu forelder;
@@ -50,8 +50,7 @@ public class RegistrerBoligForsikringPanel extends JPanel implements ActionListe
     String[] boligtyper = {"Velg boligtype", "LEILIGHET", "ENEBOLIG"};
     
     
-    public RegistrerBoligForsikringPanel(HovedVindu forelder, Forsikringsregister fregister, 
-                                        Kunderegister kregister)
+    public RegistrerBoligForsikringPanel(HovedVindu forelder, Kunderegister kregister, Forsikringsregister fregister)
     {
         this.forelder  = forelder;
         this.fregister = fregister;
@@ -68,10 +67,7 @@ public class RegistrerBoligForsikringPanel extends JPanel implements ActionListe
          Dimension skjerm = kit.getScreenSize();
          int bredde = skjerm.width;
          int høyde = skjerm.height;
-         
-         forelder.setSize(bredde/2, høyde-200);
-         forelder.setLocation(skjerm.width/2-forelder.getSize().width/2, skjerm.height/2-forelder.getSize().height/2);
-         forelder.pack();
+ 
         
     }
     
@@ -92,8 +88,8 @@ public class RegistrerBoligForsikringPanel extends JPanel implements ActionListe
         areallabel       = new JLabel("Boareal: " + arealfelt.getValue() + " km2");
         bygglabel        = new JLabel("Byggeår: " + byggeaarfelt.getValue());
         
-        registrer = new JButton("Registrer forsikring");
-        registrer.addActionListener(this);
+        beregn = new JButton("Beregn pris på forsikring");
+        beregn.addActionListener(this);
         avbryt = new JButton("Avbryt");
         avbryt.addActionListener(this);
         
@@ -142,7 +138,7 @@ public class RegistrerBoligForsikringPanel extends JPanel implements ActionListe
         toppanel.add(Reise);
         
         knappepanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        knappepanel.add(registrer);
+        knappepanel.add(beregn);
         knappepanel.add(avbryt);
         
         midtpanel = new JPanel(new GridLayout(6,0,0,0));
@@ -176,12 +172,16 @@ public class RegistrerBoligForsikringPanel extends JPanel implements ActionListe
               if( personnummer.length() == 0 || adresse.length() == 0 || boligtype.length() == 0
                      || material.length() == 0)
               {
-                  visFeilMelding("Du må skrive inn verdier i feltene!");
-              } else if(boligtype.equals("Velg boligtype") || material.equals("Velg materialtype"))
+                  visFeilMelding("Du må skrive inn verdier i alle feltene!");
+              } else if(material.equals("Velg materialtype"))
               {
-                  visFeilMelding("Du må velge boligtype/byggematerial");
-              }
-              else{
+                  visFeilMelding("Du må velge byggematerial");
+              } 
+                else if(boligtype.equals("Velg boligtype")) 
+                 {
+                  visFeilMelding("Du må velge boligtype");        
+                 } else
+                  {
                   
                   Forsikringskunde k = kregister.getKunde(personnummer);
                   
@@ -190,23 +190,31 @@ public class RegistrerBoligForsikringPanel extends JPanel implements ActionListe
                       visFeilMelding("Ingen kunde med det personnummeret!");
                   }
                   else
-                  {
+                 {
                      Innboforsikring f = new Innboforsikring(k, adresse, byggeaar, areal, boligtype, material);
-                     k.addForsikring(f);
+                     f.beregnPremie();
+                     int result = JOptionPane.showConfirmDialog(null, 
+                             "Pris på din forsikring: " + f.getPremie() + ",-" + 
+                                     "\nVil du tegne denne forsikringen?", null , JOptionPane.YES_NO_OPTION);
+                         if(result == JOptionPane.YES_OPTION) 
+                         {
                      if(fregister.leggTil(f))
                      {
+                     k.addForsikring(f);
                      visMelding("Forsikring registrert på kunde:\n" + k.toString());
                      System.out.println(fregister.toString());
                      System.out.println(f.getFNummer());
+                     forelder.addLogo();
                      forelder.visPanel(HovedVindu.HovedVindu);
                      forelder.Size();
                      }
                      else 
-                     {
-                         visFeilMelding("Feil informasjon fyllt inn. Prøv igjen");
-                     }
+                       {
+                         visFeilMelding("Feil informasjon fylt inn. Prøv igjen");
+                       }
+                        } 
                   } 
-              }
+                   }
               
               
             
@@ -236,11 +244,11 @@ public class RegistrerBoligForsikringPanel extends JPanel implements ActionListe
     {
          if(e.getSource() == avbryt)
         {
+           forelder.addLogo();
            forelder.visPanel(HovedVindu.HovedVindu);
            forelder.Size();
-           forelder.addLogo();
         }
-         else if(e.getSource() == registrer)
+         else if(e.getSource() == beregn)
          {
              registrer();    
          }

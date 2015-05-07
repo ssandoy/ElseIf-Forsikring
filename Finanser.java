@@ -33,7 +33,7 @@ public class Finanser {
     
     public void beregnUtbetalt() //regner ut hvor mye forsikringsselskapet har betalt
     {
-        
+        utbetalt = 0.00;
         try
         {
             List<Skademelding> skademeldingliste = new LinkedList<>();
@@ -64,6 +64,7 @@ public class Finanser {
     
     public void beregnInnbetalt() //regner ut hvor mye forsikringsselskapet har fått innbetalt 
     {
+        innbetalt = 0.00;
         for(Map.Entry<String, Insurance> entry: forsikringer.entrySet())
         {
             Insurance f = entry.getValue();

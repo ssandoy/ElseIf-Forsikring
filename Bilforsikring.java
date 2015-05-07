@@ -18,13 +18,14 @@ public class Bilforsikring extends Kjoretoyforsikring implements Serializable
     private int skadefri;
     private static final double BEREGNINGSKONSTANT = 0.1;
     private static final double PRIS_PR_KM = 1.50;
-
     
-    public Bilforsikring(Forsikringskunde k, String eier, String registreringsnummer, 
+    private Forsikringsregister fregister;
+    
+    public Bilforsikring(Forsikringskunde k, Forsikringsregister fregister, String eier, String registreringsnummer, 
                          String type, int modell, int aarligkjorelengde
                         , int skadefri)
     {
-        super(k, eier, registreringsnummer, type, modell);
+        super(k, fregister, eier, registreringsnummer, type, modell);
         this.aarligkjorelengde = aarligkjorelengde;
         this.skadefri = skadefri;
        
@@ -59,12 +60,7 @@ public class Bilforsikring extends Kjoretoyforsikring implements Serializable
              super.setPremie(12000.00);
          }
 
-    }
-    
-    
-    //metode som beregner bil-premien ut i fra skadefrihet, kjørelengde og egenandel
-    public void beregnBiPremie()
-    {
+    //beregner bil-premien ut i fra skadefrihet, kjørelengde og egenandel
         double premie = super.getPremie();
         premie += BEREGNINGSKONSTANT*aarligkjorelengde;
         double bonusprosent = 0.00;
@@ -90,8 +86,9 @@ public class Bilforsikring extends Kjoretoyforsikring implements Serializable
     }
 
     @Override
-    public String toString() {
-        return "Bilforsikring{" + "aarligkjorelengde=" + aarligkjorelengde + ", skadefri=" + skadefri + '}';
+    public String toString() 
+    {
+        return "Forsikringsinnehaver: ";
     }
     
         

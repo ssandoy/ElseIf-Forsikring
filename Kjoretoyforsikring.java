@@ -20,12 +20,12 @@ public abstract class Kjoretoyforsikring extends Insurance implements Serializab
     private String type;
     private int modell;
 
+    private Forsikringsregister fregister;
     
-    
-    protected Kjoretoyforsikring(Forsikringskunde k, String eier, String registreringsnummer, 
+    protected Kjoretoyforsikring(Forsikringskunde k, Forsikringsregister fregister, String eier, String registreringsnummer, 
                                  String type, int modell)
     {
-        super(k);
+        super(k, fregister);
         this.eier = eier;
         this.registreringsnummer = registreringsnummer;
         this.type = type;

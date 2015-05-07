@@ -46,7 +46,7 @@ public class RegistrerHytteForsikringPanel extends JPanel implements ActionListe
     
     Integer[] antMaaneder = {0,1,2,3,4,5};
     
-    public RegistrerHytteForsikringPanel(HovedVindu forelder, Forsikringsregister fregister)
+    public RegistrerHytteForsikringPanel(HovedVindu forelder,Kunderegister kregister,  Forsikringsregister fregister)
     {
         this.forelder  = forelder;
         this.fregister = fregister;
@@ -166,9 +166,9 @@ public class RegistrerHytteForsikringPanel extends JPanel implements ActionListe
     {
         if(e.getSource() == avbryt)
         {
+           forelder.addLogo();
            forelder.visPanel(HovedVindu.HovedVindu);
            forelder.Size();
-            forelder.addLogo();
         }
          else if(e.getSource() == Bil)
         {

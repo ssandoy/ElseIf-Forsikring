@@ -14,11 +14,11 @@ import java.util.Date;
  *
  * @author ssandoy
  */
-public abstract class Insurance implements Serializable, Forsikring {
+public abstract class Insurance implements  Forsikring {
     
     private Forsikringskunde kunde;
     private final int fnr;
-    private static int nestenummer = 1;
+    private static int nestenummer;
     private String forsikringsnummer;
     private double erstatning;
     private double egenandel;
@@ -26,14 +26,26 @@ public abstract class Insurance implements Serializable, Forsikring {
     private DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
     private double forsikringspremie;
     
+    private Forsikringsregister fregister;
     
-    protected Insurance(Forsikringskunde kunde)
+    
+    protected Insurance(Forsikringskunde kunde, Forsikringsregister fregister)
     {
         this.kunde = kunde;
+        this.fregister = fregister;
         kunde.addForsikring(this);
         this.startDato = new Date();
-        fnr = nestenummer++;
+        if(fregister.size() == 0)
+        {
+            nestenummer = 1;
+        } else
+        {
+           nestenummer = fregister.getLastNumber();
+        }
+        nestenummer++;
+        fnr = nestenummer;
         forsikringsnummer = fnr+"";
+        System.out.println(forsikringsnummer);
         erstatning = 0.00;
         egenandel = 0.00;
         forsikringspremie = 0.00;

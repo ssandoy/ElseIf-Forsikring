@@ -14,20 +14,21 @@ public class Innboforsikring extends Boligforsikring
     private String boligtype;
     private String byggematerial;
     
-
-    public Innboforsikring(Forsikringskunde k, String adresse, int byggeaar, int boareal, String boligtype, String byggematerial) 
+    private Forsikringsregister fregister;
+    
+    public Innboforsikring(Forsikringskunde k,Forsikringsregister fregister ,String adresse, int byggeaar, int boareal, String boligtype, String byggematerial) 
     {
-        super(k, adresse, byggeaar, boareal);
+        super(k, fregister, adresse, byggeaar, boareal);
         
         this.boligtype = boligtype;
         this.byggematerial = byggematerial;
         
     }
     
-     //Beregner premien på arealet av boligen
-    public void beregnArealPremie()
+     //Beregner hvor mye den årlige forsikringspremien blir på
+    public void beregnPremie()
     {
-      
+        //beregner premien ut fra arealet
          if(super.getAreal() >= 30 && super.getAreal() <= 50)
          {
              super.setPremie(1000.00);
@@ -44,11 +45,8 @@ public class Innboforsikring extends Boligforsikring
          {
              super.setPremie(2200.00);
          }
-        }
-
-
-    public void beregnMaterialPremie()
-       {
+        
+         //beregner premien ut i fra husmaterial
            double premie = super.getPremie();
            if(byggematerial == "MUR")
            {
@@ -58,13 +56,8 @@ public class Innboforsikring extends Boligforsikring
            {
                premie += 300.00;
            }
-           super.setPremie(premie);
-       }
-    
-    //metode som beregner premien ut i fra hvilket type hus det er
-        public void beregnTypePremie()
-        {
-            double premie = 0.0;
+          
+           //Beregner premien ut i fra hvilken hustype
             if(boligtype == "LEILIGHET")
             {
             premie += 100.00;
@@ -72,15 +65,9 @@ public class Innboforsikring extends Boligforsikring
             else if(boligtype ==  "ENEBOLIG")
             {
             premie += 200.00;
-            }
-            super.setPremie(premie);
-        }
-    
-    //Metode som sluttberegner boligpremien ut i fra hvor gammelt huset er
-    
-    public void beregnBoligPremie()
-     {
-         double premie = super.getPremie();
+            }  
+            
+           //beregner boligpremien ut i fra hvor gammelt huset er
          if(super.getByggeaar() <= 1940)
          {
              premie += 100.00;

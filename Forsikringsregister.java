@@ -67,6 +67,9 @@ public class Forsikringsregister extends TreeMap<String,Insurance> implements Se
         return this;
     }
 
-    
+    public int getLastNumber()
+    {
+        return Integer.parseInt(lastKey());
+    }
     
 }

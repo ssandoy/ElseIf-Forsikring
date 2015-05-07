@@ -34,32 +34,52 @@ public class RegistrerKundePanel extends JPanel implements ActionListener {
 
     private HovedVindu forelder;
 
-    public RegistrerKundePanel(Kunderegister register, HovedVindu forelder) {
+    public RegistrerKundePanel(HovedVindu forelder, Kunderegister register ) {
         super(new BorderLayout());
+        this.forelder = forelder;
         this.register = register;
-        registrer = new JButton("Registrer");
-        avbryt = new JButton("Avbryt");
+
+        setGrensesnitt();
+        add(toppanel, BorderLayout.CENTER);
+        add(knappepanel, BorderLayout.PAGE_END);
+
+        
+        toppanel.setBackground(Color.decode("#5E5E5E"));
+        overskriftpanel.setBackground(Color.decode("#5E5E5E"));
+
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        Dimension skjerm = kit.getScreenSize();
+        int bredde = skjerm.width;
+        int høyde = skjerm.height;
+
+       
+        setPreferredSize( new Dimension( 640, 480 ) );
+        
+    }
+
+    public void setGrensesnitt()
+    {
         personnummerfelt = new JTextField(10);
-
-
         fornavnsfelt = new JTextField(10);
         etternavnsfelt = new JTextField(10);
         adressefelt = new JTextField(10);
         fakturafelt = new JTextField(10);
         overskrift = new JLabel("Registrer kunde");
 
-        plabel = new JLabel("Personnummer");
-        flabel = new JLabel("Fornavn");
-        elabel = new JLabel("Etternavn");
-        alabel = new JLabel("Adresse");
-        falabel = new JLabel("Fakturaadresse");
+        plabel = new JLabel(" Personnummer");
+        flabel = new JLabel(" Fornavn");
+        elabel = new JLabel(" Etternavn");
+        alabel = new JLabel(" Adresse");
+        falabel = new JLabel(" Fakturaadresse");
 
         fakturabox = new JCheckBox();
-
+        
+        registrer = new JButton("Registrer");
+        avbryt = new JButton("Avbryt");
         avbryt.addActionListener(this);
         registrer.addActionListener(this);
 
-        this.forelder = forelder;
+  
 
         setLayout(new BorderLayout());
         tekstpanel = new JPanel(new GridLayout(5, 0, 5, 5));
@@ -79,30 +99,17 @@ public class RegistrerKundePanel extends JPanel implements ActionListener {
         tekstpanel.add(adressefelt);
         tekstpanel.add(falabel);
         tekstpanel.add(fakturafelt);
-
+        
         knappepanel.add(registrer);
         knappepanel.add(avbryt);
 
+        tekstpanel.setBackground(Color.decode("#5E5E5E"));
+        knappepanel.setBackground(Color.decode("#5E5E5E"));
+        
         toppanel.add(overskriftpanel, BorderLayout.PAGE_START);
         toppanel.add(tekstpanel, BorderLayout.CENTER);
-
-        add(toppanel, BorderLayout.CENTER);
-        add(knappepanel, BorderLayout.PAGE_END);
-
-        tekstpanel.setBackground(Color.decode("#E57E7E"));
-        toppanel.setBackground(Color.decode("#E57E7E"));
-        knappepanel.setBackground(Color.decode("#E57E7E"));
-        overskriftpanel.setBackground(Color.decode("#E57E7E"));
-
-        Toolkit kit = Toolkit.getDefaultToolkit();
-        Dimension skjerm = kit.getScreenSize();
-        int bredde = skjerm.width;
-        int høyde = skjerm.height;
-
-        forelder.setSize(bredde / 2, høyde - 500);
-        forelder.setLocation(skjerm.width / 2 - forelder.getSize().width / 2, skjerm.height / 2 - forelder.getSize().height / 2);
     }
-
+    
     public void Registrer() {
         String personnummer = personnummerfelt.getText();
         String fornavn = fornavnsfelt.getText();
@@ -119,9 +126,10 @@ public class RegistrerKundePanel extends JPanel implements ActionListener {
                 if (register.leggTil(kunde)) 
                 {
                 visMelding("Kunde registrert!");
+                forelder.addLogo();
                 forelder.visPanel(HovedVindu.HovedVindu);
                 forelder.Size();
-                forelder.addLogo();
+
                  }
             } else
                 visFeilMelding("Skriv inn et gyldig personnummer. 11 siffer");
@@ -144,11 +152,11 @@ public class RegistrerKundePanel extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == registrer) {
             Registrer();
-        } else if (e.getSource() == avbryt) {
-            forelder.visPanel(HovedVindu.HovedVindu);
-            forelder.Size();
+        } else if (e.getSource() == avbryt) 
+        {
             forelder.addLogo();
-
+           forelder.visPanel(HovedVindu.HovedVindu);
+           forelder.Size();
         }
     }
 

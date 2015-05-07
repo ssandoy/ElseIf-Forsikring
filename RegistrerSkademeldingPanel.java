@@ -160,8 +160,12 @@ public class RegistrerSkademeldingPanel extends JPanel implements ActionListener
                         
                           if(sregister.leggTil(ny))
                           {
+                          kunden.addSkademelding(ny);
                           System.out.println(sregister.toString());
                           visMelding("Skademelding lagt til");
+                          forelder.addLogo();
+                          forelder.visPanel(HovedVindu.HovedVindu);
+                          forelder.Size();
                           }
                 }
                 else
@@ -169,7 +173,7 @@ public class RegistrerSkademeldingPanel extends JPanel implements ActionListener
         }
         catch(NumberFormatException nfe)
         {
-            visFeilMelding("Pass på å skrive tall i taksering og erstatningsbelop!");
+            visFeilMelding("Pass på å skrive tall i taksering!");
         }
     }
     
@@ -189,11 +193,10 @@ public class RegistrerSkademeldingPanel extends JPanel implements ActionListener
     public void actionPerformed(ActionEvent e) {
       if (e.getSource() == registrer) {
             registrerSkademelding();
-            System.out.println(sregister.toString());
         } else if (e.getSource() == avbryt) {
-            forelder.visPanel(HovedVindu.HovedVindu);
-            forelder.Size();
-            forelder.addLogo();
+           forelder.addLogo();
+           forelder.visPanel(HovedVindu.HovedVindu);
+           forelder.Size();
 
         }  
     }

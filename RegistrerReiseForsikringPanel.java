@@ -33,19 +33,21 @@ public class RegistrerReiseForsikringPanel extends JPanel implements ActionListe
     private JPanel toppanel;
     private JPanel midtpanel;
     
-    private JButton registrer;
+    private JButton beregn;
     private JButton avbryt;
     
     HovedVindu forelder;
+    Kunderegister kregister;
     Forsikringsregister fregister;
     
     String[] reise = {"Velg område", "INNLANDS", "SKANDINAVIA", "EUROPA", "VERDEN"};
     String[] status = {"Velg din status", "Student", "Voksen", "Honnør"};
     
     
-    public RegistrerReiseForsikringPanel(HovedVindu forelder, Forsikringsregister fregister)
+    public RegistrerReiseForsikringPanel(HovedVindu forelder, Kunderegister kregister, Forsikringsregister fregister)
     {
         this.forelder  = forelder;
+        this.kregister = kregister;
         this.fregister = fregister;
         
         setLayout(new BorderLayout());
@@ -75,8 +77,8 @@ public class RegistrerReiseForsikringPanel extends JPanel implements ActionListe
         reiselabel       = new JLabel("Velg område for forsikringen: ");
         statuslabel      = new JLabel("Velg din rabatt: ");
         
-        registrer = new JButton("Registrer forsikring");
-        registrer.addActionListener(this);
+        beregn = new JButton("Beregn pris på forsikring");
+        beregn.addActionListener(this);
         avbryt = new JButton("Avbryt");
         avbryt.addActionListener(this);
         
@@ -121,7 +123,7 @@ public class RegistrerReiseForsikringPanel extends JPanel implements ActionListe
         toppanel.add(Reise);
         
         knappepanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        knappepanel.add(registrer);
+        knappepanel.add(beregn);
         knappepanel.add(avbryt);
         
         midtpanel = new JPanel(new GridLayout(3,0,0,0));
@@ -138,21 +140,90 @@ public class RegistrerReiseForsikringPanel extends JPanel implements ActionListe
     }
 
     
+    public void registrer()
+    {
+         String personnummer = personnummerfelt.getText();
+         String reisedekning   = reisefelt.getItemAt(reisefelt.getSelectedIndex());
+         String status     = statusfelt.getItemAt(statusfelt.getSelectedIndex());
+         
+         if(personnummer.length() == 0)
+         {
+             visFeilMelding("Du må fylle inn kundens personnummer");
+         } else if(reisedekning.equals("Velg område"))
+         {
+             visFeilMelding("Du må velge område du vil forsikringen skal dekke");
+         }else if(statusfelt.equals("Velg din status"))
+         {
+             visFeilMelding("Du må velge status");
+         }else
+         {
+             Forsikringskunde k = kregister.getKunde(personnummer);
+                  
+              if(k == null)
+             {
+                      visFeilMelding("Ingen kunde med det personnummeret!");
+             }else
+              {
+                  Reiseforsikring f = new Reiseforsikring(k,fregister, reisedekning, status);
+                  f.beregnPremie();
+                  int result = JOptionPane.showConfirmDialog(null, 
+                        "Pris på din forsikring: " + f.getPremie() + ",-" + 
+                         "\nVil du tegne denne forsikringen?", null , JOptionPane.YES_NO_OPTION);
+                       if(result == JOptionPane.YES_OPTION) 
+                       {
+                           if(fregister.leggTil(f))
+                           {
+                                 System.out.println(f.getFNummer());
+                                 k.addForsikring(f);
+                                 visMelding("Forsikring registrert på kunde:\n" + k.toString());
+                                 System.out.println(fregister.getObject(f.getFNummer()));
+                                 forelder.addLogo();
+                                 forelder.visPanel(HovedVindu.HovedVindu);
+                                 forelder.Size();
+                            } else 
+                              {
+                               visFeilMelding("Feil informasjon fylt inn. Prøv igjen");
+                              }
+                       }
+                       }
+              }
+  
+         }
+         
+    
+    
+    
+    
+     public void visMelding(String melding)
+     {
+        JOptionPane.showMessageDialog(null,melding);
+    }
+     
+      public void visFeilMelding(String melding)
+     {
+       JOptionPane.showMessageDialog(this, melding, "Problem", 
+               JOptionPane.ERROR_MESSAGE);
+     }
+    
+    
     
     @Override
     public void actionPerformed(ActionEvent e) 
     {
          if(e.getSource() == avbryt)
        {
+           forelder.addLogo();
            forelder.visPanel(HovedVindu.HovedVindu);
            forelder.Size();
-           forelder.addLogo();
+       }else if(e.getSource() == beregn)
+       {
+           registrer();
        }
-          else if(e.getSource() == Bil)
+       else if(e.getSource() == Bil)
         {
                     forelder.doClick(1);
         }
-        else if(e.getSource() == Baat)
+       else if(e.getSource() == Baat)
         {
             forelder.doClick(2);
         }

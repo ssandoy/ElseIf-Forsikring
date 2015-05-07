@@ -26,11 +26,9 @@ public class Baatforsikring extends Kjoretoyforsikring implements Serializable
         
     }
  
-    
-    ///Metode som beregner premien ut i fra lengden på båten    
-    public void beregnFotPremie()
+    public void beregnPremie()
     {
-        if(fot <= 20)
+         if(fot <= 20)
         {
            super.setPremie(1000.00);
         } 
@@ -46,12 +44,6 @@ public class Baatforsikring extends Kjoretoyforsikring implements Serializable
         {
             super.setPremie(5000.00);
         }
-    }
-    
-    //Metode som beregner sluttpremien på båt mhp lengde og motorstørrelse
-    
-    public void beregnBaatPremie()
-    {
         double premie = super.getPremie();
         double motorpremie = 0.00;
         

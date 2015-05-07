@@ -48,7 +48,7 @@ public class RegistrerBaatForsikringPanel extends JPanel implements ActionListen
     Forsikringsregister fregister;
     Kunderegister kregister;
 
-    public RegistrerBaatForsikringPanel(HovedVindu forelder, Forsikringsregister fregister, Kunderegister kregister)
+    public RegistrerBaatForsikringPanel(HovedVindu forelder, Kunderegister kregister, Forsikringsregister fregister)
     {
         this.forelder  = forelder;
         this.fregister = fregister;
@@ -65,10 +65,7 @@ public class RegistrerBaatForsikringPanel extends JPanel implements ActionListen
          Dimension skjerm = kit.getScreenSize();
          int bredde = skjerm.width;
          int høyde = skjerm.height;
-         
-         forelder.setSize(bredde/2, høyde-370);
-         forelder.setLocation(skjerm.width/2-forelder.getSize().width/2, skjerm.height/2-forelder.getSize().height/2);
-         
+   
     }
 
     
@@ -201,9 +198,9 @@ public class RegistrerBaatForsikringPanel extends JPanel implements ActionListen
                       {
                        visMelding("Forsikring registrert på kunde:\n" + k.toString());
                           System.out.println(fregister.toString());
+                     forelder.addLogo();
                      forelder.visPanel(HovedVindu.HovedVindu);
-                     forelder.Size();   
-                      forelder.addLogo();
+                     forelder.Size();
                       }
                       else
                       {
@@ -232,9 +229,9 @@ public class RegistrerBaatForsikringPanel extends JPanel implements ActionListen
     {
         if(e.getSource() == avbryt)
        {
+           forelder.addLogo();
            forelder.visPanel(HovedVindu.HovedVindu);
            forelder.Size();
-           forelder.addLogo();
        }
         else if(e.getSource() == registrer)
         {

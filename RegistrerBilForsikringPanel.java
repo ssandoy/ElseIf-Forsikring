@@ -50,7 +50,7 @@ public class RegistrerBilForsikringPanel extends JPanel implements ActionListene
     Forsikringsregister fregister;
     Kunderegister kregister;
     
-    public RegistrerBilForsikringPanel(HovedVindu forelder, Forsikringsregister fregister, Kunderegister kregister)
+    public RegistrerBilForsikringPanel(HovedVindu forelder, Kunderegister kregister, Forsikringsregister fregister)
     {
         this.forelder   = forelder;
         this.fregister   = fregister;
@@ -68,9 +68,6 @@ public class RegistrerBilForsikringPanel extends JPanel implements ActionListene
          int bredde = skjerm.width;
          int høyde = skjerm.height;
          
-         forelder.setSize(bredde/2, høyde-200);
-         forelder.setLocation(skjerm.width/2-forelder.getSize().width/2, skjerm.height/2-forelder.getSize().height/2);
-         forelder.pack();
     }
 
     
@@ -154,16 +151,18 @@ public class RegistrerBilForsikringPanel extends JPanel implements ActionListene
     
      public void registrer()
         {
+            try{
             String personnummer = personnummerfelt.getText();
             String bileier      = bileierfelt.getText();
             String regnummer    = regnummerfelt.getText();
             String biltype      = typefelt.getText();
             int bilmodell       = modell.getValue();
-            int kjorelengde      = Integer.parseInt(kjorelengdefelt.getText());
+            int kjorelengde     = Integer.parseInt(kjorelengdefelt.getText());
+            String test         = kjorelengdefelt.getText();
             int skade           = skadefri.getItemAt(skadefri.getSelectedIndex());
                     
               if( personnummer.length() == 0 || bileier.length() == 0 || regnummer.length() == 0 
-                      || biltype.length() == 0 || bilmodell == 0)
+                      || biltype.length() == 0 || bilmodell == 0 || test.length() == 0)
               {
                   visFeilMelding("Skriv inn verdier i feltene!");
               }
@@ -178,24 +177,32 @@ public class RegistrerBilForsikringPanel extends JPanel implements ActionListene
                   else
                   {
                       Bilforsikring b = new Bilforsikring(k, bileier, regnummer, biltype, bilmodell, kjorelengde, skade);
-                      k.addForsikring(b);
-                      if(fregister.leggTil(b))
-                      {
-                          visMelding("Forsikring registrert på kunde:\n" + k.toString());
+                      b.beregnPremie();
+                      int result = JOptionPane.showConfirmDialog(null, "Pris på din forsikring: " + b.getPremie() + ",-" + "\nVil du tegne denne forsikringen?", null , JOptionPane.YES_NO_OPTION);
+                         if(result == JOptionPane.YES_OPTION) 
+                         {
+                            fregister.put(b.getFNummer(), b);
+                             System.out.println(fregister.toString());
+                            k.addForsikring(b);
+                     visMelding("Forsikring registrert på kunde:\n" + k.toString());
+                     forelder.addLogo();
                      forelder.visPanel(HovedVindu.HovedVindu);
                      forelder.Size();
-                      }
-                      else 
-                     {
-                         visFeilMelding("Feil informasjon fyllt inn. Prøv igjen");
                      }
+                     else 
+                       {
+                         visFeilMelding("Feil informasjon fylt inn. Prøv igjen");
+                       }
                       
-                  }
-                  
-                  
+                      
+                         }  
               }
+         }catch(NumberFormatException nfe)
+         {
+             visFeilMelding("Skriv inn riktige verdier i feltene");
          }
-    
+        }
+        
     
       public void visMelding(String melding)
      {
@@ -214,9 +221,9 @@ public class RegistrerBilForsikringPanel extends JPanel implements ActionListene
     {
         if(e.getSource() == avbryt)
        {
+           forelder.addLogo();
            forelder.visPanel(HovedVindu.HovedVindu);
            forelder.Size();
-           forelder.addLogo();
        }
         else if(e.getSource() == registrer)
          {

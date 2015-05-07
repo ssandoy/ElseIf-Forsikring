@@ -5,6 +5,7 @@
  */
 package prosjektoppgave;
 
+import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
@@ -42,7 +43,7 @@ public class Prosjektoppgave
         lesKunderegister();
         lesForsikringsregister();
         lesSkademeldingsregister();
-      
+        System.out.println(fregister.toString());
         
        /* for(int i=0;i<1000;i++){
             int n = new Random().nextInt(navn.length);
@@ -60,7 +61,16 @@ public class Prosjektoppgave
         }
         */
        HovedVindu vindu = new HovedVindu(kregister, fregister, sregister);
-      
+       
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        Dimension skjerm = kit.getScreenSize();
+        int bredde = skjerm.width;
+        int høyde = skjerm.height;
+
+        vindu.setSize((bredde /2)+15, høyde - 250);
+        vindu.setLocation(skjerm.width / 2 - vindu.getSize().width / 2, skjerm.height / 2 - vindu.getSize().height / 2);
+       
+       
         vindu.addWindowListener(
                 new WindowAdapter()
                 {
@@ -145,11 +155,5 @@ public class Prosjektoppgave
         } catch (IOException ioe) {
             System.out.println("Skademeldingsregister ble ikke lagret!");
         }
-    }
-        
+    }   
 }
-    
-
-
-
-

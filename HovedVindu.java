@@ -8,6 +8,7 @@ package prosjektoppgave;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 import javax.swing.*;
 
 
@@ -24,13 +25,13 @@ public class HovedVindu extends JFrame implements ActionListener
     
     public static JPanel logopanel;
     
-    private JButton regKunde, visKunde, regForsikring, regSkade, finanser, historikk, statistikk
+    private JButton regKunde, visKunde, regForsikring, regSkade, finanser, historikk, slettKunde
             ,søk;
     
     private JButton BilForsikring, BaatForsikring, BoligForsikring, HytteForsikring, ReiseForsikring;
     
     private Icon LOGO, regKundeIcon, visKundeIcon, regForsikringIcon, regSkadeIcon, finanserIcon,
-            historikkIcon, statistikkIcon, søkIcon;
+            historikkIcon, slettKundeIcon, søkIcon;
     
     private JLabel logo;
     
@@ -51,10 +52,21 @@ public class HovedVindu extends JFrame implements ActionListener
         this.sregister = sregister;
         this.finans = new Finanser(sregister, fregister);
         
+        Toolkit verktøykasse = Toolkit.getDefaultToolkit();
+        //Bildefil for ikon er plassert i underkatalogen bilder:
+        String bildefil = "Bilder/icon.png";
+        URL kilde = HovedVindu.class.getResource(bildefil);
+        if (kilde != null)
+        {
+            ImageIcon bilde = new ImageIcon(kilde);
+            Image ikon = bilde.getImage();
+            setIconImage(ikon);
+        }
+        
         setGrensesnitt();
         underpaneler = new JPanel(new CardLayout());
         underpaneler.add(hovedpanel, HovedVindu);
-        hovedpanel.setBackground(Color.decode("#E57E7E"));
+        hovedpanel.setBackground(Color.decode("#5E5E5E"));
         
         
         add(logopanel, BorderLayout.PAGE_START);
@@ -62,7 +74,6 @@ public class HovedVindu extends JFrame implements ActionListener
         
         
         setVisible(true);
-        Size();
         pack();
         
     }
@@ -83,7 +94,7 @@ public class HovedVindu extends JFrame implements ActionListener
         regSkadeIcon        = new ImageIcon(getClass().getResource("Bilder/regSkademelding.png"));
         finanserIcon        = new ImageIcon(getClass().getResource("Bilder/Finanser.png"));
         historikkIcon       = new ImageIcon(getClass().getResource("Bilder/Historikk.png"));
-        statistikkIcon      = new ImageIcon(getClass().getResource("Bilder/Statistikk.png"));
+        slettKundeIcon      = new ImageIcon(getClass().getResource("Bilder/slettKunde.png"));
         søkIcon             = new ImageIcon(getClass().getResource("Bilder/Søk.png"));
         
         regKunde      = new JButton(regKundeIcon);
@@ -92,7 +103,7 @@ public class HovedVindu extends JFrame implements ActionListener
         regSkade      = new JButton(regSkadeIcon);
         finanser      = new JButton(finanserIcon);
         historikk     = new JButton(historikkIcon);
-        statistikk    = new JButton(statistikkIcon);
+        slettKunde    = new JButton(slettKundeIcon);
         søk           = new JButton(søkIcon);
         logo          = new JLabel(LOGO);
         
@@ -104,7 +115,7 @@ public class HovedVindu extends JFrame implements ActionListener
             regSkade      = new JButton("Registrer skademelding");
             finanser      = new JButton("Finanser");
             historikk     = new JButton("Historikk");
-            statistikk    = new JButton("Statistikk");
+            slettKunde    = new JButton("Slett kunde");
             søk           = new JButton("Søk");
             logo          = new JLabel("LOGO");
         }
@@ -122,7 +133,7 @@ public class HovedVindu extends JFrame implements ActionListener
         hovedpanel.add(regSkade);
         hovedpanel.add(finanser);
         hovedpanel.add(historikk);
-        hovedpanel.add(statistikk);
+        hovedpanel.add(slettKunde);
         hovedpanel.add(søk);
         
         regKunde.addActionListener(this);
@@ -130,6 +141,7 @@ public class HovedVindu extends JFrame implements ActionListener
         regForsikring.addActionListener(this);
         regSkade.addActionListener(this);
         finanser.addActionListener(this);
+        slettKunde.addActionListener(this);
         
         BilForsikring.addActionListener(this);
         BaatForsikring.addActionListener(this);
@@ -138,7 +150,7 @@ public class HovedVindu extends JFrame implements ActionListener
         ReiseForsikring.addActionListener(this);
         
         
-        logopanel.setBackground(Color.decode("#E57E7E"));
+        logopanel.setBackground(Color.decode("#5E5E5E"));
         
         
         
@@ -183,9 +195,8 @@ public class HovedVindu extends JFrame implements ActionListener
         int bredde = skjerm.width;
         int høyde = skjerm.height;
 
-        setSize(bredde /2, høyde - 430);
+        setSize((bredde /2)+15, høyde - 250);
         setLocation(skjerm.width / 2 - getSize().width / 2, skjerm.height / 2 - getSize().height / 2);
-       
        }
        
        public void fjernLogo(){
@@ -204,7 +215,7 @@ public class HovedVindu extends JFrame implements ActionListener
     
         if (e.getSource() == regKunde)
         {
-            underpaneler.add(new RegistrerKundePanel(kregister, this), "REG KUNDE");
+            underpaneler.add(new RegistrerKundePanel(this, kregister), "REG KUNDE");
             visPanel("REG KUNDE");
             fjernLogo();
             
@@ -214,6 +225,7 @@ public class HovedVindu extends JFrame implements ActionListener
             underpaneler.add(new VisKundePanel(this, kregister), "VIS KUNDE");
             visPanel("VIS KUNDE");
             fjernLogo();
+            setExtendedState(JFrame.MAXIMIZED_BOTH);
         }
         else if(e.getSource() == regForsikring)
         {
@@ -231,32 +243,38 @@ public class HovedVindu extends JFrame implements ActionListener
         {
             underpaneler.add(new RegistrerSkademeldingPanel(this, kregister, fregister, sregister),"REG SKADEMELDING");
             visPanel("REG SKADEMELDING");
-            
+            fjernLogo();
+        }
+        else if(e.getSource() == slettKunde)
+        {
+            underpaneler.add(new SlettKundePanel(this, kregister), "SLETT KUNDE");
+            visPanel("SLETT KUNDE");
+            fjernLogo();
         }
           else if(e.getSource() == BilForsikring)
         {
-            underpaneler.add(new RegistrerBilForsikringPanel(this, fregister, kregister), "BilForsikring");
+            underpaneler.add(new RegistrerBilForsikringPanel(this,kregister, fregister), "BilForsikring");
             visPanel("BilForsikring");
             fjernLogo();
         }
         else if(e.getSource() == BaatForsikring)
         {
-            underpaneler.add(new RegistrerBaatForsikringPanel(this, fregister, kregister), "BåtForsikring");
+            underpaneler.add(new RegistrerBaatForsikringPanel(this,kregister, fregister ), "BåtForsikring");
             visPanel("BåtForsikring");
         }
         else if(e.getSource() == BoligForsikring)
         {
-            underpaneler.add(new RegistrerBoligForsikringPanel(this,fregister, kregister), "BoligForsikring");
+            underpaneler.add(new RegistrerBoligForsikringPanel(this, kregister ,fregister), "BoligForsikring");
             visPanel("BoligForsikring");
         }
         else if(e.getSource() == HytteForsikring)
         {
-            underpaneler.add(new RegistrerHytteForsikringPanel(this,fregister), "HytteForsikring");
+            underpaneler.add(new RegistrerHytteForsikringPanel(this,kregister, fregister), "HytteForsikring");
             visPanel("HytteForsikring");
         }
         else if(e.getSource() == ReiseForsikring)
         {
-            underpaneler.add(new RegistrerReiseForsikringPanel(this, fregister), "ReiseForsikring");
+            underpaneler.add(new RegistrerReiseForsikringPanel(this, kregister, fregister), "ReiseForsikring");
             visPanel("ReiseForsikring");
     }
   }

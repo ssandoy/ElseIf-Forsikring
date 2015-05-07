@@ -15,12 +15,14 @@ public class Fritidsboligforsikring extends Boligforsikring implements Serializa
 {   
     private int antallManeder; //Antall måneder man bor i hytta
 
-    public Fritidsboligforsikring(Forsikringskunde k, String adresse, int byggeaar, String boligtype, int boareal, String byggematerial, int antallManeder) {
-    super(k, adresse, byggeaar, boareal);
+    private Forsikringsregister fregister;
+    
+    public Fritidsboligforsikring(Forsikringskunde k,Forsikringsregister fregister ,String adresse, int byggeaar, String boligtype, int boareal, String byggematerial, int antallManeder) {
+    super(k,fregister, adresse, byggeaar, boareal);
         this.antallManeder = antallManeder;   
     }
     
-    public void beregnFritidsPremie()
+    public void beregnPremie()
     {
         double premie = super.getPremie();
         if( antallManeder <= 2 )

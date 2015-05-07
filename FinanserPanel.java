@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -33,8 +34,13 @@ public class FinanserPanel extends JPanel implements ActionListener{
         avbryt = new JButton("Avbryt");
         beregn.addActionListener(this);
         avbryt.addActionListener(this);
-        infofelt = new JTextArea(60, 60);
+        infofelt = new JTextArea(15, 15);
         infofelt.setEditable(false);
+        
+        Font font = new Font("Verdana", Font.BOLD, 30);
+        infofelt.setFont(font);
+        infofelt.setForeground(Color.decode("#1EFF00"));
+        infofelt.setBackground(Color.decode("#DBDBDB"));
         
         beregn.addActionListener(this);
         

@@ -123,8 +123,12 @@ public class Skademelding implements Serializable {
 
             }
             return false;
- 
-
+        }
+        
+        public void beregnErstatning()
+        {
+            
+            
         }
     
     @Override

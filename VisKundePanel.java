@@ -6,8 +6,10 @@
 package prosjektoppgave;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.List;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
@@ -29,7 +31,7 @@ public class VisKundePanel extends JPanel implements ActionListener
     private JPanel sokepanel;
     private JPanel knappepanel;
 
-    private JButton avbryt;
+    private JButton tilbake;
 
     private JLabel overskrift;
     private JTextField sokfelt;
@@ -73,16 +75,20 @@ public class VisKundePanel extends JPanel implements ActionListener
          tabellpanel = new JPanel(new BorderLayout());
          tabellpanel.add(scroll, BorderLayout.CENTER);
          
-         avbryt = new JButton("Avbryt");
-         avbryt.addActionListener(this);
+         tilbake = new JButton("Tilbake");
+         tilbake.addActionListener(this);
          knappepanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
    
-         knappepanel.add(avbryt);
+         knappepanel.add(tilbake);
  
          this.add(sokepanel, BorderLayout.NORTH);
          this.add(tabellpanel, BorderLayout.CENTER);
          this.add(knappepanel, BorderLayout.PAGE_END);
          
+         Toolkit kit = Toolkit.getDefaultToolkit();
+         Dimension skjerm = kit.getScreenSize();
+         int bredde = skjerm.width;
+         int høyde = skjerm.height;
          
     }
 
@@ -147,14 +153,11 @@ public class VisKundePanel extends JPanel implements ActionListener
     @Override
     public void actionPerformed(ActionEvent e) 
     {
-       if(e.getSource() == avbryt)
+       if(e.getSource() == tilbake)
        {
-           forelder.visPanel(HovedVindu.HovedVindu);
            forelder.addLogo();
-           forelder.Size();
-           
-                   
-           
+           forelder.visPanel(HovedVindu.HovedVindu);
+           forelder.Size();                     
        }
     }
     

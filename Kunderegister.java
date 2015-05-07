@@ -69,7 +69,6 @@ public class Kunderegister extends TreeMap<String, Forsikringskunde> implements 
        {
           return get(pnr);
        }
-       System.out.println("NULL HER");
         return null;
     }
    
