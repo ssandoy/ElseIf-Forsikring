@@ -42,13 +42,14 @@ public class RegistrerHytteForsikringPanel extends JPanel implements ActionListe
     HovedVindu forelder;
 
     Forsikringsregister fregister;
-    
+    Kunderegister kregister;
     
     Integer[] antMaaneder = {0,1,2,3,4,5};
     
-    public RegistrerHytteForsikringPanel(HovedVindu forelder,Kunderegister kregister,  Forsikringsregister fregister)
+    public RegistrerHytteForsikringPanel(HovedVindu forelder, Kunderegister kregister, Forsikringsregister fregister)
     {
         this.forelder  = forelder;
+        this.kregister = kregister;
         this.fregister = fregister;
         
         setLayout(new BorderLayout());
@@ -82,7 +83,7 @@ public class RegistrerHytteForsikringPanel extends JPanel implements ActionListe
         areallabel       = new JLabel("Boareal: " + arealfelt.getValue() + " km2");
         bygglabel        = new JLabel("Byggeår: " + byggeaarfelt.getValue());
         
-        registrer = new JButton("Registrer forsikring");
+        registrer = new JButton("Beregn pris på forsikring");
         registrer.addActionListener(this);
         avbryt = new JButton("Avbryt");
         avbryt.addActionListener(this);
@@ -133,8 +134,9 @@ public class RegistrerHytteForsikringPanel extends JPanel implements ActionListe
         toppanel.add(Reise);
         
         knappepanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        knappepanel.add(registrer);
         knappepanel.add(avbryt);
+        knappepanel.add(registrer);
+      
         
         midtpanel = new JPanel(new GridLayout(5,0,0,0));
         midtpanel.add(personlabel);
@@ -155,10 +157,44 @@ public class RegistrerHytteForsikringPanel extends JPanel implements ActionListe
     
     public void registrer()
     {
-        
+            String personnummer = personnummerfelt.getText();
+            String adresse      = adressefelt.getText();
+            int mnder        = antMaanederfelt.getItemAt(antMaanederfelt.getSelectedIndex());
+            int areal           = arealfelt.getValue();
+            int byggeaar        = byggeaarfelt.getValue();
+            
+            if(personnummer.length() == 0 || adresse.length() == 0)
+            {
+                visFeilMelding("Du må skrive verdier i feltene");
+            } else
+            {
+                Forsikringskunde k = kregister.getKunde(personnummer);
+                  
+                  if(k == null)
+                  {
+                      visFeilMelding("Ingen kunde med det personnummeret!");
+                  }
+                  else
+                 {
+                     
+                 }
+                
+                
+            }
     }
     
+    public void visMelding(String melding)
+     {
+        JOptionPane.showMessageDialog(null,melding);
+    }
+     
+      public void visFeilMelding(String melding)
+     {
+       JOptionPane.showMessageDialog(this, melding, "Problem", 
+               JOptionPane.ERROR_MESSAGE);
+     }
     
+
     @Override
     public void actionPerformed(ActionEvent e)  
     {

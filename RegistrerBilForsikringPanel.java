@@ -90,7 +90,7 @@ public class RegistrerBilForsikringPanel extends JPanel implements ActionListene
         mlabel = new JLabel("Modell: " + modell.getValue());
         slabel = new JLabel("Antall år skadefri:");
         
-        registrer = new JButton("Registrer forsikring");
+        registrer = new JButton("Beregn pris på forsikring");
         registrer.addActionListener(this);
         avbryt = new JButton("Avbryt");
         avbryt.addActionListener(this);
@@ -124,8 +124,8 @@ public class RegistrerBilForsikringPanel extends JPanel implements ActionListene
         toppanel.add(Reise);
         
         knappepanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        knappepanel.add(registrer);
         knappepanel.add(avbryt);
+        knappepanel.add(registrer);
         
         midtpanel = new JPanel(new GridLayout(7,0,0,0));
         midtpanel.add(plabel);

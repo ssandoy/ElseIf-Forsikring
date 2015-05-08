@@ -17,8 +17,7 @@ import java.util.Date;
 public abstract class Insurance implements  Forsikring {
     
     private Forsikringskunde kunde;
-    
-    private static int nestenummer;
+
     private String forsikringsnummer;
     private String forsikringstype;
     private double erstatning;
@@ -33,8 +32,6 @@ public abstract class Insurance implements  Forsikring {
     {
         this.kunde = kunde;
         this.startDato = new Date();
-       
-       
         
         erstatning = 0.00;
         egenandel = 0.00;

@@ -123,8 +123,9 @@ public class RegistrerReiseForsikringPanel extends JPanel implements ActionListe
         toppanel.add(Reise);
         
         knappepanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        knappepanel.add(beregn);
         knappepanel.add(avbryt);
+        knappepanel.add(beregn);
+
         
         midtpanel = new JPanel(new GridLayout(3,0,0,0));
         midtpanel.add(personlabel);

@@ -40,7 +40,7 @@ public class VisKundePanel extends JPanel implements ActionListener
     private JScrollPane scroll;
     
     
-    private final String[] soyler = {"Personnummer","Fornavn","Etternavn","Adresse" ,"Fakturaadresse"};
+    private final String[] soyler = {"Personnummer","Fornavn","Etternavn","Adresse" ,"Telefonnummer", "Kundenummer"};
         
    private Kunderegister kregister; 
    private LinkedList<Forsikringskunde> kundeliste;

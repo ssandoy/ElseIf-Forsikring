@@ -16,11 +16,11 @@ import javax.swing.*;
  */
 public class RegistrerKundePanel extends JPanel implements ActionListener {
 
-    private JTextField personnummerfelt, fornavnsfelt, etternavnsfelt, adressefelt, fakturafelt;
-    private JLabel plabel, flabel, elabel, alabel, falabel;
+    private JTextField personnummerfelt, fornavnsfelt, etternavnsfelt, adressefelt, telefonfelt;
+    private JLabel plabel, flabel, elabel, alabel, tlabel;
     private JCheckBox fakturabox;
 
-    Kunderegister register;
+    Kunderegister kregister;
 
     private JPanel tekstpanel;
     private JPanel knappepanel;
@@ -34,10 +34,10 @@ public class RegistrerKundePanel extends JPanel implements ActionListener {
 
     private HovedVindu forelder;
 
-    public RegistrerKundePanel(HovedVindu forelder, Kunderegister register ) {
+    public RegistrerKundePanel(HovedVindu forelder, Kunderegister kregister ) {
         super(new BorderLayout());
         this.forelder = forelder;
-        this.register = register;
+        this.kregister = kregister;
 
         setGrensesnitt();
         add(toppanel, BorderLayout.CENTER);
@@ -46,14 +46,6 @@ public class RegistrerKundePanel extends JPanel implements ActionListener {
         
         toppanel.setBackground(Color.decode("#5E5E5E"));
         overskriftpanel.setBackground(Color.decode("#5E5E5E"));
-
-        Toolkit kit = Toolkit.getDefaultToolkit();
-        Dimension skjerm = kit.getScreenSize();
-        int bredde = skjerm.width;
-        int høyde = skjerm.height;
-
-        
-        setPreferredSize( new Dimension( 640, 480 ) );
         
     }
 
@@ -63,14 +55,14 @@ public class RegistrerKundePanel extends JPanel implements ActionListener {
         fornavnsfelt = new JTextField(10);
         etternavnsfelt = new JTextField(10);
         adressefelt = new JTextField(10);
-        fakturafelt = new JTextField(10);
+        telefonfelt = new JTextField(10);
         overskrift = new JLabel("Registrer kunde");
 
         plabel = new JLabel(" Personnummer");
         flabel = new JLabel(" Fornavn");
         elabel = new JLabel(" Etternavn");
         alabel = new JLabel(" Adresse");
-        falabel = new JLabel(" Fakturaadresse");
+        tlabel = new JLabel(" Telefonnummer(8 siffer)");
 
         fakturabox = new JCheckBox();
         
@@ -97,17 +89,25 @@ public class RegistrerKundePanel extends JPanel implements ActionListener {
         tekstpanel.add(etternavnsfelt);
         tekstpanel.add(alabel);
         tekstpanel.add(adressefelt);
-        tekstpanel.add(falabel);
-        tekstpanel.add(fakturafelt);
+        tekstpanel.add(tlabel);
+        tekstpanel.add(telefonfelt);
         
-        knappepanel.add(registrer);
         knappepanel.add(avbryt);
+        knappepanel.add(registrer);
 
         tekstpanel.setBackground(Color.decode("#5E5E5E"));
         knappepanel.setBackground(Color.decode("#5E5E5E"));
         
         toppanel.add(overskriftpanel, BorderLayout.PAGE_START);
         toppanel.add(tekstpanel, BorderLayout.CENTER);
+        
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        Dimension skjerm = kit.getScreenSize();
+        int bredde = skjerm.width;
+        int hoyde = skjerm.height;
+
+        forelder.setSize(bredde / 2, hoyde - 500);
+        forelder.setLocation(skjerm.width / 2 - forelder.getSize().width / 2, skjerm.height / 2 - forelder.getSize().height / 2);
         
     }
     
@@ -116,15 +116,21 @@ public class RegistrerKundePanel extends JPanel implements ActionListener {
         String fornavn = fornavnsfelt.getText();
         String etternavn = etternavnsfelt.getText();
         String adresse = adressefelt.getText();
-        String faktura = fakturafelt.getText();
+        String tlfnummer = telefonfelt.getText();
 
         if (personnummer.length() != 0 && fornavn.length() != 0 && etternavn.length() != 0
-                && adresse.length() != 0 && faktura.length() != 0) {
-            if(godkjennPNummer())
+                && adresse.length() != 0 && tlfnummer.length() != 0) {
+            if(godkjennPNummer() && godkjennTLFnummer())
             {
+                if(kregister.finnes(personnummer))
+                {
+                    visFeilMelding("Finnes allerede en kunde med dette personnummeret. Forsøk på identitestyveri!");
+                }
+                String knr = kregister.genererNummer();
                 Forsikringskunde kunde = new Forsikringskunde(personnummer, fornavn, etternavn, adresse,
-                    faktura);
-                if (register.leggTil(kunde)) 
+                    tlfnummer);
+                kunde.setKundenummer(knr);
+                if (kregister.leggTil(kunde)) 
                 {
                 visMelding("Kunde registrert!");
                 forelder.addLogo();
@@ -133,7 +139,7 @@ public class RegistrerKundePanel extends JPanel implements ActionListener {
 
                  }
             } else
-                visFeilMelding("Skriv inn et gyldig personnummer. 11 siffer");
+                visFeilMelding("Skriv inn et gyldig personnummer og telefonnummer. 11 siffer og 8 siffer");
         } else {
             visFeilMelding("Vennligst fyll inn alle feltene");
         }
@@ -149,6 +155,16 @@ public class RegistrerKundePanel extends JPanel implements ActionListener {
             return false;
     }
 
+    public boolean godkjennTLFnummer()
+    {
+        String regex = "[0-9]{8}";
+        String personnummer = telefonfelt.getText();
+        if(personnummer.matches(regex))
+            return true;
+         else
+            return false;
+    }
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == registrer) {

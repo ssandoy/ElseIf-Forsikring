@@ -35,8 +35,8 @@ public class Prosjektoppgave
             
        
             
-        String[] navn = {"Mads","Sander","Chris","Per","Pål","Eddard","Daenerys","Arya","Melissandre","Jon"};
-        String[] etternavn = {"Karlstad","Sandøy","Askeladd","Stark","Lannister","Snow","Sand","Stormborn"};
+        String[] navn = {"Mads","Sander","Chris","Per","Pål","Eddard","Daenerys","Arya","Melissandre","Jon","Amir"};
+        String[] etternavn = {"Karlstad","Sandøy","Askeladd","Stark","Lannister","Snow","Sand","Stormborn","Yaakoubd"};
         String[] addresse = {"Kings landing","Pyke","Winterfell","Casterly Rock","Dorne","Oslo","Dragonstone","Brønnøy","Koppang"};
         int nr = 1;
         
@@ -45,7 +45,7 @@ public class Prosjektoppgave
         lesForsikringsregister();
         lesSkademeldingsregister();
         
-        /*for(int i=0;i<1000;i++){
+        /*for(int i=0;i<100;i++){
             int n = new Random().nextInt(navn.length);
             int e = new Random().nextInt(etternavn.length);
             int a = new Random().nextInt(addresse.length);
@@ -55,11 +55,12 @@ public class Prosjektoppgave
             String name = navn[n];
             String last = etternavn[e];
             String adr = addresse[a];
-            Forsikringskunde k = new Forsikringskunde(fnr,name,last,adr,adr);
-            
+            String knr =  kregister.genererNummer();
+            Forsikringskunde k = new Forsikringskunde(fnr,name,last,adr,fnr);
+            k.setKundenummer(knr);
             kregister.leggTil(k);
         }*/
-        
+       
        HovedVindu vindu = new HovedVindu(kregister, fregister, sregister);
        
         Toolkit kit = Toolkit.getDefaultToolkit();

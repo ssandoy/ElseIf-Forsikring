@@ -94,7 +94,8 @@ class KundeRamme extends TabellRamme<Forsikringskunde> {
     private final int  FORNAVN     = 1;
     private final int ETTERNAVN    = 2;
     private final int ADRESSE      = 3;
-    private final int FAKTURA      = 4;
+    private final int TELEFON      = 4;
+    private final int KUNDENUMMER  = 5;
     
 
     public KundeRamme(String[] kolonnenavn, LinkedList<Forsikringskunde> data) {
@@ -116,8 +117,10 @@ class KundeRamme extends TabellRamme<Forsikringskunde> {
                 return kunde.getEtternavn();
             case ADRESSE:
                 return kunde.getAdresse();
-            case FAKTURA:
-                return kunde.getAdresse();
+            case TELEFON:
+                return kunde.getTlf();
+            case KUNDENUMMER:
+                return kunde.getKundenummer();
             default:
                 return null;
         }

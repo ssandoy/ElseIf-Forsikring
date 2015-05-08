@@ -138,8 +138,9 @@ public class RegistrerBoligForsikringPanel extends JPanel implements ActionListe
         toppanel.add(Reise);
         
         knappepanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        knappepanel.add(beregn);
         knappepanel.add(avbryt);
+        knappepanel.add(beregn);
+
         
         midtpanel = new JPanel(new GridLayout(6,0,0,0));
         midtpanel.add(personlabel);
@@ -199,17 +200,17 @@ public class RegistrerBoligForsikringPanel extends JPanel implements ActionListe
                      int result = JOptionPane.showConfirmDialog(null, 
                              "Pris på din forsikring: " + f.getPremie() + ",-" + 
                                      "\nVil du tegne denne forsikringen?", null , JOptionPane.YES_NO_OPTION);
-                         if(result == JOptionPane.YES_OPTION) 
+                     if(result == JOptionPane.YES_OPTION) 
                          {
                      if(fregister.leggTil(f))
                      {
-                     k.addForsikring(f);
-                     visMelding("Forsikring registrert på kunde:\n" + k.toString());
-                     System.out.println(fregister.toString());
-                     System.out.println(f.getFNummer());
-                     forelder.addLogo();
-                     forelder.visPanel(HovedVindu.HovedVindu);
-                     forelder.Size();
+                        k.addForsikring(f);
+                        visMelding("Forsikring registrert på kunde:\n" + k.toString());
+                        System.out.println(fregister.toString());
+                        System.out.println(f.getFNummer());
+                        forelder.addLogo();
+                        forelder.visPanel(HovedVindu.HovedVindu);
+                        forelder.Size();
                      }
                      else 
                        {

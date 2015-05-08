@@ -15,14 +15,16 @@ public abstract class Person implements Menneske
     private String fornavn;
     private String etternavn;
     private String adresse;
+    private String telefonnummer;
     
    
-    protected Person(String personnummer, String fornavn, String etternavn, String adresse)
+    protected Person(String personnummer, String fornavn, String etternavn, String adresse, String telefonnummer)
     {
         this.personnummer = personnummer;
         this.fornavn = fornavn;
         this.etternavn = etternavn;
         this.adresse = adresse;
+        this.telefonnummer = telefonnummer;
     }
     
     
@@ -57,6 +59,11 @@ public abstract class Person implements Menneske
         return adresse;
     }
     
+    @Override
+    public String getTlf()
+    {
+        return telefonnummer;
+    }
    
    
 

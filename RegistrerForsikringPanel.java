@@ -74,7 +74,7 @@ public class RegistrerForsikringPanel extends JPanel implements ActionListener
        
 
         
-        registrer = new JButton("Registrer forsikring");
+        registrer = new JButton("Beregn pris på forsikring");
         registrer.addActionListener(this);
         avbryt = new JButton("Avbryt");
         avbryt.addActionListener(this);
@@ -124,8 +124,9 @@ public class RegistrerForsikringPanel extends JPanel implements ActionListener
         toppanel.add(Reise);
         
         knappepanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        knappepanel.add(registrer);
         knappepanel.add(avbryt);
+        knappepanel.add(registrer);
+
         
         midtpanel = new JPanel(new BorderLayout());
         midtpanel.add(overskriftpanel, BorderLayout.PAGE_START);

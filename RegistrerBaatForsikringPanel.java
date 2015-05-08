@@ -93,7 +93,7 @@ public class RegistrerBaatForsikringPanel extends JPanel implements ActionListen
         hestekrefter.addChangeListener(e);
         modell.addChangeListener(e);
         
-        registrer = new JButton("Registrer forsikring");
+        registrer = new JButton("Beregn pris på forsikring");
         registrer.addActionListener(this);
         avbryt = new JButton("Avbryt");
         avbryt.addActionListener(this);
@@ -142,8 +142,9 @@ public class RegistrerBaatForsikringPanel extends JPanel implements ActionListen
         
         
         knappepanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        knappepanel.add(registrer);
         knappepanel.add(avbryt);
+        knappepanel.add(registrer);
+        
         
         midtpanel = new JPanel(new GridLayout(7,0,0,0));
         midtpanel.add(plabel);
@@ -196,19 +197,27 @@ public class RegistrerBaatForsikringPanel extends JPanel implements ActionListen
                       Baatforsikring b = new Baatforsikring(k, baateier, regnummer, baattype, baatmodell, motor, lengde);
                       b.setForsikringsnummer(fnr);
                       b.setType("BÅT-FORSIKRING");
-                     
-                      if(fregister.leggTil(b))
-                      {
+                      b.beregnPremie();
+                      int result = JOptionPane.showConfirmDialog(null, "Pris på din forsikring: " + b.getPremie() + ",-" + "\nVil du tegne denne forsikringen?", null , JOptionPane.YES_NO_OPTION);
+                         if(result == JOptionPane.YES_OPTION) 
+                         {
+                          if(fregister.leggTil(b))
+                          {
                          k.addForsikring(b);
                          visMelding("Forsikring registrert på kunde:\n" + k.toString());
                          forelder.addLogo();
                          forelder.visPanel(HovedVindu.HovedVindu);
                          forelder.Size();
-                      }
-                      else
-                      {
-                          visFeilMelding("Feil informasjon fyllt inn. Prøv igjen");
-                      }
+                          } else 
+                           {
+                            visFeilMelding("Feil info skrevet inn. Prøv igjen");                                
+                           }
+                         }else
+                         {
+                          visFeilMelding("Tegning av forsikring avbrutt.");
+                         
+                         }
+                         
                   }
          }
     }

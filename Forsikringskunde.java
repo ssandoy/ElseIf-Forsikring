@@ -18,10 +18,8 @@ public class Forsikringskunde extends Person implements Serializable
 {
     
     private Date startDato;
-    private String fakturaadresse; //RADIOBUTTON SOM KAN KRYSSES AV slik at den fylles ut autmoatisk
-    private int kundenummer;
-    //private int nr;
-    private static int nestenummer = 1;
+    private String kundenummer;
+    
     private double aarligpremie;
     private double erstatninger;
     private boolean totalkunde;
@@ -30,12 +28,9 @@ public class Forsikringskunde extends Person implements Serializable
 
     
     public Forsikringskunde(String personnummer, String fornavn, String etternavn,  
-           String adresse, String fakturaadresse) 
+           String adresse, String telefonnummer) 
     {
-        super(personnummer, fornavn, etternavn, adresse);
-        this.fakturaadresse = fakturaadresse;
-
-        kundenummer = nestenummer++;
+        super(personnummer, fornavn, etternavn, adresse, telefonnummer);
         
         
         forsikringer = new LinkedList();
@@ -82,6 +77,11 @@ public class Forsikringskunde extends Person implements Serializable
         return forsikringer;
     }
     
+    public LinkedList getSkademeldinger()
+    {
+        return skademeldinger;
+    }
+    
     
     //Metode som sletter en forsikrikng hos kunden, om den eksisterer
     public boolean fjernForsikring(Insurance f)
@@ -113,18 +113,17 @@ public class Forsikringskunde extends Person implements Serializable
         }
     }
     
-    //Metode som beregner hvor mye kunde får i erstatninger
-   /* public void beregnErstatning()
-    {
-        
-    }*/
-    
-    
-    public int getKundeNummer()
+    public String getKundenummer()
     {
         return kundenummer;
     }
+
+    public void setKundenummer(String kundenummer) 
+    {
+        this.kundenummer = kundenummer;
+    }
     
+
     public double getPremie()
     {
         return aarligpremie;
@@ -134,7 +133,7 @@ public class Forsikringskunde extends Person implements Serializable
     @Override
     public String toString()
     {
-        return super.toString() + "\nFakturaadresse: " + fakturaadresse + "\nKundenummer:  " + kundenummer
+        return super.toString() + "\nKundenummer:  " + kundenummer
                 + "\n Forsikringer:" + getForsikringer();
     }
     

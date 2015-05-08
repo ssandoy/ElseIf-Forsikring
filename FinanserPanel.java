@@ -50,8 +50,10 @@ public class FinanserPanel extends JPanel implements ActionListener{
         finanspanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         knappepanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         finanspanel.add(infofelt);
-        knappepanel.add(beregn);
+        
         knappepanel.add(avbryt);
+        knappepanel.add(beregn);
+
         
         add(finanspanel, BorderLayout.CENTER);
         add(knappepanel, BorderLayout.PAGE_END);

@@ -41,6 +41,7 @@ public class HovedVindu extends JFrame implements ActionListener
     private Forsikringsregister fregister;
     private Skademeldingsregister sregister;
     private Finanser finans;
+    private Historikk historikker;
    
     public HovedVindu(Kunderegister kregister, Forsikringsregister fregister, Skademeldingsregister sregister)
     {
@@ -51,6 +52,7 @@ public class HovedVindu extends JFrame implements ActionListener
         this.fregister = fregister;
         this.sregister = sregister;
         this.finans = new Finanser(sregister, fregister);
+        this.historikker = new Historikk(fregister, kregister, sregister);
         
         Toolkit verktøykasse = Toolkit.getDefaultToolkit();
         //Bildefil for ikon er plassert i underkatalogen bilder:
@@ -131,10 +133,11 @@ public class HovedVindu extends JFrame implements ActionListener
         hovedpanel.add(visKunde);
         hovedpanel.add(regForsikring);
         hovedpanel.add(regSkade);
-        hovedpanel.add(finanser);
-        hovedpanel.add(historikk);
         hovedpanel.add(slettKunde);
         hovedpanel.add(slettForsikring);
+        hovedpanel.add(finanser);
+        hovedpanel.add(historikk);
+        
         
         regKunde.addActionListener(this);
         visKunde.addActionListener(this);
@@ -143,6 +146,7 @@ public class HovedVindu extends JFrame implements ActionListener
         finanser.addActionListener(this);
         slettKunde.addActionListener(this);
         slettForsikring.addActionListener(this);
+        historikk.addActionListener(this);
         
         BilForsikring.addActionListener(this);
         BaatForsikring.addActionListener(this);
@@ -164,7 +168,8 @@ public class HovedVindu extends JFrame implements ActionListener
         cl.show(underpaneler, st);
     }
 
-    //metode for underpanelene som toggler paneler ut i fra knappetrykk
+    //metode for underpanelene som endrer paneler ut i fra knappetrykk. 
+    //Brukes i regForsikring-panelene
      public void doClick(int i)
      {
 
@@ -283,7 +288,13 @@ public class HovedVindu extends JFrame implements ActionListener
         {
             underpaneler.add(new RegistrerReiseForsikringPanel(this, kregister, fregister), "ReiseForsikring");
             visPanel("ReiseForsikring");
-    }
+        }
+        else if(e.getSource() == historikk)
+        {
+            underpaneler.add(new HistorikkPanel(this, historikker), "HISTORIKK");
+            fjernLogo();
+            visPanel("HISTORIKK");
+        }
   }
 }
 

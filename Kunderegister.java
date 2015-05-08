@@ -71,6 +71,22 @@ public class Kunderegister extends TreeMap<String, Forsikringskunde> implements 
        }
         return null;
     }
+    
+    //Genererer et unikt kundenummer hos kunden.
+    public String genererNummer()
+    {
+        int nøkkel = 1;
+        for(Map.Entry<String, Forsikringskunde> entry : this.entrySet())
+        {
+         if(entry.getValue().getKundenummer().equals(String.valueOf(nøkkel)))
+            {
+                nøkkel++;
+            }   
+        }
+
+        return String.valueOf(nøkkel);
+    }
+    
    
     
     //metode som returnerer kunderegisteret

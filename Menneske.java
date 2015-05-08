@@ -21,12 +21,13 @@ public interface Menneske extends Serializable
     public String getFornavn();
     public String getEtternavn();
     public String getAdresse();
+    public String getTlf();
     public String getPersonNr();
     
     
     /*set-metoder for navn*/
     public void setFornavn(String fornavn);
-    public void setEtternavn(String etternavn);
+    public void setEtternavn(String etternavn); // Se på dette
     public void setAdresse(String adresse);
    
     

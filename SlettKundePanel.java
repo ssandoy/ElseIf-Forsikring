@@ -69,8 +69,9 @@ public class SlettKundePanel extends JPanel implements ActionListener{
         tekstpanel.add(personnummer);
         tekstpanel.add(personnummerfelt);
         
-        knappepanel.add(slett);
         knappepanel.add(tilbake);
+        knappepanel.add(slett);
+
 
         toppanel.add(overskriftpanel, BorderLayout.PAGE_START);
         toppanel.add(tekstpanel, BorderLayout.CENTER);

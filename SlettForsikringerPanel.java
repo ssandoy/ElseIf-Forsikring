@@ -29,10 +29,11 @@ public class SlettForsikringerPanel extends JPanel implements ActionListener
     private JPanel sokepanel;
     private JPanel knappepanel;
 
-    private JButton avbryt, sokKunde;
+    private JButton avbryt, sokKunde, slettForsikring;
 
     private JLabel overskrift;
     private JTextField sokfelt;
+    private JTextArea tekstinfo;
     private JTable forsikringstabell;
     private ForsikringsRamme forsikringsramme;
     private JScrollPane scroll;
@@ -76,9 +77,12 @@ public class SlettForsikringerPanel extends JPanel implements ActionListener
          
          avbryt = new JButton("Avbryt");
          avbryt.addActionListener(this);
+         slettForsikring = new JButton("SLETT FORSIKRING");
+         slettForsikring.addActionListener(this);
          knappepanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
    
          knappepanel.add(avbryt);
+         knappepanel.add(slettForsikring);
  
          this.add(sokepanel, BorderLayout.NORTH);
          this.add(tabellpanel, BorderLayout.CENTER);
@@ -107,7 +111,16 @@ public class SlettForsikringerPanel extends JPanel implements ActionListener
         {
         LinkedList<Insurance> kundeforsikringer = f.getForsikringer();
         
-
+        if(kundeforsikringer.isEmpty())
+        {
+            tabellpanel = new JPanel(new BorderLayout());
+            tekstinfo   = new JTextArea(10,10);
+            tekstinfo.setText("Kunden eier ingen forsikringer. Enda!");
+            tabellpanel.add(tekstinfo, BorderLayout.CENTER);
+            this.add(tabellpanel,BorderLayout.CENTER);
+        }
+        else
+        {  
         forsikringsramme = new ForsikringsRamme(soyler, kundeforsikringer);
 
         forsikringstabell = new JTable(forsikringsramme);
@@ -120,7 +133,7 @@ public class SlettForsikringerPanel extends JPanel implements ActionListener
         tabellpanel.add(scroll, BorderLayout.CENTER);
 
         this.add(tabellpanel, BorderLayout.CENTER);
-        
+        }
 
         revalidate();
         repaint();
@@ -148,7 +161,18 @@ public class SlettForsikringerPanel extends JPanel implements ActionListener
            forelder.visPanel(HovedVindu.HovedVindu);
            forelder.addLogo();
            forelder.Size();  
-       } else if(e.getSource() == sokKunde)
+       } else if(e.getSource() == slettForsikring)
+       {
+                Insurance f = (Insurance) forsikringsramme.getData().get(forsikringstabell.getSelectedRow());
+                Forsikringskunde k = f.getKunde();
+                if(fregister.fjern(f.getFNummer()))
+                {
+                     k.fjernForsikring(f);
+                     visMelding("Forsikring fjernet!");
+                     f = null;
+                }
+       }
+       else if(e.getSource() == sokKunde)
        {
            sok();
        }
@@ -182,8 +206,15 @@ public class SlettForsikringerPanel extends JPanel implements ActionListener
         public void mouseClicked(java.awt.event.MouseEvent me) {
             if (me.getClickCount() == 2) 
             {
-               /* Forsikringskunde k = (Forsikringskunde) kunderamme.getData().get(kundetabell.getSelectedRow());
-                visMelding(k.toString());*/
+                Insurance f = (Insurance) forsikringsramme.getData().get(forsikringstabell.getSelectedRow());
+                Forsikringskunde k = f.getKunde();
+                if(fregister.fjern(f.getFNummer()))
+                {
+                    k.fjernForsikring(f);
+                     visMelding("Forsikring fjernet!");
+                     f = null;
+                }
+               
                 
                         
                         
