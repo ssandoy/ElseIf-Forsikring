@@ -70,6 +70,7 @@ public class VisKundePanel extends JPanel implements ActionListener
          kunderamme = new KundeRamme(soyler, kundeliste);
          kundetabell = new JTable(kunderamme);
           kundetabell.addMouseListener(new MusLytter());
+          kundetabell.setAutoCreateRowSorter(true);
          scroll = new JScrollPane(kundetabell);
 
          tabellpanel = new JPanel(new BorderLayout());
@@ -110,6 +111,7 @@ public class VisKundePanel extends JPanel implements ActionListener
 
         kundetabell = new JTable(kunderamme);
         kundetabell.addMouseListener(new MusLytter());
+        kundetabell.setAutoCreateRowSorter(true);
 
 
         scroll = new JScrollPane(kundetabell);
@@ -135,7 +137,10 @@ public class VisKundePanel extends JPanel implements ActionListener
         }else{
             for(Forsikringskunde p : kundeliste){
 
-                if(p.getPersonNr().toUpperCase().startsWith(sok) || p.getFornavn().toUpperCase().startsWith(sok) || p.getEtternavn().toUpperCase().startsWith(sok) || p.getAdresse().toUpperCase().startsWith(sok)){
+                if(p.getPersonNr().toUpperCase().startsWith(sok) || p.getFornavn().toUpperCase().startsWith(sok)
+                        || p.getEtternavn().toUpperCase().startsWith(sok) || p.getAdresse().toUpperCase().startsWith(sok)
+                        || p.getKundenummer().toUpperCase().startsWith(sok))
+                {
                     sokliste.add(p);
                 }
             }

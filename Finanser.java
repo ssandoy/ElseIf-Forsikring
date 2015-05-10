@@ -68,8 +68,8 @@ public class Finanser {
         for(Map.Entry<String, Insurance> entry: forsikringer.entrySet())
         {
             Insurance f = entry.getValue();
-            innbetalt += f.getEgenandel();
-            utbetalt += f.getPremie();
+            innbetalt += f.getPremie();
+            utbetalt += f.getErstatning();
         }
     }
     
@@ -82,7 +82,7 @@ public class Finanser {
     public String toString()
     {
         NumberFormat f = new DecimalFormat("#0.00");
-        String tekst = "FINANSER:\n\nInnbetalt: " + f.format(innbetalt) + "\nUtbetalt: " 
+        String tekst = "\n\nInnbetalt: " + f.format(innbetalt) + "\nUtbetalt: " 
                 + f.format(utbetalt) + "\nDifferanse: " + f.format(differanse);
         return tekst;                
     }

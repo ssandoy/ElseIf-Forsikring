@@ -59,7 +59,7 @@ public class SlettKundePanel extends JPanel implements ActionListener{
         
         
         setLayout(new BorderLayout());
-        tekstpanel = new JPanel(new GridLayout(5, 0, 5, 5));
+        tekstpanel = new JPanel(new GridLayout(5, 0, 5, 5)); //Endre dette.
         knappepanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         toppanel = new JPanel(new BorderLayout());
         overskriftpanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -87,9 +87,9 @@ public class SlettKundePanel extends JPanel implements ActionListener{
         Toolkit kit = Toolkit.getDefaultToolkit();
         Dimension skjerm = kit.getScreenSize();
         int bredde = skjerm.width;
-        int høyde = skjerm.height;
+        int hoyde = skjerm.height;
 
-        forelder.setSize(bredde / 2, høyde - 500);
+        forelder.setSize(bredde / 2, hoyde - 500);
         forelder.setLocation(skjerm.width / 2 - forelder.getSize().width / 2, skjerm.height / 2 - forelder.getSize().height / 2);
      
     }

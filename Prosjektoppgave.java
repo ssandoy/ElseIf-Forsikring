@@ -55,8 +55,8 @@ public class Prosjektoppgave
             String name = navn[n];
             String last = etternavn[e];
             String adr = addresse[a];
-            String knr =  kregister.genererNummer();
             Forsikringskunde k = new Forsikringskunde(fnr,name,last,adr,fnr);
+            String knr =  kregister.genererNummer();
             k.setKundenummer(knr);
             kregister.leggTil(k);
         }*/
@@ -66,9 +66,9 @@ public class Prosjektoppgave
         Toolkit kit = Toolkit.getDefaultToolkit();
         Dimension skjerm = kit.getScreenSize();
         int bredde = skjerm.width;
-        int høyde = skjerm.height;
+        int hoyde = skjerm.height;
 
-        vindu.setSize((bredde /2)+15, høyde - 250);
+        vindu.setSize((bredde /2)+15, hoyde - 250);
         vindu.setLocation(skjerm.width / 2 - vindu.getSize().width / 2, skjerm.height / 2 - vindu.getSize().height / 2);
        
        

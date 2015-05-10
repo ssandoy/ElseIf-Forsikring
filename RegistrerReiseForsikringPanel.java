@@ -62,9 +62,9 @@ public class RegistrerReiseForsikringPanel extends JPanel implements ActionListe
          int bredde = skjerm.width;
          int høyde = skjerm.height;
          
-         forelder.setSize(bredde/2, høyde-200);
+         forelder.setSize(bredde/2, høyde-520);
          forelder.setLocation(skjerm.width/2-forelder.getSize().width/2, skjerm.height/2-forelder.getSize().height/2);
-         forelder.pack();
+
     }
     
     public void setGrensesnitt()

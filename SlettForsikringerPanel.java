@@ -125,7 +125,7 @@ public class SlettForsikringerPanel extends JPanel implements ActionListener
 
         forsikringstabell = new JTable(forsikringsramme);
         forsikringstabell.addMouseListener(new MusLytter());
-
+        forsikringstabell.setAutoCreateRowSorter(true);
 
         scroll = new JScrollPane(forsikringstabell);
 

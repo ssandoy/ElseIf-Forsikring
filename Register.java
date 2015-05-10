@@ -21,6 +21,7 @@ public interface Register extends Serializable
     public boolean finnes(String nr); //skriv kommentar i sluttrapport. Dette fordi enklere å bygge videre
     public boolean fjern(String nr);
 
+    public String genererNummer(); //Genererer et unikt nummer for hvert register-objekt
     
     public Object getObject(String nr);
     

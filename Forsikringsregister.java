@@ -68,18 +68,19 @@ public class Forsikringsregister extends TreeMap<String,Insurance> implements Se
         return this;
     }
 
-    
-    public String genererNummer(){
-        int nøkkel=1;
+   
+    @Override
+    public String genererNummer()
+    { //funker fordi iterer gjennom key-verdiene
+        int maks=1;
         for(Map.Entry<String, Insurance> entry : this.entrySet())
         {
-         if(entry.getValue().getFNummer().equals(String.valueOf(nøkkel)))
+         if(entry.getValue().getFNummer().equals(String.valueOf(maks)))
             {
-                nøkkel++;
+                maks++;
             }   
         }
-
-        return String.valueOf(nøkkel);
+        return String.valueOf(maks);
     }
     
 }

@@ -54,7 +54,7 @@ public class HovedVindu extends JFrame implements ActionListener
         this.finans = new Finanser(sregister, fregister);
         this.historikker = new Historikk(fregister, kregister, sregister);
         
-        Toolkit verktøykasse = Toolkit.getDefaultToolkit();
+        Toolkit verktoykasse = Toolkit.getDefaultToolkit();
         //Bildefil for ikon er plassert i underkatalogen bilder:
         String bildefil = "Bilder/icon.png";
         URL kilde = HovedVindu.class.getResource(bildefil);
@@ -161,7 +161,7 @@ public class HovedVindu extends JFrame implements ActionListener
         
     }
        
-      //Metode for å vise panel med innkommen parameter
+      //Metode for å vise panel med innkommen parameter. Utføres ved klikk på JButton
     public void visPanel(String st) 
     {
         CardLayout cl = (CardLayout) underpaneler.getLayout();
@@ -199,9 +199,9 @@ public class HovedVindu extends JFrame implements ActionListener
         Toolkit kit = Toolkit.getDefaultToolkit();
         Dimension skjerm = kit.getScreenSize();
         int bredde = skjerm.width;
-        int høyde = skjerm.height;
+        int hoyde = skjerm.height;
 
-        setSize((bredde /2)+15, høyde - 250);
+        setSize((bredde /2)+15, hoyde - 250);
         setLocation(skjerm.width / 2 - getSize().width / 2, skjerm.height / 2 - getSize().height / 2);
        }
        
@@ -268,6 +268,7 @@ public class HovedVindu extends JFrame implements ActionListener
             underpaneler.add(new RegistrerBilForsikringPanel(this,kregister, fregister), "BilForsikring");
             visPanel("BilForsikring");
             fjernLogo();
+            
         }
         else if(e.getSource() == BaatForsikring)
         {

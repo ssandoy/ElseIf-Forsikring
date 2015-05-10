@@ -97,7 +97,7 @@ public class Forsikringskunde extends Person implements Serializable
     
     
     //Metode som beregner hvor mye kunden må betale i premie
-    public void beregnPremie()
+    public double beregnTotalPremie()
     {
         aarligpremie = 0.00;
         ListIterator<Insurance> it = forsikringer.listIterator();
@@ -111,6 +111,7 @@ public class Forsikringskunde extends Person implements Serializable
         {
             aarligpremie *= 0.10;
         }
+        return aarligpremie;
     }
     
     public String getKundenummer()

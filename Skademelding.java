@@ -21,10 +21,8 @@ public class Skademelding implements Serializable {
     
     private Forsikringskunde kunde;  
     //private Date skadedato
-    private final int snr;
-    private static int nesteNr = 1;
     private String skadenummer;
-    private String skadeType;
+    private String forsikringstype;
     
     private String skadeBeskrivelse;
     private String kontaktInfo;
@@ -34,13 +32,12 @@ public class Skademelding implements Serializable {
     private DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
     
     
-    public Skademelding(Forsikringskunde kunde, String skadeType, String skadeBeskrivelse )
+    public Skademelding(Forsikringskunde kunde, String forsikringstype, String skadeBeskrivelse )
     {
         this.kunde = kunde;
        // this.skadedato = new Date();
-        snr = nesteNr++;
-        skadenummer = snr+"";
-        this.skadeType = skadeType;
+      
+        this.forsikringstype = forsikringstype;
         this.skadeBeskrivelse = skadeBeskrivelse;   
         takseringsBelop = 0.00;
         erstatningsBelop = 0.00;
@@ -88,38 +85,46 @@ public class Skademelding implements Serializable {
         {
            LinkedList<Insurance> forsikringer = kunde.getForsikringer();
            ListIterator it = forsikringer.listIterator();
-            while(it.hasNext())
+            
+           while(it.hasNext())
             {
                 Insurance f = (Insurance) it.next();
 
-                if(skadeType == "INNBO")
+                if(forsikringstype.equals("BOLIG"))
                 {
                     if(f instanceof Innboforsikring)
                     {
                         return true;
                     }
                 }
-                else if(skadeType == "BIL")
+                else if(forsikringstype.equals("BIL"))
                 {
                     if(f instanceof Bilforsikring)
                     {
                         return true;
                     }
                 }
-                 else if(skadeType == "FRITID")
+                 else if(forsikringstype.equals("HYTTE"))
                 {
                     if(f instanceof Fritidsboligforsikring)
                     {
                         return true;
                     }
                 }
-                 else if(skadeType == "HYTTE")
+                 else if(forsikringstype.equals("BÅT"))
                 {
-                    if(f instanceof Bilforsikring)
+                    if(f instanceof Baatforsikring)
                     {
                         return true;
                     }
                 }
+                 else if(forsikringstype.equals("REISE"))
+                 {
+                     if(f instanceof Reiseforsikring)
+                     {
+                         return true;
+                     }
+                 }
 
             }
             return false;

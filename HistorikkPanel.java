@@ -45,7 +45,7 @@ public class HistorikkPanel extends JPanel implements ActionListener
         infofelt.setText(historikk.skrivHistorikk());
         Font font = new Font("Verdana", Font.BOLD, 30);
         infofelt.setFont(font);
-        infofelt.setForeground(Color.decode("#1EFF00"));
+        infofelt.setForeground(Color.decode("#5E5E5E"));
         infofelt.setBackground(Color.decode("#DBDBDB"));
         infofelt.setEditable(false);
         
@@ -74,10 +74,10 @@ public class HistorikkPanel extends JPanel implements ActionListener
         add(tekstpanel, BorderLayout.CENTER);
         add(knappepanel, BorderLayout.PAGE_END);
 
-        tekstpanel.setBackground(Color.decode("#E57E7E"));
-        toppanel.setBackground(Color.decode("#E57E7E"));
-        knappepanel.setBackground(Color.decode("#E57E7E"));
-        overskriftpanel.setBackground(Color.decode("#E57E7E"));
+        tekstpanel.setBackground(Color.decode("#5E5E5E"));
+        toppanel.setBackground(Color.decode("#5E5E5E"));
+        knappepanel.setBackground(Color.decode("#5E5E5E"));
+        overskriftpanel.setBackground(Color.decode("#5E5E5E"));
                 
         Toolkit kit = Toolkit.getDefaultToolkit();
          Dimension skjerm = kit.getScreenSize();

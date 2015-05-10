@@ -66,8 +66,10 @@ public class RegistrerBoligForsikringPanel extends JPanel implements ActionListe
          Toolkit kit = Toolkit.getDefaultToolkit();
          Dimension skjerm = kit.getScreenSize();
          int bredde = skjerm.width;
-         int høyde = skjerm.height;
- 
+         int hoyde = skjerm.height;
+         
+         forelder.setSize(bredde / 2, hoyde - 400);
+        forelder.setLocation(skjerm.width / 2 - forelder.getSize().width / 2, skjerm.height / 2 - forelder.getSize().height / 2);
         
     }
     

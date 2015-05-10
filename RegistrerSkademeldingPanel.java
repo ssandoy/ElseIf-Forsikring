@@ -45,7 +45,7 @@ public class RegistrerSkademeldingPanel extends JPanel implements ActionListener
     private JTextField skadebeskrivelse, kontaktInfo;
     private JTextField personnummerfelt, erstatningsbelop, takseringsbelop;
     
-    String[] st = {"INNBO", "FRITID", "BIL"};
+    String[] st = {"BOLIG", "HYTTE", "BIL", "REISE", "BÅT"};
     
     HovedVindu forelder;
     Kunderegister kregister;

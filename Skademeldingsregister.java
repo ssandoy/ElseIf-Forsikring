@@ -75,6 +75,22 @@ public class Skademeldingsregister extends TreeMap<String, Skademelding> impleme
         return this;
     }
    
+    //Genererer et unikt kundenummer hos kunden.
+     @Override
+    public String genererNummer()
+    {
+        int nøkkel = 1;
+        for(Map.Entry<String, Skademelding> entry : this.entrySet())
+        {
+         if(entry.getValue().getNr().equals(String.valueOf(nøkkel)))
+            {
+                nøkkel++;
+            }   
+        }
+
+        return String.valueOf(nøkkel);
+    }
+    
     
    
 }
