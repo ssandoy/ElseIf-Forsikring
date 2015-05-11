@@ -13,6 +13,7 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.LinkedList;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -39,11 +40,11 @@ public class RegistrerSkademeldingPanel extends JPanel implements ActionListener
     private JButton registrer;
     private JButton avbryt;
     
-    private JLabel personnummer, beskrivelse, kInfo, ebelop, tbelop, overskrift, stype;
+    private JLabel personnummer, beskrivelse, kInfo, tbelop, fnummer, overskrift, stype;
     
     private JComboBox<String> skadeType;
     private JTextField skadebeskrivelse, kontaktInfo;
-    private JTextField personnummerfelt, erstatningsbelop, takseringsbelop;
+    private JTextField personnummerfelt, forsikringsnummerfelt ,takseringsbelop;
     
     String[] st = {"BOLIG", "HYTTE", "BIL", "REISE", "BÅT"};
     
@@ -76,13 +77,13 @@ public class RegistrerSkademeldingPanel extends JPanel implements ActionListener
         skadeType = new JComboBox<String>(st);
         
         personnummerfelt = new JTextField(10);
-        erstatningsbelop = new JTextField(10);
+        forsikringsnummerfelt = new JTextField(10);
         takseringsbelop = new JTextField(10);
         
         personnummer = new JLabel("Personnummer: ");
+        fnummer = new JLabel("Forsikringsnummer: ");
         kInfo = new JLabel("Kontaktinfo: ");
         beskrivelse = new JLabel("Skadebeskrivelse: ");
-        ebelop = new JLabel("Erstatningsbeløp: ");
         tbelop = new JLabel("Takseringsbeløp: ");
         stype = new JLabel("Skadetype: ");
         overskrift = new JLabel("Registrer Skademelding");
@@ -102,14 +103,14 @@ public class RegistrerSkademeldingPanel extends JPanel implements ActionListener
         
         tekstpanel.add(personnummer);
         tekstpanel.add(personnummerfelt);
+        tekstpanel.add(fnummer);
+        tekstpanel.add(forsikringsnummerfelt);
         tekstpanel.add(stype);
         tekstpanel.add(skadeType);
         tekstpanel.add(beskrivelse);
         tekstpanel.add(skadebeskrivelse);
         tekstpanel.add(kInfo);
         tekstpanel.add(kontaktInfo);
-        tekstpanel.add(ebelop);
-        tekstpanel.add(erstatningsbelop);
         tekstpanel.add(tbelop);
         tekstpanel.add(takseringsbelop);
         
@@ -143,22 +144,25 @@ public void registrerSkademelding() //metode som registrerer ny skademelding på
         try{
             String nr = personnummerfelt.getText();
             Forsikringskunde kunden = kregister.getKunde(nr);
-             
-            if( erstatningsbelop.getText() != null && takseringsbelop.getText() != null)
-                {   
+            String fnr = forsikringsnummerfelt.getText();
+            Insurance f = (Insurance)fregister.getForsikring(fnr);
+            
+            LinkedList<Insurance> fliste = kunden.getForsikringer();
+            
+            if(kunden != null && f != null && takseringsbelop.getText() != null)
+            {
+                   if(fliste.contains(f))
+                {
                     String type = String.valueOf(skadeType.getSelectedItem());
                     String beskrivelse = skadebeskrivelse.getText();
                     double takst = Double.parseDouble(takseringsbelop.getText());
-                    double erstat = kunden.get
-                    Skademelding ny = new Skademelding(kunden, type , beskrivelse);
-                   
-                        //ny.setKontaktInfo(kontaktInfo.getText());
-                        ny.setErstatningsBelop(erstat);
-                        ny.setTakseringsBelop(takst);
+                    Skademelding ny = new Skademelding(kunden, f, type , beskrivelse, takst);
+                    ny.beregnErstatning();
+                    String snr = sregister.genererNummer();
+                    ny.setSkadenummer(snr);
+                        if(ny.sjekkDekning())
+                        {
 
-                       
-                       
-                        
                           if(sregister.leggTil(ny))
                           {
                           kunden.addSkademelding(ny);
@@ -168,19 +172,29 @@ public void registrerSkademelding() //metode som registrerer ny skademelding på
                           forelder.visPanel(HovedVindu.HovedVindu);
                           forelder.Size();
                           }
-                }
-                else
-                    visFeilMelding("Pass på å fylle ut taksering og erstatningsbelop!");
-        }
-        catch(NumberFormatException nfe)
+                            else
+                            {
+                              visFeilMelding("Pass på å fylle ut taksering og erstatningsbelop!");
+                            }          
+                         } //slutt på sjekkdekning
+                        else
+                        {
+                                visFeilMelding("Du har ikke dekning for denne forsikringen!");
+                        }
+
+            }else
+                    visFeilMelding("Kunden eier ikke forsikringen med innskreven forsikringsnummer"); 
+            }
+        }catch(NumberFormatException nfe)
         {
             visFeilMelding("Pass på å skrive tall i taksering!");
         }
-        catch(NullPointerException npe)
+        /*catch(NullPointerException npe)
         {
             visFeilMelding("Null Pointer");
-        }
+        }*/
     }
+
     
      public void visMelding(String melding)
      {

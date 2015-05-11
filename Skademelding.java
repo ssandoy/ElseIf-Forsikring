@@ -20,6 +20,7 @@ import java.util.ListIterator;
 public class Skademelding implements Serializable {
     
     private Forsikringskunde kunde;  
+    private Insurance forsikring;
     //private Date skadedato
     private String skadenummer;
     private String forsikringstype;
@@ -33,16 +34,17 @@ public class Skademelding implements Serializable {
     private DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
     
     
-    public Skademelding(Forsikringskunde kunde, String forsikringstype, String skadeBeskrivelse,
-                        double egenandelsbelop)
+    public Skademelding(Forsikringskunde kunde, Insurance forsikring, String forsikringstype, String skadeBeskrivelse,
+                        double takseringsBeløp)
     {
         this.kunde = kunde;
+        this.forsikring = forsikring; 
        //this.skadedato = new Date();
       
         this.forsikringstype = forsikringstype;
         this.skadeBeskrivelse = skadeBeskrivelse; 
         this.egenandelsbelop = egenandelsbelop;
-        takseringsBelop = 0.00;
+        this.takseringsBelop = takseringsBelop;
         erstatningsBelop = 0.00;
         
         
@@ -73,6 +75,10 @@ public class Skademelding implements Serializable {
     }
     
     //set-metoder
+    public void setSkadenummer(String skadenummer)
+    {
+        this.skadenummer = skadenummer;
+    }
     public void setKontaktInfo( String kontaktInfo ){
         this.kontaktInfo = kontaktInfo;
     }
@@ -138,10 +144,30 @@ public class Skademelding implements Serializable {
         {
             if(sjekkDekning())
             {
-               
-                
-            }
-        }
+             double premie = forsikring.getPremie();
+             if(forsikring instanceof Innboforsikring)
+             {
+             double erstatning = premie*1000;
+             setErstatningsBelop(erstatning);   
+             } else if(forsikring instanceof Fritidsboligforsikring)
+             {
+              double erstatning = premie*100;
+             setErstatningsBelop(erstatning);    
+             }else if(forsikring instanceof Bilforsikring)
+             {
+              double erstatning = premie*10;
+              setErstatningsBelop(erstatning); 
+             }else if(forsikring instanceof Baatforsikring)
+             {
+              double erstatning = premie*100;
+              setErstatningsBelop(erstatning); 
+             }else if(forsikring instanceof Reiseforsikring)
+             {
+              double erstatning = premie*10;
+              setErstatningsBelop(erstatning); 
+             }               
+            }//slutt på sjekkdekning
+        } //slutt på metode
     
     @Override
     public String toString(){

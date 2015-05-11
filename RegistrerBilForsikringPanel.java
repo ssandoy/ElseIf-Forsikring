@@ -186,12 +186,15 @@ public class RegistrerBilForsikringPanel extends JPanel implements ActionListene
                       int result = JOptionPane.showConfirmDialog(null, "Pris på din forsikring: " + b.getPremie() + ",-" + "\nVil du tegne denne forsikringen?", null , JOptionPane.YES_NO_OPTION);
                          if(result == JOptionPane.YES_OPTION) 
                          {
-                            fregister.put(fnr, b);
+                           if(fregister.leggTil(b))
+                           {
                             k.addForsikring(b);
                             visMelding("Forsikring registrert på kunde:\n" + k.getNavn() + b.toString());
                             forelder.addLogo();
                             forelder.visPanel(HovedVindu.HovedVindu);
                             forelder.Size();
+                           } else
+                               visFeilMelding("Ikke lagt til");
                           }else
                             {
                              b = null;

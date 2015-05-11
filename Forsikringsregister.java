@@ -64,6 +64,15 @@ public class Forsikringsregister extends TreeMap<String,Insurance> implements Se
         return null;  
     }
 
+    public Insurance getForsikring(String fnr)
+    {
+        if(finnes(fnr))
+        {
+            return get(fnr);
+        }
+        return null;  
+    }
+    
     @Override
     public Map getMap() 
     {

@@ -26,12 +26,12 @@ public class HovedVindu extends JFrame implements ActionListener
     public static JPanel logopanel;
     
     private JButton regKunde, visKunde, regForsikring, regSkade, finanser, historikk, slettKunde
-            ,slettForsikring;
+            ,visForsikring;
     
     private JButton BilForsikring, BaatForsikring, BoligForsikring, HytteForsikring, ReiseForsikring;
     
     private Icon LOGO, regKundeIcon, visKundeIcon, regForsikringIcon, regSkadeIcon, finanserIcon,
-            historikkIcon, slettKundeIcon, slettForsikringIcon;
+            historikkIcon, slettKundeIcon, visForsikringIcon;
     
     private JLabel logo;
     
@@ -97,7 +97,7 @@ public class HovedVindu extends JFrame implements ActionListener
         finanserIcon        = new ImageIcon(getClass().getResource("Bilder/Finanser.png"));
         historikkIcon       = new ImageIcon(getClass().getResource("Bilder/Historikk.png"));
         slettKundeIcon      = new ImageIcon(getClass().getResource("Bilder/slettKunde.png"));
-        slettForsikringIcon = new ImageIcon(getClass().getResource("Bilder/slettForsikring.png"));
+        visForsikringIcon = new ImageIcon(getClass().getResource("Bilder/visForsikringer.png"));
         
         regKunde          = new JButton(regKundeIcon);
         visKunde          = new JButton(visKundeIcon);
@@ -106,7 +106,7 @@ public class HovedVindu extends JFrame implements ActionListener
         finanser          = new JButton(finanserIcon);
         historikk         = new JButton(historikkIcon);
         slettKunde        = new JButton(slettKundeIcon);
-        slettForsikring   = new JButton(slettForsikringIcon);
+        visForsikring   = new JButton(visForsikringIcon);
         logo              = new JLabel(LOGO);
         
         } catch(NullPointerException npe)
@@ -118,7 +118,7 @@ public class HovedVindu extends JFrame implements ActionListener
             finanser         = new JButton("Finanser");
             historikk        = new JButton("Historikk");
             slettKunde       = new JButton("Slett kunde");
-            slettForsikring  = new JButton("Slett forsikring");
+            visForsikring  = new JButton("Vis forsikring");
             logo             = new JLabel("LOGO");
         }
         BilForsikring   = new JButton();
@@ -134,7 +134,7 @@ public class HovedVindu extends JFrame implements ActionListener
         hovedpanel.add(regForsikring);
         hovedpanel.add(regSkade);
         hovedpanel.add(slettKunde);
-        hovedpanel.add(slettForsikring);
+        hovedpanel.add(visForsikring);
         hovedpanel.add(finanser);
         hovedpanel.add(historikk);
         
@@ -145,7 +145,7 @@ public class HovedVindu extends JFrame implements ActionListener
         regSkade.addActionListener(this);
         finanser.addActionListener(this);
         slettKunde.addActionListener(this);
-        slettForsikring.addActionListener(this);
+        visForsikring.addActionListener(this);
         historikk.addActionListener(this);
         
         BilForsikring.addActionListener(this);
@@ -257,10 +257,10 @@ public class HovedVindu extends JFrame implements ActionListener
             visPanel("SLETT KUNDE");
             fjernLogo();
         }
-        else if(e.getSource() == slettForsikring)
+        else if(e.getSource() == visForsikring)
         {
-            underpaneler.add(new SlettForsikringerPanel(this, kregister, fregister), "SLETT FORSIKRING");
-            visPanel("SLETT FORSIKRING");
+            underpaneler.add(new SlettForsikringerPanel(this, kregister, fregister), "VIS FORSIKRING");
+            visPanel("VIS FORSIKRING");
             fjernLogo();
         }
           else if(e.getSource() == BilForsikring)

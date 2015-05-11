@@ -163,6 +163,7 @@ public class SlettForsikringerPanel extends JPanel implements ActionListener
            forelder.Size();  
        } else if(e.getSource() == slettForsikring)
        {
+           try{
                 Insurance f = (Insurance) forsikringsramme.getData().get(forsikringstabell.getSelectedRow());
                 Forsikringskunde k = f.getKunde();
                 if(fregister.fjern(f.getFNummer()))
@@ -171,6 +172,10 @@ public class SlettForsikringerPanel extends JPanel implements ActionListener
                      visMelding("Forsikring fjernet!");
                      f = null;
                 }
+           }catch(IndexOutOfBoundsException i)
+           {
+               visFeilMelding("Du har ikke valgt noen forsikring");
+           }
        }
        else if(e.getSource() == sokKunde)
        {
