@@ -73,7 +73,7 @@ public class RegistrerBilForsikringPanel extends JPanel implements ActionListene
     }
 
     
-    public void setGrensesnitt()
+    public void setGrensesnitt() //initialiserer tekstfeltene, panelene og ikonene
     {
          personnummerfelt = new JTextField(10);
         //bilpanel
@@ -151,7 +151,7 @@ public class RegistrerBilForsikringPanel extends JPanel implements ActionListene
         
     }
     
-     public void registrer()
+    public void registrer() //metode som registrerer bilforsikring og sjekker om det er noen feil 
         {
             try{
             String personnummer = personnummerfelt.getText();
@@ -204,8 +204,11 @@ public class RegistrerBilForsikringPanel extends JPanel implements ActionListene
             {
              visFeilMelding("Skriv inn riktige verdier i feltene");
            }
+            catch(NullPointerException npe)
+            {
+                visFeilMelding("Null Pointer");
+            }
         }
-        
     
       public void visMelding(String melding)
      {

@@ -40,7 +40,7 @@ public class VisKundePanel extends JPanel implements ActionListener
     private JScrollPane scroll;
     
     
-    private final String[] soyler = {"Personnummer","Fornavn","Etternavn","Adresse" ,"Telefonnummer", "Kundenummer"};
+    private final String[] soyler = {"Personnummer","Fornavn","Etternavn","Adresse" ,"Telefonnummer", "Kundenummer", "TOTALKUNDE"};
         
    private Kunderegister kregister; 
    private LinkedList<Forsikringskunde> kundeliste;
@@ -193,9 +193,7 @@ public class VisKundePanel extends JPanel implements ActionListener
             {
                 Forsikringskunde k = (Forsikringskunde) kunderamme.getData().get(kundetabell.getSelectedRow());
                 visMelding(k.toString());
-                
-                        
-                        
+      
             }
 
         }//mouseClicked ferdig
@@ -211,11 +209,13 @@ public class VisKundePanel extends JPanel implements ActionListener
         }//mouseReleased ferdig
 
         @Override
-        public void mouseEntered(java.awt.event.MouseEvent me) {
+        public void mouseEntered(java.awt.event.MouseEvent me) 
+        {
         }//mouseEntered ferdig
 
         @Override
-        public void mouseExited(java.awt.event.MouseEvent me) {
+        public void mouseExited(java.awt.event.MouseEvent me) 
+        {
         }//mouseExited ferdig
 
         

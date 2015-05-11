@@ -28,7 +28,7 @@ public abstract class Person implements Menneske
     }
     
     
-    
+    /*get-metoder*/
     @Override
     public String getPersonNr() {
         return personnummer;
@@ -66,7 +66,7 @@ public abstract class Person implements Menneske
     }
    
    
-
+/*set-metoder*/
     @Override
     public void setFornavn(String fornavn) 
     {

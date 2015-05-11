@@ -34,7 +34,7 @@ public abstract class Boligforsikring extends Insurance implements Serializable
         this.boareal = boareal;
     }
     
-    
+    //get-metoder
     public int getAreal()
     {
         return boareal;

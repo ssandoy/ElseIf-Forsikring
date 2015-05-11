@@ -67,7 +67,7 @@ public class RegistrerReiseForsikringPanel extends JPanel implements ActionListe
 
     }
     
-    public void setGrensesnitt()
+    public void setGrensesnitt() //initialiserer tekstfeltene, panelene og ikonene
     {
         personnummerfelt = new JTextField(10);
         reisefelt        = new JComboBox<String>(reise);
@@ -141,56 +141,62 @@ public class RegistrerReiseForsikringPanel extends JPanel implements ActionListe
     }
 
     
-    public void registrer()
+    public void registrer() //metode som registrerer reiseforsikring og sjekker om det er noen feil 
     {
-         String personnummer = personnummerfelt.getText();
-         String reisedekning   = reisefelt.getItemAt(reisefelt.getSelectedIndex());
-         String status     = statusfelt.getItemAt(statusfelt.getSelectedIndex());
-         
-         if(personnummer.length() == 0)
-         {
-             visFeilMelding("Du må fylle inn kundens personnummer");
-         } else if(reisedekning.equals("Velg område"))
-         {
-             visFeilMelding("Du må velge område du vil forsikringen skal dekke");
-         }else if(statusfelt.equals("Velg din status"))
-         {
-             visFeilMelding("Du må velge status");
-         }else
-         {
-             Forsikringskunde k = kregister.getKunde(personnummer);
-                  
-              if(k == null)
-             {
-                      visFeilMelding("Ingen kunde med det personnummeret!");
-             }else
-              {
-                  String fnr = fregister.genererNummer();
-                  Reiseforsikring f = new Reiseforsikring(k, reisedekning, status);
-                  f.setForsikringsnummer(fnr);
-                  f.setType("REISE-FORSIKRING");
-                  f.beregnPremie();
-                  int result = JOptionPane.showConfirmDialog(null, 
-                        "Pris på din forsikring: " + f.getPremie() + ",-" + 
-                         "\nVil du tegne denne forsikringen?", null , JOptionPane.YES_NO_OPTION);
-                       if(result == JOptionPane.YES_OPTION) 
-                       {
-                           if(fregister.leggTil(f))
-                           {
-                                 k.addForsikring(f);
-                                 visMelding("Forsikring registrert på kunde:\n" + k.toString());    
-                                 forelder.addLogo();
-                                 forelder.visPanel(HovedVindu.HovedVindu);
-                                 forelder.Size();
-                            } else 
+        try{
+        
+            String personnummer = personnummerfelt.getText();
+            String reisedekning   = reisefelt.getItemAt(reisefelt.getSelectedIndex());
+            String status     = statusfelt.getItemAt(statusfelt.getSelectedIndex());
+
+            if(personnummer.length() == 0)
+            {
+                visFeilMelding("Du må fylle inn kundens personnummer");
+            } else if(reisedekning.equals("Velg område"))
+            {
+                visFeilMelding("Du må velge område du vil forsikringen skal dekke");
+            }else if(statusfelt.equals("Velg din status"))
+            {
+                visFeilMelding("Du må velge status");
+            }else
+            {
+                Forsikringskunde k = kregister.getKunde(personnummer);
+
+                 if(k == null)
+                {
+                         visFeilMelding("Ingen kunde med det personnummeret!");
+                }else
+                 {
+                     String fnr = fregister.genererNummer();
+                     Reiseforsikring f = new Reiseforsikring(k, reisedekning, status);
+                     f.setForsikringsnummer(fnr);
+                     f.setType("REISE-FORSIKRING");
+                     f.beregnPremie();
+                     int result = JOptionPane.showConfirmDialog(null, 
+                           "Pris på din forsikring: " + f.getPremie() + ",-" + 
+                            "\nVil du tegne denne forsikringen?", null , JOptionPane.YES_NO_OPTION);
+                          if(result == JOptionPane.YES_OPTION) 
+                          {
+                              if(fregister.leggTil(f))
                               {
-                               visFeilMelding("Feil informasjon fylt inn. Prøv igjen");
-                              }
-                       }
-                       }
-              }
-  
-         }
+                                    k.addForsikring(f);
+                                    visMelding("Forsikring registrert på kunde:\n" + k.toString());    
+                                    forelder.addLogo();
+                                    forelder.visPanel(HovedVindu.HovedVindu);
+                                    forelder.Size();
+                               } else 
+                                 {
+                                  visFeilMelding("Feil informasjon fylt inn. Prøv igjen");
+                                 }
+                          }
+                          }
+                 }
+        }
+        catch(NullPointerException npe)
+            {
+                visFeilMelding("Null Pointer");
+            }
+    }
          
     
     

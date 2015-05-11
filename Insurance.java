@@ -38,7 +38,7 @@ public abstract class Insurance implements  Forsikring {
         forsikringspremie = 0.00;
     } 
    
-    
+    //get-metoder
     @Override
     public String getFNummer() 
     {
@@ -80,6 +80,13 @@ public abstract class Insurance implements  Forsikring {
     }
     
     @Override
+     public double getEgenandel()
+     {
+         return egenandel;
+     }
+    
+    //set-metoder
+    @Override
      public void setPremie(double premie)
      {
          forsikringspremie = premie;
@@ -92,12 +99,6 @@ public abstract class Insurance implements  Forsikring {
      }
      
      
-     
-     @Override
-     public double getEgenandel()
-     {
-         return egenandel;
-     }
 
     public void setForsikringsnummer(String forsikringsnummer)
     {

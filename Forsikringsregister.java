@@ -17,6 +17,7 @@ import java.util.TreeMap;
 public class Forsikringsregister extends TreeMap<String,Insurance> implements Serializable, Register 
 {
 
+    //legger til et forsikrings-objekt i lista
     @Override
     public boolean leggTil(Object objekt) 
     {
@@ -31,6 +32,7 @@ public class Forsikringsregister extends TreeMap<String,Insurance> implements Se
         return false;
     }
     
+    //sjekker om inkommen parameter allerede eksisterer som key-verdi
     @Override
     public boolean finnes(String fnr) 
     {
@@ -38,7 +40,7 @@ public class Forsikringsregister extends TreeMap<String,Insurance> implements Se
     }
     
     
-
+  //fjerner et objekt i fra lista, hvis det finnes
     @Override
     public boolean fjern(String fnr) 
     {
@@ -68,7 +70,7 @@ public class Forsikringsregister extends TreeMap<String,Insurance> implements Se
         return this;
     }
 
-   
+   //genererer et unikt nummer, henter ut maks-verdi og legger til 1.
     @Override
     public String genererNummer()
     { //funker fordi iterer gjennom key-verdiene

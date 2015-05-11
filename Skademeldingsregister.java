@@ -19,6 +19,7 @@ import java.util.*;
  */
 public class Skademeldingsregister extends TreeMap<String, Skademelding> implements Register{
     
+    /*Metode for å legge en skademelding i registeret.*/
      @Override
     public boolean leggTil(Object objekt) 
     {
@@ -33,12 +34,14 @@ public class Skademeldingsregister extends TreeMap<String, Skademelding> impleme
         return false;
     }
     
+    /*Metode som sjekker om objektet eksisterer i registeret med Key-verdien pnr*/
     @Override
     public boolean finnes(String nr) 
     {
        return containsKey(nr);
     }
     
+    //Metode som sletter en skademelding fra registeret. Tar Key-verdien som parameter
     @Override
     public boolean fjern(String nr) 
     {
@@ -50,6 +53,7 @@ public class Skademeldingsregister extends TreeMap<String, Skademelding> impleme
        return false;
     }
     
+    //metode som returnerer en skademelding med  parameter pnr  
      @Override
     public Object getObject(String nr) 
     {
@@ -75,7 +79,7 @@ public class Skademeldingsregister extends TreeMap<String, Skademelding> impleme
         return this;
     }
    
-    //Genererer et unikt kundenummer hos kunden.
+    //Genererer et unikt skademeldingsnummer.
      @Override
     public String genererNummer()
     {

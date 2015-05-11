@@ -66,7 +66,7 @@ public class RegistrerSkademeldingPanel extends JPanel implements ActionListener
     }
 
     
-    public void setGrensesnitt()
+    public void setGrensesnitt() //initialiserer tekstfeltene, panelene og ikonene
     {
         skadebeskrivelse = new JTextField(10);
         kontaktInfo = new JTextField(10);
@@ -138,7 +138,7 @@ public class RegistrerSkademeldingPanel extends JPanel implements ActionListener
    
     }
     
-    public void registrerSkademelding()
+public void registrerSkademelding() //metode som registrerer ny skademelding på en person og sjekker om det er noen feil 
     {
         try{
             String nr = personnummerfelt.getText();
@@ -149,7 +149,7 @@ public class RegistrerSkademeldingPanel extends JPanel implements ActionListener
                     String type = String.valueOf(skadeType.getSelectedItem());
                     String beskrivelse = skadebeskrivelse.getText();
                     double takst = Double.parseDouble(takseringsbelop.getText());
-                    double erstat = Double.parseDouble(erstatningsbelop.getText());
+                    double erstat = kunden.get
                     Skademelding ny = new Skademelding(kunden, type , beskrivelse);
                    
                         //ny.setKontaktInfo(kontaktInfo.getText());
@@ -175,6 +175,10 @@ public class RegistrerSkademeldingPanel extends JPanel implements ActionListener
         catch(NumberFormatException nfe)
         {
             visFeilMelding("Pass på å skrive tall i taksering!");
+        }
+        catch(NullPointerException npe)
+        {
+            visFeilMelding("Null Pointer");
         }
     }
     

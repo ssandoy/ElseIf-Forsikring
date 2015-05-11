@@ -71,7 +71,7 @@ public class RegistrerHytteForsikringPanel extends JPanel implements ActionListe
     
     
     
-    public void setGrensesnitt()
+    public void setGrensesnitt() //initialiserer tekstfeltene, panelene og ikonene
     {
         personnummerfelt = new JTextField(10);
         adressefelt      = new JTextField(10);
@@ -161,9 +161,9 @@ public class RegistrerHytteForsikringPanel extends JPanel implements ActionListe
     {
             String personnummer = personnummerfelt.getText();
             String adresse      = adressefelt.getText();
-            int mnder        = antMaanederfelt.getItemAt(antMaanederfelt.getSelectedIndex());
-            int areal           = arealfelt.getValue();
             int byggeaar        = byggeaarfelt.getValue();
+            int areal           = arealfelt.getValue();
+            int mnder           = antMaanederfelt.getItemAt(antMaanederfelt.getSelectedIndex());
             
             if(personnummer.length() == 0 || adresse.length() == 0)
             {
@@ -178,12 +178,36 @@ public class RegistrerHytteForsikringPanel extends JPanel implements ActionListe
                   }
                   else
                  {
+                     String fnr =  fregister.genererNummer();
+                     Fritidsboligforsikring f = new Fritidsboligforsikring(k, adresse, byggeaar, areal, mnder);
+                     f.setForsikringsnummer(fnr);
+                     f.setType("HYTTE-FORSIKRING");;
+                     f.beregnPremie();
+                     int result = JOptionPane.showConfirmDialog(null, 
+                             "Pris på din forsikring: " + f.getPremie() + ",-" + 
+                                     "\nVil du tegne denne forsikringen?", null , JOptionPane.YES_NO_OPTION);
+                     if(result == JOptionPane.YES_OPTION) 
+                    {
+                     if(fregister.leggTil(f))
+                     {
+                         k.addForsikring(f);
+                        visMelding("Forsikring registrert på kunde:\n" + k.toString());
+                        System.out.println(fregister.toString());
+                        System.out.println(f.getFNummer());
+                        forelder.addLogo();
+                        forelder.visPanel(HovedVindu.HovedVindu);
+                        forelder.Size();
+                     }
+                     else 
+                     {
+                         visFeilMelding("Feil informasjon fylt inn. Prøv igjen");
+                     }
                      
-                 }
-                
-                
-            }
-    }
+                 } //slutt på if(yes_option)
+          
+            } //slutt på if(k == null
+        } //slutt på if(personnummer.length) 
+    }//slutt på metode
     
     public void visMelding(String melding)
      {
@@ -205,6 +229,10 @@ public class RegistrerHytteForsikringPanel extends JPanel implements ActionListe
            forelder.addLogo();
            forelder.visPanel(HovedVindu.HovedVindu);
            forelder.Size();
+        }
+        else if(e.getSource() == registrer)
+        {
+            registrer();
         }
          else if(e.getSource() == Bil)
         {

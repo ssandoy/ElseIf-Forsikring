@@ -73,7 +73,7 @@ public class Finanser {
         }
     }
     
-    public void beregnDifferanse()
+    public void beregnDifferanse() //beregner differansen mellom de innbetalte og utbetalte verdiene
     {
         differanse = innbetalt - utbetalt;
     }

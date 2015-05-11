@@ -74,7 +74,7 @@ public class RegistrerBoligForsikringPanel extends JPanel implements ActionListe
     }
     
     
-    public void setGrensesnitt()
+    public void setGrensesnitt() //initialiserer tekstfeltene, panelene og ikonene
     {
         personnummerfelt = new JTextField(10);
         adressefelt      = new JTextField(10);
@@ -163,8 +163,9 @@ public class RegistrerBoligForsikringPanel extends JPanel implements ActionListe
         midtpanel.setBackground(Color.decode("#E57E7E"));
     }
     
-        public void registrer()
+public void registrer() //metode som registrerer boligforsikring og sjekker om det er noen feil 
         {
+            try{
             String personnummer = personnummerfelt.getText();
             String adresse      = adressefelt.getText();
             String boligtype    = boligtypefelt.getItemAt(boligtypefelt.getSelectedIndex());
@@ -181,10 +182,11 @@ public class RegistrerBoligForsikringPanel extends JPanel implements ActionListe
                   visFeilMelding("Du må velge byggematerial");
               } 
                 else if(boligtype.equals("Velg boligtype")) 
-                 {
+                {
                   visFeilMelding("Du må velge boligtype");        
-                 } else
-                  {
+                } 
+                else
+                {
                   
                   Forsikringskunde k = kregister.getKunde(personnummer);
                   
@@ -203,7 +205,7 @@ public class RegistrerBoligForsikringPanel extends JPanel implements ActionListe
                              "Pris på din forsikring: " + f.getPremie() + ",-" + 
                                      "\nVil du tegne denne forsikringen?", null , JOptionPane.YES_NO_OPTION);
                      if(result == JOptionPane.YES_OPTION) 
-                         {
+                    {
                      if(fregister.leggTil(f))
                      {
                         k.addForsikring(f);
@@ -214,16 +216,23 @@ public class RegistrerBoligForsikringPanel extends JPanel implements ActionListe
                         forelder.visPanel(HovedVindu.HovedVindu);
                         forelder.Size();
                      }
-                     else 
+                        else 
                        {
                          visFeilMelding("Feil informasjon fylt inn. Prøv igjen");
                        }
-                        } 
-                  } 
-                   }
-              
-              
-            
+                    }else
+                    {
+                     f = null;
+                     visMelding("Tegning av forsikring avbrutt");
+                    }
+                } 
+                }
+                            
+            }
+            catch(NullPointerException npe)
+            {
+                visFeilMelding("Null Pointer");
+            }
         }
     
         public void eierInnbo()

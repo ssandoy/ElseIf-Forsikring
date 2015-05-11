@@ -71,7 +71,7 @@ public class RegistrerBaatForsikringPanel extends JPanel implements ActionListen
     }
 
     
-    public void setGrensesnitt()
+    public void setGrensesnitt() //initialiserer tekstfeltene, panelene og ikonene
     {
          personnummerfelt = new JTextField(10);
          baateierfelt = new JTextField(10);
@@ -171,57 +171,65 @@ public class RegistrerBaatForsikringPanel extends JPanel implements ActionListen
         
     }
     
-    public void registrer()
+public void registrer() //metode som registrerer båtforsikring og sjekker om det er noen feil 
     {
+        try{
             String personnummer     = personnummerfelt.getText();
-            String baateier     = baateierfelt.getText();
-            String regnummer    = regnummerfelt.getText();
-            String baattype     = typefelt.getText();
-            int baatmodell      = modell.getValue();
-            int motor           = hestekrefter.getValue();
-            int lengde          = fot.getValue();
-            
-         if(personnummer.length() == 0 || baateier.length() == 0 || baattype.length() == 0)
-         {
-             visFeilMelding("Skriv inn verdier i feltene!");
-         }
-         else
-         {
-             Forsikringskunde k = kregister.getKunde(personnummer);
-                  
-                  if(k == null)
-                  {
-                      visFeilMelding("Ingen kunde med det personnummeret!");
-                  }
-                  else
-                  {
-                      String fnr = fregister.genererNummer();
-                      Baatforsikring b = new Baatforsikring(k, baateier, regnummer, baattype, baatmodell, motor, lengde);
-                      b.setForsikringsnummer(fnr);
-                      b.setType("BÅT-FORSIKRING");
-                      b.beregnPremie();
-                      int result = JOptionPane.showConfirmDialog(null, "Pris på din forsikring: " + b.getPremie() + ",-" + "\nVil du tegne denne forsikringen?", null , JOptionPane.YES_NO_OPTION);
-                         if(result == JOptionPane.YES_OPTION) 
-                         {
-                          if(fregister.leggTil(b))
-                          {
-                         k.addForsikring(b);
-                         visMelding("Forsikring registrert på kunde:\n" + k.toString());
-                         forelder.addLogo();
-                         forelder.visPanel(HovedVindu.HovedVindu);
-                         forelder.Size();
-                          } else 
-                           {
-                            visFeilMelding("Feil info skrevet inn. Prøv igjen");                                
-                           }
-                         }else
-                         {
-                          visFeilMelding("Tegning av forsikring avbrutt.");
-                         
-                         }
-                         
-                  }
-         }
+                String baateier     = baateierfelt.getText();
+                String regnummer    = regnummerfelt.getText();
+                String baattype     = typefelt.getText();
+                int baatmodell      = modell.getValue();
+                int motor           = hestekrefter.getValue();
+                int lengde          = fot.getValue();
+
+             if(personnummer.length() == 0 || baateier.length() == 0 || baattype.length() == 0)
+             {
+                 visFeilMelding("Skriv inn verdier i feltene!");
+             }
+             else
+             {
+                 Forsikringskunde k = kregister.getKunde(personnummer);
+
+                      if(k == null)
+                      {
+                          visFeilMelding("Ingen kunde med det personnummeret!");
+                      }
+                      else
+                      {
+                          String fnr = fregister.genererNummer();
+                          Baatforsikring b = new Baatforsikring(k, baateier, regnummer, baattype, baatmodell, motor, lengde);
+                          b.setForsikringsnummer(fnr);
+                          b.setType("BÅT-FORSIKRING");
+                          b.beregnPremie();
+                          int result = JOptionPane.showConfirmDialog(null, "Pris på din forsikring: " + b.getPremie() + ",-" + "\nVil du tegne denne forsikringen?", null , JOptionPane.YES_NO_OPTION);
+                             if(result == JOptionPane.YES_OPTION) 
+                             {
+                              if(fregister.leggTil(b))
+                              {
+                             k.addForsikring(b);
+                             visMelding("Forsikring registrert på kunde:\n" + k.toString());
+                             forelder.addLogo();
+                             forelder.visPanel(HovedVindu.HovedVindu);
+                             forelder.Size();
+                              } else 
+                               {
+                                visFeilMelding("Feil info skrevet inn. Prøv igjen");                                
+                               }
+                             }else
+                             {
+                              visFeilMelding("Tegning av forsikring avbrutt.");
+
+                             }
+
+                      }
+             }
+    
+        }
+        catch(NullPointerException npe)
+        {
+            visFeilMelding("Null Pointer");
+        }
+        
     }
     
     

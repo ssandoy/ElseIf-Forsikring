@@ -77,7 +77,7 @@ public class FinanserPanel extends JPanel implements ActionListener{
          forelder.setLocation(skjerm.width/2-forelder.getSize().width/2, skjerm.height/2-forelder.getSize().height/2);
     }
     
-    public void Beregn()
+    public void Beregn() //Beregner finansene til selskapet
     {
         finanser.beregnInnbetalt();
         finanser.beregnUtbetalt();

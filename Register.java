@@ -23,6 +23,7 @@ public interface Register extends Serializable
 
     public String genererNummer(); //Genererer et unikt nummer for hvert register-objekt
     
+    //henter et objekt fra lista
     public Object getObject(String nr);
     
     //returnerer lista

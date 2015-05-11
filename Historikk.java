@@ -36,7 +36,7 @@ public class Historikk
         antTotalKunder = 0;
     }
     
-    public void tell()
+    public void tell() //Metode som teller opp alle typer kunder, forsikringer, og skademelding
     {
         antallKunder = kregister.size();
         antallForsikringer = fregister.size();

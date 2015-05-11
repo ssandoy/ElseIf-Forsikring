@@ -31,19 +31,19 @@ public class Innboforsikring extends Boligforsikring
         //beregner premien ut fra arealet
          if(super.getAreal() >= 30 && super.getAreal() <= 50)
          {
-             super.setPremie(1000.00);
+             super.setPremie(500.00);
          }
          else if(super.getAreal() >= 51 && super.getAreal() <= 80)
          {
-             super.setPremie(1500.00);
+             super.setPremie(1000.00);
          }
          else if(super.getAreal() >= 81 && super.getAreal() <= 110)
          {
-             super.setPremie(2000.00);
+             super.setPremie(1300.00);
          }
-         else if(super.getAreal() >= 111 && super.getAreal() <= 140)
+         else if(super.getAreal() >= 111 && super.getAreal() <= 150)
          {
-             super.setPremie(2200.00);
+             super.setPremie(1600.00);
          }
         
          //beregner premien ut i fra husmaterial
@@ -84,7 +84,7 @@ public class Innboforsikring extends Boligforsikring
          {
              premie += 400.00;
          }
-         else
+         else if(super.getByggeaar() > 2000)
          {
              premie += 500.00;
          }

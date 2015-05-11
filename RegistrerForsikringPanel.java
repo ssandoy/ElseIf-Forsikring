@@ -68,8 +68,8 @@ public class RegistrerForsikringPanel extends JPanel implements ActionListener
          
     }
     
-    //inistialiserer knapper, tekstfelter o.l
-    public void setGrensesnitt()
+   
+    public void setGrensesnitt() //initialiserer tekstfeltene, panelene og ikonene
     {
        
 

@@ -38,7 +38,7 @@ public class Kunderegister extends TreeMap<String, Forsikringskunde> implements 
        return containsKey(pnr);
     }
 
-     //Metode som sletter en søker fra kunderegisteret. Tar personnummer(Key-verdien) som parameter
+     //Metode som sletter en kunde fra kunderegisteret. Tar personnummer(Key-verdien) som parameter
     @Override
     public boolean fjern(String pnr) 
     {

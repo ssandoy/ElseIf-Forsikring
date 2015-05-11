@@ -26,25 +26,29 @@ public class Skademelding implements Serializable {
     
     private String skadeBeskrivelse;
     private String kontaktInfo;
+    private double egenandelsbelop;
     private double takseringsBelop;
     private double erstatningsBelop;
     
     private DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
     
     
-    public Skademelding(Forsikringskunde kunde, String forsikringstype, String skadeBeskrivelse )
+    public Skademelding(Forsikringskunde kunde, String forsikringstype, String skadeBeskrivelse,
+                        double egenandelsbelop)
     {
         this.kunde = kunde;
-       // this.skadedato = new Date();
+       //this.skadedato = new Date();
       
         this.forsikringstype = forsikringstype;
-        this.skadeBeskrivelse = skadeBeskrivelse;   
+        this.skadeBeskrivelse = skadeBeskrivelse; 
+        this.egenandelsbelop = egenandelsbelop;
         takseringsBelop = 0.00;
         erstatningsBelop = 0.00;
         
         
     }
-    
+
+    /*get-metoder*/
     public String getNr(){
         return skadenummer;
     }
@@ -68,6 +72,7 @@ public class Skademelding implements Serializable {
         return erstatningsBelop;
     }
     
+    //set-metoder
     public void setKontaktInfo( String kontaktInfo ){
         this.kontaktInfo = kontaktInfo;
     }
@@ -125,15 +130,17 @@ public class Skademelding implements Serializable {
                          return true;
                      }
                  }
-
             }
             return false;
         }
         
         public void beregnErstatning()
         {
-            
-            
+            if(sjekkDekning())
+            {
+               
+                
+            }
         }
     
     @Override

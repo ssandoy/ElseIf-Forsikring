@@ -39,7 +39,7 @@ public class HistorikkPanel extends JPanel implements ActionListener
         
         tekstpanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         
-        historikk.tell();
+        historikk.tell(); //Metode som teller opp alle typer kunder, forsikringer, og skademelding
         
         infofelt = new JTextArea (30, 20);
         infofelt.setText(historikk.skrivHistorikk());

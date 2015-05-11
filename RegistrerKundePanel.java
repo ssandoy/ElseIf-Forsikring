@@ -49,7 +49,7 @@ public class RegistrerKundePanel extends JPanel implements ActionListener {
         
     }
 
-    public void setGrensesnitt()
+    public void setGrensesnitt() //initialiserer tekstfeltene, panelene og ikonene
     {
         personnummerfelt = new JTextField(10);
         fornavnsfelt = new JTextField(10);
@@ -111,37 +111,44 @@ public class RegistrerKundePanel extends JPanel implements ActionListener {
         
     }
     
-    public void Registrer() {
-        String personnummer = personnummerfelt.getText();
-        String fornavn = fornavnsfelt.getText();
-        String etternavn = etternavnsfelt.getText();
-        String adresse = adressefelt.getText();
-        String tlfnummer = telefonfelt.getText();
+public void Registrer() //metode som registrerer en ny kunde og sjekker om det er noen feil 
+    {
+        try{
+            String personnummer = personnummerfelt.getText();
+            String fornavn = fornavnsfelt.getText();
+            String etternavn = etternavnsfelt.getText();
+            String adresse = adressefelt.getText();
+            String tlfnummer = telefonfelt.getText();
 
-        if (personnummer.length() != 0 && fornavn.length() != 0 && etternavn.length() != 0
-                && adresse.length() != 0 && tlfnummer.length() != 0) {
-            if(godkjennPNummer() && godkjennTLFnummer())
-            {
-                if(kregister.finnes(personnummer))
+            if (personnummer.length() != 0 && fornavn.length() != 0 && etternavn.length() != 0
+                    && adresse.length() != 0 && tlfnummer.length() != 0) {
+                if(godkjennPNummer() && godkjennTLFnummer())
                 {
-                    visFeilMelding("Finnes allerede en kunde med dette personnummeret. Forsøk på identitestyveri!");
-                }
-                String knr = kregister.genererNummer();
-                Forsikringskunde kunde = new Forsikringskunde(personnummer, fornavn, etternavn, adresse,
-                    tlfnummer);
-                kunde.setKundenummer(knr);
-                if (kregister.leggTil(kunde)) 
-                {
-                visMelding("Kunde registrert!");
-                forelder.addLogo();
-                forelder.visPanel(HovedVindu.HovedVindu);
-                forelder.Size();
+                    if(kregister.finnes(personnummer))
+                    {
+                        visFeilMelding("Finnes allerede en kunde med dette personnummeret. Forsøk på identitestyveri!");
+                    }
+                    String knr = kregister.genererNummer();
+                    Forsikringskunde kunde = new Forsikringskunde(personnummer, fornavn, etternavn, adresse,
+                        tlfnummer);
+                    kunde.setKundenummer(knr);
+                    if (kregister.leggTil(kunde)) 
+                    {
+                    visMelding("Kunde registrert!");
+                    forelder.addLogo();
+                    forelder.visPanel(HovedVindu.HovedVindu);
+                    forelder.Size();
 
-                 }
-            } else
-                visFeilMelding("Skriv inn et gyldig personnummer og telefonnummer. 11 siffer og 8 siffer");
-        } else {
-            visFeilMelding("Vennligst fyll inn alle feltene");
+                     }
+                } else
+                    visFeilMelding("Skriv inn et gyldig personnummer og telefonnummer. 11 siffer og 8 siffer");
+            } else {
+                visFeilMelding("Vennligst fyll inn alle feltene");
+            }
+        }
+        catch(NullPointerException npe)
+        {
+            visFeilMelding("Null Pointer");
         }
     }
     

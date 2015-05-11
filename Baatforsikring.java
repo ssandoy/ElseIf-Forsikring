@@ -26,6 +26,7 @@ public class Baatforsikring extends Kjoretoyforsikring implements Serializable
         
     }
  
+    //Beregner premie ut i fra fotlengde og hestekrefter. Båter større enn 50 fot får samme pris
     public void beregnPremie()
     {
          if(fot <= 20)

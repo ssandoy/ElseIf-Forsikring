@@ -72,11 +72,13 @@ public class Forsikringskunde extends Person implements Serializable
         skademeldinger.add(m);
     }
      
+    //metode som henter ut forsikringene til kunden
     public LinkedList getForsikringer()
     {
         return forsikringer;
     }
     
+        //metode som henter ut skademeldingene til kunden
     public LinkedList getSkademeldinger()
     {
         return skademeldinger;
@@ -109,7 +111,7 @@ public class Forsikringskunde extends Person implements Serializable
         
         if(totalkunde)
         {
-            aarligpremie *= 0.10;
+            aarligpremie *= 0.90;
         }
         return aarligpremie;
     }
@@ -130,12 +132,25 @@ public class Forsikringskunde extends Person implements Serializable
         return aarligpremie;
     }
     
+    public String getTotalKunde()
+    {
+        if(TotalKunde())
+        {
+            return "JA";
+        }
+        else
+        {
+            return "NEI";
+        }
+    }
+    
     
     @Override
     public String toString()
     {
         return super.toString() + "\nKundenummer:  " + kundenummer
-                + "\n Forsikringer:" + getForsikringer();
+                + "\n Forsikringer:" + getForsikringer()
+                + "\n Totalsum årlige forsikringspremier: " + beregnTotalPremie() + ",-";
     }
     
 }
