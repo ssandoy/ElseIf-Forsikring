@@ -9,6 +9,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+import javax.swing.border.Border;
 
 
 /**
@@ -42,14 +43,19 @@ public class FinanserPanel extends JPanel implements ActionListener{
         
         Font font = new Font("Verdana", Font.BOLD, 30);
         infofelt.setFont(font);
-        infofelt.setForeground(Color.decode("#151514"));
+        infofelt.setForeground(Color.decode("#5E5E5E"));
         infofelt.setBackground(Color.decode("#DBDBDB"));
+        
+        Border border = BorderFactory.createLineBorder(Color.BLACK);
+        infofelt.setBorder(BorderFactory.createCompoundBorder(border, 
+        BorderFactory.createEmptyBorder(0, 70, 0, 0)));
         
         beregn.addActionListener(this);
         this.forelder = forelder;
         
         overskrift = new JLabel("FINANSER");
         overskrift.setFont(font);
+        overskrift.setForeground(Color.WHITE);
         
         setLayout(new BorderLayout());
         overskriftpanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -65,8 +71,9 @@ public class FinanserPanel extends JPanel implements ActionListener{
         add(finanspanel, BorderLayout.CENTER);
         add(knappepanel, BorderLayout.PAGE_END);
         
-        finanspanel.setBackground(Color.decode("#5E5E5E"));
-        knappepanel.setBackground(Color.decode("#5E5E5E"));
+        finanspanel.setBackground(Color.decode("#669CFF"));
+        knappepanel.setBackground(Color.decode("#669CFF"));
+        overskriftpanel.setBackground(Color.decode("#669CFF"));
         
         Toolkit kit = Toolkit.getDefaultToolkit();
          Dimension skjerm = kit.getScreenSize();

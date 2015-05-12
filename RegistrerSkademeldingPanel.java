@@ -162,7 +162,6 @@ public void registrerSkademelding() //metode som registrerer ny skademelding på
                     ny.setSkadenummer(snr);
                         if(ny.sjekkDekning())
                         {
-
                           if(sregister.leggTil(ny))
                           {
                           kunden.addSkademelding(ny);

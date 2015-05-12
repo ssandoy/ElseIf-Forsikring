@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
 import javax.swing.*;
+import javax.swing.border.Border;
 
 
 /**
@@ -49,7 +50,11 @@ public class HistorikkPanel extends JPanel implements ActionListener
         infofelt.setBackground(Color.decode("#DBDBDB"));
         infofelt.setEditable(false);
         
-        overskrift = new JLabel("Historikk");
+        Border border = BorderFactory.createLineBorder(Color.BLACK);
+        infofelt.setBorder(BorderFactory.createCompoundBorder(border, 
+        BorderFactory.createEmptyBorder(40, 70, 40, 40)));
+        
+        overskrift = new JLabel("HISTORIKK");
         
         tilbake = new JButton("Tilbake");
         tilbake.addActionListener(this);
@@ -59,8 +64,11 @@ public class HistorikkPanel extends JPanel implements ActionListener
         knappepanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         toppanel = new JPanel(new BorderLayout());
         overskriftpanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-
+        
+        overskrift.setForeground(Color.WHITE);
+        overskrift.setFont(font);
         overskriftpanel.add(overskrift);
+        
         
         tekstpanel.add(infofelt);
         
@@ -76,8 +84,8 @@ public class HistorikkPanel extends JPanel implements ActionListener
 
         tekstpanel.setBackground(Color.decode("#5E5E5E"));
         toppanel.setBackground(Color.decode("#5E5E5E"));
-        knappepanel.setBackground(Color.decode("#5E5E5E"));
-        overskriftpanel.setBackground(Color.decode("#5E5E5E"));
+        knappepanel.setBackground(Color.decode("#669CFF"));
+        overskriftpanel.setBackground(Color.decode("#669CFF"));
                 
         Toolkit kit = Toolkit.getDefaultToolkit();
          Dimension skjerm = kit.getScreenSize();

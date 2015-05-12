@@ -13,7 +13,7 @@ import java.util.LinkedList;
 import java.util.ListIterator;
 
 
-/**
+/** // egenandel - takst
  *
  * @author YAAKOUBD
  */
@@ -147,7 +147,7 @@ public class Skademelding implements Serializable {
              double premie = forsikring.getPremie();
              if(forsikring instanceof Innboforsikring)
              {
-             double erstatning = premie*1000;
+             double erstatning = premie;
              setErstatningsBelop(erstatning);   
              } else if(forsikring instanceof Fritidsboligforsikring)
              {

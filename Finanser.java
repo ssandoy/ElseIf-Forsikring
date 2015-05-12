@@ -82,7 +82,7 @@ public class Finanser {
     public String toString()
     {
         NumberFormat f = new DecimalFormat("#0.00");
-        String tekst = "\n\nInnbetalt: " + f.format(innbetalt) + "\nUtbetalt: " 
+        String tekst = "\nInnbetalt: " + f.format(innbetalt) + "\nUtbetalt: " 
                 + f.format(utbetalt) + "\nDifferanse: " + f.format(differanse);
         return tekst;                
     }
