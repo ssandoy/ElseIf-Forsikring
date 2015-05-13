@@ -13,6 +13,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 import javax.swing.*;
@@ -31,7 +32,7 @@ public class VisKundePanel extends JPanel implements ActionListener
     private JPanel sokepanel;
     private JPanel knappepanel;
 
-    private JButton tilbake;
+    private JButton tilbake, visSkademeldinger, visFinanser;
 
     private JLabel overskrift;
     private JTextField sokfelt;
@@ -69,8 +70,8 @@ public class VisKundePanel extends JPanel implements ActionListener
          
          kunderamme = new KundeRamme(soyler, kundeliste);
          kundetabell = new JTable(kunderamme);
-          kundetabell.addMouseListener(new MusLytter());
-          kundetabell.setAutoCreateRowSorter(true);
+         kundetabell.addMouseListener(new MusLytter());
+         kundetabell.setAutoCreateRowSorter(true);
          scroll = new JScrollPane(kundetabell);
 
          tabellpanel = new JPanel(new BorderLayout());
@@ -78,9 +79,15 @@ public class VisKundePanel extends JPanel implements ActionListener
          
          tilbake = new JButton("Tilbake");
          tilbake.addActionListener(this);
+         visSkademeldinger = new JButton("Vis skademeldinger");
+         visSkademeldinger.addActionListener(this);
+         visFinanser = new JButton("Vis finanser");
+         visFinanser.addActionListener(this);
          knappepanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
    
          knappepanel.add(tilbake);
+         knappepanel.add(visSkademeldinger);
+         knappepanel.add(visFinanser);
  
          this.add(sokepanel, BorderLayout.NORTH);
          this.add(tabellpanel, BorderLayout.CENTER);
@@ -164,6 +171,28 @@ public class VisKundePanel extends JPanel implements ActionListener
            forelder.visPanel(HovedVindu.HovedVindu);
            forelder.Size();                     
        }
+       else if(e.getSource() == visSkademeldinger)
+       {
+           Forsikringskunde k = (Forsikringskunde) kunderamme.getData().get(kundetabell.getSelectedRow());
+           String utskrift = "";
+           if(k.getSkademeldinger().isEmpty())
+           {
+               visMelding("Kunde: " + k.getFornavn() + " " + k.getEtternavn()
+                         + "\nHar ikke skrevet noen skademeldinger");
+               return;
+           }
+           Iterator it = k.getSkademeldinger().iterator();
+           while(it.hasNext())
+           {
+               utskrift += it.next().toString() + "\n";
+           }
+           visMelding("Kunde: " + k.getFornavn() + " " + k.getEtternavn() + 
+                      "\nSkademeldinger: " + utskrift);
+       }
+       else if(e.getSource() == visFinanser)
+       {
+           
+       }
     }
     
      private class TekstLytter implements DocumentListener {
@@ -192,7 +221,9 @@ public class VisKundePanel extends JPanel implements ActionListener
             if (me.getClickCount() == 2) 
             {
                 Forsikringskunde k = (Forsikringskunde) kunderamme.getData().get(kundetabell.getSelectedRow());
-                visMelding(k.toString());
+                visMelding("Kunde: " + k.getFornavn() + " " + k.getEtternavn() + 
+                           "\nAntall forsikringer: " + k.getForsikringer().size() + 
+                            "\nTotalsum årlig premie: " + k.getPremie());
       
             }
 

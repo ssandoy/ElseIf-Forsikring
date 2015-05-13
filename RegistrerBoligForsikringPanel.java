@@ -87,7 +87,7 @@ public class RegistrerBoligForsikringPanel extends JPanel implements ActionListe
         adresslabel      = new JLabel("Adresse: ");
         typelabel        = new JLabel("Boligtype: ");
         materiallabel    = new JLabel("Byggemateriale: ");
-        areallabel       = new JLabel("Boareal: " + arealfelt.getValue() + " km2");
+        areallabel       = new JLabel("Boareal: " + arealfelt.getValue() + " m²");
         bygglabel        = new JLabel("Byggeår: " + byggeaarfelt.getValue());
         
         beregn = new JButton("Beregn pris på forsikring");

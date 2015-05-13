@@ -31,6 +31,18 @@ public class Skademelding implements Serializable {
     private double takseringsBelop;
     private double erstatningsBelop;
     
+    private final double MAXBILERSTATNING = 100000.00;
+    private final double MAXBOLIGERSTATNING = 100000.00;
+    private final double MAXBAATERSTATNING = 50000.00;
+    private final double MAXHYTTEERSTATNING = 70000.00;
+    private final double MAXREISEERSTATNING = 20000.00;
+    
+    private final double BILEGENANDELKONSTANT = 0.2;
+    private final double BOLIGEGENANDELKONSTANT = 0.1;
+    private final double BAATEGENANDELKONSTANT = 0.2;
+    private final double HYTTEEGENANDELKONSTANT = 0.2;
+    private final double REISEEGENANDELKONSTANT = 0.3;
+
     private DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
     
     
@@ -43,7 +55,6 @@ public class Skademelding implements Serializable {
       
         this.forsikringstype = forsikringstype;
         this.skadeBeskrivelse = skadeBeskrivelse; 
-        this.egenandelsbelop = egenandelsbelop;
         this.takseringsBelop = takseringsBelop;
         erstatningsBelop = 0.00;
         
@@ -74,6 +85,11 @@ public class Skademelding implements Serializable {
         return erstatningsBelop;
     }
     
+    public double getEgenandel()
+    {
+        return egenandelsbelop;
+    }
+    
     //set-metoder
     public void setSkadenummer(String skadenummer)
     {
@@ -81,6 +97,10 @@ public class Skademelding implements Serializable {
     }
     public void setKontaktInfo( String kontaktInfo ){
         this.kontaktInfo = kontaktInfo;
+    }
+
+    public void setEgenandelsbelop(double egenandelsbelop) {
+        this.egenandelsbelop = egenandelsbelop;
     }
     
     public void setTakseringsBelop( double takseringsBelop ){
@@ -140,33 +160,75 @@ public class Skademelding implements Serializable {
             return false;
         }
         
+   //Metode som beregner erstatning og egenandelsbeløpet for skaden ut i fra takstering og konstanter
         public void beregnErstatning()
         {
-            if(sjekkDekning())
-            {
-             double premie = forsikring.getPremie();
+             //double premie = forsikring.getPremie();
+                double erstatning = 0;
              if(forsikring instanceof Innboforsikring)
              {
-             double erstatning = premie;
-             setErstatningsBelop(erstatning);   
-             } else if(forsikring instanceof Fritidsboligforsikring)
+                if(takseringsBelop < MAXBOLIGERSTATNING)
+                    erstatning = takseringsBelop;
+                
+                else
+                    erstatning = MAXBOLIGERSTATNING; 
+                
+                setEgenandelsbelop(erstatning*BOLIGEGENANDELKONSTANT);
+                erstatning = erstatning - egenandelsbelop;
+                setErstatningsBelop(erstatning);
+             } 
+             
+             else if(forsikring instanceof Fritidsboligforsikring)
              {
-              double erstatning = premie*100;
-             setErstatningsBelop(erstatning);    
-             }else if(forsikring instanceof Bilforsikring)
+              if(takseringsBelop < MAXHYTTEERSTATNING)
+                    erstatning = takseringsBelop;
+                
+                else
+                    erstatning = MAXHYTTEERSTATNING;
+              
+                setEgenandelsbelop(erstatning*HYTTEEGENANDELKONSTANT);
+                erstatning = erstatning - egenandelsbelop;
+                setErstatningsBelop(erstatning);
+             }
+             
+             else if(forsikring instanceof Bilforsikring)
              {
-              double erstatning = premie*10;
-              setErstatningsBelop(erstatning); 
-             }else if(forsikring instanceof Baatforsikring)
+                 if(takseringsBelop < MAXBILERSTATNING)
+                    erstatning = takseringsBelop;
+                
+                else
+                    erstatning = MAXBILERSTATNING;
+                 
+                setEgenandelsbelop(erstatning*BILEGENANDELKONSTANT);
+                erstatning = erstatning - egenandelsbelop;
+                setErstatningsBelop(erstatning);
+             }
+             
+             else if(forsikring instanceof Baatforsikring)
              {
-              double erstatning = premie*100;
-              setErstatningsBelop(erstatning); 
-             }else if(forsikring instanceof Reiseforsikring)
+                 if(takseringsBelop < MAXBAATERSTATNING)
+                    erstatning = takseringsBelop;
+                
+                else
+                    erstatning = MAXBAATERSTATNING;
+                 
+                 setEgenandelsbelop(erstatning*BAATEGENANDELKONSTANT);
+                erstatning = erstatning - egenandelsbelop;
+                setErstatningsBelop(erstatning);
+             }
+             
+             else if(forsikring instanceof Reiseforsikring)
              {
-              double erstatning = premie*10;
-              setErstatningsBelop(erstatning); 
-             }               
-            }//slutt på sjekkdekning
+                if(takseringsBelop < MAXREISEERSTATNING)
+                    erstatning = takseringsBelop;
+                
+                else
+                    erstatning = MAXREISEERSTATNING;
+                
+                setEgenandelsbelop(erstatning*REISEEGENANDELKONSTANT);
+                erstatning = erstatning - egenandelsbelop;
+                setErstatningsBelop(erstatning);
+             }              
         } //slutt på metode
     
     @Override

@@ -53,6 +53,12 @@ public abstract class Kjoretoyforsikring extends Insurance implements Serializab
         return modell;
     }
     
-    
+    @Override
+    public String toString() 
+    {
+        String utskrift = super.toString() + "\nEier: " + eier + "\nRegistreringsnummer: " + registreringsnummer
+                          + "\nType: " + type + "\nModell: " + modell;
+        return utskrift;
+    }
     
 }

@@ -45,7 +45,7 @@ public class Prosjektoppgave
         lesForsikringsregister();
         lesSkademeldingsregister();
         
-        /*for(int i=0;i<100;i++){
+        /*for(int i=0;i<10000;i++){
             int n = new Random().nextInt(navn.length);
             int e = new Random().nextInt(etternavn.length);
             int a = new Random().nextInt(addresse.length);

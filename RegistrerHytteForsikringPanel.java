@@ -82,7 +82,7 @@ public class RegistrerHytteForsikringPanel extends JPanel implements ActionListe
         personlabel      = new JLabel("Personnummer: ");
         adresslabel      = new JLabel("Adresse: ");
         maanedlabel    = new JLabel("Antall bo-måneder i året: ");
-        areallabel       = new JLabel("Boareal: " + arealfelt.getValue() + " km2");
+        areallabel       = new JLabel("Boareal: " + arealfelt.getValue() + " m²");
         bygglabel        = new JLabel("Byggeår: " + byggeaarfelt.getValue());
         
         registrer = new JButton("Beregn pris på forsikring");

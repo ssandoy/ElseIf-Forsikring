@@ -11,19 +11,18 @@ import java.io.Serializable;
  *
  * @author ssandoy
  */
-public class Reiseforsikring extends Insurance implements Serializable
+public class Reiseforsikring extends Personforsikring implements Serializable
 {
     private String omraade;
-    private String status;
     
     private Forsikringsregister fregister;
     
     
-    public Reiseforsikring(Forsikringskunde kunde, String omraade, String status) 
+    public Reiseforsikring(Forsikringskunde kunde, String status, String omraade) 
     {
-        super(kunde);
+        super(kunde, status);
         this.omraade = omraade;
-        this.status = status;
+        
         
     }
     
@@ -45,13 +44,13 @@ public class Reiseforsikring extends Insurance implements Serializable
             premie += 1500.00;
         }
         
-        if(status.equals("Voksen"))
+        if(getStatus().equals("Voksen"))
         {
             premie *= 1;
-        }else if(status.equals("Student"))
+        }else if(getStatus().equals("Student"))
         {
              premie *= 0.80;
-        }else if(status.equals("Honnør"))
+        }else if(getStatus().equals("Honnør"))
         {
             premie *= 0.75;
         }
@@ -59,6 +58,12 @@ public class Reiseforsikring extends Insurance implements Serializable
             super.setPremie(premie);
             
             
+    }
+
+    @Override
+    public String toString() {
+        String utskrift = "REISE FORSIKRING\n" + super.toString() + "\nOmråde: " + omraade + "\n\n";
+        return utskrift;
     }
     
 }

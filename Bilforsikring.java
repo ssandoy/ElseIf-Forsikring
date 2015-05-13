@@ -87,8 +87,10 @@ public class Bilforsikring extends Kjoretoyforsikring implements Serializable
 
     @Override
     public String toString() 
-    {
-        return "Forsikringsinnehaver: ";
+    { 
+        String utskrift = "BIL FORSIKRING\n" + super.toString() + "\nÅrlig kjørelengde: " + aarligkjorelengde 
+                          + " km \nAntall år skadefri: " + skadefri + "\n\n";
+        return utskrift;
     }
     
         

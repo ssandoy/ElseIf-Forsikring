@@ -168,7 +168,7 @@ public class RegistrerReiseForsikringPanel extends JPanel implements ActionListe
                 }else
                  {
                      String fnr = fregister.genererNummer();
-                     Reiseforsikring f = new Reiseforsikring(k, reisedekning, status);
+                     Reiseforsikring f = new Reiseforsikring(k, status ,reisedekning);
                      f.setForsikringsnummer(fnr);
                      f.setType("REISE-FORSIKRING");
                      f.beregnPremie();

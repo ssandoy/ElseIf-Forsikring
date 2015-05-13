@@ -259,7 +259,7 @@ public class HovedVindu extends JFrame implements ActionListener
         }
         else if(e.getSource() == visForsikring)
         {
-            underpaneler.add(new SlettForsikringerPanel(this, kregister, fregister), "VIS FORSIKRING");
+            underpaneler.add(new VisForsikringerPanel(this, kregister, fregister), "VIS FORSIKRING");
             visPanel("VIS FORSIKRING");
             fjernLogo();
         }

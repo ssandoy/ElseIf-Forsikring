@@ -85,5 +85,10 @@ public class Fritidsboligforsikring extends Boligforsikring implements Serializa
 
     }
     
+    @Override
+    public String toString() {
+        String utskrift = "HYTTE FORSIKRING\n" + super.toString() + "\nAntall måneder: " + antallManeder + "\n\n";
+        return utskrift;
+    }
     
 }

@@ -7,6 +7,7 @@ package prosjektoppgave;
 
 import java.io.Serializable;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -113,7 +114,14 @@ public abstract class Insurance implements  Forsikring {
      
     
 
-    
+    @Override
+    public String toString() {
+        DecimalFormat df = new DecimalFormat("#.##");
+        String utskrift = "Start Dato: " + dateFormat.format(startDato) + "\nForsikringsnummer: " + forsikringsnummer
+                           + "\nForsikringstype: " + forsikringstype + "\nErstatning: " + df.format(erstatning) 
+                           + "\nEgenandel: " + df.format(egenandel) + "\nForsikringspremie: " + df.format(forsikringspremie);
+        return utskrift;
+    }
     
     
 }

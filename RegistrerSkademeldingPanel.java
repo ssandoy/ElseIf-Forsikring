@@ -157,36 +157,45 @@ public void registrerSkademelding() //metode som registrerer ny skademelding på
                     String beskrivelse = skadebeskrivelse.getText();
                     double takst = Double.parseDouble(takseringsbelop.getText());
                     Skademelding ny = new Skademelding(kunden, f, type , beskrivelse, takst);
-                    ny.beregnErstatning();
+                    
                     String snr = sregister.genererNummer();
                     ny.setSkadenummer(snr);
+                    ny.setTakseringsBelop(takst);
+                    ny.beregnErstatning();
+                    int result = JOptionPane.showConfirmDialog(null, 
+                             "Du må betale : " + ny.getEgenandel() + ",- i egenandel for å få dekket skadene." + 
+                                     "\nVil du tegne denne skademeldingen?", null , JOptionPane.YES_NO_OPTION);
+                      if(result == JOptionPane.YES_OPTION)
+                      {
                         if(ny.sjekkDekning())
                         {
-                          if(sregister.leggTil(ny))
+                          if(!sregister.leggTil(ny))
                           {
-                          kunden.addSkademelding(ny);
-                          System.out.println(sregister.toString());
-                          visMelding("Skademelding lagt til");
-                          forelder.addLogo();
-                          forelder.visPanel(HovedVindu.HovedVindu);
-                          forelder.Size();
+                              visFeilMelding("Pass på å fylle ut taksering og erstatningsbelop!");
                           }
                             else
                             {
-                              visFeilMelding("Pass på å fylle ut taksering og erstatningsbelop!");
+                                kunden.addSkademelding(ny);
+                                System.out.println(sregister.toString());
+                                visMelding("Skademelding lagt til");
+                                forelder.addLogo();
+                                forelder.visPanel(HovedVindu.HovedVindu);
+                                forelder.Size();
                             }          
                          } //slutt på sjekkdekning
                         else
                         {
                                 visFeilMelding("Du har ikke dekning for denne forsikringen!");
                         }
-
             }else
-                    visFeilMelding("Kunden eier ikke forsikringen med innskreven forsikringsnummer"); 
+             {
+             visFeilMelding("Tegning av skademelding avbrutt");
+            }
+                }   
             }
         }catch(NumberFormatException nfe)
         {
-            visFeilMelding("Pass på å skrive tall i taksering!");
+            visFeilMelding("Pass på å skrive desimaltall i taksering!");
         }
         /*catch(NullPointerException npe)
         {

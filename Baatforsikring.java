@@ -65,11 +65,15 @@ public class Baatforsikring extends Kjoretoyforsikring implements Serializable
             premie += 2000;
         }
         
-        super.setPremie(premie);
-        
-        
+        super.setPremie(premie);  
     }
     
+    @Override
+    public String toString() 
+    {
+        String utskrift = "BÅT FORSIKRING\n" + super.toString() + "\nAntall hestekrefter: " + hestekrefter + "\nStørrelse: " + fot + " fot \n\n";
+        return utskrift;
+    }
     
     
 }

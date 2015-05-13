@@ -132,6 +132,12 @@ public class Forsikringskunde extends Person implements Serializable
         return aarligpremie;
     }
     
+    public void setPremie(double aarligpremie)
+    {
+        this.aarligpremie = aarligpremie;
+    }
+    
+    
     public String getTotalKunde()
     {
         if(TotalKunde())

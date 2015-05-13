@@ -44,6 +44,14 @@ public abstract class Boligforsikring extends Insurance implements Serializable
     {
         return byggeaar;
     }
+    
+    @Override
+    public String toString() {
+        
+        String utskrift = super.toString() + "\nBolig adresse: " + adresse + "\nByggeår: " + byggeaar 
+                          + "\nBoareal: " + boareal + " m²";
+        return utskrift;
+    }
 
    
 }

@@ -22,7 +22,7 @@ import javax.swing.event.DocumentListener;
  * @author ssandoy, YAAKOUBD
  */
 
-public class SlettForsikringerPanel extends JPanel implements ActionListener
+public class VisForsikringerPanel extends JPanel implements ActionListener
 {
     private JPanel overskriftpanel;
     private JPanel tabellpanel;
@@ -49,7 +49,7 @@ public class SlettForsikringerPanel extends JPanel implements ActionListener
    
    private HovedVindu forelder;
    
-    public SlettForsikringerPanel( HovedVindu forelder, Kunderegister kregister, Forsikringsregister fregister)
+    public VisForsikringerPanel( HovedVindu forelder, Kunderegister kregister, Forsikringsregister fregister)
     {
         super(new BorderLayout());
         this.kregister = kregister;
@@ -168,7 +168,9 @@ public class SlettForsikringerPanel extends JPanel implements ActionListener
                 Forsikringskunde k = f.getKunde();
                 if(fregister.fjern(f.getFNummer()))
                 {
+                     double pris = f.getPremie();
                      k.fjernForsikring(f);
+                     k.setPremie(k.getPremie() - pris);
                      visMelding("Forsikring fjernet!");
                      f = null;
                 }
@@ -212,13 +214,8 @@ public class SlettForsikringerPanel extends JPanel implements ActionListener
             if (me.getClickCount() == 2) 
             {
                 Insurance f = (Insurance) forsikringsramme.getData().get(forsikringstabell.getSelectedRow());
-                Forsikringskunde k = f.getKunde();
-                if(fregister.fjern(f.getFNummer()))
-                {
-                    k.fjernForsikring(f);
-                     visMelding("Forsikring fjernet!");
-                     f = null;
-                }
+                
+                visMelding(f.toString());
                
                 
                         

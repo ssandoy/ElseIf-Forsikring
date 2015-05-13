@@ -9,6 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+import javax.swing.border.Border;
 
 /**
  *
@@ -97,6 +98,10 @@ public class RegistrerKundePanel extends JPanel implements ActionListener {
 
         tekstpanel.setBackground(Color.decode("#5E5E5E"));
         knappepanel.setBackground(Color.decode("#5E5E5E"));
+        
+        Border border = BorderFactory.createLineBorder(Color.WHITE);
+        tekstpanel.setBorder(BorderFactory.createCompoundBorder(border, 
+        BorderFactory.createEmptyBorder(0, 30, 0, 0)));
         
         toppanel.add(overskriftpanel, BorderLayout.PAGE_START);
         toppanel.add(tekstpanel, BorderLayout.CENTER);

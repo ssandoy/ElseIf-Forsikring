@@ -91,4 +91,10 @@ public class Innboforsikring extends Boligforsikring
          super.setPremie(premie);
      }
 
+    @Override
+    public String toString() {
+        String utskrift = "INNBO FORSIKRING\n" + super.toString() + "\nBoligtype: " + boligtype + "\nByggematerial: " + byggematerial + "\n\n";
+        return utskrift;
+    }
+    
 }
