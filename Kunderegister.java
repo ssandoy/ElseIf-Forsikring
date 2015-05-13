@@ -9,9 +9,10 @@ import java.util.Map;
 import java.util.TreeMap;
 
 /**
- *
- * @author ssandoy
+ * Register som inneholder alle Kundene som har blitt opprettet
+ * @author Sander
  */
+
 public class Kunderegister extends TreeMap<String, Forsikringskunde> implements Register{
 
     /*Metode for å legge en kunde i registeret.*/

@@ -6,9 +6,11 @@
 package prosjektoppgave;
 
 /**
- *
- * @author ssandoy
+ * Klasse som er for å opprette et Innboforsikrings-objekt og 
+ * inneholder en metode som beregner premien for den
+ * @author Sander
  */
+
 public class Innboforsikring extends Boligforsikring 
 {
     private String boligtype;

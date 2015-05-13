@@ -9,8 +9,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- *
- * @author Sander, Amir, Jonatan
+ * Interface klasse for forsikringsklassene
+ * @author Sander, Amir
  */
 
 public interface Forsikring extends Serializable

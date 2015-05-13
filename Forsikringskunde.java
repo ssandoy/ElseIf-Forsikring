@@ -11,8 +11,10 @@ import java.util.LinkedList;
 import java.util.ListIterator;
 
 /**
- *
- * @author ssandoy
+ *  Klasse for å opprette et Forsikringskunde-objekt, inneholder all info om kunden, 
+ * metoder for å endre på dem
+ *  og har to LinkedList-er som er for å lagre alle forsikringene og skademeldingene til kunden  
+ * @author Sander
  */
 public class Forsikringskunde extends Person implements Serializable
 {

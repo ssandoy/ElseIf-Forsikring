@@ -13,9 +13,11 @@ import javax.swing.*;
 
 
 /**
- *
- * @author ssandoy
+ * Panel klasse hvor kunden kan velge de forskjellige funksjonene av programmene 
+ * ved å trykke på en av de 8 forskjellige knappene +SKRIV MER
+ * @author Sander
  */
+
 public class HovedVindu extends JFrame implements ActionListener  
 {
     

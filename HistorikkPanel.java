@@ -9,10 +9,9 @@ import javax.swing.border.Border;
 
 
 /**
- *
- * @author Yaakoubd
+ * Panel som viser all Historikk/statistikk informasjon i et JTextArea
+ * @author Amir
  */
-
 public class HistorikkPanel extends JPanel implements ActionListener
 {
     private JTextArea infofelt;

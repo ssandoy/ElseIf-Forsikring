@@ -12,9 +12,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- *
- * @author ssandoy
+ * En abstrakt super-superklasse for forsikringene
+ * @author Sander
  */
+
 public abstract class Insurance implements  Forsikring {
     
     private Forsikringskunde kunde;

@@ -10,9 +10,10 @@ import java.io.Serializable;
 
 
 /**
- * Interface Menneske.
- * @author Sander Sandøy, Amir Yaakoubd, Jonatan Stensløkken
+ * Interface Menneske for Person-superklassen
+ * @author Sander, Amir 
  */
+
 public interface Menneske extends Serializable
 {
     /*get-metoder for navn*/

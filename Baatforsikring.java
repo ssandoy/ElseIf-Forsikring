@@ -8,8 +8,8 @@ package prosjektoppgave;
 import java.io.Serializable;
 
 /**
- *
- * @author ssandoy
+ * Klasse som er for å opprette et Båtforsikrings-objekt og har en metode som beregner premien for den
+ * @author Sander
  */
 public class Baatforsikring extends Kjoretoyforsikring implements Serializable
 {

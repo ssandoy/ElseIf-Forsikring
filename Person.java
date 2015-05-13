@@ -6,9 +6,10 @@
 package prosjektoppgave;
 
 /**
- *
- * @author ssandoy
+ * Person superklasse for kunde klassen, inneholder all informasjon om personen
+ * @author Sander
  */
+
 public abstract class Person implements Menneske
 {
     private String personnummer;

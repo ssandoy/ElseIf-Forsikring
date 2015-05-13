@@ -8,9 +8,10 @@ package prosjektoppgave;
 import java.io.Serializable;
 
 /**
- *
- * @author ssandoy
+ * Klasse som oppretter et reiseforsikringsobjekt og beregner forsikring for den
+ * @author Sander, Amir
  */
+
 public class Reiseforsikring extends Personforsikring implements Serializable
 {
     private String omraade;

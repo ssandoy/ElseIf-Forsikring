@@ -11,8 +11,10 @@ import java.util.ListIterator;
 import java.util.Map;
 
 /**
- *
- * @author YAAKOUBD
+ *  Klasse som er for å oprette et Finanser-objekt, 
+ *  denne klassen beregner inntektene utgiftene og differensen 
+ *  mellom begge for forsikringsselskapet
+ * @author Amir
  */
 public class Finanser {
     

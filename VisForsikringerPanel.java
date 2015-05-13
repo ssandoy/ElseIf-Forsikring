@@ -5,12 +5,8 @@
  */
 package prosjektoppgave;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.List;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseListener;
+import java.awt.*;
+import java.awt.event.*;
 import java.util.LinkedList;
 import java.util.Map;
 import javax.swing.*;
@@ -18,8 +14,9 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 /**
- *
- * @author ssandoy, YAAKOUBD
+ * Panel som skriver ut alle forskjellige typer forsikringer i en tabell 
+ * og viser informasjon om dem i en tabell
+ * @author Sander, Amir
  */
 
 public class VisForsikringerPanel extends JPanel implements ActionListener

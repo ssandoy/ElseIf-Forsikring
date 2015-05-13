@@ -9,9 +9,10 @@ import java.io.Serializable;
 
 
 /**
- *
- * @author ssandoy
+ * Superklasse for bil og båt forsikrings klassene
+ * @author Sander
  */
+
 public abstract class Kjoretoyforsikring extends Insurance implements Serializable
 {
 

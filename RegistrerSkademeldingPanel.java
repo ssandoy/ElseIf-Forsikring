@@ -24,9 +24,10 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 /**
- *
- * @author ssandoy
+ * Panel for å skrive en skademelding ved å fylle ut alle feltene
+ * @author Amir
  */
+
 public class RegistrerSkademeldingPanel extends JPanel implements ActionListener
 { 
     

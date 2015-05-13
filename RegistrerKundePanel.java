@@ -12,9 +12,10 @@ import javax.swing.*;
 import javax.swing.border.Border;
 
 /**
- *
- * @author ssandoy
+ * Panel for å registrere en kunde ved å fylle ut alle feltene
+ * @author Sander
  */
+
 public class RegistrerKundePanel extends JPanel implements ActionListener {
 
     private JTextField personnummerfelt, fornavnsfelt, etternavnsfelt, adressefelt, telefonfelt;

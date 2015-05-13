@@ -9,8 +9,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- *
- * @author ssandoy
+ * Super klasse for innbo og fritidsbolig-forsikringsklassene
+ * @author Sander
  */
 public abstract class Boligforsikring extends Insurance implements Serializable
 {

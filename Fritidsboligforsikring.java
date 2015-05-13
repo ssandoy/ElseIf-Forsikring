@@ -8,9 +8,11 @@ package prosjektoppgave;
 import java.io.Serializable;
 
 /**
- *
- * @author ssandoy
+ * Klasse for å opprette et fritidsforsikrings objekt og 
+ * inneholder en metode for å beregne premien dens
+ * @author Sander
  */
+
 public class Fritidsboligforsikring extends Boligforsikring implements Serializable 
 {   
     private int antallManeder; //Antall måneder man bor i hytta

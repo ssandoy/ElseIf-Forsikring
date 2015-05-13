@@ -5,24 +5,17 @@
  */
 package prosjektoppgave;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.List;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseListener;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Map;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 /**
- *
- * @author ssandoy
+ * Panel som viser alle kunder i en tabell og hvor man kan søke opp alle kundene 
+ * og viser infromasjon om dem ved å trykke på en rad
+ * @author Sander
  */
 
 public class VisKundePanel extends JPanel implements ActionListener

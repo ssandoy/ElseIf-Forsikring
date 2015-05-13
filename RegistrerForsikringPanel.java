@@ -11,9 +11,10 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 /**
- *
- * @author ssandoy
+ * Panel for å velge hvilken type forsikring man vil registrere ved å trykke på en av knappene i toppanelet
+ * @author Sander
  */
+
 public class RegistrerForsikringPanel extends JPanel implements ActionListener
 {
 

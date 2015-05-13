@@ -10,9 +10,10 @@ import java.io.Serializable;
 import java.util.Map;
 
 /**
- *
- * @author ssandoy
+ * Interface for alle register klassene
+ * @author Sander
  */
+
 public interface Register extends Serializable 
 {
     /*Metoder for å legge til objekt, og fjerne/sjekke om finnes etter nøkkelverdi*/

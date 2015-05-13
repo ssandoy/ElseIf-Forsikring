@@ -13,9 +13,10 @@ import java.util.LinkedList;
 import java.util.ListIterator;
 
 
-/** // egenandel - takst
+/** Klasse for å opprette et skademeldingsobjekt og inneholder metoder som sjekker om kunden er dekket
+ *  for den spesifikke typen forsikring og beregner erstatnings beløpet
  *
- * @author YAAKOUBD
+ * @author Amir
  */
 public class Skademelding implements Serializable {
     

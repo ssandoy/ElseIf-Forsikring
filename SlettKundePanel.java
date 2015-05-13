@@ -20,9 +20,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
- *
- * @author YAAKOUBD
+ * Panel som er for å slette en kunde fra registeret hvis kunden ikke har noen forsikringer lenger.
+ * @author Amir
  */
+
 public class SlettKundePanel extends JPanel implements ActionListener{
     
     private JTextField personnummerfelt;

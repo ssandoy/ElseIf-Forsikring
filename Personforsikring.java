@@ -8,9 +8,10 @@ package prosjektoppgave;
 import java.io.Serializable;
 
 /**
- *
- * @author YAAKOUBD
+ * En abstrakt superklasse for reiseforsikrings klassen
+ * @author Amir
  */
+
 public abstract class Personforsikring extends Insurance implements Serializable{
     
     private String status;

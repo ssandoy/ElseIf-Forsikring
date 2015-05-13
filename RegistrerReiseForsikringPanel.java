@@ -11,9 +11,10 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 /**
- *
- * @author ssandoy
+ * Panel for å registrere reiseforsikring ved å fylle ut alle feltene
+ * @author Sander
  */
+
 public class RegistrerReiseForsikringPanel extends JPanel implements ActionListener
 {
     

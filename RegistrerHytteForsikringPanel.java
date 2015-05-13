@@ -13,9 +13,10 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 /**
- *
- * @author ssandoy
+ * Panel for å registrere hytteforsikring ved å fylle ut alle feltene
+ * @author Sander
  */
+
 public class RegistrerHytteForsikringPanel extends JPanel implements ActionListener
 {
      private JTextField personnummerfelt, adressefelt;

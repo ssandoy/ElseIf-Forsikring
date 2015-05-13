@@ -11,8 +11,8 @@ import java.util.Map;
 import java.util.TreeMap;
 
 /**
- *
- * @author ssandoy
+ * Register som inneholder alle Forsikringene som har blitt opprettet
+ * @author Sander
  */
 public class Forsikringsregister extends TreeMap<String,Insurance> implements Serializable, Register 
 {

@@ -13,8 +13,8 @@ import javax.swing.border.Border;
 
 
 /**
- *
- * @author YAAKOUBD
+ *  Panel for finanser klassen, det viser frem all informasjon i et JTextArea
+ * @author Amir
  */
 public class FinanserPanel extends JPanel implements ActionListener{
     

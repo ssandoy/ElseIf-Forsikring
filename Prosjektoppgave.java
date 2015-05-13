@@ -20,9 +20,11 @@ import java.util.Random;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author ssandoy
+ * Main klasse som er for å kjøre programet og inneholder metoder som er for å serialisere kunde, 
+ * forsikring og skademeldingsregisterene
+ * @author Sander, Amir
  */
+
 public class Prosjektoppgave 
 {
 

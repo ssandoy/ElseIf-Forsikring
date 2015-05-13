@@ -6,8 +6,9 @@ import java.util.LinkedList;
 import java.util.ListIterator;
 
 /**
- * 
- * &author YAAKOUBD
+ * Klasse som oppretter et Historikk objekt som er for å skrive ut all
+ * historikk/statistikk om selskapets kunder, forsikringer og skademeldinger
+ * author Amir
  */
 
 public class Historikk 

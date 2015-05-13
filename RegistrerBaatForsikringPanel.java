@@ -11,9 +11,10 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+
 /**
- *
- * @author ssandoy
+ * Panel for å registrere båtforsikring ved å fylle ut alle feltene
+ * @author Sander
  */
 
 public class RegistrerBaatForsikringPanel extends JPanel implements ActionListener
