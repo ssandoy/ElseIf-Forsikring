@@ -9,6 +9,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -23,7 +24,6 @@ import javax.swing.JTextField;
  * Panel som er for å slette en kunde fra registeret hvis kunden ikke har noen forsikringer lenger.
  * @author Amir
  */
-
 public class SlettKundePanel extends JPanel implements ActionListener{
     
     private JTextField personnummerfelt;
@@ -50,8 +50,14 @@ public class SlettKundePanel extends JPanel implements ActionListener{
         slett = new JButton("Slett Kunde");
         tilbake = new JButton("Tilbake");
         personnummerfelt = new JTextField(10);
-        personnummer = new JLabel("Personnummer: ");
+        personnummer = new JLabel("         Personnummer: ");
         overskrift = new JLabel("Slett Kunde");
+        
+        Font font = new Font("Verdana", Font.BOLD, 30);
+        
+        overskrift.setFont(font);
+        overskrift.setForeground(Color.decode("#FFFFFF"));
+        personnummer.setForeground(Color.decode("#FFFFFF"));
         
         slett.addActionListener(this);
         tilbake.addActionListener(this);
@@ -60,7 +66,7 @@ public class SlettKundePanel extends JPanel implements ActionListener{
         
         
         setLayout(new BorderLayout());
-        tekstpanel = new JPanel(new GridLayout(5, 0, 5, 5)); //Endre dette.
+        tekstpanel = new JPanel(new GridLayout(1, 0, 5, 5)); //Endre dette.
         knappepanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         toppanel = new JPanel(new BorderLayout());
         overskriftpanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -80,17 +86,17 @@ public class SlettKundePanel extends JPanel implements ActionListener{
         add(toppanel, BorderLayout.CENTER);
         add(knappepanel, BorderLayout.PAGE_END);
         
-        tekstpanel.setBackground(Color.decode("#E57E7E"));
-        toppanel.setBackground(Color.decode("#E57E7E"));
-        knappepanel.setBackground(Color.decode("#E57E7E"));
-        overskriftpanel.setBackground(Color.decode("#E57E7E"));
+        tekstpanel.setBackground(Color.decode("#669CFF"));
+        toppanel.setBackground(Color.decode("#669CFF"));
+        knappepanel.setBackground(Color.decode("#669CFF"));
+        overskriftpanel.setBackground(Color.decode("#669CFF"));
 
         Toolkit kit = Toolkit.getDefaultToolkit();
         Dimension skjerm = kit.getScreenSize();
         int bredde = skjerm.width;
         int hoyde = skjerm.height;
 
-        forelder.setSize(bredde / 2, hoyde - 500);
+        forelder.setSize(bredde / 2, hoyde/5 );
         forelder.setLocation(skjerm.width / 2 - forelder.getSize().width / 2, skjerm.height / 2 - forelder.getSize().height / 2);
      
     }
