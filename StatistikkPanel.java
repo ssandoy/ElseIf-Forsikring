@@ -9,14 +9,14 @@ import javax.swing.border.Border;
 
 
 /**
- * Panel som viser all Historikk/statistikk informasjon i et JTextArea
+ * Panel som viser all Statistikk/statistikk informasjon i et JTextArea
  * @author Amir
  */
-public class HistorikkPanel extends JPanel implements ActionListener
+public class StatistikkPanel extends JPanel implements ActionListener
 {
     private JTextArea infofelt;
 
-    private  Historikk historikk;
+    private  Statistikk statistikk;
     
     private JButton tilbake;
     
@@ -30,19 +30,19 @@ public class HistorikkPanel extends JPanel implements ActionListener
     
     private HovedVindu forelder;
     
-    public HistorikkPanel(HovedVindu forelder, Historikk historikk)
+    public StatistikkPanel(HovedVindu forelder, Statistikk statistikk)
     {
         super (new BorderLayout());
-        this.historikk = historikk;
+        this.statistikk = statistikk;
         this.forelder = forelder;
         
         
         tekstpanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         
-        historikk.tell(); //Metode som teller opp alle typer kunder, forsikringer, og skademelding
+        statistikk.tell(); //Metode som teller opp alle typer kunder, forsikringer, og skademelding
         
         infofelt = new JTextArea (30, 20);
-        infofelt.setText(historikk.skrivHistorikk());
+        infofelt.setText(statistikk.skrivStatistikk());
         Font font = new Font("Verdana", Font.BOLD, 30);
         infofelt.setFont(font);
         infofelt.setForeground(Color.decode("#5E5E5E"));
@@ -91,7 +91,7 @@ public class HistorikkPanel extends JPanel implements ActionListener
          int bredde = skjerm.width;
          int hoyde = skjerm.height;
          
-         forelder.setSize(bredde/2, hoyde-500);
+         forelder.setSize(bredde*3/4, hoyde*3/5);
          forelder.setLocation(skjerm.width/2-forelder.getSize().width/2, skjerm.height/2-forelder.getSize().height/2);
     }
     

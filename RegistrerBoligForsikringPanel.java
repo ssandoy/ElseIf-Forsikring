@@ -69,7 +69,7 @@ public class RegistrerBoligForsikringPanel extends JPanel implements ActionListe
          int bredde = skjerm.width;
          int hoyde = skjerm.height;
          
-         forelder.setSize(bredde / 2, hoyde - 400);
+         forelder.setSize(bredde / 2, hoyde/2);
         forelder.setLocation(skjerm.width / 2 - forelder.getSize().width / 2, skjerm.height / 2 - forelder.getSize().height / 2);
         
     }
@@ -84,12 +84,19 @@ public class RegistrerBoligForsikringPanel extends JPanel implements ActionListe
         arealfelt        = new JSlider(JSlider.HORIZONTAL, 30, 150, 50);
         byggeaarfelt     = new JSlider(JSlider.HORIZONTAL, 1900, 2015, 1940);
         
-        personlabel      = new JLabel("Personnummer: ");
-        adresslabel      = new JLabel("Adresse: ");
-        typelabel        = new JLabel("Boligtype: ");
-        materiallabel    = new JLabel("Byggemateriale: ");
-        areallabel       = new JLabel("Boareal: " + arealfelt.getValue() + " m²");
-        bygglabel        = new JLabel("Byggeår: " + byggeaarfelt.getValue());
+        personlabel      = new JLabel("     Personnummer: ");
+        adresslabel      = new JLabel("     Adresse: ");
+        typelabel        = new JLabel("     Boligtype: ");
+        materiallabel    = new JLabel("     Byggemateriale: ");
+        areallabel       = new JLabel("     Boareal: " + arealfelt.getValue() + " m²");
+        bygglabel        = new JLabel("     Byggeår: " + byggeaarfelt.getValue());
+        
+        personlabel.setForeground(Color.WHITE);
+        adresslabel.setForeground(Color.WHITE);
+        typelabel.setForeground(Color.WHITE);
+        materiallabel.setForeground(Color.WHITE);
+        areallabel.setForeground(Color.WHITE);
+        bygglabel.setForeground(Color.WHITE);
         
         beregn = new JButton("Beregn pris på forsikring");
         beregn.addActionListener(this);
@@ -159,9 +166,9 @@ public class RegistrerBoligForsikringPanel extends JPanel implements ActionListe
         midtpanel.add(bygglabel);
         midtpanel.add(byggeaarfelt);
         
-        toppanel.setBackground(Color.decode("#E0D1FF"));
-        knappepanel.setBackground(Color.decode("#E57E7E"));
-        midtpanel.setBackground(Color.decode("#E57E7E"));
+        toppanel.setBackground(Color.decode("#FFFFFF"));
+        knappepanel.setBackground(Color.decode("#669CFF"));
+        midtpanel.setBackground(Color.decode("#669CFF"));
     }
     
 public void registrer() //metode som registrerer boligforsikring og sjekker om det er noen feil 
@@ -207,12 +214,9 @@ public void registrer() //metode som registrerer boligforsikring og sjekker om d
                                      "\nVil du tegne denne forsikringen?", null , JOptionPane.YES_NO_OPTION);
                      if(result == JOptionPane.YES_OPTION) 
                     {
-                     if(fregister.leggTil(f))
+                     if(fregister.leggTil(f) && k.getForsikringer().add(f))
                      {
-                        k.addForsikring(f);
-                        visMelding("Forsikring registrert på kunde:\n" + k.toString());
-                        System.out.println(fregister.toString());
-                        System.out.println(f.getFNummer());
+                        visMelding("Forsikring registrert på kunde:\n" + k.getNavn() + "\n" + f.toString());
                         forelder.addLogo();
                         forelder.visPanel(HovedVindu.HovedVindu);
                         forelder.Size();
@@ -294,11 +298,11 @@ public void registrer() //metode som registrerer boligforsikring og sjekker om d
         {
             if(e.getSource() == arealfelt) 
             {
-                areallabel.setText("Boareal: " + arealfelt.getValue() + " km2") ;
+                areallabel.setText("     Boareal: " + arealfelt.getValue() + " km2") ;
             }
             else if(e.getSource() == byggeaarfelt)
             {
-                bygglabel.setText("Byggeår: " + byggeaarfelt.getValue());
+                bygglabel.setText("     Byggeår: " + byggeaarfelt.getValue());
             }
             
         } 

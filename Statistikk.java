@@ -6,12 +6,12 @@ import java.util.LinkedList;
 import java.util.ListIterator;
 
 /**
- * Klasse som oppretter et Historikk objekt som er for å skrive ut all
- * historikk/statistikk om selskapets kunder, forsikringer og skademeldinger
- * author Amir
+ * Klasse som oppretter et Statistikk objekt som er for å skrive ut all
+ statistikk om selskapets kunder, forsikringer og skademeldinger
+ author Amir
  */
 
-public class Historikk 
+public class Statistikk 
 {
     private Forsikringsregister fregister;
     private Kunderegister kregister;
@@ -24,7 +24,7 @@ public class Historikk
     private int antKunderSkademelding = 0;
     private int antTotalKunder = 0;
     
-    public Historikk(Forsikringsregister fregister, Kunderegister kregister, Skademeldingsregister sregister)
+    public Statistikk(Forsikringsregister fregister, Kunderegister kregister, Skademeldingsregister sregister)
     {
         this.fregister = fregister;
         this.kregister = kregister;
@@ -89,10 +89,10 @@ public class Historikk
         return utskrift;
     }*/
     
-    public String skrivHistorikk()
+    public String skrivStatistikk()
     {
         String stjerne = "*";
-        String utskrift = "HISTORIKK: \n\nAntall kunder: " + antallKunder
+        String utskrift = "STATISTIKK: \n\nAntall kunder: " + antallKunder
                           + "\nAntall forsikringer: " + antallForsikringer
                           + "\nAntall skademeldinger: " + antallSkademeldinger
                           + "\nAntall kunder som eier forsikring(er): " + antKunderForsikring

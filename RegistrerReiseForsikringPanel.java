@@ -63,7 +63,7 @@ public class RegistrerReiseForsikringPanel extends JPanel implements ActionListe
          int bredde = skjerm.width;
          int høyde = skjerm.height;
          
-         forelder.setSize(bredde/2, høyde-520);
+         forelder.setSize(bredde/2, høyde/3);
          forelder.setLocation(skjerm.width/2-forelder.getSize().width/2, skjerm.height/2-forelder.getSize().height/2);
 
     }
@@ -74,9 +74,13 @@ public class RegistrerReiseForsikringPanel extends JPanel implements ActionListe
         reisefelt        = new JComboBox<String>(reise);
         statusfelt       = new JComboBox<String>(status);
         
-        personlabel      = new JLabel("Personnummer: ");
-        reiselabel       = new JLabel("Velg område for forsikringen: ");
-        statuslabel      = new JLabel("Velg din rabatt: ");
+        personlabel      = new JLabel("     Personnummer: ");
+        reiselabel       = new JLabel("     Velg område for forsikringen: ");
+        statuslabel      = new JLabel("     Velg din rabatt: ");
+        
+        personlabel.setForeground(Color.WHITE);
+        reiselabel.setForeground(Color.WHITE);
+        statuslabel.setForeground(Color.WHITE);
         
         beregn = new JButton("Beregn pris på forsikring");
         beregn.addActionListener(this);
@@ -136,9 +140,9 @@ public class RegistrerReiseForsikringPanel extends JPanel implements ActionListe
         midtpanel.add(reiselabel);
         midtpanel.add(reisefelt);
         
-        toppanel.setBackground(Color.decode("#E0D1FF"));
-        knappepanel.setBackground(Color.decode("#E57E7E"));
-        midtpanel.setBackground(Color.decode("#E57E7E"));
+        toppanel.setBackground(Color.decode("#FFFFFF"));
+        knappepanel.setBackground(Color.decode("#669CFF"));
+        midtpanel.setBackground(Color.decode("#669CFF"));
     }
 
     
@@ -178,10 +182,9 @@ public class RegistrerReiseForsikringPanel extends JPanel implements ActionListe
                             "\nVil du tegne denne forsikringen?", null , JOptionPane.YES_NO_OPTION);
                           if(result == JOptionPane.YES_OPTION) 
                           {
-                              if(fregister.leggTil(f))
+                              if(fregister.leggTil(f) && k.getForsikringer().add(f))
                               {
-                                    k.addForsikring(f);
-                                    visMelding("Forsikring registrert på kunde:\n" + k.toString());    
+                                    visMelding("Forsikring registrert på kunde:\n" + k.getNavn() + "\n" + f.toString());    
                                     forelder.addLogo();
                                     forelder.visPanel(HovedVindu.HovedVindu);
                                     forelder.Size();

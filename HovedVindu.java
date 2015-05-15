@@ -43,7 +43,7 @@ public class HovedVindu extends JFrame implements ActionListener
     private Forsikringsregister fregister;
     private Skademeldingsregister sregister;
     private Finanser finans;
-    private Historikk historikker;
+    private Statistikk historikker;
    
     public HovedVindu(Kunderegister kregister, Forsikringsregister fregister, Skademeldingsregister sregister)
     {
@@ -54,7 +54,7 @@ public class HovedVindu extends JFrame implements ActionListener
         this.fregister = fregister;
         this.sregister = sregister;
         this.finans = new Finanser(sregister, fregister);
-        this.historikker = new Historikk(fregister, kregister, sregister);
+        this.historikker = new Statistikk(fregister, kregister, sregister);
         
         Toolkit verktoykasse = Toolkit.getDefaultToolkit();
         //Bildefil for ikon er plassert i underkatalogen bilder:
@@ -203,7 +203,7 @@ public class HovedVindu extends JFrame implements ActionListener
         int bredde = skjerm.width;
         int hoyde = skjerm.height;
 
-        setSize((bredde /2)+15, hoyde - 250);
+        setSize((bredde /2)+15, hoyde*3/4);
         setLocation(skjerm.width / 2 - getSize().width / 2, skjerm.height / 2 - getSize().height / 2);
        }
        
@@ -294,7 +294,7 @@ public class HovedVindu extends JFrame implements ActionListener
         }
         else if(e.getSource() == statistikk)
         {
-            underpaneler.add(new HistorikkPanel(this, historikker), "STATISTIKK");
+            underpaneler.add(new StatistikkPanel(this, historikker), "STATISTIKK");
             fjernLogo();
             visPanel("STATISTIKK");
         }

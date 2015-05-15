@@ -69,14 +69,14 @@ public class RegistrerBilForsikringPanel extends JPanel implements ActionListene
          int bredde = skjerm.width;
          int hoyde = skjerm.height;
          
-         forelder.setSize(bredde / 2, hoyde - 400);
+         forelder.setSize(bredde / 2, hoyde/2);
         forelder.setLocation(skjerm.width / 2 - forelder.getSize().width / 2, skjerm.height / 2 - forelder.getSize().height / 2);
     }
 
     
     public void setGrensesnitt() //initialiserer tekstfeltene, panelene og ikonene
     {
-         personnummerfelt = new JTextField(10);
+        personnummerfelt = new JTextField(10);
         //bilpanel
         bileierfelt = new JTextField(10);
         regnummerfelt = new JTextField(10);
@@ -85,13 +85,21 @@ public class RegistrerBilForsikringPanel extends JPanel implements ActionListene
         modell = new JSlider(JSlider.HORIZONTAL, 1950, 2015, 1990);
         skadefri = new JComboBox<Integer>(skade);
         
-        plabel = new JLabel("Personnummer:");
-        blabel = new JLabel("Bileier: ");
-        rlabel = new JLabel("Registreringsnummer: ");
-        tlabel = new JLabel("Biltype: ");
-        klabel = new JLabel("Årlig kjørelengde: ");
-        mlabel = new JLabel("Modell: " + modell.getValue());
-        slabel = new JLabel("Antall år skadefri:");
+        plabel = new JLabel("       Personnummer:");
+        blabel = new JLabel("       Bileier: ");
+        rlabel = new JLabel("       Registreringsnummer: ");
+        tlabel = new JLabel("       Biltype: ");
+        klabel = new JLabel("       Årlig kjørelengde: ");
+        mlabel = new JLabel("       Modell: " + modell.getValue());
+        slabel = new JLabel("       Antall år skadefri:");
+        
+        plabel.setForeground(Color.WHITE);
+        blabel.setForeground(Color.WHITE);
+        rlabel.setForeground(Color.WHITE);
+        tlabel.setForeground(Color.WHITE);
+        mlabel.setForeground(Color.WHITE);
+        klabel.setForeground(Color.WHITE);
+        slabel.setForeground(Color.WHITE);
         
         registrer = new JButton("Beregn pris på forsikring");
         registrer.addActionListener(this);
@@ -146,10 +154,9 @@ public class RegistrerBilForsikringPanel extends JPanel implements ActionListene
         midtpanel.add(slabel);
         midtpanel.add(skadefri);
         
-        toppanel.setBackground(Color.decode("#E0D1FF"));
-        knappepanel.setBackground(Color.decode("#E57E7E"));
-        midtpanel.setBackground(Color.decode("#E57E7E"));
-        
+        toppanel.setBackground(Color.decode("#FFFFFF"));
+        knappepanel.setBackground(Color.decode("#669CFF"));
+        midtpanel.setBackground(Color.decode("#669CFF"));
     }
     
     public void registrer() //metode som registrerer bilforsikring og sjekker om det er noen feil 
@@ -187,10 +194,11 @@ public class RegistrerBilForsikringPanel extends JPanel implements ActionListene
                       int result = JOptionPane.showConfirmDialog(null, "Pris på din forsikring: " + b.getPremie() + ",-" + "\nVil du tegne denne forsikringen?", null , JOptionPane.YES_NO_OPTION);
                          if(result == JOptionPane.YES_OPTION) 
                          {
-                           if(fregister.leggTil(b))
+                           if(fregister.leggTil(b) && k.getForsikringer().add(b))
                            {
-                            k.addForsikring(b);
-                            visMelding("Forsikring registrert på kunde:\n" + k.getNavn() + b.toString());
+                            double nypremie = b.getPremie() + k.getPremie();
+                            k.setPremie(nypremie);
+                            visMelding("Forsikring registrert på kunde:\n" + k.getNavn() + "\n" + b.toString());
                             forelder.addLogo();
                             forelder.visPanel(HovedVindu.HovedVindu);
                             forelder.Size();
@@ -267,7 +275,7 @@ public class RegistrerBilForsikringPanel extends JPanel implements ActionListene
         {
             if(e.getSource() == modell) 
             {
-                mlabel.setText("Modell: " + modell.getValue());
+                mlabel.setText("       Modell: " + modell.getValue());
             }
             
         } 

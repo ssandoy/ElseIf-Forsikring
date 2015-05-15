@@ -9,6 +9,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -47,7 +48,7 @@ public class RegistrerSkademeldingPanel extends JPanel implements ActionListener
     private JTextField skadebeskrivelse, kontaktInfo;
     private JTextField personnummerfelt, forsikringsnummerfelt ,takseringsbelop;
     
-    String[] st = {"BOLIG", "HYTTE", "BIL", "REISE", "BÅT"};
+    String[] st = {"BOLIG-FORSIKRING", "HYTTE-FORSIKRING", "BIL-FORSIKRING", "REISE-FORSIKRING", "BÅT-FORSIKRING"};
     
     HovedVindu forelder;
     Kunderegister kregister;
@@ -81,13 +82,23 @@ public class RegistrerSkademeldingPanel extends JPanel implements ActionListener
         forsikringsnummerfelt = new JTextField(10);
         takseringsbelop = new JTextField(10);
         
-        personnummer = new JLabel("Personnummer: ");
-        fnummer = new JLabel("Forsikringsnummer: ");
-        kInfo = new JLabel("Kontaktinfo: ");
-        beskrivelse = new JLabel("Skadebeskrivelse: ");
-        tbelop = new JLabel("Takseringsbeløp: ");
-        stype = new JLabel("Skadetype: ");
-        overskrift = new JLabel("Registrer Skademelding");
+        personnummer = new JLabel("      Personnummer: ");
+        fnummer = new JLabel("      Forsikringsnummer: ");
+        kInfo = new JLabel("      Kontaktinfo: ");
+        beskrivelse = new JLabel("      Skadebeskrivelse: ");
+        tbelop = new JLabel("      Takseringsbeløp: ");
+        stype = new JLabel("      Skadetype: ");
+        overskrift = new JLabel("REGISTRER SKADEMELDING");
+        Font font = new Font("Verdana", Font.BOLD, 16);
+        overskrift.setFont(font);
+        
+        personnummer.setForeground(Color.WHITE);
+        fnummer.setForeground(Color.WHITE);
+        kInfo.setForeground(Color.WHITE);
+        beskrivelse.setForeground(Color.WHITE);
+        tbelop.setForeground(Color.WHITE);
+        stype.setForeground(Color.WHITE);
+        overskrift.setForeground(Color.WHITE);
         
         registrer = new JButton("Registrer skademelding");
         registrer.addActionListener(this);
@@ -125,10 +136,10 @@ public class RegistrerSkademeldingPanel extends JPanel implements ActionListener
         add(tekstpanel, BorderLayout.CENTER);
         add(knappepanel, BorderLayout.PAGE_END);
 
-        tekstpanel.setBackground(Color.decode("#E57E7E"));
-        toppanel.setBackground(Color.decode("#E57E7E"));
-        knappepanel.setBackground(Color.decode("#E57E7E"));
-        overskriftpanel.setBackground(Color.decode("#E57E7E"));
+        tekstpanel.setBackground(Color.decode("#669CFF"));
+        toppanel.setBackground(Color.decode("#669CFF"));
+        knappepanel.setBackground(Color.decode("#669CFF"));
+        overskriftpanel.setBackground(Color.decode("#669CFF"));
 
         Toolkit kit = Toolkit.getDefaultToolkit();
         Dimension skjerm = kit.getScreenSize();
@@ -146,13 +157,12 @@ public void registrerSkademelding() //metode som registrerer ny skademelding på
             String nr = personnummerfelt.getText();
             Forsikringskunde kunden = kregister.getKunde(nr);
             String fnr = forsikringsnummerfelt.getText();
-            Insurance f = (Insurance)fregister.getForsikring(fnr);
-            
-            LinkedList<Insurance> fliste = kunden.getForsikringer();
+            Insurance f = fregister.getForsikring(fnr);
+           
             
             if(kunden != null && f != null && takseringsbelop.getText() != null)
             {
-                   if(fliste.contains(f))
+                   if(kunden.getForsikringer().contains(f))
                 {
                     String type = String.valueOf(skadeType.getSelectedItem());
                     String beskrivelse = skadebeskrivelse.getText();
@@ -163,45 +173,51 @@ public void registrerSkademelding() //metode som registrerer ny skademelding på
                     ny.setSkadenummer(snr);
                     ny.setTakseringsBelop(takst);
                     ny.beregnErstatning();
-                    int result = JOptionPane.showConfirmDialog(null, 
+                    if(ny.sjekkDekning())
+                        {
+                     int result = JOptionPane.showConfirmDialog(null, 
                              "Du må betale : " + ny.getEgenandel() + ",- i egenandel for å få dekket skadene." + 
                                      "\nVil du tegne denne skademeldingen?", null , JOptionPane.YES_NO_OPTION);
                       if(result == JOptionPane.YES_OPTION)
                       {
-                        if(ny.sjekkDekning())
-                        {
+                        
                           if(!sregister.leggTil(ny))
                           {
-                              visFeilMelding("Pass på å fylle ut taksering og erstatningsbelop!");
+                              visFeilMelding("Pass på å fylle ut takseringsbeløp for skaden!");
                           }
                             else
                             {
                                 kunden.addSkademelding(ny);
-                                System.out.println(sregister.toString());
+                                f.setErstatning(ny.getErstatningsBelop()); //Oppdaterer erstatningsbeløpet for forsikringen
                                 visMelding("Skademelding lagt til");
                                 forelder.addLogo();
                                 forelder.visPanel(HovedVindu.HovedVindu);
                                 forelder.Size();
                             }          
-                         } //slutt på sjekkdekning
-                        else
-                        {
-                                visFeilMelding("Du har ikke dekning for denne forsikringen!");
-                        }
-            }else
-             {
-             visFeilMelding("Tegning av skademelding avbrutt");
-            }
-                }   
+                       } //slutt på YES_NO_OPTION
+                            else
+                            {
+                             visFeilMelding("Tegning av skademelding avbrutt");
+                            }
+                      } //slutt på sjekkdekning
+                    else
+                 {
+                  visFeilMelding("Sjekkdekning");
+                 }
+                } //Slutt på getForsikringer().contains
+                 else
+                 {
+                  visFeilMelding("Du har ikke dekning for denne forsikringen!");
+                 }
+            }//Slutt på if( kunden != null )
+            else
+            {
+                visFeilMelding("Skriv inn gyldig kundenummer og forsikringsnummer");
             }
         }catch(NumberFormatException nfe)
         {
             visFeilMelding("Pass på å skrive desimaltall i taksering!");
         }
-        /*catch(NullPointerException npe)
-        {
-            visFeilMelding("Null Pointer");
-        }*/
     }
 
     
@@ -218,7 +234,8 @@ public void registrerSkademelding() //metode som registrerer ny skademelding på
     
     
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent e) 
+    {
       if (e.getSource() == registrer) {
             registrerSkademelding();
         } else if (e.getSource() == avbryt) {

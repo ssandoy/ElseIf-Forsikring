@@ -45,9 +45,8 @@ public class RegistrerKundePanel extends JPanel implements ActionListener {
         add(toppanel, BorderLayout.CENTER);
         add(knappepanel, BorderLayout.PAGE_END);
 
-        
-        toppanel.setBackground(Color.decode("#5E5E5E"));
-        overskriftpanel.setBackground(Color.decode("#5E5E5E"));
+       toppanel.setBackground(Color.decode("#669CFF"));
+        overskriftpanel.setBackground(Color.decode("#669CFF"));
         
     }
 
@@ -58,13 +57,22 @@ public class RegistrerKundePanel extends JPanel implements ActionListener {
         etternavnsfelt = new JTextField(10);
         adressefelt = new JTextField(10);
         telefonfelt = new JTextField(10);
-        overskrift = new JLabel("Registrer kunde");
+        overskrift = new JLabel("REGISTRER KUNDE");
+        Font font = new Font("Verdana", Font.BOLD, 16);
+        overskrift.setFont(font);
 
-        plabel = new JLabel(" Personnummer");
-        flabel = new JLabel(" Fornavn");
-        elabel = new JLabel(" Etternavn");
-        alabel = new JLabel(" Adresse");
-        tlabel = new JLabel(" Telefonnummer(8 siffer)");
+        plabel = new JLabel("       Personnummer:");
+        flabel = new JLabel("       Fornavn:");
+        elabel = new JLabel("       Etternavn:");
+        alabel = new JLabel("       Adresse:");
+        tlabel = new JLabel("       Telefonnummer(8 siffer):");
+        
+        overskrift.setForeground(Color.WHITE);
+        plabel.setForeground(Color.WHITE);
+        flabel.setForeground(Color.WHITE);
+        elabel.setForeground(Color.WHITE);
+        alabel.setForeground(Color.WHITE);
+        tlabel.setForeground(Color.WHITE);
 
         fakturabox = new JCheckBox();
         
@@ -97,10 +105,10 @@ public class RegistrerKundePanel extends JPanel implements ActionListener {
         knappepanel.add(avbryt);
         knappepanel.add(registrer);
 
-        tekstpanel.setBackground(Color.decode("#5E5E5E"));
-        knappepanel.setBackground(Color.decode("#5E5E5E"));
+        tekstpanel.setBackground(Color.decode("#669CFF"));
+        knappepanel.setBackground(Color.decode("#669CFF"));
         
-        Border border = BorderFactory.createLineBorder(Color.WHITE);
+        Border border = BorderFactory.createLineBorder(Color.decode("#669CFF"));
         tekstpanel.setBorder(BorderFactory.createCompoundBorder(border, 
         BorderFactory.createEmptyBorder(0, 30, 0, 0)));
         
@@ -112,7 +120,7 @@ public class RegistrerKundePanel extends JPanel implements ActionListener {
         int bredde = skjerm.width;
         int hoyde = skjerm.height;
 
-        forelder.setSize(bredde / 2, hoyde - 500);
+        forelder.setSize(bredde / 2, hoyde/3);
         forelder.setLocation(skjerm.width / 2 - forelder.getSize().width / 2, skjerm.height / 2 - forelder.getSize().height / 2);
         
     }

@@ -72,15 +72,15 @@ public class RegistrerForsikringPanel extends JPanel implements ActionListener
    
     public void setGrensesnitt() //initialiserer tekstfeltene, panelene og ikonene
     {
-       
-
-        
         registrer = new JButton("Beregn pris på forsikring");
         registrer.addActionListener(this);
         avbryt = new JButton("Avbryt");
         avbryt.addActionListener(this);
         
         overskrift = new JLabel("Velg en forsikring ved å klikke på ikonene over!");
+        overskrift.setForeground(Color.WHITE);
+        Font font = new Font("Verdana", Font.BOLD, 16);
+        overskrift.setFont(font);
         overskriftpanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         overskriftpanel.add(overskrift);
         
@@ -133,13 +133,10 @@ public class RegistrerForsikringPanel extends JPanel implements ActionListener
         midtpanel.add(overskriftpanel, BorderLayout.PAGE_START);
         
         
-        overskriftpanel.setBackground(Color.decode("#E57E7E"));
-        toppanel.setBackground(Color.decode("#E0D1FF"));
-        knappepanel.setBackground(Color.decode("#E57E7E"));
-        midtpanel.setBackground(Color.decode("#E57E7E"));
-        
-        
-        
+        overskriftpanel.setBackground(Color.decode("#669CFF"));
+        toppanel.setBackground(Color.decode("#FFFFFF"));
+        knappepanel.setBackground(Color.decode("#669CFF"));
+        midtpanel.setBackground(Color.decode("#669CFF"));
     }
     
   

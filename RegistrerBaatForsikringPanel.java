@@ -67,7 +67,7 @@ public class RegistrerBaatForsikringPanel extends JPanel implements ActionListen
          int bredde = skjerm.width;
          int hoyde = skjerm.height;
    
-         forelder.setSize(bredde/2, hoyde-400);
+         forelder.setSize(bredde/2, hoyde/2);
          forelder.setLocation(skjerm.width/2-forelder.getSize().width/2, skjerm.height/2-forelder.getSize().height/2);
     }
 
@@ -83,13 +83,21 @@ public class RegistrerBaatForsikringPanel extends JPanel implements ActionListen
          fot = new JSlider(JSlider.HORIZONTAL, 8, 50, 20);
          
          
-        plabel = new JLabel("Personnummer:");
-        blabel = new JLabel("Båteier: ");
-        rlabel = new JLabel("Registreringsnummer: ");
-        tlabel = new JLabel("Båttype: ");
-        mlabel = new JLabel("Årsmodell: " + modell.getValue());
-        flabel = new JLabel("Antall fot: " + fot.getValue());
-        hlabel = new JLabel("Antall hestekrefter: " + hestekrefter.getValue());
+        plabel = new JLabel("       Personnummer: ");
+        blabel = new JLabel("       Båteier: ");
+        rlabel = new JLabel("       Registreringsnummer: ");
+        tlabel = new JLabel("       Båttype: ");
+        mlabel = new JLabel("       Årsmodell: " + modell.getValue());
+        flabel = new JLabel("       Antall fot: " + fot.getValue());
+        hlabel = new JLabel("       Antall hestekrefter: " + hestekrefter.getValue());
+        
+        plabel.setForeground(Color.WHITE);
+        blabel.setForeground(Color.WHITE);
+        rlabel.setForeground(Color.WHITE);
+        tlabel.setForeground(Color.WHITE);
+        mlabel.setForeground(Color.WHITE);
+        flabel.setForeground(Color.WHITE);
+        hlabel.setForeground(Color.WHITE);
         
         SliderEvent e = new SliderEvent();
         fot.addChangeListener(e);
@@ -166,16 +174,15 @@ public class RegistrerBaatForsikringPanel extends JPanel implements ActionListen
         midtpanel.add(fot);
        
         
-        toppanel.setBackground(Color.decode("#FFFF66"));
-        knappepanel.setBackground(Color.decode("#E57E7E"));
-        midtpanel.setBackground(Color.decode("#E57E7E"));
-        
+        toppanel.setBackground(Color.decode("#FFFFFF"));
+        knappepanel.setBackground(Color.decode("#669CFF"));
+        midtpanel.setBackground(Color.decode("#669CFF"));
     }
     
 public void registrer() //metode som registrerer båtforsikring og sjekker om det er noen feil 
     {
         try{
-            String personnummer     = personnummerfelt.getText();
+                String personnummer     = personnummerfelt.getText();
                 String baateier     = baateierfelt.getText();
                 String regnummer    = regnummerfelt.getText();
                 String baattype     = typefelt.getText();
@@ -189,14 +196,9 @@ public void registrer() //metode som registrerer båtforsikring og sjekker om de
              }
              else
              {
-                 Forsikringskunde k = kregister.getKunde(personnummer);
-
-                      if(k == null)
-                      {
-                          visFeilMelding("Ingen kunde med det personnummeret!");
-                      }
-                      else
-                      {
+                 if(kregister.finnes(personnummer))
+                 {
+                          Forsikringskunde k = kregister.get(personnummer);
                           String fnr = fregister.genererNummer();
                           Baatforsikring b = new Baatforsikring(k, baateier, regnummer, baattype, baatmodell, motor, lengde);
                           b.setForsikringsnummer(fnr);
@@ -207,11 +209,11 @@ public void registrer() //metode som registrerer båtforsikring og sjekker om de
                              {
                               if(fregister.leggTil(b))
                               {
-                             k.addForsikring(b);
-                             visMelding("Forsikring registrert på kunde:\n" + k.toString());
-                             forelder.addLogo();
-                             forelder.visPanel(HovedVindu.HovedVindu);
-                             forelder.Size();
+                              k.addForsikring(b);
+                              visMelding("Forsikring registrert på kunde:\n" + k.getNavn() + "\n" + b.toString());
+                              forelder.addLogo();
+                              forelder.visPanel(HovedVindu.HovedVindu);
+                              forelder.Size();
                               } else 
                                {
                                 visFeilMelding("Feil info skrevet inn. Prøv igjen");                                
@@ -222,7 +224,11 @@ public void registrer() //metode som registrerer båtforsikring og sjekker om de
 
                              }
 
-                      }
+                      
+             } else
+                 {
+                     visFeilMelding("Personnummeret finnes ikke i registeret");
+                 }
              }
     
         }
@@ -272,8 +278,12 @@ public void registrer() //metode som registrerer båtforsikring og sjekker om de
         }
          else if(e.getSource() == Hytte)
         {
-                    forelder.doClick(4);
+            forelder.doClick(4);
         }
+         else if(e.getSource() == Reise)
+         {
+             forelder.doClick(5);
+         }
     }
         
 
@@ -285,15 +295,15 @@ public void registrer() //metode som registrerer båtforsikring og sjekker om de
         {
             if(e.getSource() == hestekrefter) 
             {
-                hlabel.setText("Antall hestekrefter: " + hestekrefter.getValue());
+                hlabel.setText("       Antall hestekrefter: " + hestekrefter.getValue());
             }
             else if(e.getSource() == fot)
             {
-                flabel.setText("Antall fot: " + fot.getValue());
+                flabel.setText("       Antall fot: " + fot.getValue());
             }
             else if(e.getSource() == modell)
             {
-                mlabel.setText("Årsmodell: " + modell.getValue());
+                mlabel.setText("       Årsmodell: " + modell.getValue());
             }
         } 
     }

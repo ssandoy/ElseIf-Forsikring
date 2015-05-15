@@ -152,6 +152,11 @@ public class VisKundePanel extends JPanel implements ActionListener
         JOptionPane.showMessageDialog(null, melding);
     }
 
+    public void visFeilMelding(String melding)
+     {
+       JOptionPane.showMessageDialog(this, melding, "Problem", 
+               JOptionPane.ERROR_MESSAGE);
+     }
      
      
      
@@ -166,6 +171,7 @@ public class VisKundePanel extends JPanel implements ActionListener
        }
        else if(e.getSource() == visSkademeldinger)
        {
+           try{
            Forsikringskunde k = (Forsikringskunde) kunderamme.getData().get(kundetabell.getSelectedRow());
            String utskrift = "";
            if(k.getSkademeldinger().isEmpty())
@@ -181,10 +187,30 @@ public class VisKundePanel extends JPanel implements ActionListener
            }
            visMelding("Kunde: " + k.getFornavn() + " " + k.getEtternavn() + 
                       "\nSkademeldinger: " + utskrift);
+           }catch(IndexOutOfBoundsException i)
+           {
+               visFeilMelding("Ingen kunde markert");
+           }
        }
        else if(e.getSource() == visFinanser)
        {
-           
+           try{
+           Forsikringskunde k = (Forsikringskunde) kunderamme.getData().get(kundetabell.getSelectedRow());
+           k.beregnTotalPremie();
+           String utskrift = "";
+           if(k.getForsikringer().isEmpty())
+               {
+               visMelding("Kunde: " + k.getFornavn() + " " + k.getEtternavn()
+                         + "\nHar ikke skrevet noen forsikringer");
+               return;
+               }
+           visMelding("Kunde: " + k.getFornavn() + " " + k.getEtternavn() + 
+                     "\nInnbetalt årlig premie: " + k.beregnTotalPremie() + ",-"
+                    + "\nUtbetalt i erstatninger: " + k.beregnTotalErstatning()); //FIKS DENNE GETERSTATNING
+           } catch(IndexOutOfBoundsException i)
+           {
+               visFeilMelding("Ingen kunde markert");
+           }
        }
     }
     

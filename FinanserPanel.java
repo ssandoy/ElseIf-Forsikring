@@ -32,7 +32,7 @@ public class FinanserPanel extends JPanel implements ActionListener{
     
     public FinanserPanel( Finanser finanser, HovedVindu forelder)
     {
-        super(new BorderLayout());
+           super(new BorderLayout());
         this.finanser = finanser;
         beregn = new JButton("Beregn");
         avbryt = new JButton("Avbryt");
@@ -80,9 +80,10 @@ public class FinanserPanel extends JPanel implements ActionListener{
          int bredde = skjerm.width;
          int hoyde = skjerm.height;
          
-         forelder.setSize(bredde/2, hoyde-500);
+         forelder.setSize(bredde/2, hoyde/2);
          forelder.setLocation(skjerm.width/2-forelder.getSize().width/2, skjerm.height/2-forelder.getSize().height/2);
     }
+    
     
     public void Beregn() //Beregner finansene til selskapet
     {

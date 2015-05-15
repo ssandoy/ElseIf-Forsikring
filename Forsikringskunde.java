@@ -118,6 +118,19 @@ public class Forsikringskunde extends Person implements Serializable
         return aarligpremie;
     }
     
+    //Metode som beregner som beregner hvor mye kunde har fått utbetalt i erstatning
+    public double beregnTotalErstatning()
+    {
+        erstatninger = 0.00;
+        ListIterator<Skademelding> it = skademeldinger.listIterator();
+        while(it.hasNext())
+        {
+            Skademelding s = it.next();
+            erstatninger += s.getErstatningsBelop();
+        }
+        return erstatninger;
+    }
+    
     public String getKundenummer()
     {
         return kundenummer;

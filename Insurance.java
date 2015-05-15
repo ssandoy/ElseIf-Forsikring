@@ -23,7 +23,6 @@ public abstract class Insurance implements  Forsikring {
     private String forsikringsnummer;
     private String forsikringstype;
     private double erstatning;
-    private double egenandel;
     private Date startDato;
     private DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
     private double forsikringspremie;
@@ -36,7 +35,6 @@ public abstract class Insurance implements  Forsikring {
         this.startDato = new Date();
         
         erstatning = 0.00;
-        egenandel = 0.00;
         forsikringspremie = 0.00;
     } 
    
@@ -81,11 +79,6 @@ public abstract class Insurance implements  Forsikring {
         return forsikringstype;
     }
     
-    @Override
-     public double getEgenandel()
-     {
-         return egenandel;
-     }
     
     //set-metoder
     @Override
@@ -120,7 +113,7 @@ public abstract class Insurance implements  Forsikring {
         DecimalFormat df = new DecimalFormat("#.##");
         String utskrift = "Start Dato: " + dateFormat.format(startDato) + "\nForsikringsnummer: " + forsikringsnummer
                            + "\nForsikringstype: " + forsikringstype + "\nErstatning: " + df.format(erstatning) 
-                           + "\nEgenandel: " + df.format(egenandel) + "\nForsikringspremie: " + df.format(forsikringspremie);
+                           + "\nForsikringspremie: " + df.format(forsikringspremie);
         return utskrift;
     }
     

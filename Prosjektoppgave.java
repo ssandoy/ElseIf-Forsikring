@@ -70,7 +70,7 @@ public class Prosjektoppgave
         int bredde = skjerm.width;
         int hoyde = skjerm.height;
 
-        vindu.setSize((bredde /2)+15, hoyde - 250);
+        vindu.setSize((bredde /2)+15, hoyde*3/4);
         vindu.setLocation(skjerm.width / 2 - vindu.getSize().width / 2, skjerm.height / 2 - vindu.getSize().height / 2);
        
        

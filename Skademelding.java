@@ -13,7 +13,7 @@ import java.util.LinkedList;
 import java.util.ListIterator;
 
 
-/** Klasse for å opprette et skademeldingsobjekt og inneholder metoder som sjekker om kunden er dekket
+/** Klasse for å opprette et skademeldingsıobjekt og inneholder metoder som sjekker om kunden er dekket
  *  for den spesifikke typen forsikring og beregner erstatnings beløpet
  *
  * @author Amir
@@ -115,50 +115,25 @@ public class Skademelding implements Serializable {
         /*Metode som sjekker om kunden har gyldig forsikring til skademeldingen*/
         public boolean sjekkDekning()
         {
-           LinkedList<Insurance> forsikringer = kunde.getForsikringer();
-           ListIterator it = forsikringer.listIterator();
-            
-           while(it.hasNext())
-            {
-                Insurance f = (Insurance) it.next();
 
-                if(forsikringstype.equals("BOLIG"))
+                if(forsikring.getType().equals(forsikringstype))
                 {
-                    if(f instanceof Innboforsikring)
-                    {
+                    if(forsikring instanceof Innboforsikring)
                         return true;
-                    }
-                }
-                else if(forsikringstype.equals("BIL"))
-                {
-                    if(f instanceof Bilforsikring)
-                    {
+                    else if(forsikring instanceof Bilforsikring)
                         return true;
-                    }
-                }
-                 else if(forsikringstype.equals("HYTTE"))
-                {
-                    if(f instanceof Fritidsboligforsikring)
-                    {
+                    else if(forsikring instanceof Baatforsikring)
                         return true;
-                    }
-                }
-                 else if(forsikringstype.equals("BÅT"))
-                {
-                    if(f instanceof Baatforsikring)
-                    {
+                    else if(forsikring instanceof Fritidsboligforsikring)
                         return true;
-                    }
-                }
-                 else if(forsikringstype.equals("REISE"))
-                 {
-                     if(f instanceof Reiseforsikring)
-                     {
-                         return true;
-                     }
-                 }
-            }
-            return false;
+                    else if(forsikring instanceof Reiseforsikring)
+                        return true;
+                    else
+                        return false;  
+                }  
+                else 
+                    return false;
+                
         }
         
    //Metode som beregner erstatning og egenandelsbeløpet for skaden ut i fra takstering og konstanter
