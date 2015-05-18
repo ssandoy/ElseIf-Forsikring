@@ -141,6 +141,11 @@ public class Forsikringskunde extends Person implements Serializable
         this.kundenummer = kundenummer;
     }
     
+    public double getErstatning()
+    {
+        return erstatninger;
+    }
+    
 
     public double getPremie()
     {
@@ -150,6 +155,10 @@ public class Forsikringskunde extends Person implements Serializable
     public void setPremie(double aarligpremie)
     {
         this.aarligpremie = aarligpremie;
+    }
+
+    public void setErstatninger(double erstatninger) {
+        this.erstatninger = erstatninger;
     }
     
     

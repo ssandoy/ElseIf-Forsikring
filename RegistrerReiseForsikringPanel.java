@@ -184,6 +184,8 @@ public class RegistrerReiseForsikringPanel extends JPanel implements ActionListe
                           {
                               if(fregister.leggTil(f) && k.getForsikringer().add(f))
                               {
+                                  double nypremie = f.getPremie() + k.getPremie();
+                                  k.setPremie(nypremie);
                                     visMelding("Forsikring registrert på kunde:\n" + k.getNavn() + "\n" + f.toString());    
                                     forelder.addLogo();
                                     forelder.visPanel(HovedVindu.HovedVindu);

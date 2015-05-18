@@ -207,9 +207,10 @@ public void registrer() //metode som registrerer båtforsikring og sjekker om de
                           int result = JOptionPane.showConfirmDialog(null, "Pris på din forsikring: " + b.getPremie() + ",-" + "\nVil du tegne denne forsikringen?", null , JOptionPane.YES_NO_OPTION);
                              if(result == JOptionPane.YES_OPTION) 
                              {
-                              if(fregister.leggTil(b))
+                              if(fregister.leggTil(b) && k.getForsikringer().add(b))
                               {
-                              k.addForsikring(b);
+                                  double nypremie = b.getPremie() + k.getPremie();
+                                 k.setPremie(nypremie);
                               visMelding("Forsikring registrert på kunde:\n" + k.getNavn() + "\n" + b.toString());
                               forelder.addLogo();
                               forelder.visPanel(HovedVindu.HovedVindu);

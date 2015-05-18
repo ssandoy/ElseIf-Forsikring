@@ -206,7 +206,7 @@ public class VisKundePanel extends JPanel implements ActionListener
                }
            visMelding("Kunde: " + k.getFornavn() + " " + k.getEtternavn() + 
                      "\nInnbetalt årlig premie: " + k.beregnTotalPremie() + ",-"
-                    + "\nUtbetalt i erstatninger: " + k.beregnTotalErstatning()); //FIKS DENNE GETERSTATNING
+                    + "\nUtbetalt i erstatninger: " + k.getErstatning()); //FIKS DENNE GETERSTATNING
            } catch(IndexOutOfBoundsException i)
            {
                visFeilMelding("Ingen kunde markert");

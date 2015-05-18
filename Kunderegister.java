@@ -77,7 +77,7 @@ public class Kunderegister extends TreeMap<String, Forsikringskunde> implements 
     @Override
     public String genererNummer()
 {
-    int max = -1;
+    int max = 0;
 
     for(Map.Entry<String, Forsikringskunde> entry : this.entrySet())
     {

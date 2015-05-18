@@ -197,6 +197,8 @@ public class RegistrerHytteForsikringPanel extends JPanel implements ActionListe
                     {
                      if(fregister.leggTil(f) && k.getForsikringer().add(f))
                      {
+                        double nypremie = f.getPremie() + k.getPremie();
+                        k.setPremie(nypremie);
                         visMelding("Forsikring registrert på kunde:\n" + k.getNavn() + "\n" + f.toString());
                         forelder.addLogo();
                         forelder.visPanel(HovedVindu.HovedVindu);
@@ -265,7 +267,7 @@ public class RegistrerHytteForsikringPanel extends JPanel implements ActionListe
         {
             if(e.getSource() == arealfelt) 
             {
-                areallabel.setText("     Boareal: " + arealfelt.getValue() + " km2") ;
+                areallabel.setText("     Boareal: " + arealfelt.getValue() + " m²") ;
             }
             else if(e.getSource() == byggeaarfelt)
             {

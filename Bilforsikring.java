@@ -45,7 +45,7 @@ public class Bilforsikring extends Kjoretoyforsikring implements Serializable
         
          if(modell >= 1950 && modell <= 1970)
          {
-             super.setPremie(5000.00);
+             super.setPremie(10000.00);
          }
          else if(modell >= 1971 && modell <= 1990)
          {
@@ -57,7 +57,7 @@ public class Bilforsikring extends Kjoretoyforsikring implements Serializable
          }
          else if(modell >= 2006 && modell <= 2015)
          {
-             super.setPremie(12000.00);
+             super.setPremie(10000.00);
          }
 
     //beregner bil-premien ut i fra skadefrihet, kjørelengde og egenandel

@@ -79,19 +79,22 @@ public class Forsikringsregister extends TreeMap<String,Insurance> implements Se
         return this;
     }
 
-   //genererer et unikt nummer, henter ut maks-verdi og legger til 1.
+  //Genererer et unikt forsikringsnummer hos kunden.
     @Override
     public String genererNummer()
-    { //funker fordi iterer gjennom key-verdiene
-        int maks=1;
-        for(Map.Entry<String, Insurance> entry : this.entrySet())
+{
+    int max = 0;
+
+    for(Map.Entry<String, Insurance> entry : this.entrySet())
+    {
+        int test = Integer.parseInt(entry.getValue().getFNummer());
+        if(test > max)
         {
-         if(entry.getValue().getFNummer().equals(String.valueOf(maks)))
-            {
-                maks++;
-            }   
-        }
-        return String.valueOf(maks);
+            max = test;
+        } 
     }
+    return String.valueOf(max + 1);
     
+}
+
 }

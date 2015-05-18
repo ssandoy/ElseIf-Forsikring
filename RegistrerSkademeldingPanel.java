@@ -181,20 +181,21 @@ public void registrerSkademelding() //metode som registrerer ny skademelding på
                       if(result == JOptionPane.YES_OPTION)
                       {
                         
-                          if(!sregister.leggTil(ny))
+                          if(sregister.leggTil(ny) && kunden.getSkademeldinger().add(ny))
                           {
-                              visFeilMelding("Pass på å fylle ut takseringsbeløp for skaden!");
+                              double erstatning = ny.getErstatningsBelop() + kunden.getErstatning();
+                              kunden.setErstatninger(erstatning);
+                              f.setErstatning(ny.getErstatningsBelop()); //Oppdaterer erstatningsbeløpet for forsikringen
+                              visMelding("Skademelding lagt til");
+                              forelder.addLogo();
+                              forelder.visPanel(HovedVindu.HovedVindu);
+                              forelder.Size();
                           }
                             else
                             {
-                                kunden.addSkademelding(ny);
-                                f.setErstatning(ny.getErstatningsBelop()); //Oppdaterer erstatningsbeløpet for forsikringen
-                                visMelding("Skademelding lagt til");
-                                forelder.addLogo();
-                                forelder.visPanel(HovedVindu.HovedVindu);
-                                forelder.Size();
-                            }          
-                       } //slutt på YES_NO_OPTION
+                                visFeilMelding("Pass på å fylle ut takseringsbeløp for skaden!");
+                            }
+                      } //slutt på YES_NO_OPTION
                             else
                             {
                              visFeilMelding("Tegning av skademelding avbrutt");
@@ -202,12 +203,12 @@ public void registrerSkademelding() //metode som registrerer ny skademelding på
                       } //slutt på sjekkdekning
                     else
                  {
-                  visFeilMelding("Sjekkdekning");
+                  visFeilMelding("Du har ikke dekning for denne forsikringen");
                  }
                 } //Slutt på getForsikringer().contains
                  else
                  {
-                  visFeilMelding("Du har ikke dekning for denne forsikringen!");
+                  visFeilMelding("Forsikringsnummeretligger ikke blant kundens forsikringer");
                  }
             }//Slutt på if( kunden != null )
             else

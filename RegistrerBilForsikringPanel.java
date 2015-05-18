@@ -35,7 +35,7 @@ public class RegistrerBilForsikringPanel extends JPanel implements ActionListene
     
     private JPanel tekstpanel;
     private JPanel knappepanel;
-    private JPanel overskriftpanel;
+    private JPanel overskriftpanel; 
     private JPanel toppanel;
     private JPanel midtpanel;
     
@@ -186,6 +186,13 @@ public class RegistrerBilForsikringPanel extends JPanel implements ActionListene
                   }
                   else
                   {
+                      if(!godkjennRegNummer())
+                      {
+                          visFeilMelding("Skriv inn gyldig registreringsnummer! F.eks AB12345");
+                      }
+                      else
+                      {
+
                       String fnr = fregister.genererNummer();
                       Bilforsikring b = new Bilforsikring(k, bileier, regnummer, biltype, bilmodell, kjorelengde, skade);
                       b.setForsikringsnummer(fnr);
@@ -202,7 +209,8 @@ public class RegistrerBilForsikringPanel extends JPanel implements ActionListene
                             forelder.addLogo();
                             forelder.visPanel(HovedVindu.HovedVindu);
                             forelder.Size();
-                           } else
+                           }
+                           else
                                visFeilMelding("Ikke lagt til");
                           }else
                             {
@@ -210,7 +218,8 @@ public class RegistrerBilForsikringPanel extends JPanel implements ActionListene
                              visMelding("Tegning av forsikring avbrutt");
                             }
                      
-                    }  
+                    }
+                  }
               }
             } catch(NumberFormatException nfe)
             {
@@ -220,6 +229,16 @@ public class RegistrerBilForsikringPanel extends JPanel implements ActionListene
             {
                 visFeilMelding("Null Pointer");
             }
+        }
+    
+        public boolean godkjennRegNummer()
+        {
+            String regex = "[A-Z]{2}\\d{5}";
+            String regnummer = regnummerfelt.getText();
+            if(regnummer.matches(regex))
+            return true;
+         else
+            return false;
         }
     
       public void visMelding(String melding)

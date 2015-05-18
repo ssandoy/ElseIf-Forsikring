@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.ListIterator;
+import java.util.Map;
 
 /**
  * Klasse som oppretter et Statistikk objekt som er for å skrive ut all
@@ -43,21 +44,17 @@ public class Statistikk
         antallForsikringer = fregister.size();
         antallSkademeldinger = sregister.size();
         
-        Collection c = kregister.values();
-
-    
-        Iterator itr = c.iterator();
-
-        //iterate through TreeMap values iterator
-        while(itr.hasNext())
+        for(Map.Entry<String, Forsikringskunde> entry: kregister.entrySet())
         {
-            Forsikringskunde kunde = (Forsikringskunde)itr.next();
+            Forsikringskunde kunde = entry.getValue();
+            
             if(!kunde.getForsikringer().isEmpty())
                 antKunderForsikring++;
             if(!kunde.getSkademeldinger().isEmpty())
-                antKunderForsikring++;
+                antKunderSkademelding++;
             if(kunde.TotalKunde())
                 antTotalKunder++;
+            
         }
     }
     
