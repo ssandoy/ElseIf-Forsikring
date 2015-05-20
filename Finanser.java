@@ -4,8 +4,6 @@ package prosjektoppgave;
 import java.util.List;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.Map;
@@ -33,7 +31,7 @@ public class Finanser {
         differanse = 0.00;
     }
     
-    public void beregnUtbetalt() //regner ut hvor mye forsikringsselskapet har betalt
+    public void beregnUtbetalt() //regner ut hvor mye forsikringsselskapet har utbetalt
     {
         utbetalt = 0.00;
         try
@@ -69,13 +67,20 @@ public class Finanser {
         innbetalt = 0.00;
         for(Map.Entry<String, Insurance> entry: forsikringer.entrySet())
         {
+            
             Insurance f = entry.getValue();
             innbetalt += f.getPremie();
             utbetalt += f.getErstatning();
+            }
+            for(Map.Entry<String,Skademelding> entry: skademeldinger.entrySet())
+            {
+            Skademelding s = entry.getValue();
+            innbetalt += s.getEgenandel();
+            }
         }
-    }
     
-    public void beregnDifferanse() //beregner differansen mellom de innbetalte og utbetalte verdiene
+    //beregner differansen mellom de innbetalte og utbetalte verdiene
+    public void beregnDifferanse() 
     {
         differanse = innbetalt - utbetalt;
     }

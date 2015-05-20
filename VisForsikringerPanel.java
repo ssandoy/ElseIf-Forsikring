@@ -55,7 +55,7 @@ public class VisForsikringerPanel extends JPanel implements ActionListener
         
          sokepanel = new JPanel(new FlowLayout());
          sokfelt   = new JTextField(20);
-         sokKunde = new JButton("Søk etter kunde");
+         sokKunde = new JButton("Skriv inn ditt personnummer");
          sokKunde.addActionListener(this);
          sokepanel.add(sokfelt);
          sokepanel.add(sokKunde);
@@ -66,7 +66,7 @@ public class VisForsikringerPanel extends JPanel implements ActionListener
          
          forsikringsramme = new ForsikringsRamme(soyler, forsikringsliste);
          forsikringstabell = new JTable(forsikringsramme);
-          forsikringstabell.addMouseListener(new MusLytter());
+         forsikringstabell.addMouseListener(new MusLytter());
          scroll = new JScrollPane(forsikringstabell);
 
          tabellpanel = new JPanel(new BorderLayout());
@@ -84,10 +84,9 @@ public class VisForsikringerPanel extends JPanel implements ActionListener
          this.add(sokepanel, BorderLayout.NORTH);
          this.add(tabellpanel, BorderLayout.CENTER);
          this.add(knappepanel, BorderLayout.PAGE_END);
-         
-         
     }
 
+    //metode som søker etter en forsikringskunde og returnerer forsikringene til kunden
      public void sok()
      {
          scroll.remove(forsikringstabell);
@@ -111,7 +110,9 @@ public class VisForsikringerPanel extends JPanel implements ActionListener
         if(kundeforsikringer.isEmpty())
         {
             tabellpanel = new JPanel(new BorderLayout());
+            Font font = new Font("Verdana", Font.BOLD, 20);
             tekstinfo   = new JTextArea(10,10);
+            tekstinfo.setFont(font);
             tekstinfo.setText("Kunden eier ingen forsikringer. Enda!");
             tabellpanel.add(tekstinfo, BorderLayout.CENTER);
             this.add(tabellpanel,BorderLayout.CENTER);
@@ -161,16 +162,25 @@ public class VisForsikringerPanel extends JPanel implements ActionListener
        } else if(e.getSource() == slettForsikring)
        {
            try{
+                   int result = JOptionPane.showConfirmDialog(null, 
+                             "Er du sikker på at du vil slette forsikringen?", null , JOptionPane.YES_NO_OPTION);
+                      if(result == JOptionPane.YES_OPTION)
+                      {
                 Insurance f = (Insurance) forsikringsramme.getData().get(forsikringstabell.getSelectedRow());
+                if(f == null)
+                {
+                    visFeilMelding("Du har ikke valgt noen forsikring");
+                    return;
+                }
                 Forsikringskunde k = f.getKunde();
-                if(fregister.fjern(f.getFNummer()))
+                if(fregister.fjern(f.getFNummer()) && k.fjernForsikring(f))
                 {
                      double pris = f.getPremie();
-                     k.fjernForsikring(f);
                      k.setPremie(k.getPremie() - pris);
                      visMelding("Forsikring fjernet!");
                      f = null;
                 }
+                      }
            }catch(IndexOutOfBoundsException i)
            {
                visFeilMelding("Du har ikke valgt noen forsikring");
@@ -212,10 +222,7 @@ public class VisForsikringerPanel extends JPanel implements ActionListener
             {
                 Insurance f = (Insurance) forsikringsramme.getData().get(forsikringstabell.getSelectedRow());
                 
-                visMelding(f.toString());
-               
-                
-                        
+                visMelding(f.toString());      
                         
             }
 
@@ -242,4 +249,4 @@ public class VisForsikringerPanel extends JPanel implements ActionListener
         
     }//Muslytter ferdig
 
-}
+}//slutt på klasse

@@ -28,7 +28,7 @@ public interface Menneske extends Serializable
     
     /*set-metoder for navn*/
     public void setFornavn(String fornavn);
-    public void setEtternavn(String etternavn); // Se på dette
+    public void setEtternavn(String etternavn); 
     public void setAdresse(String adresse);
    
     

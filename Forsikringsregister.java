@@ -64,6 +64,7 @@ public class Forsikringsregister extends TreeMap<String,Insurance> implements Se
         return null;  
     }
 
+    //henter ut forsikring ved hjelp av nøkkel-verdi
     public Insurance getForsikring(String fnr)
     {
         if(finnes(fnr))

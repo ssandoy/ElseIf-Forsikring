@@ -34,7 +34,7 @@ public class SlettKundePanel extends JPanel implements ActionListener{
 
     private HovedVindu forelder;
     
-    Kunderegister kregister;
+    private Kunderegister kregister;
 
     private JPanel tekstpanel;
     private JPanel knappepanel;
@@ -102,7 +102,7 @@ public class SlettKundePanel extends JPanel implements ActionListener{
     }
     
     
-    public void slettKunde()
+    public void slettKunde() //metode som sletter en kunde fra registeret, gitt at den ikke eier forsikringer
     {
         try{
             String nr = personnummerfelt.getText();
@@ -155,4 +155,4 @@ public class SlettKundePanel extends JPanel implements ActionListener{
 
         }
     }
-}
+}//slutt på klasse

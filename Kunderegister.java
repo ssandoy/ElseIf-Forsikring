@@ -50,9 +50,7 @@ public class Kunderegister extends TreeMap<String, Forsikringskunde> implements 
        }
        return false;
     }
-    
-
-    //metode som returnerer en kunde med  parameter pnr   
+     
     @Override
     public Object getObject(String pnr) 
     {
@@ -63,7 +61,7 @@ public class Kunderegister extends TreeMap<String, Forsikringskunde> implements 
         return null;
     }
 
-    
+     //metode som returnerer en kunde med  parameter pnr  
     public Forsikringskunde getKunde(String pnr)
     {
        if(finnes(pnr))

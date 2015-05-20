@@ -44,15 +44,19 @@ public class Statistikk
         antallForsikringer = fregister.size();
         antallSkademeldinger = sregister.size();
         
+         antKunderForsikring = 0;
+         antKunderSkademelding = 0;
+         antTotalKunder = 0;
+        
+        
         for(Map.Entry<String, Forsikringskunde> entry: kregister.entrySet())
         {
             Forsikringskunde kunde = entry.getValue();
-            
             if(!kunde.getForsikringer().isEmpty())
                 antKunderForsikring++;
             if(!kunde.getSkademeldinger().isEmpty())
                 antKunderSkademelding++;
-            if(kunde.TotalKunde())
+            if(kunde.getTotalKunde().equals("JA"))
                 antTotalKunder++;
             
         }
@@ -73,18 +77,6 @@ public class Statistikk
         return antallSkademeldinger;
     }
     
-    /*public String skrivKunder()
-    {
-        String utskrift = "";
-        Collection c = kregister.values();
-        Iterator itr = c.iterator();
-        
-        while(itr.hasNext())
-        {
-            utskrift += itr.next().toString() + "\n";
-        }
-        return utskrift;
-    }*/
     
     public String skrivStatistikk()
     {

@@ -37,12 +37,12 @@ public class RegistrerReiseForsikringPanel extends JPanel implements ActionListe
     private JButton beregn;
     private JButton avbryt;
     
-    HovedVindu forelder;
-    Kunderegister kregister;
-    Forsikringsregister fregister;
+    private HovedVindu forelder;
+    private Kunderegister kregister;
+    private Forsikringsregister fregister;
     
-    String[] reise = {"Velg område", "INNLANDS", "SKANDINAVIA", "EUROPA", "VERDEN"};
-    String[] status = {"Velg din status", "Student", "Voksen", "Honnør"};
+    private String[] reise = {"Velg område", "INNLANDS", "SKANDINAVIA", "EUROPA", "VERDEN"};
+    private String[] status = {"Velg din status", "Student", "Voksen", "Honnør"};
     
     
     public RegistrerReiseForsikringPanel(HovedVindu forelder, Kunderegister kregister, Forsikringsregister fregister)
@@ -178,7 +178,7 @@ public class RegistrerReiseForsikringPanel extends JPanel implements ActionListe
                      f.setType("REISE-FORSIKRING");
                      f.beregnPremie();
                      int result = JOptionPane.showConfirmDialog(null, 
-                           "Pris på din forsikring: " + f.getPremie() + ",-" + 
+                           "Årlig pris på din forsikring: " + f.getPremie() + ",-" + 
                             "\nVil du tegne denne forsikringen?", null , JOptionPane.YES_NO_OPTION);
                           if(result == JOptionPane.YES_OPTION) 
                           {
@@ -190,17 +190,18 @@ public class RegistrerReiseForsikringPanel extends JPanel implements ActionListe
                                     forelder.addLogo();
                                     forelder.visPanel(HovedVindu.HovedVindu);
                                     forelder.Size();
-                               } else 
+                               } //slutt på fregister.leggTil(f)
+                               else 
                                  {
                                   visFeilMelding("Feil informasjon fylt inn. Prøv igjen");
                                  }
-                          }
-                          }
-                 }
-        }
+                          } //slutt på YES_OPTION
+                  } //slutt på kunde!=null
+            } 
+        } //slutt på try
         catch(NullPointerException npe)
             {
-                visFeilMelding("Null Pointer");
+                visFeilMelding("NullPointer");
             }
     }
          
@@ -235,7 +236,7 @@ public class RegistrerReiseForsikringPanel extends JPanel implements ActionListe
        }
        else if(e.getSource() == Bil)
         {
-                    forelder.doClick(1);
+          forelder.doClick(1);
         }
        else if(e.getSource() == Baat)
         {
@@ -247,7 +248,7 @@ public class RegistrerReiseForsikringPanel extends JPanel implements ActionListe
         }
          else if(e.getSource() == Hytte)
         {
-                    forelder.doClick(4);
+          forelder.doClick(4);
         }
     }
-}
+}//slutt på klasse

@@ -9,8 +9,10 @@ import java.util.LinkedList;
 import javax.swing.table.AbstractTableModel;
 
 /**
- *
+ * Superklasse-"Ramme" for kunde og forsikringstabeller . 
+ * 
  * @author ssandoy
+ * 
  */
 
 public abstract class TabellRamme<T> extends AbstractTableModel {
@@ -23,10 +25,12 @@ public abstract class TabellRamme<T> extends AbstractTableModel {
         this.data = data;
     }
     //get-metoder for tabeller
+    @Override
     public String getColumnName(int kol) {
         return kolonnenavn[kol];
     }
 
+    @Override
     public int getRowCount() {
         return data.size();
     }
@@ -35,6 +39,7 @@ public abstract class TabellRamme<T> extends AbstractTableModel {
         return data.get(rad);
     }
 
+    @Override
     public int getColumnCount() {
         return kolonnenavn.length;
     }
@@ -46,48 +51,10 @@ public abstract class TabellRamme<T> extends AbstractTableModel {
     @Override
     public abstract Object getValueAt(int rad, int kol);
 
-    /**
-     * Setter inn et objekt i en rad i tabellen og oppdaterer modellen.
-     *
-     * @param obj Objektetsom skal settes inn.
-     */
-    public void addRow(T obj) {
-        data.add(obj);
-        this.fireTableDataChanged();
-    }
 
-    /**
-     * Fjerner en rad fra tabellen og oppdaterer modellen.
-     *
-     * @param rad Indeksen til den raden som skal fjernes.
-     */
-    public void delRow(int rad) {
-        data.remove(rad);
-        this.fireTableDataChanged();
-    }
+}//tabellRamme klasse feridg
 
-    /**
-     * Sletter all data og oppdaterer modellen.
-     */
-    public void delTabledata() {
-        data.clear();
-        this.fireTableDataChanged();
-    }
-
-    /**
-     * Sletter all data, setter inn ny og oppdaterer modellen.
-     *
-     * @param d Den nye listen med data.
-     */
-    public void setTabledata(LinkedList<T> d) {
-        data.clear();
-        data.addAll(d);
-        this.fireTableDataChanged();
-    }
-
-}//tabellModell klasse feridg
-
-//Ramme for forsikringskundene. Arver fra Tabellramme
+//Ramme for forsikringskundene. Arver fra TabellRamme
 class KundeRamme extends TabellRamme<Forsikringskunde> {
 
     private final int PERSONNUMMER = 0;

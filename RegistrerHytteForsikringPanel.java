@@ -40,12 +40,12 @@ public class RegistrerHytteForsikringPanel extends JPanel implements ActionListe
     private JButton registrer;
     private JButton avbryt;
     
-    HovedVindu forelder;
+    private HovedVindu forelder;
 
-    Forsikringsregister fregister;
-    Kunderegister kregister;
+    private Forsikringsregister fregister;
+    private Kunderegister kregister;
     
-    Integer[] antMaaneder = {0,1,2,3,4,5};
+    private Integer[] antMaaneder = {0,1,2,3,4,5};
     
     public RegistrerHytteForsikringPanel(HovedVindu forelder, Kunderegister kregister, Forsikringsregister fregister)
     {
@@ -65,7 +65,7 @@ public class RegistrerHytteForsikringPanel extends JPanel implements ActionListe
          int bredde = skjerm.width;
          int hoyde = skjerm.height;
          
-    forelder.setSize(bredde/2, hoyde/2);
+         forelder.setSize(bredde/2, hoyde/2);
          forelder.setLocation(skjerm.width/2-forelder.getSize().width/2, skjerm.height/2-forelder.getSize().height/2);
          
     }
@@ -166,6 +166,7 @@ public class RegistrerHytteForsikringPanel extends JPanel implements ActionListe
     
     public void registrer()
     {
+        try{
             String personnummer = personnummerfelt.getText();
             String adresse      = adressefelt.getText();
             int byggeaar        = byggeaarfelt.getValue();
@@ -191,7 +192,7 @@ public class RegistrerHytteForsikringPanel extends JPanel implements ActionListe
                      f.setType("HYTTE-FORSIKRING");;
                      f.beregnPremie();
                      int result = JOptionPane.showConfirmDialog(null, 
-                             "Pris på din forsikring: " + f.getPremie() + ",-" + 
+                             "Årlig pris på din forsikring: " + f.getPremie() + ",-" + 
                                      "\nVil du tegne denne forsikringen?", null , JOptionPane.YES_NO_OPTION);
                      if(result == JOptionPane.YES_OPTION) 
                     {
@@ -212,7 +213,12 @@ public class RegistrerHytteForsikringPanel extends JPanel implements ActionListe
                  } //slutt på if(yes_option)
           
             } //slutt på if(k == null
-        } //slutt på if(personnummer.length) 
+          }//slutt på if(personnummer.length) 
+        }//slutt på try
+        catch(NullPointerException npe)
+        {
+            
+        }
     }//slutt på metode
     
     public void visMelding(String melding)
@@ -257,7 +263,7 @@ public class RegistrerHytteForsikringPanel extends JPanel implements ActionListe
              forelder.doClick(5);
         }
         
-    }
+    }//slutt på metode
     
     public class SliderEvent implements ChangeListener{
 
@@ -274,7 +280,7 @@ public class RegistrerHytteForsikringPanel extends JPanel implements ActionListe
                 bygglabel.setText("     Byggeår: " + byggeaarfelt.getValue());
             }
             
-        } 
+        }//slutt på metode 
     }
     
-}
+}//slutt på klasse

@@ -93,6 +93,7 @@ public class VisKundePanel extends JPanel implements ActionListener
          
     }
 
+    //metode som lager en ny tabell basert søket skrevet inn i tekstfeltet
      public void sok()
      {
          scroll.remove(kundetabell);
@@ -127,7 +128,7 @@ public class VisKundePanel extends JPanel implements ActionListener
         
      }
     
-     
+     //Metode som søker gjennom forsikrings-kundene og legger til de som stemmer med søket
     public LinkedList<Forsikringskunde> sokListe(String sok)
     {
         LinkedList<Forsikringskunde> sokliste = new LinkedList<>();
@@ -242,7 +243,7 @@ public class VisKundePanel extends JPanel implements ActionListener
                 Forsikringskunde k = (Forsikringskunde) kunderamme.getData().get(kundetabell.getSelectedRow());
                 visMelding("Kunde: " + k.getFornavn() + " " + k.getEtternavn() + 
                            "\nAntall forsikringer: " + k.getForsikringer().size() + 
-                            "\nTotalsum årlig premie: " + k.getPremie());
+                            "\nTotalsum årlig premie: " + k.beregnTotalPremie() + ",-");
       
             }
 
@@ -271,4 +272,4 @@ public class VisKundePanel extends JPanel implements ActionListener
         
     }//Muslytter ferdig
 
-}
+}//slutt på klasse

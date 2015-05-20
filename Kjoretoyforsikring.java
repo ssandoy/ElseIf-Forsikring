@@ -20,8 +20,6 @@ public abstract class Kjoretoyforsikring extends Insurance implements Serializab
     private String registreringsnummer;
     private String type;
     private int modell;
-
-    private Forsikringsregister fregister;
     
     protected Kjoretoyforsikring(Forsikringskunde k, String eier, String registreringsnummer, 
                                  String type, int modell)

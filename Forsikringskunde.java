@@ -25,8 +25,8 @@ public class Forsikringskunde extends Person implements Serializable
     private double aarligpremie;
     private double erstatninger;
     private boolean totalkunde;
-    private LinkedList<Insurance> forsikringer;
-    private LinkedList<Skademelding> skademeldinger;
+    private  LinkedList<Insurance> forsikringer;
+    private  LinkedList<Skademelding> skademeldinger;
 
     
     public Forsikringskunde(String personnummer, String fornavn, String etternavn,  
@@ -34,9 +34,8 @@ public class Forsikringskunde extends Person implements Serializable
     {
         super(personnummer, fornavn, etternavn, adresse, telefonnummer);
         
-        
-        forsikringer = new LinkedList();
-        skademeldinger = new LinkedList();
+        forsikringer = new LinkedList<Insurance>();
+        skademeldinger = new LinkedList<Skademelding>();
         totalkunde = false; //ikke nødvendig
         aarligpremie = 0.00;
         erstatninger = 0.00;
@@ -86,7 +85,6 @@ public class Forsikringskunde extends Person implements Serializable
         return skademeldinger;
     }
     
-    
     //Metode som sletter en forsikrikng hos kunden, om den eksisterer
     public boolean fjernForsikring(Insurance f)
     {
@@ -111,7 +109,7 @@ public class Forsikringskunde extends Person implements Serializable
             aarligpremie += f.getPremie();
         }
         
-        if(totalkunde)
+        if(TotalKunde())
         {
             aarligpremie *= 0.90;
         }
@@ -131,6 +129,7 @@ public class Forsikringskunde extends Person implements Serializable
         return erstatninger;
     }
     
+    //get- og set-metoder
     public String getKundenummer()
     {
         return kundenummer;
@@ -173,6 +172,12 @@ public class Forsikringskunde extends Person implements Serializable
             return "NEI";
         }
     }
+    
+    public boolean eierForsikring(Insurance f)
+    {
+        return forsikringer.contains(f);
+    }
+    
     
     
     @Override

@@ -47,7 +47,8 @@ public class Prosjektoppgave
         lesForsikringsregister();
         lesSkademeldingsregister();
         
-        for(int i=0;i<10000;i++){
+        //om du vil legge til flere kunder!
+        /*for(int i=0;i<10000;i++){
             int n = new Random().nextInt(navn.length);
             int e = new Random().nextInt(etternavn.length);
             int a = new Random().nextInt(addresse.length);
@@ -61,10 +62,9 @@ public class Prosjektoppgave
             String knr =  kregister.genererNummer();
             k.setKundenummer(knr);
             kregister.leggTil(k);
-        }
+        }*/
        
        HovedVindu vindu = new HovedVindu(kregister, fregister, sregister);
-       
         Toolkit kit = Toolkit.getDefaultToolkit();
         Dimension skjerm = kit.getScreenSize();
         int bredde = skjerm.width;
@@ -88,6 +88,7 @@ public class Prosjektoppgave
         
     }
    
+        //Leser kunderegisteret fra fil
     public static void lesKunderegister() {
         try (ObjectInputStream innfil = new ObjectInputStream(new FileInputStream("kundeliste.data"))) {
             kregister = (Kunderegister) innfil.readObject();
@@ -102,6 +103,7 @@ public class Prosjektoppgave
         }
     }
     
+    //skriver kunderegisteret til fil
     public static void skrivKunderegister() {
         try (ObjectOutputStream utfil = new ObjectOutputStream(new FileOutputStream("kundeliste.data"))) {
             utfil.writeObject(kregister);
@@ -111,6 +113,7 @@ public class Prosjektoppgave
         }
     }
     
+    //leser forsikringsregisteret fra fil
     public static void lesForsikringsregister() 
     {
         try (ObjectInputStream innfil = new ObjectInputStream(new FileInputStream("forsikringsliste.data"))) 
@@ -128,6 +131,7 @@ public class Prosjektoppgave
         }
     }
     
+        //skriver forsikringsregisteret til fil
     public static void skrivForsikringsregister() {
         try (ObjectOutputStream utfil = new ObjectOutputStream(new FileOutputStream("forsikringsliste.data"))) {
             utfil.writeObject(fregister);
@@ -137,6 +141,7 @@ public class Prosjektoppgave
         }
     }
     
+        //leser skademeldingsregisteret fra fil
     public static void lesSkademeldingsregister() {
         try (ObjectInputStream innfil = new ObjectInputStream(new FileInputStream("skademeldingsliste.data"))) {
             sregister = (Skademeldingsregister) innfil.readObject();
@@ -151,6 +156,7 @@ public class Prosjektoppgave
         }
     }
     
+        //skriver skademeldingsregisteret fra fil
     public static void skrivSkademeldingsregister() {
         try (ObjectOutputStream utfil = new ObjectOutputStream(new FileOutputStream("skademeldingsliste.data"))) {
             utfil.writeObject(sregister);

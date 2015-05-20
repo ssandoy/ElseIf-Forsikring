@@ -53,7 +53,7 @@ public class StatistikkPanel extends JPanel implements ActionListener
         infofelt.setBorder(BorderFactory.createCompoundBorder(border, 
         BorderFactory.createEmptyBorder(40, 70, 40, 40)));
         
-        overskrift = new JLabel("HISTORIKK");
+        overskrift = new JLabel("STATISTIKK");
         
         tilbake = new JButton("Tilbake");
         tilbake.addActionListener(this);
@@ -104,4 +104,4 @@ public class StatistikkPanel extends JPanel implements ActionListener
 
         }  
     }
-}
+}//slutt på klasse

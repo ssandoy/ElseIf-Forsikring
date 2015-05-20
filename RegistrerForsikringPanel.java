@@ -74,7 +74,7 @@ public class RegistrerForsikringPanel extends JPanel implements ActionListener
     {
         registrer = new JButton("Beregn pris på forsikring");
         registrer.addActionListener(this);
-        avbryt = new JButton("Avbryt");
+        avbryt = new JButton("Tilbake");
         avbryt.addActionListener(this);
         
         overskrift = new JLabel("Velg en forsikring ved å klikke på ikonene over!");
@@ -166,7 +166,7 @@ public class RegistrerForsikringPanel extends JPanel implements ActionListener
         }
         else if(e.getSource() == registrer)
         {
-            
+            visFeilMelding("Du må velge en forsikring og fylle ut alle felter først!");
         }
        
         else if(e.getSource() == avbryt)
@@ -190,4 +190,4 @@ public class RegistrerForsikringPanel extends JPanel implements ActionListener
      }
     
     
-}
+}//slutt på klasse

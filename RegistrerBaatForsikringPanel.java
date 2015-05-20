@@ -179,7 +179,7 @@ public class RegistrerBaatForsikringPanel extends JPanel implements ActionListen
         midtpanel.setBackground(Color.decode("#669CFF"));
     }
     
-public void registrer() //metode som registrerer båtforsikring og sjekker om det er noen feil 
+    public void registrer() //metode som registrerer båtforsikring og sjekker om det er noen feil 
     {
         try{
                 String personnummer     = personnummerfelt.getText();
@@ -204,44 +204,42 @@ public void registrer() //metode som registrerer båtforsikring og sjekker om de
                           b.setForsikringsnummer(fnr);
                           b.setType("BÅT-FORSIKRING");
                           b.beregnPremie();
-                          int result = JOptionPane.showConfirmDialog(null, "Pris på din forsikring: " + b.getPremie() + ",-" + "\nVil du tegne denne forsikringen?", null , JOptionPane.YES_NO_OPTION);
+                          int result = JOptionPane.showConfirmDialog(null, "Årlig pris på din forsikring: " + b.getPremie() + ",-" + "\nVil du tegne denne forsikringen?", null , JOptionPane.YES_NO_OPTION);
                              if(result == JOptionPane.YES_OPTION) 
                              {
                               if(fregister.leggTil(b) && k.getForsikringer().add(b))
                               {
-                                  double nypremie = b.getPremie() + k.getPremie();
-                                 k.setPremie(nypremie);
+                              double nypremie = b.getPremie() + k.getPremie();
+                              k.setPremie(nypremie);
                               visMelding("Forsikring registrert på kunde:\n" + k.getNavn() + "\n" + b.toString());
                               forelder.addLogo();
                               forelder.visPanel(HovedVindu.HovedVindu);
                               forelder.Size();
-                              } else 
+                              }//slutt på fregister.leggTil
+                              else 
                                {
                                 visFeilMelding("Feil info skrevet inn. Prøv igjen");                                
                                }
-                             }else
+                             }//slutt på YES_OPTION
+                             else
                              {
                               visFeilMelding("Tegning av forsikring avbrutt.");
-
-                             }
-
-                      
-             } else
+                             } 
+                  } //slutt på kregister.finnes()
+                 else
                  {
                      visFeilMelding("Personnummeret finnes ikke i registeret");
                  }
-             }
-    
-        }
+             }//slutt på if(personnummer.length())
+        }//slutt på try
         catch(NullPointerException npe)
         {
             visFeilMelding("Null Pointer");
-        }
-        
-    }
+        } 
+    } //slutt på metode
     
     
- 
+    
      public void visMelding(String melding)
      {
         JOptionPane.showMessageDialog(null,melding);
@@ -265,9 +263,7 @@ public void registrer() //metode som registrerer båtforsikring og sjekker om de
        }
         else if(e.getSource() == registrer)
         {
-            registrer();
-
-                
+            registrer();        
         }
         else if(e.getSource() == Bil)
         {
@@ -287,7 +283,7 @@ public void registrer() //metode som registrerer båtforsikring og sjekker om de
          }
     }
         
-
+//Gjør slideren interaktiv og gjør at verdiene endrer seg mens man drar i den
      public class SliderEvent implements ChangeListener{
 
 
@@ -307,8 +303,7 @@ public void registrer() //metode som registrerer båtforsikring og sjekker om de
                 mlabel.setText("       Årsmodell: " + modell.getValue());
             }
         } 
-    }
-    
-    
-}
+    }//slutt på metode
+
+}//slutt på klasse
 

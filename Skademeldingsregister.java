@@ -30,7 +30,7 @@ public class Skademeldingsregister extends TreeMap<String, Skademelding> impleme
         return false;
     }
     
-    /*Metode som sjekker om objektet eksisterer i registeret med Key-verdien pnr*/
+    /*Metode som sjekker om objektet eksisterer i registeret med Key-verdien skademeldingsnr*/
     @Override
     public boolean finnes(String nr) 
     {
@@ -49,7 +49,7 @@ public class Skademeldingsregister extends TreeMap<String, Skademelding> impleme
        return false;
     }
     
-    //metode som returnerer en skademelding med  parameter pnr  
+    //metode som returnerer en skademelding med  parameter nr 
      @Override
     public Object getObject(String nr) 
     {
@@ -76,20 +76,21 @@ public class Skademeldingsregister extends TreeMap<String, Skademelding> impleme
     }
    
     //Genererer et unikt skademeldingsnummer.
-     @Override
+      @Override
     public String genererNummer()
-    {
-        int nøkkel = 1;
-        for(Map.Entry<String, Skademelding> entry : this.entrySet())
-        {
-         if(entry.getValue().getNr().equals(String.valueOf(nøkkel)))
-            {
-                nøkkel++;
-            }   
-        }
+{
+    int max = 0;
 
-        return String.valueOf(nøkkel);
+    for(Map.Entry<String, Skademelding> entry : this.entrySet())
+    {
+        int test = Integer.parseInt(entry.getValue().getNr());
+        if(test > max)
+        {
+            max = test;
+        } 
     }
+    return String.valueOf(max + 1);
+}
     
     
    

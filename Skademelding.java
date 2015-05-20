@@ -32,12 +32,14 @@ public class Skademelding implements Serializable {
     private double takseringsBelop;
     private double erstatningsBelop;
     
+    //konstanter for hva en maks kan få i erstatning for de forskjellige forsikringene
     private final double MAXBILERSTATNING = 100000.00;
     private final double MAXBOLIGERSTATNING = 100000.00;
     private final double MAXBAATERSTATNING = 50000.00;
     private final double MAXHYTTEERSTATNING = 70000.00;
     private final double MAXREISEERSTATNING = 20000.00;
     
+    //konstanter for hva en må betale (i prosent av totalprisen) i egenandel for å få dekket forsikringen
     private final double BILEGENANDELKONSTANT = 0.2;
     private final double BOLIGEGENANDELKONSTANT = 0.1;
     private final double BAATEGENANDELKONSTANT = 0.2;
@@ -135,6 +137,16 @@ public class Skademelding implements Serializable {
                     return false;
                 
         }
+        
+        //sjekker om eier og forsikring stemmer overens
+        public boolean sjekkEier()
+        {
+            if(forsikring.getKunde().getPersonNr().equals(kunde.getPersonNr()))
+                return true;
+            else
+                return false;
+        }
+        
         
    //Metode som beregner erstatning og egenandelsbeløpet for skaden ut i fra takstering og konstanter
         public void beregnErstatning()

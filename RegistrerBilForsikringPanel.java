@@ -192,13 +192,12 @@ public class RegistrerBilForsikringPanel extends JPanel implements ActionListene
                       }
                       else
                       {
-
                       String fnr = fregister.genererNummer();
                       Bilforsikring b = new Bilforsikring(k, bileier, regnummer, biltype, bilmodell, kjorelengde, skade);
                       b.setForsikringsnummer(fnr);
                       b.setType("BIL-FORSIKRING");
                       b.beregnPremie();
-                      int result = JOptionPane.showConfirmDialog(null, "Pris på din forsikring: " + b.getPremie() + ",-" + "\nVil du tegne denne forsikringen?", null , JOptionPane.YES_NO_OPTION);
+                      int result = JOptionPane.showConfirmDialog(null, "Årlig pris på din forsikring: " + b.getPremie() + ",-" + "\nVil du tegne denne forsikringen?", null , JOptionPane.YES_NO_OPTION);
                          if(result == JOptionPane.YES_OPTION) 
                          {
                            if(fregister.leggTil(b) && k.getForsikringer().add(b))
@@ -209,19 +208,20 @@ public class RegistrerBilForsikringPanel extends JPanel implements ActionListene
                             forelder.addLogo();
                             forelder.visPanel(HovedVindu.HovedVindu);
                             forelder.Size();
-                           }
+                           } //slutt på fregister.leggTilb
                            else
                                visFeilMelding("Ikke lagt til");
-                          }else
+                          }//slutt på YES_OPTION
+                            else
                             {
                              b = null;
                              visMelding("Tegning av forsikring avbrutt");
                             }
-                     
-                    }
-                  }
-              }
-            } catch(NumberFormatException nfe)
+                    }//Slutt på !godkjennRegnummer
+                  }//slutt på if(k == null)
+              }//slutt på if(personnummer.length())
+            } //slutt på try
+            catch(NumberFormatException nfe)
             {
              visFeilMelding("Skriv inn riktige verdier i feltene");
            }
@@ -231,6 +231,8 @@ public class RegistrerBilForsikringPanel extends JPanel implements ActionListene
             }
         }
     
+    //Metode som sjekker om innskrevet regnummer er godkjent i henhold til
+    // Norge sine registreringsnummer for bil
         public boolean godkjennRegNummer()
         {
             String regex = "[A-Z]{2}\\d{5}";
@@ -298,6 +300,6 @@ public class RegistrerBilForsikringPanel extends JPanel implements ActionListene
             }
             
         } 
-    }
+    }//slutt på metode
     
-}
+}//slutt på klasse

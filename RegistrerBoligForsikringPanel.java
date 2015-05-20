@@ -70,7 +70,7 @@ public class RegistrerBoligForsikringPanel extends JPanel implements ActionListe
          int hoyde = skjerm.height;
          
          forelder.setSize(bredde / 2, hoyde/2);
-        forelder.setLocation(skjerm.width / 2 - forelder.getSize().width / 2, skjerm.height / 2 - forelder.getSize().height / 2);
+         forelder.setLocation(skjerm.width / 2 - forelder.getSize().width / 2, skjerm.height / 2 - forelder.getSize().height / 2);
         
     }
     
@@ -172,7 +172,7 @@ public class RegistrerBoligForsikringPanel extends JPanel implements ActionListe
     }
     
 public void registrer() //metode som registrerer boligforsikring og sjekker om det er noen feil 
-        {
+    {
             try{
             String personnummer = personnummerfelt.getText();
             String adresse      = adressefelt.getText();
@@ -203,14 +203,14 @@ public void registrer() //metode som registrerer boligforsikring og sjekker om d
                       visFeilMelding("Ingen kunde med det personnummeret!");
                   }
                   else
-                 {
+                    {
                      String fnr =  fregister.genererNummer();
                      Innboforsikring f = new Innboforsikring(k, adresse, byggeaar, areal, boligtype, material);
                      f.setForsikringsnummer(fnr);
                      f.setType("BOLIG-FORSIKRING");;
                      f.beregnPremie();
                      int result = JOptionPane.showConfirmDialog(null, 
-                             "Pris på din forsikring: " + f.getPremie() + ",-" + 
+                             "Årlig pris på din forsikring: " + f.getPremie() + ",-" + 
                                      "\nVil du tegne denne forsikringen?", null , JOptionPane.YES_NO_OPTION);
                      if(result == JOptionPane.YES_OPTION) 
                     {
@@ -225,27 +225,22 @@ public void registrer() //metode som registrerer boligforsikring og sjekker om d
                        {
                          visFeilMelding("Feil informasjon fylt inn. Prøv igjen");
                        }
-                    }else
+                    }//slutt på YES_OPTION
+                     else
                     {
                      f = null;
                      visMelding("Tegning av forsikring avbrutt");
                     }
-                } 
-                }
-                            
-            }
+                   } 
+                }//slutt på else if(boligtype)               
+            }//slutt på try
             catch(NullPointerException npe)
             {
                 visFeilMelding("Null Pointer");
             }
-        }
-    
-        public void eierInnbo()
-        {
-            
-            
-        }
-        
+    }//slutt på metode
+       
+
          public void visMelding(String melding)
      {
         JOptionPane.showMessageDialog(null,melding);
@@ -288,7 +283,7 @@ public void registrer() //metode som registrerer boligforsikring og sjekker om d
         {
             forelder.doClick(5);
         }
-    }
+    }//slutt på actionperformed
     
     public class SliderEvent implements ChangeListener{
 
@@ -306,7 +301,6 @@ public void registrer() //metode som registrerer boligforsikring og sjekker om d
             }
             
         } 
-    }
+    }//slutt på metode 
     
-    
-}
+}//slutt på klasse

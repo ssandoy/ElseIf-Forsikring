@@ -16,6 +16,15 @@ public class Baatforsikring extends Kjoretoyforsikring implements Serializable
     private int hestekrefter;
     private int fot;
     
+    //konstanter for beregning av årlig premie
+    private static int FOT20KONSTANT = 7500;
+    private static int FOT30KONSTANT = 2000;
+    private static int FOT45KONSTANT = 3000;
+    private static int MAKSFOTKONSTANT = 4000;
+    private static int HESTER15KONSTANT = 500;
+    private static int HESTER30KONSTANT = 1000;
+    private static int HESTER50KONSTANT = 1200;
+    private static int MAKSHESTERKONSTANT = 1500;
     
     public Baatforsikring(Forsikringskunde k, String eier,  String registreringsnummer, 
             String type, int modell, int hestekrefter, int fot) 
@@ -31,38 +40,38 @@ public class Baatforsikring extends Kjoretoyforsikring implements Serializable
     {
          if(fot <= 20)
         {
-           super.setPremie(1000.00);
+           super.setPremie(FOT20KONSTANT);
         } 
         else if(fot <= 30 && fot >= 21)
         {
-            super.setPremie(2000.00);
+            super.setPremie(FOT30KONSTANT);
         } 
         else if(fot <= 45 && fot >= 31)
         {
-            super.setPremie(3000.00);
+            super.setPremie(FOT45KONSTANT);
         }
         else if(fot <= 46)
         {
-            super.setPremie(5000.00);
+            super.setPremie(MAKSFOTKONSTANT);
         }
         double premie = super.getPremie();
         double motorpremie = 0.00;
         
         if(hestekrefter <= 15)
         {
-            premie += 500;
+            premie += HESTER15KONSTANT;
         }
         else if(hestekrefter >= 16 && hestekrefter <= 30)
         {
-            premie += 1000;
+            premie += HESTER30KONSTANT;
         }
         else if(hestekrefter >= 31 && hestekrefter <= 50)
         {
-            premie += 1500;
+            premie += HESTER50KONSTANT;
         }
         else if(hestekrefter >= 51)
         {
-            premie += 2000;
+            premie += MAKSHESTERKONSTANT;
         }
         
         super.setPremie(premie);  

@@ -21,16 +21,18 @@ public abstract class Personforsikring extends Insurance implements Serializable
         this.status = status;
     }
 
-    public void setStatus(String status) {
+    // set og get-metoder for status
+    public void setStatus(String status) 
+    {
         this.status = status;
     }
 
-    public String getStatus() {
+    public String getStatus() 
+    {
         return status;
     }
 
-    
-    
+
     @Override
     public String toString() {
         String utskrift = super.toString() + "\nStatus: " + status;

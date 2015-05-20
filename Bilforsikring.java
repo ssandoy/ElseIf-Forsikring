@@ -19,6 +19,12 @@ public class Bilforsikring extends Kjoretoyforsikring implements Serializable
     private static final double BEREGNINGSKONSTANT = 0.1;
     private static final double PRIS_PR_KM = 1.50;
     
+    //konstanter for beregning av årlig premie
+    private static int MODELL50TALLKONSTANT = 7500;
+    private static int MODELL70TALLKONSTANT = 7000;
+    private static int MODELL90TALLKONSTANT = 7500;
+    private static int MODELL00TALLKONSTANT = 8000;
+    
     private Forsikringsregister fregister;
     
     public Bilforsikring(Forsikringskunde k, String eier, String registreringsnummer, 
@@ -30,13 +36,6 @@ public class Bilforsikring extends Kjoretoyforsikring implements Serializable
         this.skadefri = skadefri;
        
     }
-
-    @Override
-    public void setErstatning(double erstatning) 
-    {
-            
-        
-    }
     
 ///Metode som beregner premien ut i fra hvor gammel bilen er
     public void beregnPremie()
@@ -45,19 +44,19 @@ public class Bilforsikring extends Kjoretoyforsikring implements Serializable
         
          if(modell >= 1950 && modell <= 1970)
          {
-             super.setPremie(10000.00);
+             super.setPremie(MODELL50TALLKONSTANT); 
          }
          else if(modell >= 1971 && modell <= 1990)
          {
-             super.setPremie(7000.00); 
+             super.setPremie(MODELL70TALLKONSTANT); 
          }
          else if(modell >= 1991 && modell <= 2005)
          {
-             super.setPremie(9000.00);
+             super.setPremie(MODELL90TALLKONSTANT);
          }
          else if(modell >= 2006 && modell <= 2015)
          {
-             super.setPremie(10000.00);
+             super.setPremie(MODELL00TALLKONSTANT);
          }
 
     //beregner bil-premien ut i fra skadefrihet, kjørelengde og egenandel

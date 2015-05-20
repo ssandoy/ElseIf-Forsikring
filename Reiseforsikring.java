@@ -18,6 +18,15 @@ public class Reiseforsikring extends Personforsikring implements Serializable
     
     private Forsikringsregister fregister;
     
+    //beregningskonstanter for årlig premie
+    private static int INNLANDSKONSTANT = 300;
+    private static int SKANDINAVIAKONSTANT = 500;
+    private static int EUROPAKONSTANT = 1000;
+    private static int VEDENKONSTANT = 1500;
+    
+    private static double VOKSENRABATT = 1.00;
+    private static double STUDENTRABATT = 0.80;
+    private static double HONNORRABBATT = 0.75;
     
     public Reiseforsikring(Forsikringskunde kunde, String status, String omraade) 
     {
@@ -33,27 +42,27 @@ public class Reiseforsikring extends Personforsikring implements Serializable
         double premie = 0.00;
         if(omraade.equals("INNLANDS"))
         {
-            premie += 300.00;
+            premie += INNLANDSKONSTANT;
         }else if(omraade.equals("SKANDINAVIA"))
         {
-            premie += 500.00;
+            premie += SKANDINAVIAKONSTANT;
         }else if(omraade.equals("EUROPA"))
         {
-            premie += 1000.00;
+            premie += EUROPAKONSTANT;
         }else if(omraade.equals("VERDEN"))
         {
-            premie += 1500.00;
+            premie += VEDENKONSTANT;
         }
         
         if(getStatus().equals("Voksen"))
         {
-            premie *= 1;
+            premie *= VOKSENRABATT;
         }else if(getStatus().equals("Student"))
         {
-             premie *= 0.80;
+             premie *= STUDENTRABATT;
         }else if(getStatus().equals("Honnør"))
         {
-            premie *= 0.75;
+            premie *= HONNORRABBATT;
         }
             
             super.setPremie(premie);
@@ -67,4 +76,4 @@ public class Reiseforsikring extends Personforsikring implements Serializable
         return utskrift;
     }
     
-}
+}//slutt på klasse

@@ -14,7 +14,8 @@ import javax.swing.*;
 
 /**
  * Panel klasse hvor kunden kan velge de forskjellige funksjonene av programmene 
- * ved å trykke på en av de 8 forskjellige knappene +SKRIV MER
+ * ved å trykke på en av de 8 forskjellige knappene. Dette utgjør hovedvinduet for
+ * Else IF forsikring.
  * @author Sander
  */
 
@@ -43,7 +44,7 @@ public class HovedVindu extends JFrame implements ActionListener
     private Forsikringsregister fregister;
     private Skademeldingsregister sregister;
     private Finanser finans;
-    private Statistikk historikker;
+    private Statistikk statistikker;
    
     public HovedVindu(Kunderegister kregister, Forsikringsregister fregister, Skademeldingsregister sregister)
     {
@@ -54,7 +55,7 @@ public class HovedVindu extends JFrame implements ActionListener
         this.fregister = fregister;
         this.sregister = sregister;
         this.finans = new Finanser(sregister, fregister);
-        this.historikker = new Statistikk(fregister, kregister, sregister);
+        this.statistikker = new Statistikk(fregister, kregister, sregister);
         
         Toolkit verktoykasse = Toolkit.getDefaultToolkit();
         //Bildefil for ikon er plassert i underkatalogen bilder:
@@ -83,7 +84,7 @@ public class HovedVindu extends JFrame implements ActionListener
     }
     
     
-    //setter grensesnittet. Panelene, knappene osv.
+    //setter grensesnittet. Initialiserer panelet, knappene osv.
     public void setGrensesnitt()
     {
         
@@ -163,7 +164,7 @@ public class HovedVindu extends JFrame implements ActionListener
         
     }
        
-      //Metode for å vise panel med innkommen parameter. Utføres ved klikk på JButton
+    //Metode for å vise panel med innkommen parameter. Utføres ved klikk på JButton
     public void visPanel(String st) 
     {
         CardLayout cl = (CardLayout) underpaneler.getLayout();
@@ -171,10 +172,10 @@ public class HovedVindu extends JFrame implements ActionListener
     }
 
     //metode for underpanelene som endrer paneler ut i fra knappetrykk. 
-    //Brukes i regForsikring-panelene
-     public void doClick(int i)
+    //Brukes i regForsikring-panelene. Bytter forsikrings-panel ved klikk på ikonene
+    
+    public void doClick(int i)
      {
-
         switch (i)
         {
             case 1:
@@ -196,6 +197,7 @@ public class HovedVindu extends JFrame implements ActionListener
 
     }
     
+    //Setter størrelsen og plassering på vinduet
        public void Size() 
        {
         Toolkit kit = Toolkit.getDefaultToolkit();
@@ -207,26 +209,29 @@ public class HovedVindu extends JFrame implements ActionListener
         setLocation(skjerm.width / 2 - getSize().width / 2, skjerm.height / 2 - getSize().height / 2);
        }
        
-       public void fjernLogo(){
+       //metode som fjerner logo
+       public void fjernLogo()
+       {
            this.remove(logopanel);
            revalidate();
            repaint();
        }
-       public void addLogo(){
+       
+       //metode som legger til logo
+       public void addLogo()
+       {
            add(logopanel, BorderLayout.PAGE_START);
        }
 
+       
     @Override
     public void actionPerformed(ActionEvent e) 
     {
-        
-    
         if (e.getSource() == regKunde)
         {
             underpaneler.add(new RegistrerKundePanel(this, kregister), "REG KUNDE");
             visPanel("REG KUNDE");
             fjernLogo();
-            
         }
         else if(e.getSource() == visKunde)
         {
@@ -294,10 +299,10 @@ public class HovedVindu extends JFrame implements ActionListener
         }
         else if(e.getSource() == statistikk)
         {
-            underpaneler.add(new StatistikkPanel(this, historikker), "STATISTIKK");
+            underpaneler.add(new StatistikkPanel(this, statistikker), "STATISTIKK");
             fjernLogo();
             visPanel("STATISTIKK");
         }
-  }
-}
+  }//slutt på actionperformed
+}//slutt på klasse
 

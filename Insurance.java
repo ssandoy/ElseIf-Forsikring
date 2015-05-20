@@ -28,7 +28,6 @@ public abstract class Insurance implements  Forsikring {
     private double forsikringspremie;
     
     
-    
     protected Insurance(Forsikringskunde kunde)
     {
         this.kunde = kunde;
@@ -93,8 +92,6 @@ public abstract class Insurance implements  Forsikring {
          this.erstatning = erstatning;
      }
      
-     
-
     public void setForsikringsnummer(String forsikringsnummer)
     {
         this.forsikringsnummer = forsikringsnummer;
@@ -115,7 +112,5 @@ public abstract class Insurance implements  Forsikring {
                            + "\nForsikringstype: " + forsikringstype + "\nErstatning: " + df.format(erstatning) 
                            + "\nForsikringspremie: " + df.format(forsikringspremie);
         return utskrift;
-    }
-    
-    
+    }    
 }

@@ -20,8 +20,6 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 /**
@@ -48,12 +46,12 @@ public class RegistrerSkademeldingPanel extends JPanel implements ActionListener
     private JTextField skadebeskrivelse, kontaktInfo;
     private JTextField personnummerfelt, forsikringsnummerfelt ,takseringsbelop;
     
-    String[] st = {"BOLIG-FORSIKRING", "HYTTE-FORSIKRING", "BIL-FORSIKRING", "REISE-FORSIKRING", "BÅT-FORSIKRING"};
+    private String[] st = {"BOLIG-FORSIKRING", "HYTTE-FORSIKRING", "BIL-FORSIKRING", "REISE-FORSIKRING", "BÅT-FORSIKRING"};
     
-    HovedVindu forelder;
-    Kunderegister kregister;
-    Forsikringsregister fregister;
-    Skademeldingsregister sregister;
+    private HovedVindu forelder;
+    private Kunderegister kregister;
+    private Forsikringsregister fregister;
+    private Skademeldingsregister sregister;
 
     
     public RegistrerSkademeldingPanel(HovedVindu forelder, Kunderegister kregister, Forsikringsregister fregister, Skademeldingsregister sregister) 
@@ -162,7 +160,7 @@ public void registrerSkademelding() //metode som registrerer ny skademelding på
             
             if(kunden != null && f != null && takseringsbelop.getText() != null)
             {
-                   if(kunden.getForsikringer().contains(f))
+                if(f.getKunde().getPersonNr().equals(kunden.getPersonNr()))
                 {
                     String type = String.valueOf(skadeType.getSelectedItem());
                     String beskrivelse = skadebeskrivelse.getText();
@@ -205,19 +203,20 @@ public void registrerSkademelding() //metode som registrerer ny skademelding på
                  {
                   visFeilMelding("Du har ikke dekning for denne forsikringen");
                  }
-                } //Slutt på getForsikringer().contains
+                } //Slutt på eierForsikring
                  else
                  {
-                  visFeilMelding("Forsikringsnummeretligger ikke blant kundens forsikringer");
+                  visFeilMelding("Forsikringsnummeret ligger ikke blant kundens forsikringer");
                  }
             }//Slutt på if( kunden != null )
             else
             {
                 visFeilMelding("Skriv inn gyldig kundenummer og forsikringsnummer");
             }
-        }catch(NumberFormatException nfe)
+        } //slutt på try
+        catch(NumberFormatException nfe)
         {
-            visFeilMelding("Pass på å skrive desimaltall i taksering!");
+            visFeilMelding("Pass på å skrive tall i taksering!");
         }
     }
 
@@ -246,8 +245,5 @@ public void registrerSkademelding() //metode som registrerer ny skademelding på
 
         }  
     }
-    
-    
-    
-    
-}
+ 
+}//slutt på klasse

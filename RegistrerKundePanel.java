@@ -22,7 +22,7 @@ public class RegistrerKundePanel extends JPanel implements ActionListener {
     private JLabel plabel, flabel, elabel, alabel, tlabel;
     private JCheckBox fakturabox;
 
-    Kunderegister kregister;
+    private Kunderegister kregister;
 
     private JPanel tekstpanel;
     private JPanel knappepanel;
@@ -45,7 +45,7 @@ public class RegistrerKundePanel extends JPanel implements ActionListener {
         add(toppanel, BorderLayout.CENTER);
         add(knappepanel, BorderLayout.PAGE_END);
 
-       toppanel.setBackground(Color.decode("#669CFF"));
+        toppanel.setBackground(Color.decode("#669CFF"));
         overskriftpanel.setBackground(Color.decode("#669CFF"));
         
     }
@@ -135,7 +135,8 @@ public void Registrer() //metode som registrerer en ny kunde og sjekker om det e
             String tlfnummer = telefonfelt.getText();
 
             if (personnummer.length() != 0 && fornavn.length() != 0 && etternavn.length() != 0
-                    && adresse.length() != 0 && tlfnummer.length() != 0) {
+                    && adresse.length() != 0 && tlfnummer.length() != 0) 
+            {
                 if(godkjennPNummer() && godkjennTLFnummer())
                 {
                     if(kregister.finnes(personnummer))
@@ -154,18 +155,22 @@ public void Registrer() //metode som registrerer en ny kunde og sjekker om det e
                     forelder.Size();
 
                      }
-                } else
+                } //slutt på godkjennPNummer()
+                else
                     visFeilMelding("Skriv inn et gyldig personnummer og telefonnummer. 11 siffer og 8 siffer");
-            } else {
+            } //slutt på personnummer.length()
+            else 
+            {
                 visFeilMelding("Vennligst fyll inn alle feltene");
             }
-        }
+        }//slutt på try
         catch(NullPointerException npe)
         {
             visFeilMelding("Null Pointer");
         }
     }
     
+//Metode som sjekker om innskreven nummer er et gyldig norsk personnummer
     public boolean godkjennPNummer()
     {
         String regex = "[0-9]{11}";
@@ -176,6 +181,7 @@ public void Registrer() //metode som registrerer en ny kunde og sjekker om det e
             return false;
     }
 
+    //Metode som sjekker om innskreven nummer er et gyldig norsk telefonnummer
     public boolean godkjennTLFnummer()
     {
         String regex = "[0-9]{8}";
@@ -188,7 +194,8 @@ public void Registrer() //metode som registrerer en ny kunde og sjekker om det e
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == registrer) {
+        if (e.getSource() == registrer) 
+        {
             Registrer();
         } else if (e.getSource() == avbryt) 
         {
